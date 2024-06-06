@@ -250,7 +250,7 @@ const Edit = () => {
       });
       return;
     }
-    if (contactNumber.length !== 10) {
+    if (contactNumber.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -335,7 +335,7 @@ const Edit = () => {
         method: "POST",
         headers: {
           // "Content-Type": "application/json;charset=utf-8",
-          "Access-Control-Allow-Origin": "*",
+          
           Authorization: localStorage.getItem("token"),
         },
         body:formData,

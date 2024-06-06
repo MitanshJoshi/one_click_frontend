@@ -199,7 +199,6 @@ export default function AddProduct() {
         headers: {
           // "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
-          "Access-Control-Allow-Origin": "*",
         },
         body: formData,
       });
