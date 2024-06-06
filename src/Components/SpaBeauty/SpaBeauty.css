@@ -1,0 +1,44 @@
+.Spa {
+    width: 912px;
+    border-radius: 9.877px;
+    background: #FFF;
+    box-shadow: 1.975px 1.975px 7.901px 0px rgba(0, 0, 0, 0.25);
+    padding: 28px 28px;
+}
+
+.BeautySpa {
+    /* width: 742px; */
+}
+
+.Spa h4 {
+    color: #000;
+    font-family: Poppins;
+    font-size: 14.5px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.Spa p {
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Poppins;
+    font-size: 9.375px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Spa .see {
+    color: rgba(0, 129, 138, 0.50);
+    font-family: Poppins;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.SpaExperts {
+    border-radius: 6.25px;
+    background: #FFF;
+    box-shadow: 0.625px 0.625px 3.125px 0px rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,82 @@
+.StartUp h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 22.28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.StartUp p {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 15.424px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.LabelDesign {
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.add-start-up {
+  color: #000;
+  font-family: Poppins;
+  font-size: 22.28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.lorem-ipsum-dolor-container {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 15.424px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btnstartup {
+  border-radius: 8.345px;
+  background: linear-gradient(
+    180deg,
+    rgba(116, 204, 126, 0.7) 0%,
+    rgba(0, 129, 138, 0.7) 100%
+  );
+  box-shadow: 0.834px 0.834px 4.172px 0px rgba(0, 0, 0, 0.25);
+  padding: 10px 80px;
+  font-weight: 500;
+  border: none;
+}
+.drop-your-image-here-or-browse-parent {
+  border-radius: 20px;
+  border: 2px dashed #74cc7e;
+}
+.dropYour {
+  color: #000;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.browse {
+  color: #00818a;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.supports-jpg-png {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

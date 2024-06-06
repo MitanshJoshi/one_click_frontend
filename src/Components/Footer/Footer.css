@@ -1,0 +1,91 @@
+.logoFooter {
+  width: 150px;
+  height: 50.225px;
+}
+
+.footers {
+  background: #FFF;
+  box-shadow: -3px -3px 10px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.logoDiv {
+  display: flex;
+  align-items: center;
+}
+
+p a {
+  text-decoration: none;
+  color: black;
+  color: #000;
+  font-family: Poppins;
+  font-size: 16.895px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.SpecialHead {
+  color: #000;
+  font-family: Poppins;
+  font-size: 21.625px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.btn-social-media {
+
+  border: 1px ridge white;
+  border-radius: 5px;
+  background-color: white;
+  padding: 4px;
+  border-radius: 7.175px;
+  background: #FFF;
+}
+
+
+.btn-social-media .hovered {
+  position: relative;
+}
+
+.smallText {
+  color: rgba(0, 0, 0, 0.50);
+  font-family: Poppins;
+  font-size: 8.61px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.861px;
+}
+
+.socialText {
+  color: #000;
+  font-family: Poppins;
+  font-size: 10.762px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.076px;
+}
+
+.copyright {
+  color: rgba(0, 0, 0, 0.70);
+  font-family: Poppins;
+  font-size: 15.975px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.logoFooter {
+  width: 150px;
+  height: 30px;
+}
+@media screen and (max-width: 460px) {
+  /* Add your responsive styles here */
+  .button-1{
+    margin-right: 16px;
+    margin-top: 15px; /* Adjust font size for smaller screens */
+  }
+}

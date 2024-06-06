@@ -1,0 +1,45 @@
+
+.relative{
+    position: relative;
+    
+}
+.absolative{
+    position:absolute;
+    right:180px;
+}
+.chatbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.startup-profile p {
+    color: rgb(10, 10, 10) !important;
+    font-weight: 700;
+  }
+  
+.startup-profile {
+    box-shadow: 2px 2px 5px 0 #00818a, 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 33px 40px;
+    max-width: 1100px;
+    margin: auto;
+  }
+  .profile{
+    margin: auto;
+  }
+  @media (max-width: 768px) {
+    container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  
+  .select-with-arrow {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 30px; /* Adjust the padding to ensure the arrow doesn't overlap with the text */
+  }

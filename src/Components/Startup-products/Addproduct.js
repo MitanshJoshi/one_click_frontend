@@ -1,0 +1,358 @@
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+// import SecondNavbar from "../Navbar/Navbar";
+import StartupTab from "../Startup/StartupTab";
+import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import { BASE_URL } from "../../BASE_URL";
+// import { useNavigate } from 'react-router-dom';
+
+export default function AddProduct() {
+
+  const { state } = useLocation();
+  const _id = state && state._id;
+
+  const [description, setDescription] = useState("");
+  const [productName, setshoesname] = useState("");
+  const [productprice, setproductprice] = useState("");
+  const [categoryId, setcategoryId] = useState("");
+  const [subcategoryId, setsubcategoryId] = useState([]);
+  const [productstatus, setproductstatus] = useState("");
+  const [data, setData] = useState([]);
+  const [sub, setsub] = useState([]);
+  const [files, setFiles] = useState([]);
+  
+  // const { _id } = useParams();
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleName = (e) => {
+    setshoesname(e.target.value.trim( ));
+  };
+  
+  const handlePrice = (e) => {
+    setproductprice(e.target.value);
+  };
+  const handleimg = (e) => {
+    const { files } = e.target;
+    const uploadedPhotos = Array.from(files);
+    setFiles(uploadedPhotos);
+};
+
+  const handleCategory = (e) => {
+    setcategoryId(e.target.value);
+    const selectedOption = e.target.value;
+    const selectedData = data.find((item) => item._id === selectedOption);
+    if (selectedData) {
+      setcategoryIdSub(selectedData._id);
+    }
+  };
+
+  const [categoryIdforSub, setcategoryIdSub] = useState("");
+
+  const subCategoryFetch = async () => {
+    try {
+      const respo = await fetch(
+        `${BASE_URL}/api/subcategory/displayAllByCategoryId?category_id=${categoryIdforSub}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      if (!respo.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const responseData = await respo.json();
+
+      if (responseData && responseData.data) {
+        setsub(responseData.data);
+      } else {
+        console.error("No data found in response");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (categoryIdforSub) {
+      subCategoryFetch();
+    }
+  }, [categoryIdforSub]);
+
+  const handlesubcategory = (e) => {
+    setsubcategoryId(e.target.value);
+  };
+
+  const handleProductStatus = (e) => {
+    setproductstatus(e.target.value);
+  };
+
+  const handleId = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/category/displayAll`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+      const responseData = await res.json();
+      setData(responseData.data);
+    } catch (error) {
+      if (error) {
+        toast.error("Something went wrong!", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleId();
+  }, []);
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async () => {
+    // console.log(file.name)
+    if (!files) {
+      toast.error("Enter product image is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!description) {
+      toast.error("Enter product Description is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!productName) {
+      toast.error("Enter Your Product Name is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!categoryId) {
+      toast.error("Select Category is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!subcategoryId) {
+      toast.error("Select Sub Category is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!productstatus) {
+      toast.error("Product Status is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!productstatus) {
+      toast.error("Product Status is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!productprice) {
+      toast.error("Price is must be required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    const formData = new FormData();
+    formData.append("productName", productName);
+    formData.append("description", description);
+    formData.append("categoryId", categoryId);
+    formData.append("subcategoryId", subcategoryId);
+    formData.append("productstatus", productstatus);
+    formData.append("productprice", productprice);
+    files.forEach((files) => {
+      formData.append('image', files);
+    });
+    formData.append("startupId", _id);
+  
+    try {
+      const response = await fetch(`${BASE_URL}/api/product/insert`, {
+        method: "POST",
+        headers: {
+          // "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Product Add  faild`");
+      }
+      console.log(response)
+      toast.success("Product Add successful!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      setTimeout(() => {
+        navigate(-1, { state: { abc: "addproduct" } });
+        
+        localStorage.setItem('myData', "product") 
+      }, 1000);
+    } catch (error) {
+      console.error("Product Add failed:", error.message);
+      toast.error("Product Add failed. Please try again later.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+    }
+  };
+
+  return (
+    <>
+      <div>
+        <ToastContainer />
+        <div className="d-flex justify-content-between">
+          <h2 className="mb-5" style={{ fontWeight: "600" }}>
+            Add Product
+          </h2>
+        </div>
+        <div>
+          <div className="row gap-0">
+            <div className="col-6 d-flex align-item-center justify-content-center">
+              <div className="add-award-form" style={{ width: "556px", height: "181px" }}>
+                <p className="">Enter product image</p>
+                <div className=" mb-4">
+                <input
+                    type="file"
+                    multiple 
+                    onChange={handleimg}
+                    // value={shoesname}
+                    className="mb-3"
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                  {/* <div className="about-us">
+                    <div className="d-flex justify-content-center align-items-center flex-column">
+                      <div>
+                        <img src="./ImageFOrm.png" alt="image" className="" />
+                      </div>
+                      <div>
+                        <span className="dropYour text-center">Drop your image here or </span>
+                        <span className="browse">browse </span>
+                        <div className="supports-jpg-png text-center">Supports jpg, png, jpeg</div>
+                      </div>
+                    </div>
+                  </div> */}
+                </div>
+                <div className="mb-4">
+                  <p className="mb-3">Enter product Description</p>
+                  <textarea
+                    onChange={handleDescription}
+                    value={description}
+                    cols="30"
+                    rows="5"
+                    style={{ width: "559px", height: "147px" }}
+                  ></textarea>
+                </div>
+                <div className="d-flex justify-content-between mt-5 mb-5 ">
+                  <button
+                    onClick={handleSubmit}
+                    className="add-award-submit-button "
+                    style={{ height: "50px", width: "267px" }}
+                  >
+                    SUBMIT
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-6">
+              <div className="add-award-form mt-1">
+                <div className="mb-1">
+                  <p className="mb-3">Enter Your Product Name</p>
+                  <input
+                    type="text"
+                    onChange={handleName}
+                    value={productName}
+                    className="mb-3"
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                </div>
+                <div className="mb-1">
+                  <p className="mb-3">Select Category</p>
+                  <select className="form-control" onChange={handleCategory}style={{width:'559px', height:'46px'}}>
+                    <option value="Select">Select</option>
+                    {data &&
+                      data.map((e) => (
+                        <option key={e._id} value={e._id} style={{ width: "550px", height: "46px" }}>
+                          {e.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="mb-1" >
+                  <p className="mb-3">Select Sub Category</p>
+                  <select className="form-control" onChange={handlesubcategory} style={{width:'559px', height:'46px'}}>
+                    <option value="Select" >Select</option>
+                    {sub &&
+                      sub.map((e) => (
+                        <option key={e._id} value={e._id} >
+                          {e.name}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="mb-1">
+                  <p className="mb-3">Product Status</p>
+                  <input
+                    type="text"
+                    onChange={handleProductStatus}
+                    value={productstatus}
+                    className="mb-3"
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                </div>
+                <div className="mb-1">
+                  <p className="mb-3">Price</p>
+                  <input
+                  onInput={(e) => {
+                    let value = e.target.value.replace(/[^0-9 ,.]/g, ''); // Remove non-numeric characters
+                    // Check if the first digit is zero
+                    if (value.length > 0 && value[0] === ' ') {
+                      // If the first digit is zero, remove it
+                      value = value.slice(1);
+                    }
+                    // Set the updated value
+                    e.target.value = value;
+                  }}
+                    type="text"
+                    onChange={handlePrice}
+                    value={productprice}
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

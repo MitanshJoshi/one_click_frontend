@@ -1,0 +1,190 @@
+.profile-form {
+  color: #000;
+  font-weight: 600;
+  opacity: 0;
+}
+
+.profile-basic-info {
+  display: flex;
+}
+
+.profileDiv2 h4 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.profileDiv p {
+  color: #000;
+  font-family: Poppins;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.LabelDesign2 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.StartUp h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 22.28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.StartUp p {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 15.424px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.add-start-up {
+  color: #000;
+  font-family: Poppins;
+  font-size: 22.28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.lorem-ipsum-dolor-container {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 15.424px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btnstartup {
+  border-radius: 8.345px;
+  background: linear-gradient(
+    180deg,
+    rgba(116, 204, 126, 0.7) 0%,
+    rgba(0, 129, 138, 0.7) 100%
+  );
+  box-shadow: 0.834px 0.834px 4.172px 0px rgba(0, 0, 0, 0.25);
+  padding: 10px 80px;
+}
+.drop-your-image-here-or-browse-parent {
+  border-radius: 20px;
+  border: 2px dashed #74cc7e;
+}
+.dropYour {
+  color: #000;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.browse {
+  color: #00818a;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.supports-jpg-png {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.infoBasic {
+  color: #000;
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.shadow {
+  border-radius: 13.077px;
+  background: #fff;
+  box-shadow: 0.654px 0.654px 3.269px 0px rgba(0, 0, 0, 0.25);
+}
+
+.profile-edit-buttons {
+  margin-right: 107px;
+}
+
+.profile-edit-buttons button {
+  height: 40px;
+  width: 200px;
+  border: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.profile-edit-buttons button:first-child {
+  background-color: transparent;
+  border: 1px solid #74cc7e;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.profile-edit-buttons button:last-child {
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Newsallstyle {
+  padding-top: 55px;
+}
+
+.display-profile-education {
+  display: grid;
+  grid-template-columns: 0.4fr;
+}
+
+.display-profile-education h4 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.display-profile-education label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.display-profile-education span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 500px) {
+  .Newsallstyle {
+    padding-top: 35px;
+  }
+
+  .profile-edit-buttons {
+    margin-right: 0px;
+  }
+
+  .profile-edit-buttons button {
+    width: 176px;
+    font-size: 15px;
+  }
+}

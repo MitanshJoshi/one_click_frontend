@@ -1,0 +1,24 @@
+.product-list-view {
+    display: flex;
+    align-items: center; /* Align items vertically center */
+    justify-content: space-between; /* Distribute space between items */
+    color: black;
+  }
+  
+  .product-info {
+    flex: 1; /* Distribute available space equally among items */
+    text-align: center; /* Center-align text */
+  }
+  
+  .product-info p {
+    margin: 0; /* Remove default margin */
+    color: #000;
+  }
+  .heading {
+    color: rgb(0, 0, 50); /* Set heading color to black with 50% opacity */
+  }
+  
+  .product-info p {
+    color: black !important; /* Set text color to black */
+  }
+ 

@@ -1,0 +1,20 @@
+.form-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.inputcontrol {
+  font-size: 18px;
+  color: #0f0e0e;
+  /* font-weight: 500; */
+  /* opacity: 0.5; */
+  margin-bottom: 10px;
+  /* font-family: poppins; */
+}
+.inputcontrol input {
+  outline: none;
+}

@@ -1,0 +1,112 @@
+.startup-review {
+  max-width: 90%;
+  margin: auto;
+}
+
+.startup-average-review h6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.startup-average-review p {
+  color: #000000;
+  opacity: 0.6;
+  font-size: 15px;
+}
+
+.startup-average-review button {
+  background: linear-gradient(to bottom, #9ad1a0, #00818a);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+.startup-recent-review h6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.startup-recent-review button {
+  box-shadow: 1px 1px 2px 0px #74cc7e;
+  background-color: transparent;
+  border: none;
+  padding: 4px 22px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.startup-user-review{
+    margin-top: 30px;
+}
+
+.startup-user-review h6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.startup-user-review button {
+  /* background: linear-gradient(to bottom, #9ad1a0, #00818a); */
+  /* box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25); */
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 38px;
+}
+.startup-user-review button:hover {
+  background: linear-gradient(to bottom, #9ad1a0, #00818a);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.startup-user-review-button{
+    margin-left: 66px;
+}
+
+.startup-user-review-detail{
+    border: 1px solid rgb(246, 239, 239);
+    border-radius: 10px;
+    padding: 26px 40px;
+}
+
+.startup-user-review-detail-name h6{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.startup-user-review-detail-name p{
+    color: #000000;
+    opacity: 0.5;
+    font-size: 15px;
+    font-weight: 500;
+}
+.startup-user-review-detail-time span{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.startup-user-review-detail-time p{
+    color: #000000;
+    opacity: 0.5;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.startup-user-review-description{
+    display: flex;
+    gap: 250px;
+}
+
+.startup-user-review-description p{
+    font-size: 13px;
+}
+
+.round-icon-border{
+    box-shadow: 1px 1px 2px 0px #74cc7e;
+    border-radius: 50%;
+    padding: 14px;
+}

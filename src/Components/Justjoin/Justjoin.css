@@ -1,0 +1,24 @@
+.justjoinstyle h1{
+    color: #000;
+font-family: Poppins;
+font-size: 35px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.justjoin-img{
+    margin: 20px;
+    max-width: 100%;
+    height: auto;
+
+    border-radius: 5.992px;
+    box-shadow: 0.599px 0.599px 2.996px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+
+@media (max-width:768px){
+    .justjoin-img{
+        margin: 0px;
+   }
+}

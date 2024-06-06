@@ -1,0 +1,36 @@
+.profileDiv h4 {
+    color: #000;
+    font-family: Poppins;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.profileDiv p {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.infoBasic {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.shadow {
+    border-radius: 13.077px;
+    background: #FFF;
+    box-shadow: 0.654px 0.654px 3.269px 0px rgba(0, 0, 0, 0.25);
+}
+
+.profile-image{
+    margin-top: -65px;
+}

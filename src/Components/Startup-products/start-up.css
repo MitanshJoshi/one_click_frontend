@@ -1,0 +1,138 @@
+.startup-products {
+  max-width: 90%;
+  margin: auto;
+}
+
+.startup-products-header h6 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.startup-product-add-button button {
+  border: none;
+}
+
+.startup-product-add-button button {
+  background: linear-gradient(to bottom, #9ad1a0, #00818a);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 38px;
+}
+
+.startup-add-product-icons {
+  background: linear-gradient(to bottom, #9ad1a0, #00818a);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px 0px 0px 8px;
+  padding: 14px 20px;
+}
+
+.startup-add-product-icons-2 {
+  background: linear-gradient(to bottom, #c8dbca, #a4c7c9);
+  border-radius: 0px 8px 8px 0px;
+}
+
+.startup-product-list-display {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+.startup-product-list-display img {
+  margin-bottom: 35px;
+  padding: 10px 20px;
+}
+
+.startup-product-list-display-detail {
+  padding: 0px 20px;
+}
+
+.startup-product-list-display-detail h6 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.startup-product-list-display-detail span {
+  color: #00818a;
+  font-size: 12px;
+}
+
+.startup-product-list-display-detail p {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.startup-product-categories {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.startup-product-categories p {
+  color: #000000;
+  opacity: 0.5;
+  font-weight: 600;
+}
+
+.startup-product-categories h6 {
+  font-weight: 600;
+}
+
+.product-list-view {
+  display: grid;
+  grid-template-columns: 2.2fr 0.7fr 0.5fr 0.8fr 1.5fr;
+  gap: 10px;
+}
+
+.product-list-view p {
+  font-weight: 600;
+  color: #000000;
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+.product-list-view h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.product-list-view img {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 50%;
+  padding: 15px 0px;
+  height: 50px;
+}
+
+.product-list-view-content {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+  padding-top: 15px;
+}
+
+.edit-shoe-list-button {
+  background: linear-gradient(90deg, #74cc7e 0%, #00818a 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+}
+
+.delete-shoe-list-button{
+  color: #FF2E00;
+  background: none;
+  font-weight: 600;
+}
+.buttons-container .btng:hover {
+  background-color: #128c2b;
+}
+.buttons-container .btnr:hover {
+  background-color: #c70b0b;
+}

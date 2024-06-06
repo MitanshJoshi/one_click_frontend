@@ -1,0 +1,196 @@
+.custom-tabs {
+  display: flex;
+}
+
+.custom-tab {
+  position: relative;
+  padding: 20px 40px;
+  cursor: pointer;
+  background-color: transparent;
+  user-select: none;
+  width:350px;
+}
+
+.custom-tab.active {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.active-icon-2 {
+  position: absolute;
+  bottom: -5px;
+  /* left: 50%; */
+  right: 50%;
+  /* transform: translateX(-50%); */
+  /* transition: 5s; */
+}
+
+.active-icon-1 {
+  position: absolute;
+  bottom: -5px;
+  /* left: 50%; */
+  right: 35px;
+  /* transform: translateX(-50%); */
+  /* transition: 5s; */
+}
+
+.add-start-up-button button {
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+  color: #000;
+  border: none;
+  padding: 10px 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tab-bold-css {
+  font-weight: 700;
+}
+
+.edit-icon {
+  background: linear-gradient(to right, #c4ffcb 100%, #a4c5c7 100%);
+  padding: 8px 10px 10px 11px;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  
+  /* position: relative; */
+  /* z-index: 111; */
+}
+
+.delete-icon {
+  background-color: #ff390036;
+  padding: 8px 12px 8px 12px;
+  border-radius: 50%;
+  border: none;
+  /* position: relative; */
+  /* z-index: 111; */
+}
+
+.shadow-startup {
+  background: #fff;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+  padding: 30px 30px 15px 30px;
+}
+
+.my-profile-relative{
+  position: relative;
+}
+
+.my-profile-image-change{
+  position: absolute;
+  top: 120px;
+  right: 6px;
+}
+
+@media (max-width: 770px) {
+  .profile-image img {
+    height: 130px;
+  }
+
+  .profile-image {
+    margin-top: -29px;
+  }
+
+  .profileDiv h4 {
+    font-size: 24px;
+  }
+
+  .profileDiv p {
+    font-size: 18px;
+  }
+
+  .LabelDesign2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-image img {
+    height: 100px;
+  }
+
+  .profile-image {
+    margin-top: 0px;
+  }
+
+  .profileDiv h4 {
+    font-size: 16px;
+  }
+
+  .profileDiv p {
+    font-size: 14px;
+  }
+
+  .add-start-up-button button {
+    padding: 3px 24px;
+    font-size: 14px;
+  }
+
+  .LabelDesign2 {
+    font-size: 14px;
+  }
+  .form-control {
+    font-size: 12px;
+  }
+  .custom-tab {
+    padding: 0px 11px;
+  }
+  .shadow {
+    padding: 20px 30px 20px 30px;
+  }
+  .tab-bold-css {
+    font-size: 18px;
+  }
+}
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.confirmation-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.confirmation-message {
+  color:black; /* Highlighted message color */
+  margin-bottom: 40px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons-container button {
+  margin: 0 25px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color:black;
+  font-weight: 700;
+}
+
+.buttons-container .btng:hover {
+  background-color: #128c2b;
+}
+.buttons-container .btnr:hover {
+  background-color: #c70b0b;
+}
+
+

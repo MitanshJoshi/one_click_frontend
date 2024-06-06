@@ -1,0 +1,128 @@
+.startup-profile-box {
+  box-shadow: 2px 2px 5px 0 #00818a, 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 33px 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.startup-profile-heading img {
+  height: 70px;
+  width: 70px;
+}
+
+.startup-profile-heading h4 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.startup-profile-heading p {
+  color: #000000;
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+.startup-profile-buttons button {
+  background: linear-gradient(to bottom, #9ad1a0, #00818a);
+  box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.25);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.startup-profile-1 {
+  padding: 8px 38px;
+}
+
+.startup-profile-2 {
+  padding: 8px 38px;
+}
+
+.startup-profile-3 {
+  padding: 8px 18px;
+}
+
+.startup-profile-4 {
+  padding: 8px 18px;
+}
+
+.startup-profile-5 {
+  padding: 8px 52px;
+  float: right;
+}
+
+.star-icons {
+  color: gold;
+  margin-right: 15px;
+}
+
+@media (max-width: 992px) {
+  .startup-profile-5 {
+    float: none;
+  }
+  .startup-profile-1 {
+    padding: 8px 30px;
+  }
+  .startup-profile-2 {
+    padding: 8px 30px;
+  }
+  .startup-profile-5 {
+    padding: 8px 22px;
+  }
+  .startup-profile-buttons button {
+    font-size: 13px;
+  }
+  .startup-profile-heading h4 {
+    font-size: 28px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 770px) {
+  .startup-profile-box {
+    padding: 23px 18px;
+  }
+  .startup-profile-heading h4 {
+    font-size: 22px;
+  }
+  .star-icons {
+    font-size: 10px;
+    margin-right: 1px;
+  }
+  .startup-profile-heading h6 {
+    font-size: 14px;
+  }
+  .startup-profile-1 {
+    padding: 6px 22px;
+  }
+  .startup-profile-2 {
+    padding: 6px 22px;
+  }
+  .startup-profile-3 {
+    padding: 6px 14px;
+  }
+  .startup-profile-4 {
+    padding: 6px 14px;
+  }
+  .startup-profile-5 {
+    padding: 6px 17px;
+  }
+  .startup-profile-buttons button {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 500px) {
+  .startup-profile-heading img {
+    height: 40px;
+    width: 40px;
+  }
+  .startup-profile-heading h4 {
+    font-size: 14px;
+  }
+  .startup-profile-heading p {
+    font-size: 10px;
+}
+}

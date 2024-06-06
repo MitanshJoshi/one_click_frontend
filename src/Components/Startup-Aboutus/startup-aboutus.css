@@ -1,0 +1,35 @@
+.startup-aboutus-header{
+    padding: 0px 30px;
+}
+
+.startup-aboutus {
+  max-width: 90%;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.startup-aboutus-name p {
+  color: #000000;
+  opacity: 0.5;
+  font-weight: 600;
+}
+.startup-aboutus-name h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.startup-mobile-number p{
+    color: #000000;
+    opacity: 0.6;
+    font-weight: 500;
+}
+
+.startup-aboutus-location{
+    padding: 0px 50px;
+}
+
+.startup-aboutus-location p{
+    color: #000000;
+    opacity: 0.5;
+    font-weight: 500;
+}

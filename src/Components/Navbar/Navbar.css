@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+button {
+    font-family: 'Poppins', sans-serif;
+}
+
+.LogoDesign {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.logoNav {
+    max-width: 120px;
+
+}
+
+.font {
+    color: #000;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.special {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.shadow {
+    background: #FFF;
+    box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+    padding: 30px;
+}
+
+.LogoDesign img {
+    z-index: 1;
+}
+
+.LogoDesign svg {
+    margin-top: -6px;
+    margin-right: -10px;
+}
+.login{
+    background-color: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+}
+/* Center the logout confirmation modal footer */
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Style the buttons in the logout confirmation modal footer */
+  .modal-footer .btn {
+    border-radius: 10px;
+    padding: 8px 30px;
+    margin: 0 20px;
+    /* color: #74CC7EB2; */
+  }
+  
+  /* Style the primary button (Yes) */
+  .modal-footer .btn-primary {
+    background-color:#74cc7ee1;
+    border-color: #74cc7eec;
+    color: #fff;
+    /* margin: 10px 0px; */
+  }
+  
+  /* Style the secondary button (No) */
+  .modal-footer .btn-secondary {
+    background-color:#74cc7ee1;
+    border-color: #74cc7eec;
+    color: #fff;
+  }
+  
+  /* Hover effect for the buttons */
+  .modal-footer .btn:hover {
+    opacity: 0.8;
+  }
+  .body{
+    font-size: 25px;
+    padding-bottom: 30px;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    .font {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Poppins;
+    }
+   
+  }
+  @media (min-width: 1000px) {
+    .font {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Poppins;
+    }
+   
+  }

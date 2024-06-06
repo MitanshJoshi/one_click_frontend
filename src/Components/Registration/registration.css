@@ -1,0 +1,359 @@
+/* .form-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+}*/
+
+.registration-inputs {
+  gap: 15px;
+  /* padding: 0px 20px; */
+}
+
+.registration-inputs input,
+.registration-inputs select,
+.registration-inputs textarea {
+  outline: none;
+  width: 100%;
+  border: 1px solid #d5d5d5;
+  padding: 4px 5px 4px 5px;
+  border-radius: 6px;
+}
+
+.registration-inputs input::placeholder {
+  /* font-family: poppins; */
+  color: #151414cc;
+}
+
+.registration-inputs select {
+  color: #151414cc;
+}
+/*
+
+.registration-background-image img {
+  height: 90vh;
+}
+
+.registration {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+  align-items: center;
+  max-width: 75%;
+  margin: auto;
+}
+
+.registration-wrapper {
+  display: flex;
+  max-width: 100%;
+  height: 100%;
+}
+
+.registration-border {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 2rem;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.registration-title h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.registration-title p {
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 0px 18px;
+}
+
+.registration-image {
+  position: relative;
+  height: 100%;
+  width: 100%;
+} */
+
+.form-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.registrationStyle {
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  background-color: white;
+}
+
+.SignUP-Btn {
+  border-radius: 8.208px;
+  border: 0.821px solid #74cc7e;
+  background: rgba(218, 218, 218, 0.01);
+}
+
+.SignUP-Btn {
+  color: #000;
+  font-family: Poppins;
+  font-size: 11.491px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+.registrationLogo {
+  max-width: 72px;
+}
+
+.btnregistration {
+  border-radius: 20px;
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btnregistration Span {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.FormHead h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.FormHead p {
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.forgotpswd {
+  color: #000;
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.form-reme {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: Poppins;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* .ImageRight {
+      position: relative;
+      border-radius: 0px 20px 20px 0px;
+      background-image: url('../../../public/BGregistration.png');
+      z-index: 111111;
+  
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      width: 597px;
+      height: 480px;
+      flex-shrink: 0;
+  } */
+
+.middleImage {
+  color: #000;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 14.762px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.registration {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 3rem;
+}
+
+.registration-wrapper {
+  /* height: 480px; */
+  display: flex;
+  justify-content: center;
+}
+
+.registration-form {
+  background-color: white;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+}
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.registrationLogo {
+  max-width: 72px;
+}
+
+.SignUP-Btn {
+  border-radius: 8.208px;
+  border: 0.821px solid #74cc7e;
+  background: rgba(218, 218, 218, 0.01);
+  color: #000;
+  font-family: Poppins;
+  font-size: 11.491px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 0.5rem 1rem;
+}
+
+/* .SignUP-Btn span {
+    color: #000;
+    font-family: Poppins;
+    font-size: 11.491px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  } */
+
+.FormHead h1 {
+  color: #000;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.FormHead p {
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 0px;
+  /* padding: 0px 58px; */
+}
+
+.btnregistration {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
+  border: none;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 8px 32px;
+}
+
+.registration-background-image {
+  background-image: url("../../../public/login-background.jpg");
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.registration-image-section {
+  /* height: 480px; */
+  height: 100%;
+  position: relative;
+}
+
+.registration-image-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.image-content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.image-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .registration-image-section {
+    display: none;
+
+  }
+  .from{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .col-5 {
+    width: 100% !important;
+  }
+}
+/* @media (max-width: 768px) {
+  
+  .from{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+} */
+@media (max-width:320px ) {
+  
+  .from{
+    width: 380px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+}

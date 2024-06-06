@@ -1,0 +1,34 @@
+.supplier-full-detail {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 25px 28px;
+    border-radius: 10px;
+  }
+
+  .supplier-details-info h4{
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .supplier-details-info h6{
+    color: #000000;
+    opacity: 0.6;
+  }
+
+  .supplier-details-info p{
+    font-weight: 500;
+  }
+
+  .supplier-product-description h4{
+    font-weight: 600;
+  }
+
+  .supplier-product-description p{
+    color: #000000;
+    opacity: 0.6;
+    line-height: 30px;
+    text-align: justify;
+  }
+
+  .supplier-more-product h4{
+    font-weight: 600;
+  }

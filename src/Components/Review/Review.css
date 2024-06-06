@@ -1,0 +1,73 @@
+.review .checkHead {
+  color: #000;
+  font-family: Poppins;
+  font-size: 30.141px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.review .checkReview {
+  color: #000;
+  font-family: Poppins;
+  font-size: 41.444px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.slider-content {
+  max-width: 420px;
+padding: 20px 25px;
+  border-radius: 14.365px;
+background: #FFF;
+box-shadow: 0.718px 0.718px 3.591px 0px #00818A;
+}
+
+.slider-font h5{
+  color: #000;
+font-family: Poppins;
+font-size: 17.956px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.slider-font p{
+  color: rgba(0, 0, 0, 0.40);
+font-family: Poppins;
+font-size: 12.929px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.starGive{
+  color: #000;
+font-family: Poppins;
+font-size: 17.956px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.text-slider{
+  color: rgba(0, 0, 0, 0.80);
+font-family: Poppins;
+font-size: 17.956px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.slick-slide.slick-center .slider-content {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+
+/* Smaller size for other items on hover */
+.slick-slide:not(.slick-center):hover .slider-content {
+  transform: scale(0.8);
+  transition: transform 0.5s ease;
+}
+.slick-slider {
+  overflow: hidden;
+}
