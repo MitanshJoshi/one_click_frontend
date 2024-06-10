@@ -4,8 +4,20 @@ import { Container } from "react-bootstrap";
 import "./myinquirychat.css";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useSocketContext } from "../../context/SocketContext";
 import Accordion from "react-bootstrap/Accordion";
 // import { Button, Modal, Form } from 'react-bootstrap';
+const useListenMessages = ({ chat, setchat, setmessage }) => {
+  const { socket } = useSocketContext();
+
+  useEffect(() => {
+    socket?.on("newMessage", (newMessage) => {
+      setchat([...chat, newMessage]);
+    });
+
+    return () => socket?.off("newMessage");
+  }, [socket, setchat, chat, setmessage]);
+};
 
 export default function Myinquirychat() {
   const [showNewContent, setShowNewContent] = useState(false);
@@ -25,6 +37,7 @@ export default function Myinquirychat() {
   const [chat, setchat] = useState([]);
   console.log(chat);
   const [message, setmessage] = useState("");
+  useListenMessages({ chat, setchat, setmessage })
   const [inquiryId, setid] = useState(item.item._id);
   console.log(inquiryId);
   const [receiverId, sereceiverid] = useState(item.item.userId);
