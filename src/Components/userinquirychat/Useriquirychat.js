@@ -5,11 +5,25 @@ import SecondNavbar from "../Navbar/Navbar";
 import { Container } from "react-bootstrap";
 import { Form } from "react-router-dom";
 import "./useiquirychat.css";
+import { useSocketContext } from "../../context/SocketContext";
 import { BASE_URL } from "../../BASE_URL";
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
+const useListenMessages = ({ chat, setchat, setmessage }) => {
+  const { socket } = useSocketContext();
+
+  useEffect(() => {
+    socket?.on("newMessage", (newMessage) => {
+      setchat([...chat, newMessage]);
+    });
+
+    return () => socket?.off("newMessage");
+  }, [socket, setchat, chat, setmessage]);
+};
 
 export default function Useriquirychat() {
   const [showConfirmation, setshowConfirmation] = useState(false);
@@ -30,6 +44,7 @@ export default function Useriquirychat() {
   const item = location.state && location.state;
   const [chat, setchat] = useState([]);
   const [message, setmessage] = useState("");
+  useListenMessages({ chat, setchat, setmessage })
   const [inquiryId, setid] = useState(item.item._id);
   const [receiverId, setReceiverId] = useState();
   console.log(receiverId);

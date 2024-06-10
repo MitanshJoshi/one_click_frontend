@@ -5,9 +5,11 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../BASE_URL";
 
 const LoginPage = () => {
+  const[setAuthUser]=useAuthContext();
   const [email, setEmail] = useState("");
   // console.log(email.trim());
   const [password, setPassword] = useState("");
@@ -90,6 +92,7 @@ const LoginPage = () => {
       const responseData = await response.json();
       localStorage.setItem("token", responseData.data.token);
       localStorage.setItem("userid", responseData.data.id);
+      setAuthUser(responseData.data.id);
       console.log(responseData);
     } catch (error) {
       if (error) {

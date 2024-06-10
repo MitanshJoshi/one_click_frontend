@@ -12,6 +12,7 @@ const Inquiryform = () => {
   const location = useLocation();
   const productId = location.state && location.state.productId;
   const startupId = location.state && location.state.startupId;
+  console.log('startupid is', startupId)
   const navigate = useNavigate();
   const handleSubmit = async () => {
     if (!title || !description || !best_time_to_connect) {
