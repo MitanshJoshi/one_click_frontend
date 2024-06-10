@@ -48,7 +48,6 @@ export default function Useriquirychat() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
             Authorization: localStorage.getItem("token"),
           },
           body: JSON.stringify({

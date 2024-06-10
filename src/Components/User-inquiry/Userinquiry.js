@@ -79,7 +79,7 @@ const Userinquiry = () => {
             <p>{item.createdAt.slice(0,10)}</p>
           </div>
           <div className="product-info">
-          <button className="btn btn-success" onClick={() => handlenavigate(item)}>view</button>
+          <button className="btn btn-success" onClick={() => handlenavigate(item,"63b3dd7840ee7256cfce95a1")}>view</button>
           </div>
         </div>
       ))}

@@ -50,6 +50,24 @@ const Shoes = () => {
     // Navigate to the next page and pass _id as part of the state object
     navigate("/supplier-detail", { state: { shoes, _id:_id } });
   };
+  const handleInquiryNow = () => {
+    // Check if shoes data is available
+    if (!shoes || !shoes._id || !shoes.startupId) {
+      // If shoes data is not available, fetch it first
+      fetchData().then(() => {
+        // Once shoes data is fetched, navigate to the inquiry form
+        navigate("/inquiryform", {
+          state: { productId: shoes._id, startupId: shoes.startupId },
+        });
+      });
+    } else {
+      // If shoes data is already available, navigate to the inquiry form
+      navigate("/inquiryform", {
+        state: { productId: shoes._id, startupId: shoes.startupId },
+      });
+    }
+  };
+  
 
   const fetchData = async () => {
       // console.log(localStorage.getItem("tokenData"));
@@ -220,7 +238,8 @@ const Shoes = () => {
                     <del>$ 65.12</del>
                   </div>
                   <div className="detail-product-button">
-                    <button> Inquiry Now</button>
+                  <button onClick={handleInquiryNow}>Inquiry Now</button>
+
                   </div>
                 </div>
                 <div className="detail-description">

@@ -140,7 +140,7 @@ const DisplayProfile = ({img}) => {
       });
       return;
     }
-    if (contact.length !== 5) {
+    if (contact.length <= 9) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,

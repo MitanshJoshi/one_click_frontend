@@ -124,106 +124,102 @@ export default function AddProduct() {
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    // console.log(file.name)
-    if (!files) {
-      toast.error("Enter product image is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!description) {
-      toast.error("Enter product Description is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!productName) {
-      toast.error("Enter Your Product Name is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!categoryId) {
-      toast.error("Select Category is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!subcategoryId) {
-      toast.error("Select Sub Category is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!productstatus) {
-      toast.error("Product Status is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!productstatus) {
-      toast.error("Product Status is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!productprice) {
-      toast.error("Price is must be required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    const formData = new FormData();
-    formData.append("productName", productName);
-    formData.append("description", description);
-    formData.append("categoryId", categoryId);
-    formData.append("subcategoryId", subcategoryId);
-    formData.append("productstatus", productstatus);
-    formData.append("productprice", productprice);
-    files.forEach((files) => {
-      formData.append('image', files);
+  if (!files) {
+    toast.error("Product image is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
     });
-    formData.append("startupId", _id);
-  
-    try {
-      const response = await fetch(`${BASE_URL}/api/product/insert`, {
-        method: "POST",
-        headers: {
-          // "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-        body: formData,
-      });
+    return;
+  }
+  if (!description) {
+    toast.error("Product description is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
+  if (!productName) {
+    toast.error("Product name is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
+  if (!categoryId) {
+    toast.error("Category selection is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
+  if (!subcategoryId) {
+    toast.error("Subcategory selection is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
+  if (!productstatus) {
+    toast.error("Product status is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
+  if (!productprice) {
+    toast.error("Product price is required!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+    return;
+  }
 
-      if (!response.ok) {
-        throw new Error("Product Add  faild`");
-      }
-      console.log(response)
-      toast.success("Product Add successful!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      setTimeout(() => {
-        navigate(-1, { state: { abc: "addproduct" } });
-        
-        localStorage.setItem('myData', "product") 
-      }, 1000);
-    } catch (error) {
-      console.error("Product Add failed:", error.message);
-      toast.error("Product Add failed. Please try again later.", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
+  const formData = new FormData();
+  formData.append("productName", productName);
+  formData.append("description", description);
+  formData.append("categoryId", categoryId);
+  formData.append("subcategoryId", subcategoryId);
+  formData.append("productstatus", productstatus);
+  formData.append("productprice", productprice);
+  files.forEach((file) => {
+    formData.append('image', file);
+  });
+  formData.append("startupId", _id);
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/product/insert`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorDetails = await response.json();
+      console.error("Product Add failed:", errorDetails);
+      throw new Error("Product Add failed");
     }
-  };
+
+    console.log(response);
+    toast.success("Product added successfully!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+
+    setTimeout(() => {
+      navigate(-1, { state: { abc: "addproduct" } });
+      localStorage.setItem('myData', "product");
+    }, 1000);
+  } catch (error) {
+    console.error("Product Add failed:", error.message);
+    toast.error("Product Add failed. Please try again later.", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      autoClose: 1000,
+    });
+  }
+};
+
 
   return (
     <>

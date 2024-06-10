@@ -157,7 +157,6 @@ const Startup_awards = () => {
         headers: {
           //   "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
-          "Access-Control-Allow-Origin": "*",
         },
         body: formData,
       });
@@ -314,7 +313,7 @@ const Startup_awards = () => {
         headers: {
           //   "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
-          "Access-Control-Allow-Origin": "*",
+
         },
         body: formData,
       });

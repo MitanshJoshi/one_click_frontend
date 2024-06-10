@@ -212,7 +212,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-    if (contact.length !== 10) {
+    if (contact.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,

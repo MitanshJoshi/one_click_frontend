@@ -150,7 +150,6 @@ const Certificateedit = () => {
           method: "POST",
           headers: {
             Authorization: localStorage.getItem("token"),
-            "Access-Control-Allow-Origin": "*",
           },
           body: formData,
         }
