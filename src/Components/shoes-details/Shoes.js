@@ -51,13 +51,14 @@ const Shoes = () => {
     navigate("/supplier-detail", { state: { shoes, _id:_id } });
   };
   const handleInquiryNow = () => {
+    console.log('shoes is', shoes)
     // Check if shoes data is available
     if (!shoes || !shoes._id || !shoes.startupId) {
       // If shoes data is not available, fetch it first
       fetchData().then(() => {
         // Once shoes data is fetched, navigate to the inquiry form
         navigate("/inquiryform", {
-          state: { productId: shoes._id, startupId: shoes.startupId },
+          state: { productId: shoes._id, startupId: shoes.startup._id },
         });
       });
     } else {
@@ -101,6 +102,8 @@ const Shoes = () => {
         }
       }
     };
+
+    console.log("soes is",shoes)
     useEffect(() => {
       fetchData();
     }, []);

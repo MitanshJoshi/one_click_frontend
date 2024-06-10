@@ -13,7 +13,6 @@ const Inquiryform = () => {
   const productId = location.state && location.state.productId;
   const startupId = location.state && location.state.startupId;
   const navigate = useNavigate();
-
   const handleSubmit = async () => {
     if (!title || !description || !best_time_to_connect) {
       toast.error("All fields are required", {

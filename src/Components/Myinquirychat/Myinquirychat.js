@@ -34,7 +34,7 @@ export default function Myinquirychat() {
   const handlechat = async () => {
     try {
       const response = await fetch(
-        "https://one-click-backend-mfrv.onrender.com/api/chat/chat-insert",
+        "https://oneclick-sfu6.onrender.com/api/chat/chat-insert",
         {
           method: "POST",
           headers: {
@@ -72,7 +72,7 @@ export default function Myinquirychat() {
   const display = async () => {
     try {
       const response = await fetch(
-        `https://one-click-backend-mfrv.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
         {
           method: "GET",
           headers: {
