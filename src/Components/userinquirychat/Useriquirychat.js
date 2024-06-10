@@ -28,22 +28,32 @@ export default function Useriquirychat() {
 
   const location = useLocation();
   const item = location.state && location.state;
-  console.log(item);
   const [chat, setchat] = useState([]);
-  console.log(chat);
   const [message, setmessage] = useState("");
   const [inquiryId, setid] = useState(item.item._id);
-  const [receiverId, sereceiverid] = useState(
-    item.item.productDetails[0].startupId
-  );
+  const [receiverId, setReceiverId] = useState();
+  console.log(receiverId);
+
+  useEffect(() => {
+    setReceiverId(item.item.productDetails?.startupId)
+  }, [item])
+  
+  
 
   const [userId, setuserId] = useState(item.item.userId);
-  const screen = "user";
-  // console.log(receiverId)
+  const screen = "user";  
   const handlechat = async () => {
     try {
+      console.log("Sending request with data:", {
+        inquiryId,
+        message,
+        receiverId,
+        screen,
+        userId,
+      });
+  
       const response = await fetch(
-        "https://one-click-backend-mfrv.onrender.com/api/chat/chat-insert",
+        "https://oneclick-sfu6.onrender.com/api/chat/chat-insert",
         {
           method: "POST",
           headers: {
@@ -59,28 +69,31 @@ export default function Useriquirychat() {
           }),
         }
       );
+  
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
         throw new Error("Chat inquiry failed");
       }
-      // toast.success(" Chat Inquiry Successful!", {
-      //   position: toast.POSITION.BOTTOM_RIGHT,
-      //   autoClose: 1000,
-      // });
+  
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+  
       display();
       setmessage("");
     } catch (error) {
-      if (error) {
-        toast.error(" Chat Inquiry failed!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 1000,
-        });
-      }
+      console.error("Caught error:", error);
+      toast.error("Chat Inquiry failed!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
     }
   };
+  
   const display = async () => {
     try {
       const response = await fetch(
-        `https://one-click-backend-mfrv.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
         {
           method: "GET",
           headers: {
@@ -91,7 +104,6 @@ export default function Useriquirychat() {
         }
       );
       const Data = await response.json();
-      console.log(Data);
       setchat(Data?.data);
       console.log(setchat);
     } catch (error) {
@@ -103,7 +115,6 @@ export default function Useriquirychat() {
     display();
   }, []);
   const [Status, setStatus] = useState("");
-  console.log(Status);
   const inquirydata = async () => {
     try {
       const response = await fetch(`${BASE_URL}/api/inquiry/userInquiry`, {
@@ -119,7 +130,6 @@ export default function Useriquirychat() {
       }
       const responseData = await response.json();
       setStatus(responseData.data[0]);
-      console.log(responseData.data);
     } catch (error) {
       toast.error("Something went wrong!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -135,7 +145,7 @@ export default function Useriquirychat() {
   const handleConfirmUpdate = async () => {
     try {
       const response = await fetch(
-        `https://one-click-backend-mfrv.onrender.com/api/inquiry/updateStatus?inquiryId=${inquiryId}`,
+        `https://oneclick-sfu6.onrender.com/api/inquiry/updateStatus?inquiryId=${inquiryId}`,
         {
           method: "PUT",
           headers: {
@@ -379,7 +389,7 @@ export default function Useriquirychat() {
                     />
                   </div>
                   <div>
-                    <h5>{item.item.productDetails[0].productName}</h5>
+                  <h5>{item.item.productDetails && item.item.productDetails[0] ? item.item.productDetails[0].productName : ''}</h5>
                   </div>
                 </div>
               </div>
@@ -417,7 +427,8 @@ export default function Useriquirychat() {
                               </div>
                               <div className="name pt-2 ps-2">
                                 <h3>
-                                  {item.item.startupDetails[0].contactPerson}
+                                {item.item.startupDetails && item.item.startupDetails[0] ? item.item.startupDetails[0].contactPerson : ''}
+
                                 </h3>
                               </div>
                             </div>

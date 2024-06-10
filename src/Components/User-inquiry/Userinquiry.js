@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./userinquiry.css";
-import { Link, useNavigate , } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../BASE_URL";
 import { toast, ToastContainer } from "react-toastify";
 
 const Userinquiry = () => {
   
-  const [inquiry,setinquiry]=useState([])
+  const [inquiry, setInquiry] = useState([]);
+
   const inquirydata = async () => {
     try {
       const response = await fetch(
@@ -24,7 +25,7 @@ const Userinquiry = () => {
         throw new Error("Request failed");
       }
       const responseData = await response.json();
-      setinquiry(responseData.data);
+      setInquiry(responseData.data);
       console.log(responseData.data);
     } catch (error) {
       toast.error("Something went wrong!", {
@@ -38,14 +39,13 @@ const Userinquiry = () => {
     inquirydata();
   }, []);
 
-  const navigate = useNavigate()
-  const handlenavigate =(item,_id)=>{
-    navigate("/Userinquirychat", { state: { item ,_id } })
-   
-}
+  const navigate = useNavigate();
+  const handlenavigate = (item) => {
+    navigate("/Userinquirychat", { state: { item, _id: item._id } });
+  };
 
   return (
-    <div className="container" style={{ marginTop: "50px",  }}>
+    <div className="container" style={{ marginTop: "50px" }}>
       <div className="product-list-view">
         <div className="product-info">
           <p>Product Photo</p>
@@ -65,28 +65,26 @@ const Userinquiry = () => {
       </div>
 
       {inquiry.map((item) => (
-        <div key={item.id} className="product-list-view" style={{ height: "auto", marginBottom: "20px", marginTop:"10px" }}>
+        <div key={item._id} className="product-list-view" style={{ height: "auto", marginBottom: "20px", marginTop: "10px" }}>
           <div className="product-info">
-            <img src="/shoe.png" alt="Product" style={{ width: "25%", maxWidth: "150px", }} />
+            <img src="/shoe.png" alt="Product" style={{ width: "25%", maxWidth: "150px" }} />
           </div>
           <div className="product-info">
-            <p>{item?.productDetails?.[0]?.productName}</p>
+            <p>{item?.productDetails?.productName}</p>
           </div>
           <div className="product-info">
-            <p>{item.startupName}</p>
+            <p>{item?.startupDetails?.startupName}</p>
           </div>
           <div className="product-info">
-            <p>{item.createdAt.slice(0,10)}</p>
+            <p>{item.createdAt.slice(0, 10)}</p>
           </div>
           <div className="product-info">
-          <button className="btn btn-success" onClick={() => handlenavigate(item,"63b3dd7840ee7256cfce95a1")}>view</button>
+            <button className="btn btn-success" onClick={() => handlenavigate(item)}>View</button>
           </div>
         </div>
       ))}
 
-      <div className="chatpop">
-        
-      </div>
+      <ToastContainer />
     </div>
   );
 };
