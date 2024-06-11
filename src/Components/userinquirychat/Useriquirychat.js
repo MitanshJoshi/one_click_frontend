@@ -6,27 +6,46 @@ import { Container } from "react-bootstrap";
 import { Form } from "react-router-dom";
 import "./useiquirychat.css";
 import { useSocketContext } from "../../context/SocketContext";
-import { BASE_URL } from "../../BASE_URL";
+import { BASE_URL } from "../../BASE_URL";  
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-const useListenMessages = ({ chat, setchat, setmessage }) => {
+const useListenMessages = ({ chat, setchat }) => {
   const { socket } = useSocketContext();
 
   useEffect(() => {
-    socket?.on("newMessage", (newMessage) => {
-      setchat([...chat, newMessage]);
-    });
+    console.log("useListenMessages useEffect triggered");
+    console.log("Current chat:", chat);
 
-    return () => socket?.off("newMessage");
-  }, [socket, setchat, chat, setmessage]);
+    if (socket) {
+      console.log("Socket is connected. Adding event listener.");
+      
+      const handleNewMessage = (newMessage) => {
+        console.log("newMessage received:", newMessage);
+        setchat([...chat, newMessage]);
+      };
+
+      socket.on("newMessage", handleNewMessage);
+
+      return () => {
+        console.log("Cleaning up useEffect");
+        socket.off("newMessage", handleNewMessage);
+      };
+    } else {
+      console.log("Socket is not connected. Skipping event listener registration.");
+    }
+  }, [socket, chat, setchat]);
 };
+
 
 export default function Useriquirychat() {
   const [showConfirmation, setshowConfirmation] = useState(false);
+  const [chat, setchat] = useState([]);
+  const [message, setmessage] = useState("");
+  useListenMessages({ chat, setchat, setmessage })
 
   const handleCancelDelete = () => {
     setshowConfirmation(false);
@@ -42,9 +61,7 @@ export default function Useriquirychat() {
 
   const location = useLocation();
   const item = location.state && location.state;
-  const [chat, setchat] = useState([]);
-  const [message, setmessage] = useState("");
-  useListenMessages({ chat, setchat, setmessage })
+  
   const [inquiryId, setid] = useState(item.item._id);
   const [receiverId, setReceiverId] = useState();
   console.log(receiverId);
@@ -96,6 +113,7 @@ export default function Useriquirychat() {
   
       display();
       setmessage("");
+      setchat([...chat, responseData.data.message])
     } catch (error) {
       console.error("Caught error:", error);
       toast.error("Chat Inquiry failed!", {
@@ -129,6 +147,7 @@ export default function Useriquirychat() {
   useEffect(() => {
     display();
   }, []);
+  
   const [Status, setStatus] = useState("");
   const inquirydata = async () => {
     try {

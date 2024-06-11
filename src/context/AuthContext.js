@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
             return null;
         }
     });
-    // console.log(authUser)
+    console.log("autUser is:",authUser)
 
 	return <AuthContext.Provider value={{ authUser:authUser, setAuthUser }}>{children}</AuthContext.Provider>;
 };

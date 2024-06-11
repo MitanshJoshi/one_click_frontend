@@ -7,20 +7,40 @@ import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../../context/SocketContext";
 import Accordion from "react-bootstrap/Accordion";
 // import { Button, Modal, Form } from 'react-bootstrap';
-const useListenMessages = ({ chat, setchat, setmessage }) => {
+const useListenMessages = ({ chat, setchat }) => {
   const { socket } = useSocketContext();
 
   useEffect(() => {
-    socket?.on("newMessage", (newMessage) => {
-      setchat([...chat, newMessage]);
-    });
+    console.log("useListenMessages useEffect triggered");
+    console.log("Current chat:", chat);
 
-    return () => socket?.off("newMessage");
-  }, [socket, setchat, chat, setmessage]);
+    if (socket) {
+      console.log("Socket is connected. Adding event listener.");
+      
+      const handleNewMessage = (newMessage) => {
+        console.log("newMessage received:", newMessage);
+        setchat([...chat, newMessage]);
+      };
+
+      socket.on("newMessage", handleNewMessage);
+
+      return () => {
+        console.log("Cleaning up useEffect");
+        socket.off("newMessage", handleNewMessage);
+      };
+    } else {
+      console.log("Socket is not connected. Skipping event listener registration.");
+    }
+  }, [socket, chat, setchat]);
 };
+
 
 export default function Myinquirychat() {
   const [showNewContent, setShowNewContent] = useState(false);
+  const [chat, setchat] = useState([]);
+  console.log(chat);
+  const [message, setmessage] = useState("");
+  useListenMessages({ chat, setchat });
 
   // Handle click on the "Update User" button
   const handleUpdateUserClick = () => {
@@ -34,10 +54,7 @@ export default function Myinquirychat() {
   const location = useLocation();
   const item = location.state && location.state;
   console.log(item);
-  const [chat, setchat] = useState([]);
-  console.log(chat);
-  const [message, setmessage] = useState("");
-  useListenMessages({ chat, setchat, setmessage });
+  
   const [inquiryId, setid] = useState(item.item._id);
   console.log(inquiryId);
   const [receiverId, sereceiverid] = useState(item.item.userId);
@@ -67,12 +84,16 @@ export default function Myinquirychat() {
       if (!response.ok) {
         throw new Error("Chat inquiry failed");
       }
+      
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
       // toast.success(" Chat Inquiry Successful!", {
       //   position: toast.POSITION.BOTTOM_RIGHT,
       //   autoClose: 1000,
       // });
       display();
       setmessage("");
+      setchat([...chat, responseData.data.message])
     } catch (error) {
       if (error) {
         toast.error(" Chat Inquiry failed!", {
