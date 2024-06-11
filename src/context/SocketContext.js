@@ -19,8 +19,10 @@ export const SocketContextProvider = ({ children }) => {
 				query: {
 					userId: authUser.id,
 				},
+				// transports:["websocket"]
 			});
-
+			console.log("id is:",authUser.id);
+			
 			setSocket(socket);
 
 			// socket.on() is used to listen to the events. can be used both on client and server side

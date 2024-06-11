@@ -37,7 +37,7 @@ export default function Myinquirychat() {
   const [chat, setchat] = useState([]);
   console.log(chat);
   const [message, setmessage] = useState("");
-  useListenMessages({ chat, setchat, setmessage })
+  useListenMessages({ chat, setchat, setmessage });
   const [inquiryId, setid] = useState(item.item._id);
   console.log(inquiryId);
   const [receiverId, sereceiverid] = useState(item.item.userId);
