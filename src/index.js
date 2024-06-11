@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { AuthContext, AuthContextProvider } from './context/AuthContext';
 import { SocketContextProvider } from './context/SocketContext';
+import { SharedStateProvider } from './context/SharedStateContext';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +12,9 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <SocketContextProvider>
+      <SharedStateProvider>
     <App />
+  </SharedStateProvider>
     </SocketContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

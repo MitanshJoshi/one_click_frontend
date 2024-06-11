@@ -9,43 +9,45 @@ import { useSocketContext } from "../../context/SocketContext";
 import { BASE_URL } from "../../BASE_URL";  
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import { useSharedState } from "../../context/SharedStateContext";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-const useListenMessages = ({ chat, setchat }) => {
-  const { socket } = useSocketContext();
-
-  useEffect(() => {
-    console.log("useListenMessages useEffect triggered");
-    console.log("Current chat:", chat);
-
-    if (socket) {
-      console.log("Socket is connected. Adding event listener.");
-      
-      const handleNewMessage = (newMessage) => {
-        console.log("newMessage received:", newMessage);
-        setchat([...chat, newMessage]);
-      };
-
-      socket.on("newMessage", handleNewMessage);
-
-      return () => {
-        console.log("Cleaning up useEffect");
-        socket.off("newMessage", handleNewMessage);
-      };
-    } else {
-      console.log("Socket is not connected. Skipping event listener registration.");
-    }
-  }, [socket, chat, setchat]);
-};
-
-
 export default function Useriquirychat() {
+  const { sharedState, setSharedState } = useSharedState();
   const [showConfirmation, setshowConfirmation] = useState(false);
   const [chat, setchat] = useState([]);
   const [message, setmessage] = useState("");
+
+  const useListenMessages = ({ chat, setchat }) => {
+    const { socket } = useSocketContext();
+  
+    useEffect(() => {
+      console.log("useListenMessages useEffect triggered");
+      console.log("Current chat:", chat);
+  
+      if (socket) {
+        console.log("Socket is connected. Adding event listener.");
+        
+        
+  
+        socket?.on("newMessage", (newMessage) => {
+          console.log("newMessage received:", newMessage);
+          setchat([...chat, newMessage]);
+        });
+  
+        return () => {
+          console.log("Cleaning up useEffect");
+          socket?.off("newMessage");
+        };
+      } else {
+        console.log("Socket is not connected. Skipping event listener registration.");
+      }
+    }, [socket, chat, setchat,sharedState]);
+  };
   useListenMessages({ chat, setchat, setmessage })
+
 
   const handleCancelDelete = () => {
     setshowConfirmation(false);
