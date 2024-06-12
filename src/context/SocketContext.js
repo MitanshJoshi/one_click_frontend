@@ -19,31 +19,31 @@ export const SocketContextProvider = ({ children }) => {
                 query: {
                     userId: authUser.id,
                 },
-                // transports: ["websocket"],
-                // timeout: 20000, // Extend timeout to 20 seconds
-                // reconnectionAttempts: 5 // Number of reconnection attempts
+                transports: ["websocket"], // Uncommented this line
+                timeout: 20000, // Extended timeout to 20 seconds
+                reconnectionAttempts: 5 // Number of reconnection attempts
             });
             console.log("id is:", authUser.id);
             
-            // newSocket.on("connect", () => {
-            //     console.log("Socket connected:", newSocket.id);
-            // });
+            newSocket.on("connect", () => {
+                console.log("Socket connected:", newSocket.id);
+            });
 
-            // newSocket.on("connect_error", (error) => {
-            //     console.error("Socket connection error:", error);
-            // });
+            newSocket.on("connect_error", (error) => {
+                console.error("Socket connection error:", error);
+            });
 
-            // newSocket.on("disconnect", (reason) => {
-            //     console.log("Socket disconnected:", reason);
-            //     if (reason === "io server disconnect") {
-            //         // If the server explicitly disconnected the socket
-            //         newSocket.connect();
-            //     }
-            // });
+            newSocket.on("disconnect", (reason) => {
+                console.log("Socket disconnected:", reason);
+                if (reason === "io server disconnect") {
+                    // If the server explicitly disconnected the socket
+                    newSocket.connect();
+                }
+            });
 
-            // newSocket.on("getOnlineUsers", (users) => {
-            //     setOnlineUsers(users);
-            // });
+            newSocket.on("getOnlineUsers", (users) => {
+                setOnlineUsers(users);
+            });
 
             setSocket(newSocket);
 

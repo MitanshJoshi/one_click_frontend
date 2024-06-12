@@ -9,9 +9,11 @@ import { useSocketContext } from "../../context/SocketContext";
 import { BASE_URL } from "../../BASE_URL";  
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
+// import { useSharedState } from "../../context/SharedStateContext";
 import { useSharedState } from "../../context/SharedStateContext";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Socket } from "socket.io-client";
 
 
 export default function Useriquirychat() {
@@ -26,15 +28,19 @@ export default function Useriquirychat() {
     useEffect(() => {
       console.log("useListenMessages useEffect triggered");
       console.log("Current chat:", chat);
+      display();
   
       if (socket) {
         console.log("Socket is connected. Adding event listener.");
+
         
         
   
         socket?.on("newMessage", (newMessage) => {
           console.log("newMessage received:", newMessage);
           setchat([...chat, newMessage]);
+          setSharedState(() => sharedState + 1);
+          console.log("sharedstate is:",sharedState);
         });
   
         return () => {
@@ -124,6 +130,8 @@ export default function Useriquirychat() {
       });
     }
   };
+
+  
   
   const display = async () => {
     try {
@@ -142,7 +150,7 @@ export default function Useriquirychat() {
       setchat(Data?.data);
       console.log(setchat);
     } catch (error) {
-      // console.error("Error fetching data from the backend", error);
+      console.error("Error fetching data from the backend", error);
     }
   };
 

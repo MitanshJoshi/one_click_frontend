@@ -7,8 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../../context/SocketContext";
 import { useSharedState } from "../../context/SharedStateContext";
 import Accordion from "react-bootstrap/Accordion";
-// import { Button, Modal, Form } from 'react-bootstrap';
-
+import { Socket } from "socket.io-client";
 
 export default function Myinquirychat() {
   const { sharedState, setSharedState } = useSharedState();
@@ -16,19 +15,23 @@ export default function Myinquirychat() {
   const [chat, setchat] = useState([]);
   console.log(chat);
   const [message, setmessage] = useState("");
+
   const useListenMessages = ({ chat, setchat }) => {
     const { socket } = useSocketContext();
   
     useEffect(() => {
       console.log("useListenMessages useEffect triggered");
       console.log("Current chat:", chat);
-  
+      display();
+      
       if (socket) {
         console.log("Socket is connected. Adding event listener.");
         
         socket?.on("newMessage", (newMessage) => {
           console.log("newMessage received:", newMessage);
           setchat([...chat, newMessage]);
+          setSharedState(() => sharedState + 1);
+      console.log("sharedstate is:",sharedState);
         });
   
         return () => {
@@ -38,29 +41,64 @@ export default function Myinquirychat() {
       } else {
         console.log("Socket is not connected. Skipping event listener registration.");
       }
-    }, [socket, chat, setchat,sharedState]);
+    }, [socket, chat, setchat, sharedState]);
   };
-  useListenMessages({ chat, setchat });
+  useListenMessages({ chat, setchat, setmessage });
 
-  // Handle click on the "Update User" button
   const handleUpdateUserClick = () => {
-    setShowNewContent(!showNewContent); // Toggle the state
+    setShowNewContent(!showNewContent); 
   };
+
   const [uid, setUID] = useState("");
 
   useEffect(() => {
     setUID(localStorage.getItem("userid"));
   }, []);
+
   const location = useLocation();
   const item = location.state && location.state;
-  console.log(item);
+  console.log("item:", item);
   
   const [inquiryId, setid] = useState(item.item._id);
   console.log(inquiryId);
-  const [receiverId, sereceiverid] = useState(item.item.userId);
-  const [userId, setuserId] = useState(item.item.userId);
+  const [receiverId, setReceiverId] = useState();
+  const [userId, setuserId] = useState();
   const screen = "";
-  // console.log(receiverId)
+
+  useEffect(() => {
+    const fetchChatData = async () => {
+      try {
+        const response = await fetch(
+          `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch chat data");
+        }
+
+        const Data = await response.json();
+        setchat(Data?.data);
+
+        if (Data?.data && Data?.data.length > 0) {
+          const firstChat = Data.data[0];
+          const inquiryDetails = firstChat.inquiryDetails[0];
+          setReceiverId(inquiryDetails.startupId);
+          setuserId(inquiryDetails.userId);
+        }
+      } catch (error) {
+        console.error("Error fetching data from the backend", error);
+      }
+    };
+
+    fetchChatData();
+  }, []);
+
   const handlechat = async () => {
     try {
       const response = await fetch(
@@ -69,7 +107,6 @@ export default function Myinquirychat() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
             Authorization: localStorage.getItem("token"),
           },
           body: JSON.stringify({
@@ -81,16 +118,13 @@ export default function Myinquirychat() {
           }),
         }
       );
+      // setSharedState(prevState => prevState + 1);
       if (!response.ok) {
         throw new Error("Chat inquiry failed");
       }
       
       const responseData = await response.json();
       console.log("Response data:", responseData);
-      // toast.success(" Chat Inquiry Successful!", {
-      //   position: toast.POSITION.BOTTOM_RIGHT,
-      //   autoClose: 1000,
-      // });
       display();
       setmessage("");
       setchat([...chat, responseData.data.message])
@@ -103,6 +137,7 @@ export default function Myinquirychat() {
       }
     }
   };
+
   const display = async () => {
     try {
       const response = await fetch(
@@ -110,7 +145,6 @@ export default function Myinquirychat() {
         {
           method: "GET",
           headers: {
-            // "Content-Type": "application/json",
             Authorization: `${localStorage.getItem("token")}`,
           },
         }
@@ -120,13 +154,13 @@ export default function Myinquirychat() {
       setchat(Data?.data);
       console.log(Data?.data);
     } catch (error) {
-      // console.error("Error fetching data from the backend", error);
+      console.error("Error fetching data from the backend", error);
     }
   };
 
   useEffect(() => {
     display();
-  }, []);
+  }, [sharedState]);
 
   const [messageComponent, setMessageComponent] = useState(false);
 
