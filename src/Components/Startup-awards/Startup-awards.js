@@ -918,6 +918,7 @@ const Startup_awards = () => {
                                           alt=""
                                           onClick={() => handleawardedit(e._id)}
                                           style={{ cursor: "pointer" }}
+                                          className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
                                         />
                                       </div>
                                       <div className="delete-icon-1">

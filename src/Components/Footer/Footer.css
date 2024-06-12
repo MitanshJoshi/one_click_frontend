@@ -6,7 +6,6 @@
 .footers {
   background: #FFF;
   box-shadow: -3px -3px 10px 0px rgba(0, 0, 0, 0.25);
-
 }
 
 .logoDiv {
@@ -82,10 +81,17 @@ p a {
   width: 150px;
   height: 30px;
 }
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 1200px) {
   /* Add your responsive styles here */
   .button-1{
     margin-right: 16px;
     margin-top: 15px; /* Adjust font size for smaller screens */
+  }
+  .container{
+    margin: 0;
+  }
+  .footers{
+    width: 100vw;
+    margin: 0px;
   }
 }

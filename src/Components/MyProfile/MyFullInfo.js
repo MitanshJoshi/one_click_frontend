@@ -210,7 +210,9 @@ const MyFullInfo = () => {
                     htmlFor="file-upload"
                     className="edit-icon mb-5 my-profile-image-change"
                   >
-                    <img src="/edit.png" alt="" />
+                    <img src="/edit.png" alt="" 
+                    className="sm:rounded-sm md:rounded-[2px] "
+                    />
                   </label>
                   <input
                     id="file-upload"
