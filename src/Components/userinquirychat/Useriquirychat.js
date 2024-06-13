@@ -1,6 +1,7 @@
 import { faMapMarkerAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import SecondNavbar from "../Navbar/Navbar";
 import { Container } from "react-bootstrap";
 import { Form } from "react-router-dom";
@@ -21,10 +22,10 @@ export default function Useriquirychat() {
   const [showConfirmation, setshowConfirmation] = useState(false);
   const [chat, setchat] = useState([]);
   const [message, setmessage] = useState("");
+  const chatEndRef = useRef(null);
 
   const useListenMessages = ({ chat, setchat }) => {
     const { socket } = useSocketContext();
-  
     useEffect(() => {
       console.log("useListenMessages useEffect triggered");
       console.log("Current chat:", chat);
@@ -53,6 +54,11 @@ export default function Useriquirychat() {
     }, [socket, chat, setchat,sharedState]);
   };
   useListenMessages({ chat, setchat, setmessage })
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
 
 
   const handleCancelDelete = () => {
@@ -157,6 +163,10 @@ export default function Useriquirychat() {
   useEffect(() => {
     display();
   }, []);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
   
   const [Status, setStatus] = useState("");
   const inquirydata = async () => {
@@ -194,7 +204,7 @@ export default function Useriquirychat() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",
             Authorization: localStorage.getItem("token"),
           },
           body: JSON.stringify({

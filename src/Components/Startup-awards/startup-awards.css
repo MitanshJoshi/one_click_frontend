@@ -171,3 +171,16 @@
 .buttons-container .btnr:hover {
   background-color: #c70b0b;
 }
+
+@media (max-width:775px) {
+  .eebtn{
+    margin-inline-start:2px;
+    font-size: 10px;
+  }
+  .startup-awards-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

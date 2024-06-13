@@ -31,8 +31,7 @@ const Justjoin = () => {
                 </filter>
               </defs>
             </svg>
-
-
+            
             <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
               <g filter="url(#filter0_d_1_572)">
                 <path d="M11.2915 14.6412L15.3975 10.5352L11.2915 6.42932" stroke="black" stroke-width="1.64237" stroke-linecap="round" stroke-linejoin="round" />

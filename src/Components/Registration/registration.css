@@ -26,6 +26,13 @@
   color: #151414cc;
 }
 
+#terms{
+  width: 5px;
+}
+.form-check-label{
+  width: 300px;
+}
+
 .registration-inputs select {
   color: #151414cc;
 }

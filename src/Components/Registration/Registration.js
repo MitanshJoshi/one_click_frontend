@@ -26,6 +26,8 @@ const RegistrationPage = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contact, setContact] = useState("");
+  const [dob,setDob]=useState("")
+  const [file,setFile]=useState(null)
   // const [file, setimage] = useState("");
 
   // console.log(file);
@@ -79,6 +81,14 @@ const RegistrationPage = () => {
   const handleContact = (e) => {
     setContact(e.target.value);
   };
+
+  const handleFileChange=(e)=>{
+    const file=e.target.files[0];
+    setFile(file);
+  }
+  const handleDob = (e) => {
+    setDob(e.target.value);
+  };
   // const handleimg = (e) => {
 
   //   const { files } = e.target;
@@ -93,25 +103,6 @@ const RegistrationPage = () => {
   const [showconform, setshowconform] = useState(false);
 
   const handleRegistration = async () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // if (
-    //   !userName ||
-    //   !email ||
-    //   !password ||
-    //   !state ||
-    //   !city ||
-    //   !address ||
-    //   !pincode ||
-    //   !contact ||
-    //   !confirmPassword
-    // ) {
-    //   toast.error("Please Fill All Field!", {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    //     autoClose: 1000,
-    //   });
-    //   return;
-    // }
     if (!userName) {
       toast.error("Username must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -119,7 +110,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-
+  
     if (!email) {
       toast.error("Email is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -132,6 +123,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (!password) {
       toast.error("Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -139,13 +131,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-    // if (password.length < 8) {
-    //   toast.error("Password must  be at least 8 characters long", {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    //     autoClose: 1000,
-    //   });
-    //   return;
-    // }
+  
     if (!confirmPassword) {
       toast.error("Confirm Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -153,6 +139,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (password !== confirmPassword) {
       toast.error("Password and Confirm Password do not match.", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -160,6 +147,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (!selectedState) {
       toast.error("State must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -167,6 +155,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (!city) {
       toast.error("City must be required!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -174,14 +163,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-
-    // if (!emailRegex.test(email)) {
-    //   toast.error("Invalid Email Address!", {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    //     autoClose: 1000,
-    //   });
-    //   return;
-    // }
+  
     if (!address) {
       toast.error("Address must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -189,7 +171,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-
+  
     if (!pincode) {
       toast.error("Pincode must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -197,6 +179,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (pincode.length < 6) {
       toast.error("Please enter a valid 6-digit Pincode!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -204,7 +187,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-
+  
     if (!contact) {
       toast.error("Contact number must be required!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -212,6 +195,7 @@ const RegistrationPage = () => {
       });
       return;
     }
+  
     if (contact.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -219,50 +203,46 @@ const RegistrationPage = () => {
       });
       return;
     }
-
-    // if (!file) {
-    //   toast.error("please select image", {
-    //     position: toast.POSITION.BOTTOM_RIGHT,
-    //     autoClose: 1000,
-    //   });
-    //   return;
-    // }
-
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("contact", contact);
-    // formData.append("email", email);
-    // formData.append("password", password);
-    // formData.append("address", address);
-    // formData.append("city", city);
-    // formData.append("state", state);
-    // formData.append("pincode", pincode);
-    // formData.append("image", file);
-
-    // navigate("/registration");
+  
+    if (!dob) {
+      toast.error("Date of Birth is required", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    if (!file) {
+      toast.error("Please select an image file", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("name", userName);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("state", state);
+    formData.append("city", city);
+    formData.append("address", address);
+    formData.append("pincode", pincode);
+    formData.append("contact", contact);
+    formData.append("status", "active");
+    formData.append("DOB", new Date(dob).toISOString());
+    formData.append("image", file);
+  
     try {
       const response = await fetch(`${BASE_URL}/api/user/register`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userName,
-          contact,
-          email,
-          password,
-          address,
-          city,
-          state,
-          pincode,
-        }),
+        body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error("Registration failed");
       }
-      console.log(response);
-
+  
       toast.success(
         "Registration successful!  Now, login with your registered email and password",
         {
@@ -270,7 +250,7 @@ const RegistrationPage = () => {
           autoClose: 1000,
         }
       );
-
+  
       setTimeout(() => {
         navigate("/login");
       }, 1500);
@@ -282,6 +262,7 @@ const RegistrationPage = () => {
       });
     }
   };
+  
 
   const handleKeyDown = (e) => {
     // Allow: backspace, delete, tab, escape, enter
@@ -668,6 +649,40 @@ const RegistrationPage = () => {
                         }}
                       />
                     </div>
+                    <div className="mb-3">
+                    <label htmlFor="dob" className="form-label">
+                      Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="dob"
+                      placeholder="Enter your date of birth"
+                      value={dob}
+                      onChange={handleDob}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="file" className="form-label">
+                      Upload Image
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="file"
+                      onChange={handleFileChange}
+                    />
+                  </div>
+                  <div className=" form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="terms"
+                    />
+                    <label className="form-check-label" htmlFor="terms">
+                      I agree to the terms and conditions
+                    </label>
+                  </div>
                     {/* <div className="col-12 ">
                       <input
                         type="file"
@@ -675,6 +690,7 @@ const RegistrationPage = () => {
                         // value={file}
                         onChange={handleimg}
                       />
+                      
                     </div> */}
 
                     <div className="col-12 d-flex justify-content-center align-items-center">

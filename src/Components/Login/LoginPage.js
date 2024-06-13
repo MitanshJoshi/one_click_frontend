@@ -134,7 +134,7 @@ const LoginPage = () => {
       <div className="login">
         <div className="login-wrapper">
           <div className="row w-75 h-100 gx-0 ">
-            <div className="col-6 h-100 login11 w-[100vw]" 
+            <div className="col-6 h-100 login11" 
             >
               <div className="login-form h-100">
                 <div className="login-header">
@@ -177,7 +177,7 @@ const LoginPage = () => {
                   <form className="row g-3">
                     <div className="col-12 ">
                       <input
-                        type="tel"
+                        type="email"
                         className="form-control"
                         id="inputEmail"
                         placeholder="Email"

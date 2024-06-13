@@ -8,16 +8,16 @@ const Question = () => {
         navigate("/inquiryform")
     }
     return (
-        <div>
-            <div className='Imagestyle' style={{ paddingTop: '75px' }}>
+        <div className='dd'>
+            <div className='Imagestyle' style={{ paddingTop: '20px' }}>
                 <div className="container">
                     <div className="image-container">
-                        <img src="./question.png" alt="image" className='w-100' />
+                        <img src="./question.png" alt="image" className='im w-100' />
                         <div className='image-overlayer'>
                             <div className='image-up-headers'>
-                                <div className='text-end'>
+                                <div className=''>
                                     <h1 className='mb-3'>Customer Service</h1>
-                                    <img src="./image-up.png" alt="" />
+                                    <img className="mt-1" src="./image-up.png" alt="" />
                                 </div>
                                 <p>We are on mission to provide <br /> Good Customer Service to the people at very low price.</p>
                                 <button onClick={handleiquiry}>INQUIRY NOW</button>

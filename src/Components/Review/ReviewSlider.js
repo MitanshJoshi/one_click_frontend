@@ -38,7 +38,7 @@ const ReviewSlider = () => {
         ],
     };
     return (
-        <div className='container' style={{ paddingTop: '75px' }}>
+        <div className='container' style={{ paddingTop: '20px' }}>
             <div className='review' >
                 <div style={{ textAlign: 'center', marginBottom: '60px' }} >
                     <h3 className='checkHead'>Check Out</h3>

@@ -59,3 +59,13 @@
   margin-top: 20px;
   height: 45px;
 }
+
+
+@media (max-width:500px) {
+  .im{
+    height: 400px;
+  }
+  .dd{
+    margin-top: -90px;
+  }
+}

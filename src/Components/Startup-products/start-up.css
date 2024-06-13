@@ -136,3 +136,14 @@
 .buttons-container .btnr:hover {
   background-color: #c70b0b;
 }
+
+@media (max-width:600px) {
+  .startup-product-list-display{
+    width: 90vw;
+    margin: auto;
+  }
+  .product-list-view{
+    flex-direction: column;
+  }
+  
+}

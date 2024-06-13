@@ -27,7 +27,8 @@ line-height: normal;
     display: flex;
     justify-content: between;
     align-items: center;
-    overflow-x: auto; /* Enable horizontal scrollbar */
+    overflow-x: auto; 
+    height: 110px;
     white-space: nowrap; /* Prevent wrapping of the child elements */
   }
 
@@ -43,7 +44,8 @@ line-height: normal;
   /* Media query for screens with a maximum width of 576px */
   @media (max-width: 576px) {
     .scrollImage {
-      overflow-x: scroll; /* Use scroll instead of auto for screens <= 576px */
+      overflow-x: scroll; 
+      height: 110px;
     }
   }
   

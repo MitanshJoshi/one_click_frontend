@@ -108,6 +108,10 @@
 }
 
 @media (max-width: 500px) {
+
+  .editim{
+    border-radius: -100px;
+  }
   .profile-image img {
     height: 100px;
   }

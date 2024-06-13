@@ -211,7 +211,7 @@ const MyFullInfo = () => {
                     className="edit-icon mb-5 my-profile-image-change"
                   >
                     <img src="/edit.png" alt="" 
-                    className="sm:rounded-sm md:rounded-[2px] "
+                    className="sm:rounded-sm md:rounded-[2px] editim"
                     />
                   </label>
                   <input

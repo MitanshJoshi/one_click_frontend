@@ -43,7 +43,7 @@ const NewsAll = () => {
 
 
   return (
-    <div className='Newsallstyle' style={{ paddingTop: '75px' }}>
+    <div className='Newsallstyle' style={{ paddingTop: '20px' }}>
       <div className="container">
         <div className="row">
 

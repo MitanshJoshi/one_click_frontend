@@ -208,9 +208,6 @@
   height: 100%;
   position: relative;
 }
-.login11{
-  /* width: 100vw; */
-}
 
 .login-image-content {
   display: flex;
@@ -240,14 +237,10 @@
   .login-image-section {
     display: none;
   }
-  .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 300px;
-  }
-  .login11{
-    width: 100vw;
+
+  .login-form {
+    width: 200%;
+    margin: auto;
   }
 
   .login {
@@ -262,9 +255,6 @@
 }
 @media (max-width:320px ) {
   
-  .login11{
-    width: 100vw;
-  }
   .login{
     width: 380px;
     height: auto;

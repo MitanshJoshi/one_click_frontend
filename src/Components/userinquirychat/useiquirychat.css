@@ -1,45 +1,79 @@
+/* useiquirychat.css */
 
-.relative{
-    position: relative;
-    
-}
-.absolative{
-    position:absolute;
-    right:180px;
-}
-.chatbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.startup-profile p {
-    color: rgb(10, 10, 10) !important;
-    font-weight: 700;
-  }
-  
 .startup-profile {
-    box-shadow: 2px 2px 5px 0 #00818a, 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    padding: 33px 40px;
-    max-width: 1100px;
-    margin: auto;
-  }
-  .profile{
-    margin: auto;
-  }
-  @media (max-width: 768px) {
-    container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-  }
-  
-  .select-with-arrow {
-    appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right center;
-    padding-right: 30px; /* Adjust the padding to ensure the arrow doesn't overlap with the text */
-  }
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.startup-profile-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0;
+  max-width: 80%;
+}
+
+.sent {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: #ebebeb;
+  align-self: flex-start;
+}
+
+.message-input {
+  display: flex;
+  align-items: center;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-input button {
+  margin-left: 10px;
+}
+
+.update-status {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.update-status h4 {
+  margin-bottom: 15px;
+}
+
+.update-status .confirmation {
+  margin-top: 10px;
+}

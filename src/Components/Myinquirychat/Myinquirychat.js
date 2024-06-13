@@ -8,6 +8,7 @@ import { useSocketContext } from "../../context/SocketContext";
 import { useSharedState } from "../../context/SharedStateContext";
 import Accordion from "react-bootstrap/Accordion";
 import { Socket } from "socket.io-client";
+import { useRef } from "react";
 
 export default function Myinquirychat() {
   const { sharedState, setSharedState } = useSharedState();
@@ -15,10 +16,10 @@ export default function Myinquirychat() {
   const [chat, setchat] = useState([]);
   console.log(chat);
   const [message, setmessage] = useState("");
+  const chatEndRef = useRef(null);
 
   const useListenMessages = ({ chat, setchat }) => {
     const { socket } = useSocketContext();
-  
     useEffect(() => {
       console.log("useListenMessages useEffect triggered");
       console.log("Current chat:", chat);
@@ -45,6 +46,10 @@ export default function Myinquirychat() {
   };
   useListenMessages({ chat, setchat, setmessage });
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
   const handleUpdateUserClick = () => {
     setShowNewContent(!showNewContent); 
   };
@@ -58,6 +63,7 @@ export default function Myinquirychat() {
   const location = useLocation();
   const item = location.state && location.state;
   console.log("item:", item);
+
   
   const [inquiryId, setid] = useState(item.item._id);
   console.log(inquiryId);
@@ -161,6 +167,7 @@ export default function Myinquirychat() {
   useEffect(() => {
     display();
   }, [sharedState]);
+
 
   const [messageComponent, setMessageComponent] = useState(false);
 

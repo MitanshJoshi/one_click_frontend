@@ -7,22 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../BASE_URL";
 
 const Startup_awards = () => {
-  const array = [
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-    { hyyy: "dnfkdf" },
-  ];
-
   const Navigate = useNavigate();
   const [showAwardList, setShowAwardList] = useState(false);
-  // const [certiList, setcertiList] = useState(false);
   const [awardAdd, setAwardAdd] = useState(false);
   const [description, setdescription] = useState();
   const [achievementName, setachievementName] = useState();
@@ -30,7 +16,7 @@ const Startup_awards = () => {
   const [file, setimage] = useState();
   const [achievementPlace, setachievementPlace] = useState();
   const [achievementYear, setachievementYear] = useState();
-
+  
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [awarddelete, setawarddelete] = useState(false);
   const handleCancelDelete = () => {
@@ -889,8 +875,8 @@ const Startup_awards = () => {
                 </div>
                 <div className="startup-awards-buttons">
                   <button onClick={handleAddAward}>+ Add Awards</button>
-                  <button className="ms-4" onClick={handleSeeListClick}>
-                    SEE ACHIEVEMENT LIST
+                  <button className="ms-4 eebtn" onClick={handleSeeListClick}>
+                    Achievement List
                   </button>
                 </div>
               </div>
@@ -957,8 +943,8 @@ const Startup_awards = () => {
                   <button onClick={() => handleCertificate("certi")}>
                     + Add Certificate
                   </button>
-                  <button className="ms-4" onClick={handleCertiList}>
-                    SEE CERTIFICATE LIST
+                  <button className="ms-4 eebtn" onClick={handleCertiList}>
+                    Certificate List
                   </button>
                 </div>
               </div>
