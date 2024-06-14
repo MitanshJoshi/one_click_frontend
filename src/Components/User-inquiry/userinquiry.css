@@ -21,4 +21,26 @@
   .product-info p {
     color: black !important; /* Set text color to black */
   }
+  .startup-profile{
+     width: "1175px"; 
+     height: "550px";
+  }
+  .profile{
+    width: "1100px";
+    height: "300px";
+    margin-top: 80px;
+  }
+
+
+  @media (max-width:600px) {
+    .profile{
+      width: 500px;
+      height: 570px;
+      margin-top: 36px;
+    }
+    .startup-profile{
+      width: 500px;
+    }
+    
+  }
  

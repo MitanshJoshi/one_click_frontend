@@ -202,10 +202,6 @@ export default function Myinquirychat() {
             {/* profile  */}
             <div
               className="profile"
-              style={{
-                width: "1100px",
-                height: "300px",
-              }}
             >
               <div>
                 <img
@@ -243,7 +239,6 @@ export default function Myinquirychat() {
             <div>
               <div
                 className="startup-profile "
-                style={{ width: "1175px", height: "550px" }}
               >
                 <div>
                   <div className="startup-profile-heading">

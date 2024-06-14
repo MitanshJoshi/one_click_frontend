@@ -125,6 +125,8 @@ const MyFullInfo = () => {
       const Data = await response.json();
 
       setname(Data.data[0].name || "");
+      console.log('data is:',Data);
+      
       setimg(Data.data[0].profileImageURL || "");
       // console.log(Data.data)
     } catch (error) {
@@ -211,7 +213,6 @@ const MyFullInfo = () => {
                     className="edit-icon mb-5 my-profile-image-change"
                   >
                     <img src="/edit.png" alt="" 
-                    className="sm:rounded-sm md:rounded-[2px] editim"
                     />
                   </label>
                   <input
