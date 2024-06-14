@@ -1,5 +1,5 @@
 .justjoinstyle h1{
-    color: #000;
+color: #000;
 font-family: Poppins;
 font-size: 35px;
 font-style: normal;
@@ -14,6 +14,18 @@ line-height: normal;
     border-radius: 5.992px;
     box-shadow: 0.599px 0.599px 2.996px 0px rgba(0, 0, 0, 0.25);
 }
+.images-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, auto);  /* 3 rows */
+    gap: 10px; /* Adjust the gap between images as needed */
+  }
+  
+  .justjoin-img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
 
 
 
@@ -22,3 +34,22 @@ line-height: normal;
         margin: 0px;
    }
 }
+
+@media (max-width: 599px) {
+    .images-grid-container {
+      grid-template-columns: 1fr; /* 1 column on smaller screens */
+    }
+  }
+  
+  @media (min-width: 600px) and (max-width: 899px) {
+    .images-grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+    }
+  }
+  
+  @media (min-width: 900px) and (max-width: 1199px) {
+    .images-grid-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+}
+  

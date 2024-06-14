@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import './SpaBeauty.css'
 const SpaBeauty = () => {
-
+    
     const settings = {
         dots: false,
         infinite: true,

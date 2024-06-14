@@ -24,8 +24,7 @@ const StartupTab = () => {
     // const [Data, setData] = useState(false);
 
     const myData = localStorage.getItem('myData')
-
-
+    
       useEffect(() => {
         if(myData){
             setActiveTab(2)

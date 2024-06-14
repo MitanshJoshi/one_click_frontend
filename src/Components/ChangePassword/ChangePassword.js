@@ -245,7 +245,15 @@ const ChangePasswordPage = () => {
                             user experience, including verticals and 23
                             transaction-oriented search options.”
                           </h4>
+                          <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="91" height="10" viewBox="0 0 91 25" fill="none">
+                        <circle opacity="0.5" cx="9.87597" cy="12.0496" r="9.87597" fill="#00818A" />
+                        <circle cx="45.5002" cy="12.4023" r="12.345" fill="#00818A" />
+                        <circle opacity="0.5" cx="81.124" cy="12.0496" r="9.87597" fill="#00818A" />
+                    </svg>
+                </div>
                         </div>
+                        
                       </div>
                     </div>
                   </div>

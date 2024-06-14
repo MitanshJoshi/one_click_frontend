@@ -56,7 +56,7 @@ const Justjoin = () => {
 
 
 
-        <div style={{ paddingTop: '65px' }}>
+        <div className="images-grid-container" style={{ paddingTop: '65px' }}>
           <img src='./Join.png' className='justjoin-img' alt="join" />
           <img src='./Join.png' className='justjoin-img' alt="join" />
           <img src='./Join.png' className='justjoin-img' alt="join" />

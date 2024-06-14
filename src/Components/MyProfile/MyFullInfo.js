@@ -8,9 +8,11 @@ import SecondNavbar from "../Navbar/Navbar";
 import AddStartUp from "../AddStartUp/Addprduct";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import Userinquiry from "../User-inquiry/Userinquiry";
+import EducationBack from "../../EducationBackground/educationBack";
 import { BASE_URL } from "../../BASE_URL";
 
 const MyFullInfo = () => {
@@ -127,7 +129,7 @@ const MyFullInfo = () => {
       setname(Data.data[0].name || "");
       console.log('data is:',Data);
       
-      setimg(Data.data[0].profileImageURL || "");
+      setimg(Data.data[0].profilePicture || "");
       // console.log(Data.data)
     } catch (error) {
       // console.error("Error fetching data from the backend", error);
@@ -236,7 +238,7 @@ const MyFullInfo = () => {
 
         <div className="custom-tabs-container mt-5">
           <div className="custom-tabs">
-            <div
+          <div
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}
             >
@@ -247,24 +249,35 @@ const MyFullInfo = () => {
                 </div>
               )}
             </div>
-
-            <div
+          <div
               className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
               onClick={() => handleTabClick(1)}
             >
-              <h5 className="mb-0 tab-bold-css">Start-ups</h5>
+              <h5 className="mb-0 tab-bold-css">Education Background</h5>
               {activeTab === 1 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
               )}
             </div>
+
             <div
               className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
               onClick={() => handleTabClick(2)}
             >
-              <h5 className="mb-0 tab-bold-css">My inquiry</h5>
+              <h5 className="mb-0 tab-bold-css">Start-ups</h5>
               {activeTab === 2 && (
+                <div className="active-icon">
+                  <img src="./tab-photo.png" alt="" className="" />
+                </div>
+              )}
+            </div>
+            <div
+              className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
+              onClick={() => handleTabClick(3)}
+            >
+              <h5 className="mb-0 tab-bold-css">My inquiry</h5>
+              {activeTab === 3 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
@@ -272,12 +285,17 @@ const MyFullInfo = () => {
             </div>
           </div>
           <div className="custom-tab-panel ">
-            {activeTab === 0 && (
+          {activeTab === 0 && (
               <div>
                 <DisplayProfile img={img} />
               </div>
             )}
-            {activeTab === 1 && (
+          {activeTab === 1 && (
+              <div>
+                <EducationBack/>
+              </div>
+            )}
+            {activeTab === 2 && (
               <>
                 {addStartup ? (
                   <>
@@ -398,7 +416,7 @@ const MyFullInfo = () => {
                 )}
               </>
             )}
-            {activeTab === 2 && (
+            {activeTab === 3 && (
               <div>
                 <Userinquiry />
               </div>

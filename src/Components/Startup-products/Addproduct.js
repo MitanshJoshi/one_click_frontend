@@ -3,7 +3,9 @@ import { toast, ToastContainer } from "react-toastify";
 // import SecondNavbar from "../Navbar/Navbar";
 import StartupTab from "../Startup/StartupTab";
 import { Navigate, useLocation, useNavigate, useParams } from "react-router-dom";
+import StartUpProfile from "../StartUpProfile/StartUpProfile";
 import { BASE_URL } from "../../BASE_URL";
+import SecondNavbar from "../Navbar/Navbar";
 // import { useNavigate } from 'react-router-dom';
 
 export default function AddProduct() {
@@ -20,6 +22,7 @@ export default function AddProduct() {
   const [data, setData] = useState([]);
   const [sub, setsub] = useState([]);
   const [files, setFiles] = useState([]);
+  const [wishList, setWishList] = useState(false);
   
   // const { _id } = useParams();
   const handleDescription = (e) => {
@@ -47,6 +50,10 @@ export default function AddProduct() {
       setcategoryIdSub(selectedData._id);
     }
   };
+
+  const displayWishList = () => {
+    setWishList(true); // Set addStartup to false when back button is clicked
+};
 
   const [categoryIdforSub, setcategoryIdSub] = useState("");
 
@@ -116,6 +123,7 @@ export default function AddProduct() {
       }
     }
   };
+  
 
   useEffect(() => {
     handleId();
@@ -223,6 +231,8 @@ export default function AddProduct() {
 
   return (
     <>
+    <SecondNavbar></SecondNavbar>
+    <StartUpProfile onBackButtonClick={displayWishList} />
       <div>
         <ToastContainer />
         <div className="d-flex justify-content-between">

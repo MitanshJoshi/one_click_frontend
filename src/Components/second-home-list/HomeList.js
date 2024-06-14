@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./homelist.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FaSearch } from 'react-icons/fa';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../BASE_URL";
@@ -65,12 +65,13 @@ const HomeList = ({ handlesubcategory }) => {
               </div>
 
               <div className="mb-5 second-home-searchType">
+              {searchTerm === '' && <FaSearch className="search-ic" />}
                 <input
                   type="search"
                   id="site-search"
                   name="q"
                   className="px-3"
-                  placeholder="Search"
+                  placeholder="search"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />

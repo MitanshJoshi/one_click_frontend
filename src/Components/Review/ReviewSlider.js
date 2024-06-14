@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import './Review.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FaRegStar } from "react-icons/fa6";
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -66,7 +66,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive'>
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive'>
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 
@@ -112,7 +112,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive'>
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 
@@ -135,7 +135,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive'>
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 
@@ -158,7 +158,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive' >
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 
@@ -181,7 +181,7 @@ const ReviewSlider = () => {
                                 </div>
 
                                 <div className='starGive'>
-                                    3.6  <FontAwesomeIcon icon={faStar} style={{ color: '#F7BE16' }} />
+                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
                                 </div>
                             </div>
 

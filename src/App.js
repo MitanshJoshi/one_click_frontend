@@ -19,6 +19,7 @@ import Buying_Inquiry from "./Container/HomePage/Buying-Inquiry";
 import ChangePassword from "./Container/HomePage/ChangePassword";
 import Addprduct from "./Components/Startup-products/Addproduct";
 import MyFullInfo from "./Components/MyProfile/MyFullInfo";
+import EducationBack from "./EducationBackground/educationBack";
 import Edit from "./Components/EditStartUp/Edit";
 import Startup_product from "./Components/Startup-products/Startup-produc";
 import Productedit from "./Components/StartUp-ProductEdit/Productedit";

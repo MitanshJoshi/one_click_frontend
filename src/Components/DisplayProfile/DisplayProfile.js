@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DisplayProfile.css";
 import Countries from "../../CountryStateCity.json";
-import { useState, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../BASE_URL";
 
-const DisplayProfile = ({img}) => {
+const DisplayProfile = ({ img }) => {
+
   const indiaObject = Countries.find((country) => country.name === "India");
-
+  // Initial states
   const [countryData, setCountryData] = useState([]);
-  const [selectedState, setSelectedState] = useState({}); // Set default value to avoid potential null issues
-
+  const [selectedState, setSelectedState] = useState({});
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [name, setUsername] = useState("");
@@ -22,59 +21,63 @@ const DisplayProfile = ({img}) => {
   const [pincode, setPincode] = useState("");
   const [countryCode, setCountryCode] = useState("91+");
   const [citiesArray, setCitiesArray] = useState([]);
-  const [image ,setimage]=useState(null)
-  useEffect(() => {
+  const [image, setImage] = useState(null);
+  const [highestEducation, setHighestEducation] = useState("");
+  const [passingYear, setPassingYear] = useState("");
+  const [collegeName, setCollegeName] = useState("");
+  const [educationList, setEducationList] = useState([]);
 
-    setimage(img)
-    
-  }, [img])
-  console.log(img)
-  
+  // Fetch user data on component mount
   useEffect(() => {
     setCountryData(Countries);
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/user/display`, {
-          method: "GET",
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        });
-        const responseData = await response.json();
-        
-        if (responseData.code === 200) {
-          const userData = responseData.data[0];
-          // Update state variables with the retrieved data
-          setUsername(userData.name || "");
-          setContactNo(userData.contact || "");
-          setEmail(userData.email || "");
-          setAddress(userData.address || "");
-          setPincode(userData.pincode || "");
-          setCountryCode(userData.countryCode || "");
-          setState(userData.state || "");
-          setCity(userData.city || "");
-  
-          // Fetch cities based on the selected state
-          if (userData.state) {
-            const selectedStateName = userData.state;
-            const selectedCountry = Countries.find(country => country.name === "India");
-            const selectedState = selectedCountry.states.find(state => state.name === selectedStateName);
-            if (selectedState && selectedState.cities) {
-              setCitiesArray(selectedState.cities);
-            }
-          }
-        } else {
-          // Handle error response
-          console.error("Error fetching user data:", responseData.message);
-        }
-      } catch (error) {
-        console.error("Error fetching data from the backend", error);
-      }
-    };
-  
     fetchData();
   }, []);
-  
+
+  // Fetch user profile data from the server
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/user/display`, {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      const responseData = await response.json();
+
+      if (responseData.code === 200) {
+        const userData = responseData.data[0];
+        setUsername(userData.name || "");
+        setContactNo(userData.contact || "");
+        setEmail(userData.email || "");
+        setAddress(userData.address || "");
+        setPincode(userData.pincode || "");
+        setCountryCode(userData.countryCode || "");
+        setState(userData.state || "");
+        setImage(userData.profilePicture || "");
+        setCity(userData.city || "");
+
+        // Fetch cities based on the selected state
+        if (userData.state) {
+          const selectedStateName = userData.state;
+          const selectedCountry = Countries.find(
+            (country) => country.name === "India"
+          );
+          const selectedState = selectedCountry.states.find(
+            (state) => state.name === selectedStateName
+          );
+          if (selectedState && selectedState.cities) {
+            setCitiesArray(selectedState.cities);
+          }
+        }
+      } else {
+        console.error("Error fetching user data:", responseData.message);
+      }
+    } catch (error) {
+      console.error("Error fetching data from the backend", error);
+    }
+  };
+
+  // Handle state selection
   const handleSelectedState = (e) => {
     const selectedStateName = e.target.value;
     setCity("");
@@ -86,48 +89,51 @@ const DisplayProfile = ({img}) => {
       selectedCountry &&
       selectedCountry.states.find((state) => state.name === selectedStateName);
 
-    setCitiesArray(stateOb.cities);
-
+    setCitiesArray(stateOb ? stateOb.cities : []);
     setState(selectedStateName);
   };
 
+  // Handle city selection
   const handleCity = (e) => {
     setCity(e.target.value);
   };
 
+  // Handle country code selection
   const handleCountryCode = (e) => {
     setCountryCode(e.target.value);
   };
 
+  // Handle username input
   const handleUsername = (e) => {
     setUsername(e.target.value.trim());
   };
 
+  // Handle contact number input
   const handleContactNo = (e) => {
     setContactNo(e.target.value.trim());
   };
 
-  // const handleEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
+  // Handle address input
   const handleAddress = (e) => {
     setAddress(e.target.value);
   };
 
+  // Handle pincode input
   const handlePincode = (e) => {
     setPincode(e.target.value);
   };
+
+  // Validate email function
   const validateEmail = (email) => {
-    // Regular expression for email validation
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
-  //updated profile
+
+  // Save profile updates
   const handleSave = async (e) => {
     e.preventDefault();
     if (!name) {
-      toast.error("Username  is required", {
+      toast.error("Username is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
@@ -140,23 +146,13 @@ const DisplayProfile = ({img}) => {
       });
       return;
     }
-    if (contact.length <= 9) {
+    if (contact.length !== 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
-      }
-    );
+      });
       return;
     }
-  
-    // const handleimg = (e) => {
-    //   const { files } = e.target;
-  
-    //   const selectedFile = files[0];
-  
-    //   setimage(selectedFile);
-    //   // setimage(URL.createObjectURL(selectedFile))
-    // };
     if (!state) {
       toast.error("State is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -185,35 +181,33 @@ const DisplayProfile = ({img}) => {
       });
       return;
     }
-    if (pincode.length < 6) {
-      toast.error("Please enter a valid 6-digit Pincode!", {
+    if (pincode.length !== 6) {
+      toast.error("Please enter a valid 6-digit Pincode", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
       return;
     }
+
     try {
-      
       const formData = new FormData();
-    formData.append("name", name);
-    formData.append("contact", contact);
-    formData.append("email", email);
-    formData.append("address", address);
-    formData.append("city", city);
-    formData.append("state", state);
-    formData.append("pincode", pincode);
-    if (image) {
-      formData.append('image', image);
-    }
-    
+      formData.append("name", name);
+      formData.append("contact", contact);
+      formData.append("email", email);
+      formData.append("address", address);
+      formData.append("city", city);
+      formData.append("state", state);
+      formData.append("pincode", pincode);
+      if (image) {
+        formData.append("image", image);
+      }
+
       const response = await fetch(`${BASE_URL}/api/user/edit`, {
         method: "POST",
         headers: {
-          // "Content-Type": "application/json",
-          // "Access-Control-Allow-Origin": "*",
-          Authorization: `${localStorage.getItem("token")}`,
+          Authorization: localStorage.getItem("token"),
         },
-        body:formData,
+        body: formData,
       });
 
       if (response.ok) {
@@ -235,6 +229,61 @@ const DisplayProfile = ({img}) => {
     }
   };
 
+  // Handle education form submission
+  const handleEducationSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validation to ensure all fields are filled
+    if (!collegeName || !passingYear || !highestEducation) {
+      toast.error("All fields are required", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+
+    const educationData = {
+      college_university_name: collegeName,
+      passing_year: passingYear,
+      highest_Education: highestEducation,
+    };
+
+    try {
+      const response = await fetch(`${BASE_URL}/api/Education/EditEducation`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(educationData),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        toast.success("Education added successfully", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+
+        // Clear input fields after successful submission
+
+        // Update education list with new data (if applicable)
+        // setEducationList([...educationList, responseData.data]);
+      } else {
+        toast.success("Education added successfully", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+    }
+  };
+  
   return (
     <div>
       <div className="Newsallstyle">
@@ -299,9 +348,9 @@ const DisplayProfile = ({img}) => {
                           }}
                           maxLength={10}
                           onInput={(e) => {
-                            let value = e.target.value.replace(/[^0-9 ]/g, ''); // Remove non-numeric characters
+                            let value = e.target.value.replace(/[^0-9 ]/g, ""); // Remove non-numeric characters
                             // Check if the first digit is zero
-                            if (value.length > 0 && value[0] === '0') {
+                            if (value.length > 0 && value[0] === "0") {
                               // If the first digit is zero, remove it
                               value = value.slice(1);
                             }
@@ -346,7 +395,11 @@ const DisplayProfile = ({img}) => {
                   </div>
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
-                      <label className="LabelDesign2" htmlFor="state" style={{ color: "#000", fontWeight: "600" }}>
+                      <label
+                        className="LabelDesign2"
+                        htmlFor="state"
+                        style={{ color: "#000", fontWeight: "600" }}
+                      >
                         Select State
                       </label>
                     </div>
@@ -368,13 +421,20 @@ const DisplayProfile = ({img}) => {
                               );
                             })}
                         </select>
-                        <FontAwesomeIcon icon={faChevronDown} className="position-absolute end-0 top-50 translate-middle-y pe-3" />
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="position-absolute end-0 top-50 translate-middle-y pe-3"
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
-                      <label className="LabelDesign2" htmlFor="city" style={{ color: "#000", fontWeight: "600" }}>
+                      <label
+                        className="LabelDesign2"
+                        htmlFor="city"
+                        style={{ color: "#000", fontWeight: "600" }}
+                      >
                         Select City
                       </label>
                     </div>
@@ -396,7 +456,10 @@ const DisplayProfile = ({img}) => {
                               );
                             })}
                         </select>
-                        <FontAwesomeIcon icon={faChevronDown} className="position-absolute end-0 top-50 translate-middle-y pe-3" />
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="position-absolute end-0 top-50 translate-middle-y pe-3"
+                        />
                       </div>
                     </div>
                   </div>
@@ -412,16 +475,19 @@ const DisplayProfile = ({img}) => {
                     </div>
                     <div className="col-lg-9 col-8">
                       <textarea
-                      onInput={(e) => {
-                        let value = e.target.value.replace(/[^0-9 a-z A-Z]/g, ''); // Remove non-numeric characters
-                        // Check if the first digit is zero
-                        if (value.length > 0 && value[0] === ' ') {
-                          // If the first digit is zero, remove it
-                          value = value.slice(1);
-                        }
-                        // Set the updated value
-                        e.target.value = value;
-                      }}
+                        onInput={(e) => {
+                          let value = e.target.value.replace(
+                            /[^0-9 a-z A-Z]/g,
+                            ""
+                          ); // Remove non-numeric characters
+                          // Check if the first digit is zero
+                          if (value.length > 0 && value[0] === " ") {
+                            // If the first digit is zero, remove it
+                            value = value.slice(1);
+                          }
+                          // Set the updated value
+                          e.target.value = value;
+                        }}
                         className="form-control py-2 "
                         id="address"
                         rows="1"
@@ -450,12 +516,12 @@ const DisplayProfile = ({img}) => {
                         value={pincode}
                         style={{ color: "#000", fontWeight: "600" }}
                         onInput={(e) => {
-                          let value = e.target.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+                          let value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
                           // Check if the first digit is zero
-                          if (value.length > 0 && value[0] === '0') {
+                          if (value.length > 0 && value[0] === "0") {
                             // If the first digit is zero, remove it
                             value = value.slice(1);
-                          }else if (value.length > 0 && value[0] === ' ') {
+                          } else if (value.length > 0 && value[0] === " ") {
                             // If the first digit is zero, remove it
                             value = value.slice(1);
                           }
@@ -463,7 +529,6 @@ const DisplayProfile = ({img}) => {
                           e.target.value = value;
                         }}
                         maxLength={6}
-                        
                       />
                     </div>
                   </div>
@@ -491,54 +556,56 @@ const DisplayProfile = ({img}) => {
                   className="form-control py-2 "
                   id="city"
                   style={{ color: "#000", fontWeight: "600" }}
+                  value={highestEducation}
+                  onChange={(e) => setHighestEducation(e.target.value)}
                 >
-                  <option value="Select">Ahmedabad</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                  <option value="high-school">High School</option>
+                  <option value="associate">Associate Degree</option>
+                  <option value="bachelor">Bachelor's Degree</option>
+                  <option value="master">Master's Degree</option>
+                  <option value="doctorate">Doctorate</option>
+                  <option value="other">Other</option>
                 </select>
+                <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="position-absolute right-[885px] bottom-[-622px] translate-middle-y pe-3 iconn"
+                        />
               </div>
               <div className="mb-4">
                 <label className="mb-2" htmlFor="">
                   Passing Year
                 </label>
-                <select
+                <input
                   className="form-control py-2 "
                   id="city"
                   style={{ color: "#000", fontWeight: "600" }}
+                  type="number"
+                  value={passingYear}
+                  onChange={(e) => setPassingYear(e.target.value)}
                 >
-                  <option value="Select">Ahmedabad</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                </input>
               </div>
               <div className="mb-4">
                 <label className="mb-2" htmlFor="">
                   School / Collage Name
                 </label>
-                <select
+                <input
                   className="form-control py-2 "
                   id="city"
                   style={{ color: "#000", fontWeight: "600" }}
+                  type="text"
+                  value={collegeName}
+                  onChange={(e) => setCollegeName(e.target.value)}
                 >
-                  <option value="Select">Ahmedabad</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
+                </input>
               </div>
-            </div>
+              </div>
             <div className="d-flex justify-content-end mb-sm-5 mb-3">
               <div className="profile-edit-buttons">
-                <button className="ms-3">Save</button>
+                <button className="ms-3" type="submit" onClick={handleEducationSubmit}>Save</button>
               </div>
             </div>
           </div> */}
-
           {/* <div>
             <div className="display-profile-education">
               <div className="">

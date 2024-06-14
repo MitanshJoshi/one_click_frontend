@@ -39,7 +39,6 @@ function SecondNavbar() {
         console.error("Error fetching data from the backend", error);
       }
     };
-
     fetchData();
   }, []);
   

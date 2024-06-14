@@ -4,6 +4,35 @@ background: #FFF;
 box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
 min-width: 343px;
 }
+.sidebar {
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 50px; /* Adjust this value to position the icon correctly */
+    top:3.65%;
+    transform: translateY(-50%);
+    color: #999; /* Change the color to suit your design */
+  }
+  
+  .searchType {
+    padding-left: 40px; /* Adjust this value to ensure text doesn't overlap the icon */
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .searchType::placeholder {
+    color: #999; /* Change this color to whatever you prefer */
+    padding-left: 40px; /* Add padding to shift placeholder text to the right */
+    opacity: 1; /* Ensures the color is not faded */
+  }
+  
+  /* Placeholder styling */
+  .searchType::placeholder {
+    color: #999; /* Change this color to whatever you prefer */
+    opacity: 1; /* Ensures the color is not faded */
+  }
+  
 .searchType{
     border-radius: 50px;
 border: 0.25px solid rgba(0, 0, 0, 0.50);

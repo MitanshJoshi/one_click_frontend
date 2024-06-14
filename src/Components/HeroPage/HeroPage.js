@@ -49,7 +49,7 @@ useEffect(() => {
         const Data = await response.json();
 
         setname(Data.data[0].name || "");
-        setimg(Data.data[0].profileImageURL || "");
+        setimg(Data.data[0].profilePicture || "");
         // console.log(Data.data)
       } catch (error) {
         console.error("Error fetching data from the backend", error);
@@ -81,7 +81,7 @@ useEffect(() => {
                                         <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <button className='btn styleBtn mt-3'><p className='mx-4 mb-0'>Settings</p></button>
+                                <button className='btn styleBtn mt-3'><p className='mx-4 mb-0 '>Settings</p></button>
                             </section>
                         </div>
                     </div>

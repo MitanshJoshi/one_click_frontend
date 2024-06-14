@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./SidebarFreeAdd.css";
+import { FaSearch } from 'react-icons/fa';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../BASE_URL";
@@ -51,6 +52,7 @@ const SidebarFreeAdd = () => {
         <div className="row ">
           <div className="col-md-12 sidebarscroll">
             <div className="sidebar px-4 ">
+            {searchTerm === '' && <FaSearch className="search-icon" />}
               <input
                 type="search"
                 id="site-search"

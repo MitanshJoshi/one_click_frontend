@@ -723,6 +723,13 @@ const RegistrationPage = () => {
                         cities"
                       </h4>
                     </div>
+                    <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="91" height="15" viewBox="0 0 91 25" fill="none">
+                        <circle opacity="0.5" cx="9.87597" cy="12.0496" r="9.87597" fill="#59E659" />
+                        <circle cx="45.5002" cy="12.4023" r="12.345" fill="#59E659" />
+                        <circle opacity="0.5" cx="81.124" cy="12.0496" r="9.87597" fill="#59E659" />
+                    </svg>
+                </div>
                   </div>
                 </div>
               </div>

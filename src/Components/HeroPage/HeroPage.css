@@ -7,7 +7,7 @@
 }
 
 .styleBtn {
-  border-radius: 10px;
+  border-radius: 20px;
   background: linear-gradient(180deg, #74cc7e 0%, rgba(0, 129, 138, 0.7) 100%);
   display: flex;
   justify-content: center;
