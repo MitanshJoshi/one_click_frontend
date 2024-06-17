@@ -10,7 +10,8 @@ import HomePage2 from "./Container/HomePage/HomePage2";
 import ShoesDetails from "./Container/HomePage/ShoesDetails";
 import SupplierDetail from "./Container/HomePage/SupplierDetail";
 import Myprofile from "./Container/HomePage/Myprofile";
-import DisplayProfile from "./Components/DisplayProfile/DisplayProfile";
+import DisplayProfile from "./Components/DisplayProfile/DisplayProfile"
+import AddPartner from "./Components/Startup_team/addPartner";
 import StartUps from "./Container/HomePage/StartUps";
 import Footer from "./Components/Footer/Footer";
 import Inquiry from "./Container/HomePage/Inquiry";
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/addstartup/:id" element={<AddStartUp />} />
           <Route path="/addproduct" element={<Addprduct/>} />
+          <Route path="/addpartner" element={<AddPartner/>} />
           <Route path="/productedit" element={<Productedit/>} />
           <Route path="/edit" element={<Edit />} />
           <Route path="/myinquirychar" element={<Myinquirychat/>}/>

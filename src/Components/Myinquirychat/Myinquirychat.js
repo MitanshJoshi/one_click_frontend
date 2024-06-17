@@ -213,7 +213,7 @@ export default function Myinquirychat() {
               </div>
               <div className="d-flex justify-content-between align-items-center profile-image">
                 <div className="d-flex align-items-end ms-sm-5 ms-2">
-                  <div className="my-profile-relative">
+                  <div className="-relative">
                     <img
                       src="BioDisplayUser.png"
                       alt="User Display"

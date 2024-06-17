@@ -21,7 +21,6 @@ const ShoesList = ({ handleDetail }) => {
 
   const fetchData = async () => {
     // console.log(localStorage.getItem("tokenData"));
-
     try {
       const response = await fetch(
         `${BASE_URL}/api/subcategory/displayAllByCategoryId?category_id=${handleDetail}`,
