@@ -73,10 +73,10 @@ export default function Myinquirychat() {
     const { socket } = useSocketContext();
 
     useEffect(() => {
-      console.log('inquiryId',item.item._id);
+      // console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
         console.log('socket messae  ....');
-        // console.log('inquiryId',item.item._id);
+        console.log('inquiryId',item.item._id);
         
         if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
