@@ -8,7 +8,9 @@ import DisplayProfileWithStartupList from "./Components/DisplayProfileWithStartu
 import AddStartUp from "./Components/AddStartUp/Addprduct";
 import HomePage2 from "./Container/HomePage/HomePage2";
 import ShoesDetails from "./Container/HomePage/ShoesDetails";
+import addinvestment from "./Components/Startup_investments/addinvestment";
 import SupplierDetail from "./Container/HomePage/SupplierDetail";
+import AddGrant from "./Components/Startup_grant/addgrant";
 import Myprofile from "./Container/HomePage/Myprofile";
 import DisplayProfile from "./Components/DisplayProfile/DisplayProfile"
 import AddPartner from "./Components/Startup_team/addPartner";
@@ -33,6 +35,7 @@ import Myinquirychat from "./Components/Myinquirychat/Myinquirychat";
 import Forgot from "./Forgot Password/Forgot";
 import ContactUs from "./Components/Contact US/ContactUs";
 import Inquiryform from "./Components/Inquiry-form/Inquiryform";
+import AddInvestments from "./Components/Startup_investments/addinvestment";
 // import Startup_product from "./Components/Startup-products/Startup-produc";
 
 const App = () => {
@@ -60,6 +63,8 @@ const App = () => {
           <Route path="/addstartup/:id" element={<AddStartUp />} />
           <Route path="/addproduct" element={<Addprduct/>} />
           <Route path="/addpartner" element={<AddPartner/>} />
+          <Route path="/addgrant" element={<AddGrant/>} />
+          <Route path="/addinvestment" element={<AddInvestments/>} />
           <Route path="/productedit" element={<Productedit/>} />
           <Route path="/edit" element={<Edit />} />
           <Route path="/myinquirychar" element={<Myinquirychat/>}/>

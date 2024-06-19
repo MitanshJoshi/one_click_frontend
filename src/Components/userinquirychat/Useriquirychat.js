@@ -8,6 +8,7 @@ import { Form } from "react-router-dom";
 import "./useiquirychat.css";
 import { useSocketContext } from "../../context/SocketContext";
 import { BASE_URL } from "../../BASE_URL";  
+import { useChatContext } from "../../context/chatcontext";
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from "react-router-dom";
 // import { useSharedState } from "../../context/SharedStateContext";
@@ -15,45 +16,109 @@ import { useSharedState } from "../../context/SharedStateContext";
 import { Accordion, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Socket } from "socket.io-client";
+import { useMessageContext } from "../../context/setMessage";
+
 
 
 export default function Useriquirychat() {
   const { sharedState, setSharedState } = useSharedState();
   const [showConfirmation, setshowConfirmation] = useState(false);
-  const [chat, setchat] = useState([]);
-  const [message, setmessage] = useState("");
+  const { chat, setchat } = useChatContext();
+  const { message, setmessage } = useMessageContext();
   const chatEndRef = useRef(null);
+  const displayCalledRef = useRef(false);
+  const location = useLocation();
+  const item = location.state && location.state;
 
-  const useListenMessages = ({ chat, setchat }) => {
+  const display = async () => {
+    try {
+      const response = await fetch(
+        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+        {
+          method: "GET",
+          headers: {
+            // "Content-Type": "application/json",
+            // "Access-Control-Allow-Origin": "*",
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const Data = await response.json();
+      setchat(Data?.data);
+      console.log(chat);
+    } catch (error) {
+      console.error("Error fetching data from the backend", error);
+    }
+  };
+  // const useListenMessages = ({ chat, setChat }) => {
+  //   const { socket } = useSocketContext();
+  //   useEffect(() => {
+  //     console.log("useListenMessages useEffect triggered");
+  //     console.log("Current chat:", chat);
+
+  //     if (socket) {
+  //       console.log("Socket is connected. Adding event listener.");
+  //       socket?.on("newMessage", (newMessage) => {
+  //         console.log("newMessage received:", newMessage);
+  //         setChat((prevChat) => [...prevChat, newMessage]);
+  //         if (sharedState) {
+  //           setSharedState(false);
+  //           display();
+  //         }
+  //       });
+
+  //       return () => {
+  //         console.log("Cleaning up useEffect");
+  //         socket?.off("newMessage");
+  //       };
+  //     } else {
+  //       console.log("Socket is not connected. Skipping event listener registration.");
+  //     }
+  //   }, [socket, chat, setChat,sharedState]);
+  // };
+
+  // useListenMessages({ chat, setchat });
+  const useListenMessages = ({ messageDisplay, setMessageDisplay, setMessage }) => {
+
     const { socket } = useSocketContext();
-    useEffect(() => {
-      console.log("useListenMessages useEffect triggered");
-      console.log("Current chat:", chat);
-      display();
-  
-      if (socket) {
-        console.log("Socket is connected. Adding event listener.");
 
-        
-        
-  
-        socket?.on("newMessage", (newMessage) => {
-          console.log("newMessage received:", newMessage);
-          setchat([...chat, newMessage]);
-          setSharedState(() => sharedState + 1);
-          console.log("sharedstate is:",sharedState);
-        });
-  
-        return () => {
-          console.log("Cleaning up useEffect");
-          socket?.off("newMessage");
-        };
-      } else {
-        console.log("Socket is not connected. Skipping event listener registration.");
-      }
-    }, [socket, chat, setchat,sharedState]);
+    useEffect(() => {
+      socket?.on("newMessage", (newMessage) => {
+        console.log('inquiryId',item.item._id);
+        if (newMessage.inquiryId == item.item._id) {
+          
+          setMessageDisplay([...messageDisplay, newMessage]);
+        }
+      });
+
+      return () => socket?.off("newMessage");
+    }, [socket, setMessageDisplay, messageDisplay, setMessage]);
+  };
+
+  const useListenOnlineUsers = () => {
+    const { socket, setOnlineUsers, onlineUsers } = useSocketContext();
+
+    useEffect(() => {
+      socket?.on("getOnlineUsers", (users) => {
+        setOnlineUsers(users);
+      });
+
+      return () => socket?.off("getOnlineUsers");
+    }, [socket, setOnlineUsers, onlineUsers]);
   };
   useListenMessages({ chat, setchat, setmessage })
+  useListenOnlineUsers();
+
+  useEffect(() => {
+    display();
+  }, []);
+
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [chat]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -72,9 +137,6 @@ export default function Useriquirychat() {
   useEffect(() => {
     setUID(localStorage.getItem("userid"));
   }, []);
-
-  const location = useLocation();
-  const item = location.state && location.state;
   
   const [inquiryId, setid] = useState(item.item._id);
   const [receiverId, setReceiverId] = useState();
@@ -139,26 +201,26 @@ export default function Useriquirychat() {
 
   
   
-  const display = async () => {
-    try {
-      const response = await fetch(
-        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
-        {
-          method: "GET",
-          headers: {
-            // "Content-Type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      const Data = await response.json();
-      setchat(Data?.data);
-      console.log(setchat);
-    } catch (error) {
-      console.error("Error fetching data from the backend", error);
-    }
-  };
+  // const display = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           // "Content-Type": "application/json",
+  //           // "Access-Control-Allow-Origin": "*",
+  //           Authorization: `${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     const Data = await response.json();
+  //     setchat(Data?.data);
+  //     console.log(setchat);
+  //   } catch (error) {
+  //     console.error("Error fetching data from the backend", error);
+  //   }
+  // };
 
   useEffect(() => {
     display();

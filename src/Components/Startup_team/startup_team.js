@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import {
@@ -32,48 +32,46 @@ const Startup_team = () => {
   const [editingPartner, setEditingPartner] = useState(null);
   const [partnerDetails, setPartnerDetails] = useState(null);
 
+  useEffect(() => {
+      fetchData();
+  }, []);
+
   const navigate = useNavigate();
   const { _id } = useParams();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/api/Partner/getPartner/${_id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/Partner/getPartner/${_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      });
   
       if (!response.ok) {
         throw new Error("Request failed");
       }
   
       const responseData = await response.json();
-      console.log("responseData:", responseData); // Log to check the structure of responseData
-  
-      // Check if responseData is empty and set partners accordingly
-      if (!responseData ||responseData.length === 0) {
-        setPartners(null);
-      } else {
-        setPartners(prevPartners => [...prevPartners, responseData]); // Directly set the fetched data to partners
-      }
+      console.log("responseData:", responseData);
+
+      setPartners(responseData.data?responseData.data:[]);
   
       console.log("partners:", partners);
     } catch (error) {
+      console.error("Error fetching data:", error);
       toast.error("Something went wrong!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
     }
   };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+  
   
   
   const fetchPartnerDetails = async (partnerId) => {
@@ -235,7 +233,7 @@ const Startup_team = () => {
               <>
                 <div className="mt-5">
                   <div>
-                    <div className="product-list-view d-flex align-item-center justify-content-betweenx">
+                    <div className="product-list-view d-flex align-item-center justify-content-between">
                       <div className="pe-5 ">
                         <div>
                           <p>Partner Name</p>
@@ -275,7 +273,7 @@ const Startup_team = () => {
                     {partners.map((partner) => (
                       <div
                         key={partner._id}
-                        className="product-list-view product-list-view-content d-flex align-item-center justify-content-between"
+                        className="product-list-view product-list-view-content d-flex align-item-center"
                       >
                         <div className="">
                           <div className="d-flex align-items-center">

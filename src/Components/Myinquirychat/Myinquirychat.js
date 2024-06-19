@@ -7,47 +7,109 @@ import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../../context/SocketContext";
 import { useSharedState } from "../../context/SharedStateContext";
 import Accordion from "react-bootstrap/Accordion";
-import { Socket } from "socket.io-client";
+import { useChatContext } from "../../context/chatcontext";
+// import { Socket } from "socket.io-client";
 import { useRef } from "react";
+import { useMessageContext } from "../../context/setMessage";
 
 export default function Myinquirychat() {
   const { sharedState, setSharedState } = useSharedState();
   const [showNewContent, setShowNewContent] = useState(false);
-  const [chat, setchat] = useState([]);
-  console.log(chat);
-  const [message, setmessage] = useState("");
+  const { chat, setchat } = useChatContext();
+  console.log('cat',chat);
+  const { message, setmessage } = useMessageContext();
   const chatEndRef = useRef(null);
-
-  const useListenMessages = ({ chat, setchat }) => {
-    const { socket } = useSocketContext();
-    useEffect(() => {
-      console.log("useListenMessages useEffect triggered");
-      console.log("Current chat:", chat);
-      display();
-      
-      if (socket) {
-        console.log("Socket is connected. Adding event listener.");
-        
-        socket?.on("newMessage", (newMessage) => {
-          console.log("newMessage received:", newMessage);
-          setchat([...chat, newMessage]);
-          setSharedState(() => sharedState + 1);
-      console.log("sharedstate is:",sharedState);
-        });
-  
-        return () => {
-          console.log("Cleaning up useEffect");
-          socket?.off("newMessage");
-        };
-      } else {
-        console.log("Socket is not connected. Skipping event listener registration.");
-      }
-    }, [socket, chat, setchat, sharedState]);
+  const displayCalledRef = useRef(false);
+  const display = async () => {
+    try {
+      const response = await fetch(
+        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const Data = await response.json();
+      console.log(Data);
+      setchat(Data?.data);
+      console.log(Data?.data);
+    } catch (error) {
+      console.error("Error fetching data from the backend", error);
+    }
   };
-  useListenMessages({ chat, setchat, setmessage });
+
+  // const useListenMessages = ({ chat, setChat }) => {
+  //   const { socket } = useSocketContext();
+  //   useEffect(() => {
+  //     console.log("useListenMessages useEffect triggered");
+  //     console.log("Current chat:", chat);
+
+  //     if (socket) {
+  //       console.log("Socket is connected. Adding event listener.");
+  //       socket?.on("newMessage", (newMessage) => {
+  //         console.log("newMessage received:", newMessage);
+  //         setChat((prevChat) => [...prevChat, newMessage]);
+          
+  //         if (!sharedState) {
+  //           setSharedState(true);
+  //           display();
+  //         } // Increment shared state to trigger updates in both components
+  //       });
+
+  //       return () => {
+  //         console.log("Cleaning up useEffect");
+  //         socket?.off("newMessage");
+  //       };
+  //     } else {
+  //       console.log("Socket is not connected. Skipping event listener registration.");
+  //     }
+  //   }, [socket, chat, setChat,sharedState]);
+  // };
+
+  // useListenMessages({ chat, setchat });
+  const useListenMessages = ({ messageDisplay, setMessageDisplay, setMessage }) => {
+
+    const { socket } = useSocketContext();
+
+    useEffect(() => {
+      socket?.on("newMessage", (newMessage) => {
+        console.log('new messae',newMessage);
+        
+        if (newMessage.inquiryId == item.item._id) {
+
+          setMessageDisplay([...messageDisplay, newMessage]);
+        }
+      });
+      
+      return () => socket?.off("newMessage");
+    }, [socket, setMessageDisplay, messageDisplay, setMessage]);
+  };
+
+  const useListenOnlineUsers = () => {
+    const { socket, setOnlineUsers, onlineUsers } = useSocketContext();
+
+    useEffect(() => {
+      socket?.on("getOnlineUsers", (users) => {
+        setOnlineUsers(users);
+      });
+
+      return () => socket?.off("getOnlineUsers");
+    }, [socket, setOnlineUsers, onlineUsers]);
+  };
+  useListenMessages({ chat, setchat, setmessage })
+  useListenOnlineUsers();
 
   useEffect(() => {
+    display();
+  }, []);
+
+  const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(() => {
+    scrollToBottom();
   }, [chat]);
 
   const handleUpdateUserClick = () => {
@@ -130,7 +192,7 @@ export default function Myinquirychat() {
       }
       
       const responseData = await response.json();
-      console.log("Response data:", responseData);
+      
       display();
       setmessage("");
       setchat([...chat, responseData.data.message])
@@ -144,29 +206,29 @@ export default function Myinquirychat() {
     }
   };
 
-  const display = async () => {
-    try {
-      const response = await fetch(
-        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      const Data = await response.json();
-      console.log(Data);
-      setchat(Data?.data);
-      console.log(Data?.data);
-    } catch (error) {
-      console.error("Error fetching data from the backend", error);
-    }
-  };
+  // const display = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     const Data = await response.json();
+  //     console.log(Data);
+  //     setchat(Data?.data);
+  //     console.log(Data?.data);
+  //   } catch (error) {
+  //     console.error("Error fetching data from the backend", error);
+  //   }
+  // };
 
   useEffect(() => {
     display();
-  }, [sharedState]);
+  }, []);
 
 
   const [messageComponent, setMessageComponent] = useState(false);

@@ -8,6 +8,8 @@ import Startup_review from '../startup-review/Startup-review';
 import Startup_product from '../Startup-products/Startup-produc';
 import Startup_awards from '../Startup-awards/Startup-awards';
 import Startup_team from '../Startup_team/startup_team';
+import Startup_grant from '../Startup_grant/Startup_grant';
+import Startup_investments from '../Startup_investments/Startup_investments';
 import Wishlist from '../Wishlist/Wishlist';
 // import "./Navbar.css"; 
 import { toast, ToastContainer } from "react-toastify";
@@ -150,6 +152,28 @@ const StartupTab = () => {
                                     </div>
                                 )}
                             </div>
+                            <div
+                                className={`custom-tab ${activeTab === 4 ? 'active' : ''}`}
+                                onClick={() => handleTabClick(4)}
+                            >
+                                <h5 className='mb-0 tab-bold-css'>Grants</h5>
+                                {activeTab === 4 && (
+                                    <div className="active-icon-1">
+                                        <img src="/tab-photo.png" alt="" className='' />
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className={`custom-tab ${activeTab === 5 ? 'active' : ''}`}
+                                onClick={() => handleTabClick(5)}
+                            >
+                                <h5 className='mb-0 tab-bold-css'>Investments</h5>
+                                {activeTab === 5 && (
+                                    <div className="active-icon-1">
+                                        <img src="/tab-photo.png" alt="" className='' />
+                                    </div>
+                                )}
+                            </div>
 
                         </div>
 
@@ -179,6 +203,16 @@ const StartupTab = () => {
                         <div className="custom-tab-panel ">
                             {activeTab === 3 &&
                                 <Startup_team />
+                            }
+                        </div>
+                        <div className="custom-tab-panel ">
+                            {activeTab === 4 &&
+                                <Startup_grant />
+                            }
+                        </div>
+                        <div className="custom-tab-panel ">
+                            {activeTab === 5 &&
+                                <Startup_investments />
                             }
                         </div>
                     </div>

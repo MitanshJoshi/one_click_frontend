@@ -6,7 +6,7 @@ const SharedStateContext = createContext();
 export const useSharedState = () => useContext(SharedStateContext);
 
 export const SharedStateProvider = ({ children }) => {
-  const [sharedState, setSharedState] = useState(0);
+  const [sharedState, setSharedState] = useState(false);
 
   return (
     <SharedStateContext.Provider value={[sharedState, setSharedState]}>

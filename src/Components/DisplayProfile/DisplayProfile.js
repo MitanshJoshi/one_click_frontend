@@ -26,6 +26,9 @@ const DisplayProfile = ({ img }) => {
   const [passingYear, setPassingYear] = useState("");
   const [collegeName, setCollegeName] = useState("");
   const [educationList, setEducationList] = useState([]);
+  const [documentType, setDocumentType] = useState(""); // State to manage document type
+  const [documentFile, setDocumentFile] = useState(null); // State to manage selected document file
+
 
   // Fetch user data on component mount
   useEffect(() => {
@@ -76,6 +79,114 @@ const DisplayProfile = ({ img }) => {
       console.error("Error fetching data from the backend", error);
     }
   };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type !== "application/pdf") {
+      toast.error("Only PDF files are allowed", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      setDocumentFile(null); // Reset the file input
+    } else {
+      setDocumentFile(file);
+    }
+  };
+
+  // Handle document upload
+  const handleDocumentUpload = async () => {
+    if (!documentFile || documentFile.type !== "application/pdf") {
+      toast.error("Please select a valid PDF file", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append("file", documentFile);
+      formData.append("document_type", documentType);
+  
+      const response = await fetch(`${BASE_URL}/api/Document/AddDocument`, {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: formData,
+      });
+  
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        toast.success(responseData.message, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+        // Optionally update state or perform any additional actions
+      } else {
+        toast.error("Failed to upload document", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading document:", error);
+      toast.error("Something went wrong!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+    }
+  };
+  
+  const handleDocumentEdit = async () => {
+    if (!documentFile || documentFile.type !== "application/pdf") {
+      toast.error("Please select a valid PDF file", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append("file", documentFile);
+      formData.append("document_type", documentType);
+  
+      const response = await fetch(
+        `${BASE_URL}/api/Document/EditDocument`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+          body: formData,
+        }
+      );
+  
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        toast.success("Document updated successfully", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+        // Optionally update state or perform any additional actions
+      } else {
+        toast.error("Failed to update document", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+      }
+    } catch (error) {
+      console.error("Error updating document:", error);
+      toast.error("Something went wrong!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+    }
+  };
+  
+
 
   // Handle state selection
   const handleSelectedState = (e) => {
@@ -107,7 +218,6 @@ const DisplayProfile = ({ img }) => {
   const handleUsername = (e) => {
     setUsername(e.target.value.trim());
   };
-
   // Handle contact number input
   const handleContactNo = (e) => {
     setContactNo(e.target.value.trim());
@@ -543,6 +653,56 @@ const DisplayProfile = ({ img }) => {
               </div>
             </div>
           </div>
+          <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
+  <div className="col-lg-2 col-3">
+    <label
+      className="LabelDesign2"
+      htmlFor="documentType"
+      style={{ color: "#000", fontWeight: "600" }}
+    >
+      Document Type
+    </label>
+  </div>
+  <div className="col-lg-9 col-8">
+    <input
+      type="text"
+      className="form-control py-2"
+      id="documentType"
+      onChange={(e) => setDocumentType(e.target.value)}
+      value={documentType}
+      style={{ color: "#000", fontWeight: "600" }}
+    />
+  </div>
+</div>
+<div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
+  <div className="col-lg-2 col-3">
+    <label
+      className="LabelDesign2"
+      htmlFor="documentFile"
+      style={{ color: "#000", fontWeight: "600" }}
+    >
+      Upload Document
+    </label>
+  </div>
+  <div className="col-lg-9 col-8">
+    <input
+      type="file"
+      className="form-control py-2"
+      id="documentFile"
+      onChange={handleFileChange}
+      style={{ color: "#000", fontWeight: "600" }}
+    />
+  </div>
+</div>
+<div className="d-flex justify-content-end mb-sm-5 mb-3">
+  <div className="profile-edit-buttons">
+    <button className="ms-3" onClick={handleDocumentEdit}>
+      Upload Document
+    </button>
+  </div>
+</div>
+
+
 
           {/* <div>
             <div className="display-profile-education">

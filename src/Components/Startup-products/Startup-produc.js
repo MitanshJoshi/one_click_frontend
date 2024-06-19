@@ -90,6 +90,8 @@ const Startup_product = () => {
         throw new Error("Request failed");
       }
       const responseData = await response.json();
+      console.log('responseData',responseData);
+      
       setdata(responseData.data[0].product);
       // console.log(setdata);
     } catch (error) {

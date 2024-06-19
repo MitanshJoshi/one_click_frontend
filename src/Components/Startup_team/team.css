@@ -7,3 +7,29 @@
     font-weight: 500;
     border-radius: 8px;
   }
+  .product-list-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-list-view p {
+    margin: 0;
+    text-align: center;
+  }
+  
+  .product-list-view-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .product-list-view-content h5 {
+    margin: 0;
+    text-align: center;
+  }
+  
