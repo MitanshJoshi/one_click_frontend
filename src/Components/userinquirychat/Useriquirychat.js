@@ -147,7 +147,7 @@ export default function Useriquirychat() {
   const [receiverId, setReceiverId] = useState();
 
   useEffect(() => {
-    setReceiverId(item.item.startupDetails
+    setReceiverId(item.item.productDetails
       ?.startupId)
   }, [item])
   
