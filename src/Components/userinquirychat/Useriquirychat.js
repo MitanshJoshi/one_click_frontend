@@ -29,6 +29,8 @@ export default function Useriquirychat() {
   const displayCalledRef = useRef(false);
   const location = useLocation();
   const item = location.state && location.state;
+  console.log('itemsss',item);
+  
 
   const display = async () => {
     try {
@@ -45,7 +47,7 @@ export default function Useriquirychat() {
       );
       const Data = await response.json();
       setchat(Data?.data);
-      console.log(chat);
+      // console.log(chat);
     } catch (error) {
       console.error("Error fetching data from the backend", error);
     }
@@ -78,22 +80,25 @@ export default function Useriquirychat() {
   // };
 
   // useListenMessages({ chat, setchat });
-  const useListenMessages = ({ messageDisplay, setMessageDisplay, setMessage }) => {
+  const useListenMessages = ({ chat, setchat, setmessage }) => {
 
     const { socket } = useSocketContext();
 
     useEffect(() => {
+      console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
-        console.log('inquiryId',item.item._id);
+        console.log('socket messae  ....');
+        // console.log('inquiryId',item.item._id);
+        
         if (newMessage.inquiryId == item.item._id) {
-          
-          setMessageDisplay([...messageDisplay, newMessage]);
+          setchat((prevChat) => [...prevChat, newMessage]);
         }
       });
 
       return () => socket?.off("newMessage");
-    }, [socket, setMessageDisplay, messageDisplay, setMessage]);
+    }, [socket, chat, setchat, setmessage]);
   };
+
 
   const useListenOnlineUsers = () => {
     const { socket, setOnlineUsers, onlineUsers } = useSocketContext();
@@ -140,10 +145,10 @@ export default function Useriquirychat() {
   
   const [inquiryId, setid] = useState(item.item._id);
   const [receiverId, setReceiverId] = useState();
-  console.log(receiverId);
 
   useEffect(() => {
-    setReceiverId(item.item.productDetails?.startupId)
+    setReceiverId(item.item.startupDetails
+      ?.userId)
   }, [item])
   
   
@@ -177,6 +182,9 @@ export default function Useriquirychat() {
           }),
         }
       );
+      console.log('reciver:',receiverId);
+      console.log('user:',userId);
+      
   
       if (!response.ok) {
         const errorText = await response.text();

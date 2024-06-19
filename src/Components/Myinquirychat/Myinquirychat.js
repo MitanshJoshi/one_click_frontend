@@ -16,7 +16,6 @@ export default function Myinquirychat() {
   const { sharedState, setSharedState } = useSharedState();
   const [showNewContent, setShowNewContent] = useState(false);
   const { chat, setchat } = useChatContext();
-  console.log('cat',chat);
   const { message, setmessage } = useMessageContext();
   const chatEndRef = useRef(null);
   const displayCalledRef = useRef(false);
@@ -34,7 +33,7 @@ export default function Myinquirychat() {
       const Data = await response.json();
       console.log(Data);
       setchat(Data?.data);
-      console.log(Data?.data);
+      // console.log(Data?.data);
     } catch (error) {
       console.error("Error fetching data from the backend", error);
     }
@@ -69,22 +68,23 @@ export default function Myinquirychat() {
   // };
 
   // useListenMessages({ chat, setchat });
-  const useListenMessages = ({ messageDisplay, setMessageDisplay, setMessage }) => {
+  const useListenMessages = ({ chat, setchat, setmessage }) => {
 
     const { socket } = useSocketContext();
 
     useEffect(() => {
+      console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
-        console.log('new messae',newMessage);
+        console.log('socket messae  ....');
+        // console.log('inquiryId',item.item._id);
         
         if (newMessage.inquiryId == item.item._id) {
-
-          setMessageDisplay([...messageDisplay, newMessage]);
+          setchat((prevChat) => [...prevChat, newMessage]);
         }
       });
-      
+
       return () => socket?.off("newMessage");
-    }, [socket, setMessageDisplay, messageDisplay, setMessage]);
+    }, [socket, chat, setchat, setmessage]);
   };
 
   const useListenOnlineUsers = () => {
@@ -124,11 +124,11 @@ export default function Myinquirychat() {
 
   const location = useLocation();
   const item = location.state && location.state;
-  console.log("item:", item);
+  // console.log("item:", item);
 
   
   const [inquiryId, setid] = useState(item.item._id);
-  console.log(inquiryId);
+  // console.log(inquiryId);
   const [receiverId, setReceiverId] = useState();
   const [userId, setuserId] = useState();
   const screen = "";
@@ -156,8 +156,12 @@ export default function Myinquirychat() {
         if (Data?.data && Data?.data.length > 0) {
           const firstChat = Data.data[0];
           const inquiryDetails = firstChat.inquiryDetails[0];
-          setReceiverId(inquiryDetails.startupId);
-          setuserId(inquiryDetails.userId);
+          console.log('inquiryy',firstChat);
+          
+          setReceiverId(inquiryDetails.userId);
+          setuserId(localStorage.getItem("userid"));
+          console.log(userId);
+          
         }
       } catch (error) {
         console.error("Error fetching data from the backend", error);
@@ -186,6 +190,10 @@ export default function Myinquirychat() {
           }),
         }
       );
+      console.log('receiver',receiverId);
+      console.log('user',userId);
+
+      
       // setSharedState(prevState => prevState + 1);
       if (!response.ok) {
         throw new Error("Chat inquiry failed");
