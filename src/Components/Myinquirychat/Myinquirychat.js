@@ -124,14 +124,13 @@ export default function Myinquirychat() {
 
   const location = useLocation();
   const item = location.state && location.state;
-  // console.log("item:", item);
+  console.log("item:", item);
 
   
   const [inquiryId, setid] = useState(item.item._id);
   // console.log(inquiryId);
-  const [receiverId, setReceiverId] = useState();
+  const [receiverId, setReceiverId] = useState(item.item.userData._id);
   const [userId, setuserId] = useState();
-  setuserId(localStorage.getItem("userid"));
   const screen = "";
 
   useEffect(() => {
@@ -157,9 +156,11 @@ export default function Myinquirychat() {
         if (Data?.data && Data?.data.length > 0) {
           const firstChat = Data.data[0];
           const inquiryDetails = firstChat.inquiryDetails[0];
-          console.log('data is:',Data);
-          console.log('inquiryy',firstChat);
-          setReceiverId(inquiryDetails.userId);
+          // console.log('data is:',Data);
+          // console.log('inquiryy',firstChat);
+          console.log('receiver id is',receiverId);
+          
+          setuserId(localStorage.getItem("userid"));
           console.log(userId);
           
         }

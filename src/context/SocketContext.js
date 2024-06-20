@@ -73,7 +73,7 @@ export const SocketContextProvider = ({ children }) => {
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const { authUser } = useAuthContext();
 
-    console.log('Aut User'+authUser.id)
+    // console.log('Aut User'+authUser.id)
 
 	useEffect(() => {
 		if (authUser) {
