@@ -129,8 +129,10 @@ export default function Myinquirychat() {
   
   const [inquiryId, setid] = useState(item.item._id);
   // console.log(inquiryId);
-  const [receiverId, setReceiverId] = useState(item.item.userData._id);
-  const [userId, setuserId] = useState();
+  const [receiverId, setReceiverId] = useState(item.item.userData);
+  console.log('maharsh',item.item.userData);
+  
+  const [userId, setuserId] = useState(localStorage.getItem("userid"));
   const screen = "";
 
   useEffect(() => {
@@ -159,8 +161,6 @@ export default function Myinquirychat() {
           // console.log('data is:',Data);
           // console.log('inquiryy',firstChat);
           console.log('receiver id is',receiverId);
-          
-          setuserId(localStorage.getItem("userid"));
           console.log(userId);
           
         }
