@@ -90,9 +90,9 @@ export default function Useriquirychat() {
         console.log('socket messae  ....');
         console.log('inquiryId',item.item._id);
         
-        // if (newMessage.inquiryId == item.item._id) {
+        if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
-        // }
+        }
       });
 
       return () => socket?.off("newMessage");
