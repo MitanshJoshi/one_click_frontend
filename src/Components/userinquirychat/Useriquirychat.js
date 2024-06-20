@@ -147,11 +147,9 @@ export default function Useriquirychat() {
   const [receiverId, setReceiverId] = useState();
 
   useEffect(() => {
-    setReceiverId(item.item.productDetails
-      ?.startupId)
+    setReceiverId(item.item.startupDetails
+      ?.userId)
   }, [item])
-  
-  
 
   const [userId, setuserId] = useState(item.item.userId);
   const screen = "user";  
