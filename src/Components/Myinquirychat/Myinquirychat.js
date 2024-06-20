@@ -13,7 +13,7 @@ import "./myinquirychat.css";
 export default function MyInquiryChat() {
   const { sharedState, setSharedState } = useSharedState();
   const { chat, setChat } = useChatContext();
-  const { message, setmessage } = useMessageContext();
+  const { message, setMessage } = useMessageContext();
   const chatEndRef = useRef(null);
   const location = useLocation();
   const item = location.state && location.state.item;
@@ -115,7 +115,7 @@ export default function MyInquiryChat() {
 
       const responseData = await response.json();
       display();
-      setmessage("");
+      setMessage("");
       setChat([...chat, responseData.data.message]);
     } catch (error) {
       toast.error("Chat Inquiry failed!", {
@@ -124,6 +124,7 @@ export default function MyInquiryChat() {
       });
     }
   };
+
   return (
     <>
       <SecondNavbar />
@@ -149,16 +150,12 @@ export default function MyInquiryChat() {
           />
           <span className="ps-3">pankaj</span>
         </span>
-        <section className="mt-sm-5 mt-2 pt-4 ">
+        <section className="mt-sm-5 mt-2 pt-4">
           <div className="container">
-            {/* <ToastContainer/> */}
-            {/* profile  */}
-            <div
-              className="profile"
-            >
+            <div className="profile">
               <div>
                 <img
-                  className="background-image img-fluid "
+                  className="background-image img-fluid"
                   style={{ width: "100%" }}
                   src="/Frame.png"
                   alt="Background"
@@ -177,238 +174,167 @@ export default function MyInquiryChat() {
                       }}
                     />
                   </div>
-                  <div
-                    className="profileDiv mt-5 "
-                    style={{ marginLeft: "20px" }}
-                  >
+                  <div className="profileDiv mt-5" style={{ marginLeft: "20px" }}>
                     <h4 className="h4">Profile</h4>
                     <p className="lead ">webearl</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* detail  */}
-            <div>
-              <div
-                className="startup-profile "
-              >
-                <div>
-                  <div className="startup-profile-heading">
-                    <div className="d-flex justify-content-between mb-md-5 mb-2">
-                      <div className="d-flex align-items-sm-center align-items-start">
-                        <div>
-                          <img src="/webearl.png" alt="" />
-                        </div>
-                        <div className="ms-sm-4 ms-2">
-                          <h4 className="mb-1">Webearl Technology Pvt Ltd</h4>
-                          <p className="mb-0">Cradle, EDII</p>
-                        </div>
-                      </div>
-                      <div className="ms-lg-0 ms-1">
-                        <div className="d-flex align-item-center">
-                          <img
-                            src="/start.png"
-                            alt=""
-                            style={{ width: "230px", height: "40px" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className=" d-flex align-item-center gap-5 w-100 d-flex  ">
-                      <p className=" ms-md-3 ms-sm-2 ">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupData.city}
-                      </p>
-                      <p className=" ms-md-3 ms-sm-2">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupData.state}
-                      </p>
-                      <p className=" ms-md-3 ms-sm-2">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupData.country}
-                      </p>
-                    </div>
-                    <div className="icone d-flex align-item center justify-content-start gap-5 mt-3">
-                      <p className=" ms-md-3 ms-sm-2">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupData.inqubationCenterCity}
-                      </p>
-                      <p className=" ms-md-3 ms-sm-2">
-                        {/* <FontAwesomeIcon icon={faMapMarkerAlt} /> */}
-                        Centre for Advancing & Launching Enterprises (CrAdLE)
-                      </p>
-                    </div>
-                    <div className="mt-5 d-flex align-item-center">
+            <div className="startup-profile">
+              <div>
+                <div className="startup-profile-heading">
+                  <div className="d-flex justify-content-between mb-md-5 mb-2">
+                    <div className="d-flex align-items-sm-center align-items-start">
                       <div>
-                        <h3>Inquiry Information :</h3>
+                        <img src="/webearl.png" alt="" />
                       </div>
-                      <div className="mt-2 ms-5">
-                        <h5>Title={item.item.inquiryData.title}</h5>
-                        <h5>Description={item.item.inquiryData.description}</h5>
-                        <h5>
-                          Best-Time To Connect={" "}
-                          {item.item.inquiryData.best_time_to_connect}
-                        </h5>
+                      <div className="ms-sm-4 ms-2">
+                        <h4 className="mb-1">Webearl Technology Pvt Ltd</h4>
+                        <p className="mb-0">Cradle, EDII</p>
                       </div>
                     </div>
-                    <div className="mt-5 d-flex align-item-center">
-                      <div>
-                        <h3>Product Information :</h3>
+                    <div className="ms-lg-0 ms-1">
+                      <div className="d-flex align-item-center">
+                        <img
+                          src="/start.png"
+                          alt=""
+                          style={{ width: "230px", height: "40px" }}
+                        />
                       </div>
-                      <div className="mt-2 ms-5 d-flex align-item-center">
-                        <div>
-                          <img
-                            src="/shoe-list.png"
-                            alt=""
-                            style={{ width: "70px", height: "30px" }}
-                          />
-                        </div>
-                        <div>
-                          <h5>{item.item.productData.productName}</h5>
-                        </div>
+                    </div>
+                  </div>
+                  <div className="d-flex align-item-center gap-5 w-100 d-flex">
+                    <p className="ms-md-3 ms-sm-2">
+                      <span>
+                        <img
+                          src="/map-pin.png"
+                          alt=""
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </span>
+                      {item.startupData.city}
+                    </p>
+                    <p className="ms-md-3 ms-sm-2">
+                      <span>
+                        <img
+                          src="/map-pin.png"
+                          alt=""
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </span>
+                      {item.startupData.state}
+                    </p>
+                    <p className="ms-md-3 ms-sm-2">
+                      <span>
+                        <img
+                          src="/map-pin.png"
+                          alt=""
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </span>
+                      {item.startupData.country}
+                    </p>
+                  </div>
+                  <div className="icone d-flex align-item center justify-content-start gap-5 mt-3">
+                    <p className="ms-md-3 ms-sm-2">
+                      <span>
+                        <img
+                          src="/map-pin.png"
+                          alt=""
+                          style={{ width: "30px", height: "30px" }}
+                        />
+                      </span>
+                      {item.startupData.inqubationCenterCity}
+                    </p>
+                    <p className="ms-md-3 ms-sm-2">
+                      Centre for Advancing & Launching Enterprises (CrAdLE)
+                    </p>
+                  </div>
+                  <div className="mt-5 d-flex align-item-center">
+                    <div>
+                      <h3>Inquiry Information :</h3>
+                    </div>
+                    <div className="mt-2 ms-5">
+                      <h5>Title={item.inquiryData.title}</h5>
+                      <h5>Description={item.inquiryData.description}</h5>
+                      <h5>
+                        Best-Time To Connect={item.inquiryData.best_time_to_connect}
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="mt-5 d-flex align-item-center">
+                    <div>
+                      <h3>Product Information :</h3>
+                    </div>
+                    <div className="mt-2 ms-5 d-flex align-item-center">
+                      <div>
+                        <img
+                          src="/shoe-list.png"
+                          alt=""
+                          style={{ width: "100px", height: "100px" }}
+                        />
+                      </div>
+                      <div className="ms-5">
+                        <h5>Name= {item.productData.name}</h5>
+                        <h5>Type= {item.productData.type}</h5>
+                        <h5>Quantity={item.productData.quantity}</h5>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <Accordion>
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header
+                    onClick={handleUpdateUserClick}
+                    style={{ color: "#0082ca" }}
+                  >
+                    <h5 style={{ color: "#0082ca" }}>
+                      View Messages ({chat?.length || 0})
+                    </h5>
+                  </Accordion.Header>
+                  <Accordion.Body className="chat-box">
+                    <div className="chat">
+                      {chat?.map((message, index) => (
+                        <div
+                          key={index}
+                          className={`${
+                            message?.userId?._id === userId
+                              ? "chat-bubble-right"
+                              : "chat-bubble-left"
+                          }`}
+                        >
+                          <div className="message">
+                            <img
+                              className="chat-user-image"
+                              src="/BioDisplayUser.png"
+                              alt="User"
+                            />
+                            <div className="chat-text">{message.message}</div>
+                          </div>
+                        </div>
+                      ))}
+                      <div ref={chatEndRef} />
+                    </div>
+                    <div className="chat-input">
+                      <textarea
+                        rows="3"
+                        placeholder="Type your message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
+                      <button onClick={handleChat} className="btn btn-primary">
+                        Send
+                      </button>
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
             </div>
-
-            {messageComponent && (
-              <div
-                style={{
-                  position: "fixed",
-                  bottom: "1%",
-                  right: "4%",
-                  zIndex: "2222",
-                }}
-              >
-                <div className="space d-flex align-item-center- justify-content-end">
-                  <div className="chatboxx">
-                    <span></span>
-                  </div>
-                  <div className="accordian">
-                    <div
-                      className="chatpop"
-                      style={{ width: "400px", height: "auto" }}
-                    >
-                      <Accordion defaultActiveKey="0">
-                        <Accordion.Item eventKey="0">
-                          <Accordion.Header
-                            onClick={() => setMessageComponent(false)}
-                          >
-                            <div className="profile d-flex justify-content-start">
-                              <div className="img">
-                                <img
-                                  src="BioDisplayUser.png"
-                                  alt=""
-                                  style={{ width: "50px" }}
-                                />{" "}
-                              </div>
-                              <div className="name pt-2 ps-2">
-                                <h3>{item.item.userData.name}</h3>
-                              </div>
-                            </div>
-                          </Accordion.Header>
-                          <Accordion.Body>
-                            <div
-                              style={{
-                                maxHeight: "300px", 
-                                overflowY: "auto", 
-                              }}
-                            >
-                              {chat &&
-                                chat.map((e, index) => (
-                                  <div
-                                    key={index} // Add a unique key to each chat message
-                                    className={`${
-                                      uid === e.senderId
-                                        ? "text-end"
-                                        : "text-start"
-                                    } p-3`}
-                                  >
-                                    <span
-                                      style={{
-                                        height: "20px",
-                                        color: "black",
-                                      }}
-                                    >
-                                      <img
-                                        src="BioDisplayUser.png"
-                                        alt=""
-                                        style={{
-                                          width: "30px",
-                                          height: "30px",
-                                          marginRight: "10px",
-                                        }}
-                                      />
-                                      {e.message}
-                                    </span>
-                                  </div>
-                                ))}
-                            </div>
-                            <div className="mt-5 From-Control ">
-                              <input
-                                value={message}
-                                type="text "
-                                style={{
-                                  width: "85%",
-                                  border: "1px solid green",
-                                  borderRadius: "10px",
-                                  height: "35px",
-                                }}
-                                onChange={(e) => setmessage(e.target.value)}
-                                placeholder="Type your message here"
-                              />
-                              <span
-                                className=""
-                                style={{
-                                  height: "30px",
-                                  borderRadius: "50px",
-                                  width: "50px",
-                                }}
-                              >
-                                <img
-                                  src="send.png"
-                                  alt=""
-                                  onClick={handleChat}
-                                />
-                              </span>
-                            </div>
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      </Accordion>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </section>
+        <ToastContainer />
       </Container>
     </>
   );
