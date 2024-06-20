@@ -129,8 +129,7 @@ export default function Userinquirychat() {
   
   const [inquiryId, setid] = useState(item.item._id);
   // console.log(inquiryId);
-  const [receiverId, setReceiverId] = useState(item.item.startupDetails.userId);
-  console.log('maharsh',item.item.userData._id);
+  const [receiverId, setReceiverId] = useState(item.item.startupDetails.userId)
   
   const [userId, setuserId] = useState(localStorage.getItem("userid"));
   console.log("User Id:::"+localStorage.getItem("userid"))
