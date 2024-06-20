@@ -103,7 +103,7 @@ export default function Myinquirychat() {
 
   useEffect(() => {
     display();
-  }, [chat]);
+  }, []);
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
