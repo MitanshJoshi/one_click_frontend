@@ -19,7 +19,7 @@ export default function MyInquiryChat() {
   const item = location.state && location.state.item;
   const [showNewContent, setShowNewContent] = useState(false);
   const [uid, setUID] = useState("");
-  const [inquiryId, setInquiryId] = useState(item?._id);
+  const [inquiryId, setInquiryId] = useState(item.item._id);
   const [receiverId, setReceiverId] = useState(item?.userData._id);
   const [userId, setUserId] = useState(localStorage.getItem("userid"));
   const [messageComponent, setMessageComponent] = useState(false);
@@ -53,6 +53,8 @@ export default function MyInquiryChat() {
 
     useEffect(() => {
       socket?.on("newMessage", (newMessage) => {
+        console.log('socket from myinqurychat');
+        
         if (newMessage.inquiryId === inquiryId) {
           setChat((prevChat) => [...prevChat, newMessage]);
         }
