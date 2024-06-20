@@ -31,7 +31,7 @@ export default function Myinquirychat() {
         }
       );
       const Data = await response.json();
-      console.log(Data);
+      console.log("data is:",Data);
       setchat(Data?.data);
       // console.log(Data?.data);
     } catch (error) {
@@ -78,9 +78,9 @@ export default function Myinquirychat() {
         console.log('socket messae  ....');
         console.log('inquiryId',item.item._id);
         
-        if (newMessage.inquiryId == item.item._id) {
+        // if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
-        }
+        // }
       });
 
       return () => socket?.off("newMessage");
@@ -131,6 +131,7 @@ export default function Myinquirychat() {
   // console.log(inquiryId);
   const [receiverId, setReceiverId] = useState();
   const [userId, setuserId] = useState();
+  setuserId(localStorage.getItem("userid"));
   const screen = "";
 
   useEffect(() => {
@@ -156,10 +157,9 @@ export default function Myinquirychat() {
         if (Data?.data && Data?.data.length > 0) {
           const firstChat = Data.data[0];
           const inquiryDetails = firstChat.inquiryDetails[0];
+          console.log('data is:',Data);
           console.log('inquiryy',firstChat);
-          
           setReceiverId(inquiryDetails.userId);
-          setuserId(localStorage.getItem("userid"));
           console.log(userId);
           
         }
