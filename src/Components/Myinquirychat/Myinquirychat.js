@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SecondNavbar from "../Navbar/Navbar";
 import { Container } from "react-bootstrap";
-import "./myinquirychat.css";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../../context/SocketContext";
 import { useSharedState } from "../../context/SharedStateContext";
 import Accordion from "react-bootstrap/Accordion";
 import { useChatContext } from "../../context/chatcontext";
-// import { Socket } from "socket.io-client";
-import { useRef } from "react";
 import { useMessageContext } from "../../context/setMessage";
+import "./myinquirychat.css";
 
-export default function Myinquirychat() {
+export default function MyInquiryChat() {
   const { sharedState, setSharedState } = useSharedState();
-  const [showNewContent, setShowNewContent] = useState(false);
-  const { chat, setchat } = useChatContext();
+  const { chat, setChat } = useChatContext();
   const { message, setmessage } = useMessageContext();
   const chatEndRef = useRef(null);
-  const displayCalledRef = useRef(false);
+  const location = useLocation();
+  const item = location.state && location.state.item;
+  const [showNewContent, setShowNewContent] = useState(false);
+  const [uid, setUID] = useState("");
+  const [inquiryId, setInquiryId] = useState(item?._id);
+  const [receiverId, setReceiverId] = useState(item?.userData._id);
+  const [userId, setUserId] = useState(localStorage.getItem("userid"));
+  const [messageComponent, setMessageComponent] = useState(false);
+  const screen = "";
+
+  useEffect(() => {
+    setUID(localStorage.getItem("userid"));
+    display();
+  }, []);
+
   const display = async () => {
     try {
       const response = await fetch(
@@ -30,65 +41,29 @@ export default function Myinquirychat() {
           },
         }
       );
-      const Data = await response.json();
-      console.log("data is:",Data);
-      setchat(Data?.data);
-      // console.log(Data?.data);
+      const data = await response.json();
+      setChat(data?.data);
     } catch (error) {
       console.error("Error fetching data from the backend", error);
     }
   };
 
-  // const useListenMessages = ({ chat, setChat }) => {
-  //   const { socket } = useSocketContext();
-  //   useEffect(() => {
-  //     console.log("useListenMessages useEffect triggered");
-  //     console.log("Current chat:", chat);
-
-  //     if (socket) {
-  //       console.log("Socket is connected. Adding event listener.");
-  //       socket?.on("newMessage", (newMessage) => {
-  //         console.log("newMessage received:", newMessage);
-  //         setChat((prevChat) => [...prevChat, newMessage]);
-          
-  //         if (!sharedState) {
-  //           setSharedState(true);
-  //           display();
-  //         } // Increment shared state to trigger updates in both components
-  //       });
-
-  //       return () => {
-  //         console.log("Cleaning up useEffect");
-  //         socket?.off("newMessage");
-  //       };
-  //     } else {
-  //       console.log("Socket is not connected. Skipping event listener registration.");
-  //     }
-  //   }, [socket, chat, setChat,sharedState]);
-  // };
-
-  // useListenMessages({ chat, setchat });
-  const useListenMessages = ({ chat, setchat, setmessage }) => {
-
+  const useListenMessages = ({ chat, setChat }) => {
     const { socket } = useSocketContext();
 
     useEffect(() => {
-      // console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
-        console.log('socket message from myinquiry  ....');
-        console.log('inquiryId',item.item._id);
-        
-        if (newMessage.inquiryId == item.item._id) {
-          setchat((prevChat) => [...prevChat, newMessage]);
+        if (newMessage.inquiryId === inquiryId) {
+          setChat((prevChat) => [...prevChat, newMessage]);
         }
       });
 
       return () => socket?.off("newMessage");
-    }, [socket, chat, setchat, setmessage]);
+    }, [socket, chat, setChat]);
   };
 
   const useListenOnlineUsers = () => {
-    const { socket, setOnlineUsers, onlineUsers } = useSocketContext();
+    const { socket, setOnlineUsers } = useSocketContext();
 
     useEffect(() => {
       socket?.on("getOnlineUsers", (users) => {
@@ -96,84 +71,25 @@ export default function Myinquirychat() {
       });
 
       return () => socket?.off("getOnlineUsers");
-    }, [socket, setOnlineUsers, onlineUsers]);
+    }, [socket, setOnlineUsers]);
   };
-  useListenMessages({ chat, setchat, setmessage })
+
+  useListenMessages({ chat, setChat });
   useListenOnlineUsers();
 
-  useEffect(() => {
-    display();
-  }, []);
-
-  const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
 
-  const handleUpdateUserClick = () => {
-    setShowNewContent(!showNewContent); 
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const [uid, setUID] = useState("");
+  const handleUpdateUserClick = () => {
+    setShowNewContent(!showNewContent);
+  };
 
-  useEffect(() => {
-    setUID(localStorage.getItem("userid"));
-  }, []);
-
-  const location = useLocation();
-  const item = location.state && location.state;
-  console.log("item:", item);
-
-  
-  const [inquiryId, setid] = useState(item.item._id);
-  // console.log(inquiryId);
-  const [receiverId, setReceiverId] = useState(item.item.userData._id);
-  console.log('maharsh',item.item.userData._id);
-  
-  const [userId, setuserId] = useState(localStorage.getItem("userid"));
-  console.log("User Id:::"+localStorage.getItem("userid"))
-  // setuserId(localStorage.getItem("userid"))
-  const screen = "";
-
-  const fetchChatData = async () => {
-    try {
-      const response = await fetch(
-        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch chat data");
-      }
-
-      const Data = await response.json();
-      setchat(Data?.data);
-
-      if (Data?.data && Data?.data.length > 0) {
-        const firstChat = Data.data[0];
-        const inquiryDetails = firstChat.inquiryDetails[0];
-        // console.log('data is:',Data);
-        // console.log('inquiryy',firstChat);
-        console.log('receiver id is',receiverId);
-        console.log(userId);
-        
-      }
-    } catch (error) {
-      console.error("Error fetching data from the backend", error);
-    }
-  }
-  // useEffect(() => {
-  //   fetchChatData();
-  // }, []);
-  
-  const handlechat = async () => {
+  const handleChat = async () => {
     try {
       const response = await fetch(
         "https://oneclick-sfu6.onrender.com/api/chat/chat-insert",
@@ -192,57 +108,22 @@ export default function Myinquirychat() {
           }),
         }
       );
-      console.log('receiver',receiverId);
-      console.log('user',userId);
 
-      
-      // setSharedState(prevState => prevState + 1);
       if (!response.ok) {
         throw new Error("Chat inquiry failed");
       }
-      
+
       const responseData = await response.json();
-      
       display();
       setmessage("");
-      setchat([...chat, responseData.data.message])
+      setChat([...chat, responseData.data.message]);
     } catch (error) {
-      if (error) {
-        toast.error(" Chat Inquiry failed!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 1000,
-        });
-      }
+      toast.error("Chat Inquiry failed!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
     }
   };
-
-  // const display = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: `${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-  //     const Data = await response.json();
-  //     console.log(Data);
-  //     setchat(Data?.data);
-  //     console.log(Data?.data);
-  //   } catch (error) {
-  //     console.error("Error fetching data from the backend", error);
-  //   }
-  // };
-
-  useEffect(() => {
-    display();
-  }, []);
-
-
-  const [messageComponent, setMessageComponent] = useState(false);
-
   return (
     <>
       <SecondNavbar />
@@ -514,7 +395,7 @@ export default function Myinquirychat() {
                                 <img
                                   src="send.png"
                                   alt=""
-                                  onClick={handlechat}
+                                  onClick={handleChat}
                                 />
                               </span>
                             </div>
