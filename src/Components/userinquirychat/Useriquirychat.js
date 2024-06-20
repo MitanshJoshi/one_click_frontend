@@ -94,7 +94,6 @@ export default function Userinquirychat() {
       socket?.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);
       });
-
       return () => socket?.off("getOnlineUsers");
     }, [socket, setOnlineUsers, onlineUsers]);
   };

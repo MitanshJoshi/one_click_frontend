@@ -75,7 +75,7 @@ export default function Myinquirychat() {
     useEffect(() => {
       // console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
-        console.log('socket messae  ....');
+        console.log('socket message from myinquiry  ....');
         console.log('inquiryId',item.item._id);
         
         if (newMessage.inquiryId == item.item._id) {
