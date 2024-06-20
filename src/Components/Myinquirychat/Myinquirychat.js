@@ -133,45 +133,46 @@ export default function Myinquirychat() {
   console.log('maharsh',item.item.userData._id);
   
   const [userId, setuserId] = useState(localStorage.getItem("userid"));
+  console.log("User Id:::"+localStorage.getItem("userid"))
+  // setuserId(localStorage.getItem("userid"))
   const screen = "";
 
-  useEffect(() => {
-    const fetchChatData = async () => {
-      try {
-        const response = await fetch(
-          `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `${localStorage.getItem("token")}`,
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch chat data");
+  const fetchChatData = async () => {
+    try {
+      const response = await fetch(
+        `https://oneclick-sfu6.onrender.com/api/chat/display-chat?inquiryId=${inquiryId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+          },
         }
+      );
 
-        const Data = await response.json();
-        setchat(Data?.data);
-
-        if (Data?.data && Data?.data.length > 0) {
-          const firstChat = Data.data[0];
-          const inquiryDetails = firstChat.inquiryDetails[0];
-          // console.log('data is:',Data);
-          // console.log('inquiryy',firstChat);
-          console.log('receiver id is',receiverId);
-          console.log(userId);
-          
-        }
-      } catch (error) {
-        console.error("Error fetching data from the backend", error);
+      if (!response.ok) {
+        throw new Error("Failed to fetch chat data");
       }
-    };
 
-    fetchChatData();
-  }, []);
+      const Data = await response.json();
+      setchat(Data?.data);
 
+      if (Data?.data && Data?.data.length > 0) {
+        const firstChat = Data.data[0];
+        const inquiryDetails = firstChat.inquiryDetails[0];
+        // console.log('data is:',Data);
+        // console.log('inquiryy',firstChat);
+        console.log('receiver id is',receiverId);
+        console.log(userId);
+        
+      }
+    } catch (error) {
+      console.error("Error fetching data from the backend", error);
+    }
+  }
+  // useEffect(() => {
+  //   fetchChatData();
+  // }, []);
+  
   const handlechat = async () => {
     try {
       const response = await fetch(
