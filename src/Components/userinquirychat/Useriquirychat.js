@@ -386,11 +386,11 @@ export default function Userinquirychat() {
                         <h3>Inquiry Information :</h3>
                       </div>
                       <div className="mt-2 ms-5">
-                        <h5>Title={item.item.inquiryData.title}</h5>
-                        <h5>Description={item.item.inquiryData.description}</h5>
+                        <h5>Title={item.item.title}</h5>
+                        <h5>Description={item.item.description}</h5>
                         <h5>
                           Best-Time To Connect={" "}
-                          {item.item.inquiryData.best_time_to_connect}
+                          {item.item.best_time_to_connect}
                         </h5>
                       </div>
                     </div>
