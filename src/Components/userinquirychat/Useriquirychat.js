@@ -448,7 +448,7 @@ export default function Userinquirychat() {
                                 />{" "}
                               </div>
                               <div className="name pt-2 ps-2">
-                                <h3>{item.item.userData.name}</h3>
+                                <h3>{item.item.userDetails.name}</h3>
                               </div>
                             </div>
                           </Accordion.Header>
