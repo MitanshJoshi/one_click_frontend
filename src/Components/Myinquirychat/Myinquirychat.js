@@ -154,7 +154,16 @@ export default function Myinquirychat() {
 
         const Data = await response.json();
         setchat(Data?.data);
-        
+
+        if (Data?.data && Data?.data.length > 0) {
+          const firstChat = Data.data[0];
+          const inquiryDetails = firstChat.inquiryDetails[0];
+          // console.log('data is:',Data);
+          // console.log('inquiryy',firstChat);
+          console.log('receiver id is',receiverId);
+          console.log(userId);
+          
+        }
       } catch (error) {
         console.error("Error fetching data from the backend", error);
       }
