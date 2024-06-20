@@ -407,7 +407,7 @@ export default function Userinquirychat() {
                           />
                         </div>
                         <div>
-                          <h5>{item.item.productData.productName}</h5>
+                          <h5>{item.item.productDetails.productName}</h5>
                         </div>
                       </div>
                     </div>
