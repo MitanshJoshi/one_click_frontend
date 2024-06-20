@@ -342,7 +342,7 @@ export default function Userinquirychat() {
                             style={{ width: "30px", height: "30px" }}
                           />
                         </span>
-                        {item.item.startupData.city}
+                        {item.item.startupDetails.city}
                       </p>
                       <p className=" ms-md-3 ms-sm-2">
                         <span>
@@ -352,7 +352,7 @@ export default function Userinquirychat() {
                             style={{ width: "30px", height: "30px" }}
                           />
                         </span>
-                        {item.item.startupData.state}
+                        {item.item.startupDetails.state}
                       </p>
                       <p className=" ms-md-3 ms-sm-2">
                         <span>
@@ -362,7 +362,7 @@ export default function Userinquirychat() {
                             style={{ width: "30px", height: "30px" }}
                           />
                         </span>
-                        {item.item.startupData.country}
+                        {item.item.startupDetails.country}
                       </p>
                     </div>
                     <div className="icone d-flex align-item center justify-content-start gap-5 mt-3">
@@ -374,7 +374,7 @@ export default function Userinquirychat() {
                             style={{ width: "30px", height: "30px" }}
                           />
                         </span>
-                        {item.item.startupData.inqubationCenterCity}
+                        {item.item.startupDetails.inqubationCenterCity}
                       </p>
                       <p className=" ms-md-3 ms-sm-2">
                         {/* <FontAwesomeIcon icon={faMapMarkerAlt} /> */}
