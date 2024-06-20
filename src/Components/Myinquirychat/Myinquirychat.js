@@ -75,12 +75,12 @@ export default function Userinquirychat() {
     useEffect(() => {
       // console.log('inquiryId',item.item._id);
       socket?.on("newMessage", (newMessage) => {
-        console.log('socket messae  ....');
+        console.log('socket messae from mychatinquiry  ....');
         console.log('inquiryId',item.item._id);
         
-        if (newMessage.inquiryId == item.item._id) {
+        // if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
-        }
+        // }
       });
 
       return () => socket?.off("newMessage");
