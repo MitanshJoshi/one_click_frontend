@@ -78,7 +78,7 @@ export default function Userinquirychat() {
         console.log('socket messae  ....');
         console.log('inquiryId',item.item._id);
         
-        if (newMessage.inquiryId == item._id) {
+        if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
         }
       });
@@ -126,7 +126,7 @@ export default function Userinquirychat() {
   console.log("item:", item);
 
   
-  const [inquiryId, setid] = useState(item._id);
+  const [inquiryId, setid] = useState(item.item._id);
   // console.log(inquiryId);
   const [receiverId, setReceiverId] = useState(item.item.userData._id)
   
