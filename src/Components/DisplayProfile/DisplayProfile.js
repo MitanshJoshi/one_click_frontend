@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./DisplayProfile.css";
 import Countries from "../../CountryStateCity.json";
 import { toast } from "react-toastify";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../BASE_URL";
 
 const DisplayProfile = ({ img }) => {
-
   const indiaObject = Countries.find((country) => country.name === "India");
   // Initial states
   const [countryData, setCountryData] = useState([]);
@@ -27,14 +27,52 @@ const DisplayProfile = ({ img }) => {
   const [collegeName, setCollegeName] = useState("");
   const [educationList, setEducationList] = useState([]);
   const [documentType, setDocumentType] = useState(""); // State to manage document type
+  // const [documentOptions, setDocumentOptions] = useState([]);
   const [documentFile, setDocumentFile] = useState(null); // State to manage selected document file
-
+  const [documentUrl, setDocumentUrl] = useState("");
 
   // Fetch user data on component mount
   useEffect(() => {
     setCountryData(Countries);
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const fetchDocumentTypes = async () => {
+      const token = localStorage.getItem("token"); // Get token from localStorage
+      try {
+        const response = await axios.get(
+          "https://oneclick-sfu6.onrender.com/api/Document/getDocument",
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        if (response.data.document && response.data.document.length > 0) {
+          const document = response.data.document[0];
+          setDocumentType(document.document_type);
+          setDocumentUrl(document.document_photo);
+        }
+      } catch (error) {
+        console.error("Error fetching document types:", error);
+      }
+    };
+
+    fetchDocumentTypes();
+
+    // Set the stored document type on initial load
+    const storedDocumentType = localStorage.getItem("documentType");
+    if (storedDocumentType) {
+      setDocumentType(storedDocumentType);
+    }
+  }, []);
+
+  const handleDocumentTypeChange = (e) => {
+    const newDocumentType = e.target.value;
+    setDocumentType(newDocumentType);
+    localStorage.setItem("documentType", newDocumentType); // Store the selected document type
+  };
 
   // Fetch user profile data from the server
   const fetchData = async () => {
@@ -101,12 +139,12 @@ const DisplayProfile = ({ img }) => {
       });
       return;
     }
-  
+
     try {
       const formData = new FormData();
       formData.append("file", documentFile);
       formData.append("document_type", documentType);
-  
+
       const response = await fetch(`${BASE_URL}/api/Document/AddDocument`, {
         method: "POST",
         headers: {
@@ -114,9 +152,9 @@ const DisplayProfile = ({ img }) => {
         },
         body: formData,
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         toast.success(responseData.message, {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -137,7 +175,7 @@ const DisplayProfile = ({ img }) => {
       });
     }
   };
-  
+
   const handleDocumentEdit = async () => {
     if (!documentFile || documentFile.type !== "application/pdf") {
       toast.error("Please select a valid PDF file", {
@@ -146,25 +184,25 @@ const DisplayProfile = ({ img }) => {
       });
       return;
     }
-  
+
     try {
       const formData = new FormData();
       formData.append("file", documentFile);
       formData.append("document_type", documentType);
-  
-      const response = await fetch(
-        `${BASE_URL}/api/Document/EditDocument`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-          body: formData,
-        }
-      );
-  
+
+      const response = await fetch(`${BASE_URL}/api/Document/EditDocument`, {
+        method: "PUT",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: formData,
+      });
+
       const responseData = await response.json();
-  
+      console.log("resp:", responseData);
+      setDocumentUrl(responseData.document_photo);
+      console.log("documenturl", documentUrl);
+
       if (response.ok) {
         toast.success("Document updated successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -185,8 +223,6 @@ const DisplayProfile = ({ img }) => {
       });
     }
   };
-  
-
 
   // Handle state selection
   const handleSelectedState = (e) => {
@@ -256,7 +292,7 @@ const DisplayProfile = ({ img }) => {
       });
       return;
     }
-    if (contact.length !== 10) {
+    if (contact.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -393,7 +429,11 @@ const DisplayProfile = ({ img }) => {
       });
     }
   };
-  
+  const handleViewDocument = () => {
+    // Open documentUrl in a new tab
+    window.open(documentUrl, "_blank");
+  };
+
   return (
     <div>
       <div className="Newsallstyle">
@@ -433,12 +473,12 @@ const DisplayProfile = ({ img }) => {
                         Contact No
                       </label>
                     </div>
-                    <div className="col-lg-9 col-8">
-                      <div className="d-flex" style={{ gap: "20px" }}>
+                    <div className="col-lg-4 col-5">
+                      <div className="d-flex align-items-center">
                         <input
                           type="tel"
-                          className="form-control py-2 "
-                          id="contactNo"
+                          className="form-control py-2"
+                          id="countryCode"
                           defaultValue={countryCode}
                           style={{
                             color: "#000",
@@ -448,13 +488,13 @@ const DisplayProfile = ({ img }) => {
                         />
                         <input
                           type="tel"
-                          className="form-control py-2  text-center"
+                          className="form-control py-2 ms-2"
                           id="contactNo"
                           value={contact}
                           style={{
                             color: "#000",
                             fontWeight: "600",
-                            width: "160px",
+                            flex: "1",
                           }}
                           maxLength={10}
                           onInput={(e) => {
@@ -471,9 +511,7 @@ const DisplayProfile = ({ img }) => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
-                    <div className="col-lg-2 col-3">
+                    <div className="col-lg-3 col-4">
                       <label
                         className="LabelDesign2"
                         htmlFor="email"
@@ -482,27 +520,22 @@ const DisplayProfile = ({ img }) => {
                         Email ID
                       </label>
                     </div>
-                    <div className="col-lg-9 col-8">
+                    <div className="col-lg-3 col-4 ml-[-250px]">
                       <input
-                        type="tel"
-                        className="form-control py-2 "
+                        type="email"
+                        className="form-control py-2"
                         id="email"
-                        // onChange={handleEmail}
                         value={email}
-                        // onInput={(e) => {
-                        //   let value = e.target.value.replace(/[^0-9 a-z @_. ]/g, ''); // Remove non-numeric characters
-                        //   // Check if the first digit is zero
-                        //   if (value.length > 0 && value[0] === ' ') {
-                        //     // If the first digit is zero, remove it
-                        //     value = value.slice(1);
-                        //   }
-                        //   // Set the updated value
-                        //   e.target.value = value;
-                        // }}
-                        // style={{ color: "#000", fontWeight: "600" }}
+                        style={{
+                          color: "#000",
+                          fontWeight: "600",
+                          width: "100%",
+                        }}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                   </div>
+
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
                       <label
@@ -513,7 +546,7 @@ const DisplayProfile = ({ img }) => {
                         Select State
                       </label>
                     </div>
-                    <div className="col-lg-9 col-8">
+                    <div className="col-lg-4 col-5">
                       <div className="position-relative">
                         <select
                           className="form-control py-2"
@@ -537,9 +570,7 @@ const DisplayProfile = ({ img }) => {
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
-                    <div className="col-lg-2 col-3">
+                    <div className="col-lg-2 col-3 ms-lg-0">
                       <label
                         className="LabelDesign2"
                         htmlFor="city"
@@ -548,7 +579,7 @@ const DisplayProfile = ({ img }) => {
                         Select City
                       </label>
                     </div>
-                    <div className="col-lg-9 col-8">
+                    <div className="ml-[-123px] col-4">
                       <div className="position-relative">
                         <select
                           className="form-control py-2"
@@ -573,6 +604,7 @@ const DisplayProfile = ({ img }) => {
                       </div>
                     </div>
                   </div>
+
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
                       <label
@@ -654,55 +686,69 @@ const DisplayProfile = ({ img }) => {
             </div>
           </div>
           <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
-  <div className="col-lg-2 col-3">
-    <label
-      className="LabelDesign2"
-      htmlFor="documentType"
-      style={{ color: "#000", fontWeight: "600" }}
-    >
-      Document Type
-    </label>
-  </div>
-  <div className="col-lg-9 col-8">
-    <input
-      type="text"
-      className="form-control py-2"
-      id="documentType"
-      onChange={(e) => setDocumentType(e.target.value)}
-      value={documentType}
-      style={{ color: "#000", fontWeight: "600" }}
-    />
-  </div>
-</div>
-<div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
-  <div className="col-lg-2 col-3">
-    <label
-      className="LabelDesign2"
-      htmlFor="documentFile"
-      style={{ color: "#000", fontWeight: "600" }}
-    >
-      Upload Document
-    </label>
-  </div>
-  <div className="col-lg-9 col-8">
-    <input
-      type="file"
-      className="form-control py-2"
-      id="documentFile"
-      onChange={handleFileChange}
-      style={{ color: "#000", fontWeight: "600" }}
-    />
-  </div>
-</div>
-<div className="d-flex justify-content-end mb-sm-5 mb-3">
-  <div className="profile-edit-buttons">
-    <button className="ms-3" onClick={handleDocumentEdit}>
-      Upload Document
-    </button>
-  </div>
-</div>
-
-
+            <div className="col-lg-2 col-3">
+              <label
+                className="LabelDesign2"
+                htmlFor="documentType"
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                Document Type
+              </label>
+            </div>
+            <div className="col-lg-9 col-8">
+              <select
+                className="form-control py-2"
+                id="documentType"
+                onChange={(e) => setDocumentType(e.target.value)}
+                value={documentType}
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                <option value="">Select Document Type</option>
+                <option value="aadhaar_card">Aadhaar Card</option>
+                <option value="driving_license">Driving License</option>
+                <option value="election_card">Election Card</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
+            <div className="col-lg-2 col-3">
+              <label
+                className="LabelDesign2"
+                htmlFor="documentFile"
+                style={{ color: "#000", fontWeight: "600" }}
+              >
+                Upload Document
+              </label>
+            </div>
+            <div className="col-lg-9 col-8">
+              <input
+                type="file"
+                className="form-control py-2"
+                id="documentFile"
+                onChange={handleFileChange}
+                style={{ color: "#000", fontWeight: "600" }}
+              />
+            </div>
+          </div>
+          <div className="d-flex justify-content-end mb-sm-5 mb-3">
+            {documentUrl && (
+              <div>
+                <div className="profile-edit-buttons">
+                  <button
+                    className="btn ms-3 btn-primary"
+                    onClick={handleViewDocument}
+                  >
+                    View Document
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="profile-edit-buttons">
+              <button className="ms-3" onClick={handleDocumentEdit}>
+                Upload Document
+              </button>
+            </div>
+          </div>
 
           {/* <div>
             <div className="display-profile-education">

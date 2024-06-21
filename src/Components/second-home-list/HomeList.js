@@ -96,13 +96,9 @@ const HomeList = ({ handlesubcategory }) => {
               </div>
 
               <div className="d-flex flex-column justify-content-center align-items-center">
-                <div className="second-home-postBtnParent">
-                  <p className="second-home-postBtn"> + Post a Free Ad</p>
-                </div>
+                <button className='btn styleBtn mt-3'><p className='mx-4 mb-0'>+ Post a Free Ad</p></button>
 
-                <div className="second-home-postBtnParent mt-2 mb-5">
-                  <p className="postBtn"> Download App</p>
-                </div>
+                <button className='btn styleBtn mt-3 mb-3'><p className='mx-4 mb-0'>Download App</p></button>
               </div>
             </div>
           </div>

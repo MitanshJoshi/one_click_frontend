@@ -48,11 +48,11 @@ const App = () => {
           <Route path="/Contect-Us" element={<ContactUs />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/changepassword" element={<ChangePassword />} />
-          <Route path="/home2" element={<HomePage2 />} />
+          <Route path="/home" element={<HomePage2 />} />
           <Route path="/my-profile" element={<Myprofile />} />
           <Route path="/my-fullinfo" element={<MyFullInfo />} />
           <Route path="/start-up-full-detail/:_id" element={<StartUps />} />
-          <Route path="/home-page-2" element={<HomePage2 />} />
+          <Route path="/home-page" element={<HomePage2 />} />
           <Route path="/shoes-details/:_id" element={<ShoesDetails />} />
           <Route path="/supplier-detail" element={<SupplierDetail />} />
           <Route path="/inquiry/:_id" element={<Myinquiry/>} />

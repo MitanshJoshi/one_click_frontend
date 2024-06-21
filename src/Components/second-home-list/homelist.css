@@ -4,6 +4,7 @@
   box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
   min-width: 343px;
 }
+
 .search-container {
   position: relative;
   display: flex;
@@ -23,21 +24,20 @@
   box-sizing: border-box;
 }
 
-
-.second-home-searchType{
-    position: relative;
+.second-home-searchType {
+  position: relative;
 }
 
-.second-home-search-icon{
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    margin: auto;
-    left: 20px;
-    color: lightgray;
+.second-home-search-icon {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  margin: auto;
+  left: 20px;
+  color: lightgray;
 }
 
-.second-home-searchType input{
+.second-home-searchType input {
   border-radius: 50px;
   border: 1px solid #d8d8d8;
   background: #fff;
@@ -46,10 +46,10 @@
   height: 40px;
 }
 
-.second-home-searchType input::placeholder{
-    color: lightgray;
-    font-family: poppins;
-    padding-left: 25px;
+.second-home-searchType input::placeholder {
+  color: lightgray;
+  font-family: Poppins;
+  padding-left: 25px;
 }
 
 .second-home-elements {
@@ -70,6 +70,18 @@
   font-weight: 400;
   line-height: normal;
 }
+
+.second-home-postBtnParent {
+  border-radius: 14.526px;
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 199px;
+  height: auto;
+  padding-top: 10px;
+}
+
 .second-home-postBtn {
   color: #fff;
   font-family: Poppins;
@@ -77,16 +89,21 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  text-align: center;
+  margin: 0;  /* Ensure no default margin is affecting the alignment */
+  width: 100%; /* Ensure the text takes up the full width of the parent */
 }
-.second-home-postBtnParent {
-  border-radius: 14.526px;
-  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
-  padding-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 199px;
-  height: auto;
+
+.postBtn {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 18.157px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  margin: 0;  /* Ensure no default margin is affecting the alignment */
+  width: 100%; /* Ensure the text takes up the full width of the parent */
 }
 
 .second-home-categories select {
@@ -96,17 +113,16 @@
   border-radius: 8px;
   color: white;
   font-weight: 600;
-  font-family: poppins;
+  font-family: Poppins;
 }
 
-.second-home-categories select:focus-visible{
-    outline: none;
+.second-home-categories select:focus-visible {
+  outline: none;
 }
 
-.second-home-categories h5{
-    font-weight: 600;
+second-home-categories h5 {
+  font-weight: 600;
 }
-
 
 @media (max-width: 768px) {
   .second-home-sidebar {
@@ -118,4 +134,3 @@
     /* justify-content: center; */
   }
 }
-

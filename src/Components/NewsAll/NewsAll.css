@@ -6,6 +6,13 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
+ul {
+  overflow-x: hidden; /* Allow horizontal scrolling */
+  display: flex;
+  white-space: nowrap; /* Prevent wrapping of the child elements */
+  padding: 0;
+  margin: 0;
+}
 
 .firstLi{
   max-width: 137px;
@@ -20,6 +27,11 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 }
+.scroll-container {
+  overflow-x: hidden; /* Hide the horizontal scrollbar */
+  position: relative;
+  flex-grow: 1;
+}
 
 
 
@@ -28,11 +40,12 @@ line-height: normal;
     justify-content: between;
     align-items: center;
     overflow-x: auto; 
+    /* margin-bottom: -70px; */
     height: 110px;
     white-space: nowrap; /* Prevent wrapping of the child elements */
   }
 
-  .scrollImage h1{
+  .row h1{
     color: #000;
 font-family: Poppins;
 font-size: 35px;

@@ -76,7 +76,7 @@ function SecondNavbar() {
   };
 
   const handlehome2 = () => {
-    navigate("/home2");
+    navigate("/home");
   };
 
   return (

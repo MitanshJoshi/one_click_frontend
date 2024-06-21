@@ -59,7 +59,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 }
-.postBtn{
+.styleBtn{
     color: #FFF;
 font-family: Poppins;
 font-size: 18.157px;
@@ -67,7 +67,7 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 }
-.postBtnParent{
+.Parant{
     border-radius: 14.526px;
 background: linear-gradient(180deg, #74CC7E 0%, #00818A 100%);
 padding-top: 10px;
