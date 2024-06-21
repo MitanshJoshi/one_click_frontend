@@ -78,9 +78,9 @@ export default function Userinquirychat() {
         console.log('socket messae from mychatinquiry  ....');
         console.log('inquiryId',item.item._id);
         
-        // if (newMessage.inquiryId == item.item._id) {
+        if (newMessage.inquiryId == item.item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
-        // }
+        }
       });
 
       return () => socket?.off("newMessage");
