@@ -161,7 +161,6 @@ export default function Userinquirychat() {
         // console.log('inquiryy',firstChat);
         console.log('receiver id is',receiverId);
         console.log(userId);
-        
       }
     } catch (error) {
       console.error("Error fetching data from the backend", error);

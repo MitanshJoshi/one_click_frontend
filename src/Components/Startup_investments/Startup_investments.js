@@ -156,13 +156,6 @@ const Startup_investments = () => {
                 <div className="startup-product-add-button">
                   <button onClick={handleAddInvestment}>+ Add Investment</button>
                 </div>
-                <div className="ms-4">
-                  <FontAwesomeIcon
-                    icon={faList}
-                    className="startup-add-product-icons"
-                    onClick={handleListView}
-                  />
-                </div>
               </div>
             </div>
 
