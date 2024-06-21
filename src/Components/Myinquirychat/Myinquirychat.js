@@ -130,7 +130,7 @@ export default function Userinquirychat() {
   // console.log(inquiryId);
   const [receiverId, setReceiverId] = useState(item.item.userData._id)
   
-  const [userId, setuserId] = useState(localStorage.getItem("userid"));
+  const [userId, setuserId] = useState(item.item.startupData._id);
   console.log("User Id:::"+localStorage.getItem("userid"))
   // setuserId(localStorage.getItem("userid"))
   const screen = "";
