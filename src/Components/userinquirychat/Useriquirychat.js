@@ -78,9 +78,9 @@ export default function Userinquirychat() {
         console.log('socket messae  ....');
         console.log('inquiryId',item.item._id);
         
-        // if (newMessage.inquiryId == item._id) {
+        if (newMessage.inquiryId == item._id) {
           setchat((prevChat) => [...prevChat, newMessage]);
-        // }
+        }
       });
 
       return () => socket?.off("newMessage");
@@ -129,7 +129,7 @@ export default function Userinquirychat() {
   const [inquiryId, setid] = useState(item._id);
   // console.log(inquiryId);
   const [receiverId, setReceiverId] = useState(item.item.startupDetails.userId)
-  
+
   const [userId, setuserId] = useState(localStorage.getItem("userid"));
   console.log("User Id:::"+localStorage.getItem("userid"))
   // setuserId(localStorage.getItem("userid"))
