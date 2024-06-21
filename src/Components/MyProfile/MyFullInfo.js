@@ -121,7 +121,7 @@ const MyFullInfo = () => {
         method: "GET",
         headers: {
           // "Content-Type": "application/json",
-          Authorization: `${localStorage.getItem("token")}`,
+          Authorization: localStorage.getItem("token"),
         },
       });
       const Data = await response.json();
@@ -163,7 +163,7 @@ const MyFullInfo = () => {
       const response = await fetch(`${BASE_URL}/api/user/edit`, {
         method: "POST",
         headers: {
-          Authorization: `${localStorage.getItem("token")}`,
+          Authorization: localStorage.getItem("token"),
         },
         body: formData,
       });

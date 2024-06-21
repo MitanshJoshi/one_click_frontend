@@ -30,7 +30,7 @@ function SecondNavbar() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token")}`,
+            Authorization: localStorage.getItem("token"),
           },
         });
         const data = await response.json();

@@ -26,7 +26,7 @@ export default function Userinquirychat() {
         {
           method: "GET",
           headers: {
-            Authorization: `${localStorage.getItem("token")}`,
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
@@ -142,7 +142,7 @@ export default function Userinquirychat() {
         {
           method: "GET",
           headers: {
-            Authorization: `${localStorage.getItem("token")}`,
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
