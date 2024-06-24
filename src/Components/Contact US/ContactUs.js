@@ -107,7 +107,7 @@ const ContactUs = () => {
                 </div>
               </div>
             </div>
-            <div className="col-6">
+            <div className="col-6 h-[492px]">
               <div className="login-image-section h-100">
                 <img src="./map.png" className="login-background-image" />
                 <div className="image-content" style={{ position: "relative" }}>

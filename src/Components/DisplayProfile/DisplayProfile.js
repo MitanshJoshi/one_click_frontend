@@ -485,6 +485,7 @@ const DisplayProfile = ({ img }) => {
                             fontWeight: "600",
                             width: "55px",
                           }}
+                          readOnly
                         />
                         <input
                           type="tel"
@@ -523,13 +524,12 @@ const DisplayProfile = ({ img }) => {
                     <div className="col-lg-3 col-4 ml-[-250px]">
                       <input
                         type="email"
-                        className="form-control py-2"
+                        className="form-control py-2 w-[136%]"
                         id="email"
                         value={email}
                         style={{
                           color: "#000",
                           fontWeight: "600",
-                          width: "100%",
                         }}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -541,7 +541,7 @@ const DisplayProfile = ({ img }) => {
                       <label
                         className="LabelDesign2"
                         htmlFor="state"
-                        style={{ color: "#000", fontWeight: "600" }}
+                        style={{ color: "#000", fontWeight: "600"}}
                       >
                         Select State
                       </label>
@@ -549,7 +549,7 @@ const DisplayProfile = ({ img }) => {
                     <div className="col-lg-4 col-5">
                       <div className="position-relative">
                         <select
-                          className="form-control py-2"
+                          className="form-control py-2 w-[100%]"
                           onChange={handleSelectedState}
                           value={state}
                           id="state"
@@ -582,11 +582,15 @@ const DisplayProfile = ({ img }) => {
                     <div className="ml-[-123px] col-4">
                       <div className="position-relative">
                         <select
-                          className="form-control py-2"
+                          className="form-control py-2 "
                           onChange={handleCity}
                           value={city}
                           id="city"
-                          style={{ color: "#000", fontWeight: "600" }}
+                          style={{
+                            color: "#000",
+                            fontWeight: "600",
+                            width: "100%",
+                          }}
                         >
                           {citiesArray &&
                             citiesArray?.map((e) => {
@@ -725,6 +729,7 @@ const DisplayProfile = ({ img }) => {
                 type="file"
                 className="form-control py-2"
                 id="documentFile"
+                accept=".pdf"
                 onChange={handleFileChange}
                 style={{ color: "#000", fontWeight: "600" }}
               />

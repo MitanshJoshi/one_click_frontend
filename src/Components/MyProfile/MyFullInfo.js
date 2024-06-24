@@ -91,9 +91,21 @@ const MyFullInfo = () => {
           },
         }
       );
+      if (response.ok) {
+        toast.success("Startup Deleted Successfully", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+
+        // Clear input fields after successful submission
+      } 
 
       if (!response.ok) {
         throw new Error("Request failed");
+      }
+      else
+      {
+        
       }
 
       fetchData();

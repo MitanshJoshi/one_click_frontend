@@ -44,7 +44,7 @@ const AddStartUp = () => {
     setCenterCity(e.target.value);
   };
   const handleyears = (e) => {
-    const inputyear=e.target.value.substring(0, 4);
+    const inputyear=e.target.value;
     setYearOfEstablished(inputyear)
   };
   const handleregister = (e) => {
@@ -499,7 +499,7 @@ const AddStartUp = () => {
                     type="date"
                     className="form-control"
                     id="incubationCenterCity"
-                    value={yearOfEstablished ? `${yearOfEstablished}-01-01` : ""} // Set the input value to the first day of the input year
+                    value={yearOfEstablished} // Set the input value to the first day of the input year
                     onChange={handleyears}
                     max="9999-01-01" // Set the maximum allowed year
                   />
@@ -714,7 +714,7 @@ const AddStartUp = () => {
                   />
                   <div className="about-us">
                     <div className="d-flex justify-content-center align-items-center flex-column">
-                      <input type="file" name="" id=""  onChange={handleimg} className="pt-3 ps-5 pb-2" />
+                      <input type="file" name="" id=""  onChange={handleimg} className="pt-3 ps-5 pb-2" accept=".jpg ,.png, .jpeg" />
                      <p className="pe-5">Supports jpg, png, jpeg</p>
                     </div>
                   </div>

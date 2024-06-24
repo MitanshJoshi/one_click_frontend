@@ -1,14 +1,15 @@
-import React from 'react'
-import Slider from "react-slick";
-import './Review.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaRegStar } from "react-icons/fa6";
+import React, { useState, useRef } from 'react';
+import Slider from 'react-slick';
+import './Review.css';
+import { FaRegStar } from 'react-icons/fa6';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-
 const ReviewSlider = () => {
+    const sliderRef = useRef(null);
+    const [activeCircle, setActiveCircle] = useState(1); // 0: left, 1: middle, 2: right
+
     const settings = {
         dots: false,
         infinite: true,
@@ -37,10 +38,37 @@ const ReviewSlider = () => {
             },
         ],
     };
+
+    const handlePrev = () => {
+        sliderRef.current.slickPrev();
+        setActiveCircle(0);
+    };
+
+    const handleNext = () => {
+        sliderRef.current.slickNext();
+        setActiveCircle(2);
+    };
+
+    const handleMiddle = () => {
+        if(activeCircle==2)
+            {
+                sliderRef.current.slickPrev();
+            }
+        if(activeCircle==0)
+            {
+                sliderRef.current.slickNext();
+            }
+        setActiveCircle(1);
+    };
+
+    const getCircleStyle = (index) => {
+        return activeCircle === index ? { opacity: 1, r: 12.345 } : { opacity: 0.5, r: 9.87597 };
+    };
+
     return (
         <div className='container' style={{ paddingTop: '20px' }}>
-            <div className='review' >
-                <div style={{ textAlign: 'center', marginBottom: '60px' }} >
+            <div className='review'>
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h3 className='checkHead'>Check Out</h3>
                     <h1 className='checkReview mb-0'>Recent Review</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" width="295" height="18" viewBox="0 0 295 18" fill="none">
@@ -48,161 +76,59 @@ const ReviewSlider = () => {
                     </svg>
                 </div>
 
-                <Slider {...settings} >
-                    <div>
-                        <section className='slider-content my-2 ' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-
-
-
-
-                                    <div style={{ marginLeft: '10px' }} className='slider-font'>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
+                <Slider ref={sliderRef} {...settings}>
+                    {/* Review Items */}
+                    {[...Array(6)].map((_, index) => (
+                        <div key={index}>
+                            <section className='slider-content my-2'>
+                                <div className='d-flex justify-content-between'>
+                                    <div className='d-flex align-items-center'>
+                                        <img src='./reviewGirl.png' alt='' />
+                                        <div style={{ marginLeft: '10px' }} className='slider-font'>
+                                            <h5>Steffenina Seth</h5>
+                                            <p>Lorem ipsum</p>
+                                        </div>
+                                    </div>
+                                    <div className='starGive'>
+                                        3.6 <FaRegStar style={{ color: '#F7BE16' }} />
                                     </div>
                                 </div>
-
-                                <div className='starGive'>
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
+                                <div>
+                                    <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ..</p>
                                 </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='slider-content my-2 ' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-                                    <div style={{ marginLeft: '10px' }}>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-
-                                <div className='starGive'>
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
-                                </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='slider-content my-2' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-                                    <div style={{ marginLeft: '10px' }} className='slider-font'>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-
-                                <div className='starGive'>
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
-                                </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='slider-content my-2' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-                                    <div style={{ marginLeft: '10px' }} className='slider-font'>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-
-                                <div className='starGive'>
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
-                                </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='slider-content my-2' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-                                    <div style={{ marginLeft: '10px' }} className='slider-font'>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-
-                                <div className='starGive' >
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
-                                </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
-                    <div>
-                        <section className='slider-content my-2' >
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex align-items-center'>
-                                    <img src='./reviewGirl.png' alt='' />
-
-                                    <div style={{ marginLeft: '10px' }} className='slider-font'>
-                                        <h5>Steffenina Seth</h5>
-                                        <p>Lorem ipsum</p>
-                                    </div>
-                                </div>
-
-                                <div className='starGive'>
-                                    3.6  <FaRegStar style={{ color: '#F7BE16' }} />
-                                </div>
-                            </div>
-
-                            <div >
-                                <p className='text-slider'>Lorem ipsum Lorem ipsum Lorem ipsum
-                                    Lorem ipsum Lorem ipsum ..</p>
-                            </div>
-                        </section>
-                    </div>
+                            </section>
+                        </div>
+                    ))}
                 </Slider>
+
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '50px 0px' }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="91" height="25" viewBox="0 0 91 25" fill="none">
-                        <circle opacity="0.5" cx="9.87597" cy="12.0496" r="9.87597" fill="#00818A" />
-                        <circle cx="45.5002" cy="12.4023" r="12.345" fill="#00818A" />
-                        <circle opacity="0.5" cx="81.124" cy="12.0496" r="9.87597" fill="#00818A" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="28" viewBox="0 0 91 25" fill="none">
+                        <circle
+                            cx="9.87597"
+                            cy="12.0496"
+                            {...getCircleStyle(0)}
+                            fill="#00818A"
+                            onClick={handlePrev}
+                        />
+                        <circle
+                            cx="45.5002"
+                            cy="12.4023"
+                            {...getCircleStyle(1)}
+                            fill="#00818A"
+                            onClick={handleMiddle}
+                        />
+                        <circle
+                            cx="81.124"
+                            cy="12.0496"
+                            {...getCircleStyle(2)}
+                            fill="#00818A"
+                            onClick={handleNext}
+                        />
                     </svg>
                 </div>
             </div>
         </div>
     );
+};
 
-}
-
-export default ReviewSlider
+export default ReviewSlider;

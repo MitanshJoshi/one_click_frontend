@@ -565,8 +565,8 @@ const RegistrationPage = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-6">
+                    <div className="col">
+                      <div className="col-6 mb-3 w-[100%]">
                         <select onChange={handleState}>
                           <option>Select State</option>
                           {indiaObject &&
@@ -575,7 +575,7 @@ const RegistrationPage = () => {
                             })}
                         </select>
                       </div>
-                      <div className="col-6">
+                      <div className="col-6  w-[100%]">
                         <select onChange={handleCity}>
                           <option>Select City</option>
                           {selectedState &&

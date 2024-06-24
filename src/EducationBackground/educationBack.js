@@ -11,6 +11,8 @@ const EducationBack = () => {
     highest_Education: "high-school", // Default value if not provided by API
   });
 
+  const currentYear = new Date().getFullYear();
+
   useEffect(() => {
     const fetchEducationData = async () => {
       try {
@@ -61,6 +63,15 @@ const EducationBack = () => {
       return;
     }
 
+    // Validate the passing year
+    if (parseInt(passing_year) > currentYear) {
+      toast.error("Passing year cannot exceed the current year", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+
     try {
       const response = await fetch(`${BASE_URL}/api/Education/EditEducation`, {
         method: "PUT",
@@ -73,18 +84,13 @@ const EducationBack = () => {
 
       const responseData = await response.json();
 
-      if (response.ok && responseData.success) {
+      if (response.ok) {
         toast.success("Education updated successfully", {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,
         });
 
         // Clear input fields after successful submission
-        setEducationData({
-          college_university_name: "",
-          passing_year: "",
-          highest_Education: "high-school", // Reset highest education to default
-        });
       } else {
         toast.error(responseData.message || "Failed to update education", {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -107,7 +113,7 @@ const EducationBack = () => {
 
         <div className="mb-4 mt-4">
           <label className="mb-2" htmlFor="highestEducation">
-            Last Education
+            Highest Education
           </label>
           <select
             className="form-control py-2"
@@ -141,17 +147,25 @@ const EducationBack = () => {
             id="passingYear"
             type="number"
             value={educationData.passing_year}
-            onChange={(e) =>
-              setEducationData({
-                ...educationData,
-                passing_year: e.target.value,
-              })
-            }
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value <= currentYear) {
+                setEducationData({
+                  ...educationData,
+                  passing_year: value,
+                });
+              } else {
+                toast.error("Passing year cannot exceed the current year", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                  autoClose: 1000,
+                });
+              }
+            }}
           />
         </div>
         <div className="mb-4">
           <label className="mb-2" htmlFor="collegeName">
-            School / College Name
+            School / College / University Name
           </label>
           <input
             className="form-control py-2"
