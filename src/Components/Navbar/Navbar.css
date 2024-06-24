@@ -57,7 +57,7 @@ button {
 }
 /* Center the logout confirmation modal footer */
 .modal-footer {
-    background-color: #f8f9fa;
+    background-color: #ffff;
     border-top: none;
     display: flex;
     justify-content: center;
@@ -67,7 +67,7 @@ button {
   .modal-footer .btn {
     border-radius: 10px;
     padding: 8px 30px;
-    margin: 0 20px;
+    margin: -30px 10px 20px 10px;
     /* color: #74CC7EB2; */
   }
   

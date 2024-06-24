@@ -2,9 +2,14 @@ import React, { useState } from "react";
 // import "./LoginPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import SecondNavbar from "../Navbar/Navbar";
+import { ToastContainer } from "react-toastify";
 
 const ContactUs = () => {
   return (
+    <>
+    <SecondNavbar />
+    <ToastContainer />
     <div className="container form-start">
       <div className="login">
         <div className="login-wrapper">
@@ -124,6 +129,7 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

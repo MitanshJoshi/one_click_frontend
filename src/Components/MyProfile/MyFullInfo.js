@@ -24,7 +24,6 @@ const MyFullInfo = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedStartupId, setSelectedStartupId] = useState(null);
   const [img, setimg] = useState("");
-  console.log(img)
   
   const fetchData = async () => {
     try {

@@ -84,7 +84,7 @@ const DisplayProfile = ({ img }) => {
         },
       });
       const responseData = await response.json();
-
+      
       if (responseData.code === 200) {
         const userData = responseData.data[0];
         setUsername(userData.name || "");
@@ -108,6 +108,7 @@ const DisplayProfile = ({ img }) => {
           );
           if (selectedState && selectedState.cities) {
             setCitiesArray(selectedState.cities);
+            console.log("cities sre",citiesArray)
           }
         }
       } else {

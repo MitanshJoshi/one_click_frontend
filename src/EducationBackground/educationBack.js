@@ -107,7 +107,7 @@ const EducationBack = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-[200px] p-6">
+    <div className="max-w-2xl mx-[100px] p-3 mt-5">
         <h1 className="text-lg text-[20px] font-bold mb-4">Education Background</h1>
 
         <div className="mb-4">

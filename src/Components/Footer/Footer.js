@@ -121,7 +121,7 @@ const Footer = () => {
 
             <div className="col-lg-2 col-md-6 col-12">
               <h4 className="SpecialHead">Connect us on</h4>
-              <div className="d-flex justify-content-evenly mt-2 mx-md-0 mx-5 px-md-0 px-5">
+              <div className="d-flex justify-center items-center mt-2 mx-md-0 mx-5 px-md-0 px-5">
                 <img
                   src="/fb.png"
                   alt="Facebook"
@@ -132,7 +132,7 @@ const Footer = () => {
                   src="/insta.png"
                   alt="Instagram"
                   className="social-icon mr-3"
-                  style={{ width: "40px", height: "40px" }}
+                  style={{ width: "50px", height: "50px" }}
                 />
                 <img
                   src="/linkedin.png"
@@ -144,7 +144,7 @@ const Footer = () => {
                   src="/sparrow.png"
                   alt="Sparrow"
                   className="social-icon mr-3"
-                  style={{ width: "40px", height: "40px" }}
+                  style={{ width: "53px", height: "53px" }}
                 />
               </div>
 

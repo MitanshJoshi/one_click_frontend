@@ -143,19 +143,16 @@ function SecondNavbar() {
         </Container>
       </Navbar>
 
-      <Modal show={showLogoutConfirmation} onHide={handleCancelLogout} centered>
-        <Modal.Header closeButton>
-          {/* <Modal.Title>Confirm Logout</Modal.Title> */}
-        </Modal.Header>
-        <Modal.Body className="d-flex flex-column align-items-center body">
-          <FontAwesomeIcon icon={faSignOutAlt} size="3x" className="mb-3" />
+      <Modal show={showLogoutConfirmation} onHide={handleCancelLogout} centered >
+        <Modal.Body className="pt-5 d-flex flex-column align-items-center body">
+          <FontAwesomeIcon icon={faSignOutAlt} size="2x" className="" />
           <span className="mb-3">Are you sure you want to logout?</span>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancelLogout}>
+          <Button className="font-bold" variant="secondary" onClick={handleCancelLogout}>
             No
           </Button>
-          <Button variant="primary" onClick={handleConfirmLogout}>
+          <Button className="font-bold" variant="primary" onClick={handleConfirmLogout}>
             Yes
           </Button>
         </Modal.Footer>
