@@ -24,8 +24,8 @@ const Edit = () => {
   const [categoryId, setcategoryId] = useState("");
   const [subcategoryId, setsubcategoryId] = useState("");
   // const [startupLogo, setStartupLogo] = useState("");
-  const [data, setdata] = useState();
-  const [subcategory, setsubcategory] = useState();
+  const [data, setdata] = useState([]);
+  const [subcategory, setsubcategory] = useState([]);
   // console.log(subcategory);
   const [inqubation, setinqubation] = useState();
   const [selectedState, setSelectedState] = useState(null);
@@ -47,7 +47,7 @@ const Edit = () => {
     setCenterCity(e.target.value);
   };
   const handleyears = (e) => {
-    const inputyear=e.target.value;
+    const inputyear=e.target.value.substring(0, 4);
     setYearOfEstablished(inputyear)
   };
   const handleregister = (e) => {
@@ -384,7 +384,7 @@ const Edit = () => {
       setname(responseData.data);
 
       const matchedStartup = responseData.data.find(item => item._id === _id);
-      console.log("startup:",matchedStartup);
+      console.log(matchedStartup);
       setMacheStartup(matchedStartup)
       if(matchedStartup){
         setStartupName(matchedStartup.startupName)
@@ -583,7 +583,7 @@ const Edit = () => {
                     className="form-control"
                     value={yearOfEstablished}
                     id="incubationCenterCity"
-                    value={yearOfEstablished} // Set the input value to the first day of the input year
+                    value={yearOfEstablished ? `${yearOfEstablished}-01-01` : ""} // Set the input value to the first day of the input year
                     onChange={handleyears}
                     max="9999-01-01" // Set the maximum allowed year
                   />

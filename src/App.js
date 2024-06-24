@@ -4,6 +4,7 @@ import HomePage from "./Container/HomePage/HomePage";
 import Login from "./Container/HomePage/Login";
 import Registration from "./Container/HomePage/Registration";
 import RegistrationPage from "./Components/Registration/Registration";
+import "./App.css"
 import DisplayProfileWithStartupList from "./Components/DisplayProfileWithStartupList/DisplayProfileWithStartupList";
 import AddStartUp from "./Components/AddStartUp/Addprduct";
 import HomePage2 from "./Container/HomePage/HomePage2";

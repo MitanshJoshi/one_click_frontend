@@ -327,7 +327,7 @@ const DisplayProfile = ({ img }) => {
       });
       return;
     }
-    if (pincode.length !== 6) {
+    if (pincode.length < 6) {
       toast.error("Please enter a valid 6-digit Pincode", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -435,7 +435,7 @@ const DisplayProfile = ({ img }) => {
   };
 
   return (
-    <div>
+    <div className="mx-[100px] ">
       <div className="Newsallstyle">
         <div className="container">
           <div className="row">
@@ -514,14 +514,14 @@ const DisplayProfile = ({ img }) => {
                     </div>
                     <div className="col-lg-3 col-4">
                       <label
-                        className="LabelDesign2"
+                        className="LabelDesign2 ml-[-10px]"
                         htmlFor="email"
                         style={{ color: "#000", fontWeight: "600" }}
                       >
                         Email ID
                       </label>
                     </div>
-                    <div className="col-lg-3 col-4 ml-[-250px]">
+                    <div className="col-lg-3 col-4 ml-[-220px]">
                       <input
                         type="email"
                         className="form-control py-2 w-[136%]"
@@ -535,7 +535,40 @@ const DisplayProfile = ({ img }) => {
                       />
                     </div>
                   </div>
-
+                  <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
+                    <div className="col-lg-2 col-3">
+                      <label
+                        className="LabelDesign2"
+                        htmlFor="address"
+                        style={{ color: "#000", fontWeight: "600" }}
+                      >
+                        Address
+                      </label>
+                    </div>
+                    <div className="col-lg-9 col-8">
+                      <textarea
+                        onInput={(e) => {
+                          let value = e.target.value.replace(
+                            /[^0-9 a-z A-Z]/g,
+                            ""
+                          ); // Remove non-numeric characters
+                          // Check if the first digit is zero
+                          if (value.length > 0 && value[0] === " ") {
+                            // If the first digit is zero, remove it
+                            value = value.slice(1);
+                          }
+                          // Set the updated value
+                          e.target.value = value;
+                        }}
+                        className="form-control py-2 "
+                        id="address"
+                        rows="1"
+                        onChange={handleAddress}
+                        defaultValue={address}
+                        style={{ color: "#000", fontWeight: "600" }}
+                      ></textarea>
+                    </div>
+                  </div>
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
                       <label
@@ -572,14 +605,14 @@ const DisplayProfile = ({ img }) => {
                     </div>
                     <div className="col-lg-2 col-3 ms-lg-0">
                       <label
-                        className="LabelDesign2"
+                        className="LabelDesign2  ml-[-10px]"
                         htmlFor="city"
                         style={{ color: "#000", fontWeight: "600" }}
                       >
                         Select City
                       </label>
                     </div>
-                    <div className="ml-[-123px] col-4">
+                    <div className="ml-[-105px] col-4">
                       <div className="position-relative">
                         <select
                           className="form-control py-2 "
@@ -609,40 +642,6 @@ const DisplayProfile = ({ img }) => {
                     </div>
                   </div>
 
-                  <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
-                    <div className="col-lg-2 col-3">
-                      <label
-                        className="LabelDesign2"
-                        htmlFor="address"
-                        style={{ color: "#000", fontWeight: "600" }}
-                      >
-                        Address
-                      </label>
-                    </div>
-                    <div className="col-lg-9 col-8">
-                      <textarea
-                        onInput={(e) => {
-                          let value = e.target.value.replace(
-                            /[^0-9 a-z A-Z]/g,
-                            ""
-                          ); // Remove non-numeric characters
-                          // Check if the first digit is zero
-                          if (value.length > 0 && value[0] === " ") {
-                            // If the first digit is zero, remove it
-                            value = value.slice(1);
-                          }
-                          // Set the updated value
-                          e.target.value = value;
-                        }}
-                        className="form-control py-2 "
-                        id="address"
-                        rows="1"
-                        onChange={handleAddress}
-                        defaultValue={address}
-                        style={{ color: "#000", fontWeight: "600" }}
-                      ></textarea>
-                    </div>
-                  </div>
                   <div className="form-group mb-sm-5 mb-3 row align-items-lg-start align-items-center">
                     <div className="col-lg-2 col-3">
                       <label

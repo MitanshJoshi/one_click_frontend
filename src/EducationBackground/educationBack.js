@@ -107,43 +107,41 @@ const EducationBack = () => {
   };
 
   return (
-    <div>
-      <div className="display-profile-education">
-        <h4>Education Background</h4>
+    <div className="max-w-2xl mx-[200px] p-6">
+        <h1 className="text-lg text-[20px] font-bold mb-4">Education Background</h1>
 
-        <div className="mb-4 mt-4">
-          <label className="mb-2" htmlFor="highestEducation">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="highestEducation">
+            
             Highest Education
           </label>
-          <select
-            className="form-control py-2"
-            id="highestEducation"
-            value={educationData.highest_Education}
-            onChange={(e) =>
-              setEducationData({
-                ...educationData,
-                highest_Education: e.target.value,
-              })
-            }
-          >
-            <option value="high-school">High School</option>
-            <option value="associate">Associate Degree</option>
-            <option value="bachelor">Bachelor's Degree</option>
-            <option value="master">Master's Degree</option>
-            <option value="doctorate">Doctorate</option>
-            <option value="other">Other</option>
-          </select>
-          <FontAwesomeIcon
-            icon={faChevronDown}
-            className="position-absolute right-[885px] bottom-[-622px] translate-middle-y pe-3 iconn"
-          />
+          <div className="relative">
+            <select
+              className="form-select block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              id="highestEducation"
+              value={educationData.highest_Education}
+              onChange={(e) =>
+                setEducationData({
+                  ...educationData,
+                  highest_Education: e.target.value,
+                })
+              }
+            >
+              <option value="high-school">High School</option>
+              <option value="associate">Associate Degree</option>
+              <option value="bachelor">Bachelor's Degree</option>
+              <option value="master">Master's Degree</option>
+              <option value="doctorate">Doctorate</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
         </div>
         <div className="mb-4">
-          <label className="mb-2" htmlFor="passingYear">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="passingYear">
             Passing Year
           </label>
           <input
-            className="form-control py-2"
+            className="form-input block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             id="passingYear"
             type="number"
             value={educationData.passing_year}
@@ -164,11 +162,11 @@ const EducationBack = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="mb-2" htmlFor="collegeName">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="collegeName">
             School / College / University Name
           </label>
           <input
-            className="form-control py-2"
+            className="form-input block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             id="collegeName"
             type="text"
             value={educationData.college_university_name}
@@ -180,15 +178,12 @@ const EducationBack = () => {
             }
           />
         </div>
-      </div>
-      <div className="d-flex justify-content-end mb-sm-5 mb-3">
-        <div className="profile-edit-buttons">
+         <div className="profile-edit-buttons flex justify-end" style={{marginRight:"0px"}}>
           <button className="ms-3" type="submit" onClick={handleEducationSubmit}>
             Save
           </button>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -17,7 +17,6 @@ const SidebarFreeAdd = () => {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
           },
         }
       );

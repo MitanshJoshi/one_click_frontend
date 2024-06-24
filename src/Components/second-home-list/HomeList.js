@@ -18,7 +18,6 @@ const HomeList = ({ handlesubcategory }) => {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            Authorization: localStorage.getItem("token"),
           },
         }
       );

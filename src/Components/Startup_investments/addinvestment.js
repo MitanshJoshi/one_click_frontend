@@ -95,12 +95,12 @@ export default function AddInvestment() {
       });
     }
   };
-
+  
   return (
     <>
       <SecondNavbar />
       <StartUpProfile />
-      <div className="container mt-4">
+      <div className="container p-11">
         <ToastContainer />
         <div className="d-flex justify-content-between mb-4">
           <h2 style={{ fontWeight: "600" }}>Add Investment</h2>

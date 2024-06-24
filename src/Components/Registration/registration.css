@@ -22,8 +22,10 @@
 }
 
 .registration-inputs input::placeholder {
-  /* font-family: poppins; */
+  font-family: poppins;
   color: #151414cc;
+  font-weight: 400;
+  font-size: 15px;
 }
 
 #terms{
