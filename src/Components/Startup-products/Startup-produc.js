@@ -104,6 +104,7 @@ const Startup_product = () => {
       }
     }
   };
+  
   useEffect(() => {
     fetchData();
   }, []);

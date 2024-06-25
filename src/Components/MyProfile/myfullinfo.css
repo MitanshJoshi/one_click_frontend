@@ -164,7 +164,7 @@
 
 .confirmation-content {
   background-color: white;
-  padding: 20px;
+  padding: 40px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -173,6 +173,8 @@
 .confirmation-message {
   color:black; /* Highlighted message color */
   margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .buttons-container {
@@ -190,11 +192,13 @@
   font-weight: 700;
 }
 
-.buttons-container .btng:hover {
-  background-color: #128c2b;
+.buttons-container .btng {
+  background-color: #74cc7e;
+  color: white;
 }
-.buttons-container .btnr:hover {
-  background-color: #c70b0b;
+.buttons-container .btnr {
+  background-color: #74cc7e;
+  color:white
 }
 
 

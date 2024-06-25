@@ -4,6 +4,7 @@ import HomePage from "./Container/HomePage/HomePage";
 import Login from "./Container/HomePage/Login";
 import Registration from "./Container/HomePage/Registration";
 import RegistrationPage from "./Components/Registration/Registration";
+import Startup_product from "./Components/Startup-products/Startup-produc";
 import "./App.css"
 import DisplayProfileWithStartupList from "./Components/DisplayProfileWithStartupList/DisplayProfileWithStartupList";
 import AddStartUp from "./Components/AddStartUp/Addprduct";
@@ -25,7 +26,7 @@ import Addprduct from "./Components/Startup-products/Addproduct";
 import MyFullInfo from "./Components/MyProfile/MyFullInfo";
 import EducationBack from "./EducationBackground/educationBack";
 import Edit from "./Components/EditStartUp/Edit";
-import Startup_product from "./Components/Startup-products/Startup-produc";
+// import Startup_product from "./Components/Startup-products/Startup-produc";
 import Productedit from "./Components/StartUp-ProductEdit/Productedit";
 import Awardedit from "./Components/AwardEdit/Awardedit";
 import Certificateedit from "./Components/CertificateEdit/Certificateedit";
@@ -62,6 +63,8 @@ const App = () => {
           <Route path="/display-profile" element={<DisplayProfile />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/addstartup/:id" element={<AddStartUp />} />
+          <Route path="/startupprod" element={<Startup_product />} />
+
           <Route path="/addproduct" element={<Addprduct/>} />
           <Route path="/addpartner" element={<AddPartner/>} />
           <Route path="/addgrant" element={<AddGrant/>} />

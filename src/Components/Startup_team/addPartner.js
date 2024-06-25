@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import StartUpProfile from "../StartUpProfile/StartUpProfile";
 import { BASE_URL } from "../../BASE_URL";
 import SecondNavbar from "../Navbar/Navbar";
+import Countries from "../../CountryStateCity.json"; // Assuming you have this JSON file
 
 export default function AddPartner() {
   const { state } = useLocation();
@@ -13,6 +15,10 @@ export default function AddPartner() {
   const [position, setPosition] = useState("");
   const [city, setCity] = useState("");
   const [stateName, setStateName] = useState("");
+  // const [citiesArray, setCitiesArray] = useState([]);
+  const [statesArray, setStatesArray] = useState([]);
+  const [citiesArray, setCitiesArray] = useState([]);
+
   const [country, setCountry] = useState("");
   const [dob, setDob] = useState("");
   const [filePhoto, setFilePhoto] = useState(null);
@@ -26,6 +32,45 @@ export default function AddPartner() {
 
   const handlePosition = (e) => {
     setPosition(e.target.value.trim());
+  };
+  const handleCountryChange = (e) => {
+    const countryCode = e.target.value;
+    const selectedCountry = Countries.find(
+      (country) => country.name === countryCode
+    );
+    setCountry(countryCode);
+    setStateName(""); // Reset state selection
+    setCity(""); // Reset city selection
+
+    if (selectedCountry && selectedCountry.states) {
+      setStatesArray(selectedCountry.states);
+      setCitiesArray([]); // Reset cities array
+    } else {
+      setStatesArray([]); // Reset states array if no states found
+      setCitiesArray([]); // Reset cities array
+    }
+  };
+
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
+    setStateName(selectedState);
+    setCity(""); // Reset city selection
+
+    const selectedCountry = Countries.find(
+      (country) => country.name === "India"
+    );
+    if (selectedCountry) {
+      const selectedStateObj = selectedCountry.states.find(
+        (state) => state.name === selectedState
+      );
+      if (selectedStateObj && selectedStateObj.cities) {
+        setCitiesArray(selectedStateObj.cities);
+      } else {
+        setCitiesArray([]); // Reset cities array if no cities found
+      }
+    } else {
+      setCitiesArray([]); // Reset cities array if selectedCountry not found
+    }
   };
 
   const handleCity = (e) => {
@@ -49,50 +94,17 @@ export default function AddPartner() {
   };
 
   const handleSubmit = async () => {
-    if (!partnerName) {
-      toast.error("Partner name is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!position) {
-      toast.error("Position is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!city) {
-      toast.error("City is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!stateName) {
-      toast.error("State is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!country) {
-      toast.error("Country is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!dob) {
-      toast.error("Date of Birth is required!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    if (!filePhoto) {
-      toast.error("Photo is required!", {
+    // Validation checks for required fields
+    if (
+      !partnerName ||
+      !position ||
+      // !city ||
+      !stateName ||
+      !country ||
+      !dob ||
+      !filePhoto
+    ) {
+      toast.error("All fields are required!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
@@ -102,7 +114,7 @@ export default function AddPartner() {
     const formData = new FormData();
     formData.append("partner_name", partnerName);
     formData.append("position", position);
-    formData.append("city", city);
+    formData.append("city", "ahmedabad");
     formData.append("state", stateName);
     formData.append("country", country);
     formData.append("DOB", dob);
@@ -132,7 +144,7 @@ export default function AddPartner() {
 
       setTimeout(() => {
         navigate(-1, { state: { abc: "addpartner" } });
-        localStorage.setItem('myData', "partner");
+        localStorage.setItem("myData", "partner");
       }, 1000);
     } catch (error) {
       console.error("Partner Add failed:", error.message);
@@ -156,38 +168,6 @@ export default function AddPartner() {
         </div>
         <div className="flex justify-center items-center">
           <div className="row gap-0">
-            <div className="col-6 d-flex align-item-center justify-content-center">
-              <div className="add-award-form" style={{ width: "556px", height: "181px" }}>
-                <p className="">Enter partner photo</p>
-                <div className="mb-4">
-                  <input
-                    type="file"
-                    onChange={handleFilePhoto}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-4">
-                  <p className="mb-3">Enter Partner Name</p>
-                  <input
-                    type="text"
-                    onChange={handlePartnerName}
-                    value={partnerName}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="d-flex justify-content-between mt-5 mb-5">
-                  <button
-                    onClick={handleSubmit}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    SUBMIT
-                  </button>
-                </div>
-              </div>
-            </div>
             <div className="col-6">
               <div className="add-award-form mt-1">
                 <div className="mb-1">
@@ -201,34 +181,58 @@ export default function AddPartner() {
                   />
                 </div>
                 <div className="mb-1">
-                  <p className="mb-3">Enter City</p>
-                  <input
-                    type="text"
-                    onChange={handleCity}
+                  <p className="mb-3">Select City</p>
+                  <select
                     value={city}
-                    className="mb-3"
+                    onChange={handleCity}
+                    className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
                     style={{ width: "559px", height: "46px" }}
-                  />
+                  >
+                    <option value="">Select City</option>
+                    {citiesArray.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+
                 <div className="mb-1">
-                  <p className="mb-3">Enter State</p>
-                  <input
-                    type="text"
-                    onChange={handleStateName}
+                  <p className="mb-3">Select State</p>
+                  <select
                     value={stateName}
-                    className="mb-3"
+                    onChange={handleStateName}
+                    // className="mb-3"
+                    className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
                     style={{ width: "559px", height: "46px" }}
-                  />
+                  >
+                    <option value="">Select State</option>
+                    {Countries.map((country) =>
+                      country.states.map((state) => (
+                        <option key={state.name} value={state.name}>
+                          {state.name}
+                        </option>
+                      ))
+                    )}
+                  </select>
                 </div>
                 <div className="mb-1">
-                  <p className="mb-3">Enter Country</p>
-                  <input
-                    type="text"
-                    onChange={handleCountry}
+                  <p className="mb-3">Select Country</p>
+                  <select
                     value={country}
-                    className="mb-3"
+                    onChange={handleCountry}
+                    className="mb-3 form-control py-2 w-[100%]"
                     style={{ width: "559px", height: "46px" }}
-                  />
+                  >
+                    <option value="" className="opacity-30">
+                      Select Country
+                    </option>
+                    {Countries.map((country) => (
+                      <option key={country.name} value={country.name}>
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="mb-1">
                   <p className="mb-3">Enter Date of Birth</p>
@@ -239,6 +243,41 @@ export default function AddPartner() {
                     className="mb-3"
                     style={{ width: "559px", height: "46px" }}
                   />
+                </div>
+              </div>
+            </div>
+            <div className="col-6 d-flex align-item-center justify-content-center">
+              <div
+                className="add-award-form"
+                style={{ width: "556px", height: "auto" }}
+              >
+                <div className="mb-4">
+                  <p className="mb-3">Enter Partner Name</p>
+                  <input
+                    type="text"
+                    onChange={handlePartnerName}
+                    value={partnerName}
+                    className="mb-3"
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                </div>
+                <div className="mb-4">
+                  <p className="">Enter Partner Photo</p>
+                  <input
+                    type="file"
+                    onChange={handleFilePhoto}
+                    className="mb-3"
+                    style={{ width: "559px", height: "46px" }}
+                  />
+                </div>
+                <div className="d-flex justify-content-between mt-5 mb-5">
+                  <button
+                    onClick={handleSubmit}
+                    className="add-award-submit-button"
+                    style={{ height: "50px", width: "267px" }}
+                  >
+                    SUBMIT
+                  </button>
                 </div>
               </div>
             </div>

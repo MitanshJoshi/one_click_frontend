@@ -20,7 +20,7 @@ export default function ProductEdit() {
   const [sub, setSub] = useState([]);
   const [file, setFile] = useState([]);
   const [matchedStartup, setMatchedStartup] = useState(null);
-
+  
   useEffect(() => {
     if (matchedStartup) {
       const { description, productprice, productName, productstatus, categoryId, subcategoryId } = matchedStartup;

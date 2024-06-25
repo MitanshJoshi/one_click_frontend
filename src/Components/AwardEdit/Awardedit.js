@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import StartUpProfile from "../StartUpProfile/StartUpProfile";
 import {  useLocation, useNavigate,  } from "react-router-dom";
 import { BASE_URL } from "../../BASE_URL";
+import SecondNavbar from "../Navbar/Navbar";
 
 const Awardedit = () => {
-
 
   const Navigate = useNavigate();
   const [description, setdescription] = useState();
@@ -15,12 +16,13 @@ const Awardedit = () => {
   const [competitionName, setcompetitionName] = useState();
   const [file, setimage] = useState();
   const [achievementPlace, setachievementPlace] = useState();
+  const [wishList, setWishList] = useState(false);
   const [achievementYear, setachievementYear] = useState(); 
   const [matchedStartup, setmatchedStartup] = useState("");
   console.log(matchedStartup); 
   // const [data, setdata] = useState(); 
   // console.log(name)
-  
+
 //   const {_id}=useParams()
 
 useEffect(() => {
@@ -180,20 +182,25 @@ const { state } = useLocation();
       }
     }
   };
+  const displayWishList = () => {
+    setWishList(true); // Set addStartup to false when back button is clicked
+};
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
       <>
+      <SecondNavbar/>
+      <StartUpProfile onBackButtonClick={displayWishList} />
       <ToastContainer />
             <div>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between ml-[200px] pt-[30px] text-[30px]">
                 <h2 className="mb-5" style={{ fontWeight: "600" }}>
                   Edit Awards
                 </h2>
               </div>
-              <div>
+              <div className=" mx-[170px]">
                 <div className="row">
                   <div className="col-6">
                     <div className="add-award-form">

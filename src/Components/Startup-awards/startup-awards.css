@@ -165,12 +165,12 @@
 
   height: 40px;
 }
-.buttons-container .btng:hover {
+/* .buttons-container .btng:hover {
   background-color: #128c2b;
 }
 .buttons-container .btnr:hover {
   background-color: #c70b0b;
-}
+} */
 
 @media (max-width:775px) {
   .eebtn{

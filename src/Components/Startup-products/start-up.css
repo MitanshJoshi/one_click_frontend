@@ -130,12 +130,12 @@
   background: none;
   font-weight: 600;
 }
-.buttons-container .btng:hover {
+/* .buttons-container .btng:hover {
   background-color: #128c2b;
 }
 .buttons-container .btnr:hover {
   background-color: #c70b0b;
-}
+} */
 
 @media (max-width:600px) {
   .startup-product-list-display{

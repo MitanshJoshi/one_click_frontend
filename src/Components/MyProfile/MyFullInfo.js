@@ -248,7 +248,7 @@ const MyFullInfo = () => {
         </div>
 
         <div className="custom-tabs-container mt-5">
-          <div className="custom-tabs">
+          <div className="custom-tabs flex justify-center">
           <div
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}

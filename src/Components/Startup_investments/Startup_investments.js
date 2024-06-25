@@ -71,7 +71,7 @@ const Startup_investments = () => {
           body: JSON.stringify(editingInvestment),
         }
       );
-
+      
       if (!response.ok) {
         throw new Error("Failed to edit investment");
       }

@@ -52,7 +52,7 @@ const Startup_awards = () => {
   const handleBack = () => {
     setShowAwardList(false);
     setAwardAdd(false);
-    setCertiList(false); // Hide the other section
+    setCertiList(true); // Hide the other section
   };
 
   const handleAddAward = () => {
@@ -904,7 +904,7 @@ const Startup_awards = () => {
                                           alt=""
                                           onClick={() => handleawardedit(e._id)}
                                           style={{ cursor: "pointer" }}
-                                          className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+                                          // className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
                                         />
                                       </div>
                                       <div className="delete-icon-1">
@@ -1009,9 +1009,9 @@ const Startup_awards = () => {
       {showConfirmation && (
         <div className="confirmation-modal">
           <div className="confirmation-content">
-            <h3 className="confirmation-message">
-              Are you sure you want to delete this Awards?
-            </h3>
+            <h1 className="confirmation-message">
+              Are you sure you want to delete this Award?
+            </h1>
             <div className="buttons-container">
               <button className="btng" onClick={handleConfirmDelete}>Yes</button>
               <button className="btnr" onClick={handleCancelDelete}>No</button>

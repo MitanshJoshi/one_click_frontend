@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import SecondNavbar from "../Navbar/Navbar";
+import StartUpProfile from "../StartUpProfile/StartUpProfile";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../BASE_URL";
 
 const Certificateedit = () => {
   const { state } = useLocation();
+  const [wishList, setWishList] = useState(false);
   const _id = state && state.id;
   // console.log(_id)
   const startupId = state && state._id;
@@ -25,6 +28,11 @@ const Certificateedit = () => {
       
     }
    }, [matchedStartup])
+
+
+   const displayWishList = () => {
+    setWishList(true); // Set addStartup to false when back button is clicked
+};
 
 
   const fetchData = async () => {
@@ -176,14 +184,16 @@ const Certificateedit = () => {
 
   return (
     <>
+    <SecondNavbar/>
+    <StartUpProfile onBackButtonClick={displayWishList} />
       <div>
         <ToastContainer />
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between pt-[30px] ml-[200px] text-[30px]">
           <h2 className="mb-5" style={{ fontWeight: "600" }}>
-            Add Certificate
+            Edit Certificate
           </h2>
         </div>
-        <div>
+        <div className="mx-[170px]">
           <div className="row">
             <div className="col-6">
               <div className="add-award-form">
