@@ -191,16 +191,16 @@ const Startup_grant = () => {
                         className="product-list-view product-list-view-content d-flex align-item-center"
                       >
                         <div className="">
-                          <h5 className="mb-0 me-5" style={{ width: "150px" }}>
+                          <h5 className="mb-0 me-5" style={{ width: "" }}>
                             {grant.grant_name}
                           </h5>
                         </div>
-                        <div className="">
+                        <div className="ml-[39px]">
                           <h5 className="ms-3" style={{ width: "80px" }}>
                             {grant.grant_amount}
                           </h5>
                         </div>
-                        <div className="">
+                        <div className="ml-[67px]">
                           <h5 className="mb-0 ms-2" style={{ width: "180px" }}>
                             {new Date(grant.date_when_available).toLocaleDateString()}
                           </h5>
@@ -210,7 +210,7 @@ const Startup_grant = () => {
                             {grant.grant_from}
                           </h5>
                         </div>
-                        <div className="">
+                        <div className="w-[95px]">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -340,9 +340,11 @@ const Startup_grant = () => {
                   required
                 />
               </div>
-              <Button variant="primary" type="submit">
+              <div className="startup-product-add-button">
+              <Button type="submit">
                 Save Changes
               </Button>
+              </div>
             </form>
           </Modal.Body>
         </Modal>
@@ -350,10 +352,10 @@ const Startup_grant = () => {
 
       {/* Modal for Delete Confirmation */}
       <Modal show={showConfirmation} onHide={handleCancelDelete}>
-        <Modal.Header closeButton>
+        <Modal.Header className="">
           <Modal.Title>Confirm Deletion</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this grant?</Modal.Body>
+        <Modal.Body className="mb-3">Are you sure you want to delete this grant?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCancelDelete}>
             Cancel

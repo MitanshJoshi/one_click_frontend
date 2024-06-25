@@ -102,11 +102,11 @@ export default function AddInvestment() {
       <StartUpProfile />
       <div className="container p-11">
         <ToastContainer />
-        <div className="d-flex justify-content-between mb-4">
+        <div className="d-flex justify-content-between mb-4 ml-[120px] pt-[30px] text-[30px]">
           <h2 style={{ fontWeight: "600" }}>Add Investment</h2>
         </div>
-        <div className="row">
-          <div className="col-lg-6 mb-4">
+        <div className="row flex justify-center items-center">
+          <div className="col-lg-5 mb-4 mt-[-23px]">
             <div className="form-group">
               <label htmlFor="investorName">Investor Name</label>
               <input
@@ -130,7 +130,7 @@ export default function AddInvestment() {
               />
             </div>
           </div>
-          <div className="col-lg-6 mb-4">
+          <div className="col-lg-5 mb-4">
             <div className="form-group">
               <label htmlFor="dateAvailable">Date Available</label>
               <input
@@ -155,8 +155,8 @@ export default function AddInvestment() {
             </div>
           </div>
         </div>
-        <div className="row">
-        <div className="d-flex justify-content-between mt-5 mb-5">
+        <div className="row mr-[105px]">
+        <div className="d-flex justify-end mt-5 mb-5">
                   <button
                     onClick={handleSubmit}
                     className="add-award-submit-button"

@@ -196,17 +196,17 @@ const Startup_investments = () => {
                         className="product-list-view product-list-view-content d-flex align-item-center"
                       >
                         <div className="">
-                          <h5 className="mb-0 me-5" style={{ width: "150px" }}>
+                          <h5 className="mb-0" style={{ width: "150px" }}>
                             {investment.investor_name}
                           </h5>
                         </div>
-                        <div className="">
-                          <h5 className="ms-3" style={{ width: "80px" }}>
+                        <div className="text-start">
+                          <h5 className="" style={{ width: "150px" }}>
                             {investment.investment_amount}
                           </h5>
                         </div>
-                        <div className="">
-                          <h5 className="mb-0 ms-2" style={{ width: "180px" }}>
+                        <div className="text-start">
+                          <h5 className="mb-0" style={{ width: "100px" }}>
                             {new Date(investment.date_when_available).toLocaleDateString()}
                           </h5>
                         </div>
@@ -215,7 +215,7 @@ const Startup_investments = () => {
                             {investment.other_details}
                           </h5>
                         </div>
-                        <div className="">
+                        <div className="w-[95px]">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -349,9 +349,11 @@ const Startup_investments = () => {
                   }
                 ></textarea>
               </div>
+              <div className="startup-product-add-button">
               <button type="submit" className="btn btn-primary">
                 Save Changes
               </button>
+              </div>
             </form>
           </Modal.Body>
         </Modal>

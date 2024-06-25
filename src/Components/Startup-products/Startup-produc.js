@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./start-up.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit,faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -237,14 +238,14 @@ const Startup_product = () => {
                 <div className="mt-5">
                   <div>
                     <div className="product-list-view d-flex align-item-center justify-content-betweenx">
+                    <div className="pe-5">
+                        <div>
+                          <p>Product Name</p>
+                        </div>
+                      </div>
                       <div className="pe-5 ">
                         <div>
                           <p>Product Description</p>
-                        </div>
-                      </div>
-                      <div className="pe-5">
-                        <div>
-                          <p>Product Name</p>
                         </div>
                       </div>
                       <div className="pe-5">
@@ -278,6 +279,16 @@ const Startup_product = () => {
                         return (
                           <>
                             <div className="product-list-view product-list-view-content d-flex align-item-center justify-content-between">
+                            <div className="">
+                                <div className="d-flex align-items-center h-100">
+                                  <h5
+                                    className="ms-3  "
+                                    style={{ width: "80px" }}
+                                  >
+                                    {e.productName}
+                                  </h5>
+                                </div>
+                              </div>
                               <div className="">
                                 <div className="d-flex align-items-center ">
                                   <img className="me-3" src="" alt="" />
@@ -286,16 +297,6 @@ const Startup_product = () => {
                                     style={{ width: "80px" }}
                                   >
                                     {e.description}
-                                  </h5>
-                                </div>
-                              </div>
-                              <div className="">
-                                <div className="d-flex align-items-center h-100">
-                                  <h5
-                                    className="ms-3  "
-                                    style={{ width: "80px" }}
-                                  >
-                                    {e.productName}
                                   </h5>
                                 </div>
                               </div>
@@ -336,21 +337,24 @@ const Startup_product = () => {
                                     style={{ width: "80px" }}
                                   >
                                     {e.productprice}
+                          
                                   </h5>
+                                  <div className="flex items-center mr-[61px]">
                                   <Nav.Link
-                                    className="ms-5 edit-shoe-list-button"
+                                    className="ms-5"
                                     href=""
                                     onClick={() => handleedit(e._id)}
                                   >
-                                    EDIT
+                                  <FontAwesomeIcon icon={faEdit} />
                                   </Nav.Link>
                                   <a
                                     onClick={() => handledeletproduct(e._id)}
-                                    className="ms-5 delete-shoe-list-button"
+                                    className="ms-3"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    DELETE
+                                    <FontAwesomeIcon icon={faTrashAlt} />
                                   </a>
+                                  </div>
                                 </div>
                               </div>
                             </div>

@@ -149,12 +149,12 @@ export default function AddPartner() {
       <StartUpProfile />
       <div>
         <ToastContainer />
-        <div className="d-flex justify-content-between">
+        <div className="d-flex text-[30px] justify-content-between ml-[200px] pt-[30px]">
           <h2 className="mb-5" style={{ fontWeight: "600" }}>
             Add Partner
           </h2>
         </div>
-        <div>
+        <div className="flex justify-center items-center">
           <div className="row gap-0">
             <div className="col-6 d-flex align-item-center justify-content-center">
               <div className="add-award-form" style={{ width: "556px", height: "181px" }}>

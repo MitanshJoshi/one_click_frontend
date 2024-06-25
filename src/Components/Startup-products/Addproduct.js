@@ -235,12 +235,12 @@ export default function AddProduct() {
     <StartUpProfile onBackButtonClick={displayWishList} />
       <div>
         <ToastContainer />
-        <div className="d-flex justify-content-between">
-          <h2 className="mb-5" style={{ fontWeight: "600" }}>
+        <div className="d-flex text-[30px] justify-content-between ml-[200px] pt-[30px]">
+          <h1 className="mb-5" style={{ fontWeight: "600" }}>
             Add Product
-          </h2>
+          </h1>
         </div>
-        <div>
+        <div className="flex justify-center items-center">
           <div className="row gap-0">
             <div className="col-6 d-flex align-item-center justify-content-center">
               <div className="add-award-form" style={{ width: "556px", height: "181px" }}>

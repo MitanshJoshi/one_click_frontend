@@ -277,22 +277,22 @@ const Startup_team = () => {
                       >
                         <div className="">
                           <div className="d-flex align-items-center">
-                            <img className="me-3" src={partner.partner_photo} alt="" />
+                            {/* <img className="me-3" src={partner.partner_photo} alt="" /> */}
                             <h5 className="mb-0 me-5" style={{ width: "80px" }}>
                               {partner.partner_name}
                             </h5>
                           </div>
                         </div>
-                        <div className="">
+                        <div className=" ml-[-52px] text-end">
                           <div className="d-flex align-items-center h-100">
-                            <h5 className="ms-3" style={{ width: "80px" }}>
+                            <h5 className="" style={{ width: "80px" }}>
                               {partner.position}
                             </h5>
                           </div>
                         </div>
                         <div className="">
                           <div className="d-flex align-items-center h-100">
-                            <h5 className="mb-0 ms-2" style={{ width: "80px" }}>
+                            <h5 className="mb-0" style={{ width: "80px" }}>
                               {partner.city}
                             </h5>
                           </div>
@@ -306,19 +306,19 @@ const Startup_team = () => {
                         </div>
                         <div className="">
                           <div className="d-flex align-items-center h-100">
-                            <h5 className="mb-0 ms-2" style={{ width: "80px" }}>
+                            <h5 className="mb-0" style={{ width: "80px" }}>
                             {partner.country}
                             </h5>
                           </div>
                         </div>
-                        <div className="">
+                        <div className="w-[110px]">
                           <div className="d-flex align-items-center h-100">
-                            <h5 className="mb-0 ms-2" style={{ width: "80px" }}>
+                            <h5 className="mb-0 " style={{ width: "80px" }}>
                               {new Date(partner.DOB).toLocaleDateString()}
                             </h5>
                           </div>
                         </div>
-                        <div className="">
+                        <div className="w-[95px]">
                           <div className="d-flex align-items-center h-100">
                             <FontAwesomeIcon
                               icon={faEdit}
@@ -506,9 +506,11 @@ const Startup_team = () => {
                   }
                 />
               </div>
+              <div className="startup-product-add-button">
               <Button variant="primary" type="submit">
                 Save Changes
               </Button>
+              </div>
             </form>
           </Modal.Body>
         </Modal>

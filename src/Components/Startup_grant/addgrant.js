@@ -72,16 +72,16 @@ const AddGrant = () => {
       <StartUpProfile />
       <div className="container mt-4">
         <ToastContainer />
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between ml-[200px] pt-[30px] text-[30px]">
           <h2 className="mb-5" style={{ fontWeight: "600" }}>
             Add Grant
           </h2>
         </div>
-        <div>
+        <div className="flex justify-center items-center">
           <div className="row gap-0">
-            <div className="col-6 d-flex align-items-center justify-content-center">
-              <div className="add-award-form" style={{ width: "556px", height: "181px" }}>
-                <div className="mb-4">
+            <div className="col-6 d-flex  justify-content-center">
+              <div className="add-award-form mt-1" style={{ width: "556px", height: "181px" }}>
+                <div className="mb-1">
                   <p className="mb-3">Enter Grant Name</p>
                   <input
                     type="text"
@@ -129,7 +129,7 @@ const AddGrant = () => {
                     required
                   />
                 </div> 
-                <div className="d-flex justify-content-between mt-5 mb-5">
+                <div className="d-flex justify-end mt-5 mb-5">
                   <button
                     onClick={handleAddGrant}
                     className="add-award-submit-button"

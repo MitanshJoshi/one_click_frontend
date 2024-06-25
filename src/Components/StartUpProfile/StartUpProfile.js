@@ -44,10 +44,10 @@ const fetchData = async () => {
       // console.log(setdata);
     } catch (error) {
       if (error) {
-        toast.error("Something went wrong!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 1000,
-        });
+        // toast.error("Something went wrong!", {
+        //   position: toast.POSITION.BOTTOM_RIGHT,
+        //   autoClose: 1000,
+        // });
       }
     }
   };
