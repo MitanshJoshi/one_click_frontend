@@ -127,7 +127,8 @@ const Startup_investments = () => {
   };
 
   const handleEdit = (investment) => {
-    setEditingInvestment(investment);
+    // const navigate = useNavigate();
+    navigate(`/editinvestment/${investment._id}`);
   };
 
   const handleListView = () => {
@@ -360,7 +361,20 @@ const Startup_investments = () => {
       )}
 
       {/* Confirmation Modal for Deletion */}
-      <Modal show={showConfirmation} onHide={handleCancelDelete}>
+      {showConfirmation && (
+        <div className="confirmation-modal">
+          <div className="confirmation-content">
+            <h1 className="confirmation-message">
+              Are you sure you want to delete this Investment?
+            </h1>
+            <div className="buttons-container">
+              <button className="btng" onClick={handleDeleteInvestment}>Yes</button>
+              <button className="btnr" onClick={handleCancelDelete}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* <Modal show={showConfirmation} onHide={handleCancelDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Deletion</Modal.Title>
         </Modal.Header>
@@ -373,7 +387,7 @@ const Startup_investments = () => {
             Delete
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

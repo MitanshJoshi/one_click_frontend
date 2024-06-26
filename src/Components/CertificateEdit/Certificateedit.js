@@ -99,6 +99,12 @@ const Certificateedit = () => {
 
   const navigate = useNavigate(); // Correct usage of useNavigate
 
+  const handleBackButtonClick = () => {
+    localStorage.setItem("myData", "award");
+    navigate(-1); // Navigate back to the previous page
+  };
+  
+
   const handlecirtificatesubmit = async () => {
     if (!decscprt) {
       toast.error("Description is must be required", {
@@ -170,7 +176,8 @@ const Certificateedit = () => {
         autoClose: 1000,
       });
       setTimeout(() => {
-        navigate(-1); // Correct usage of navigate function
+        localStorage.setItem("myData", "award");
+        navigate(-1);// Correct usage of navigate function
       }, 1000);
     } catch (error) {
       if (error) {
@@ -248,7 +255,7 @@ const Certificateedit = () => {
                   />
                 </div>
                 <div className="d-flex justify-content-between mt-5 mb-5">
-                  <button className="add-award-submit-button">BACK</button>
+                  <button className="add-award-submit-button" onClick={handleBackButtonClick}>BACK</button>
                   <button
                     className="add-award-submit-button"
                     onClick={handlecirtificatesubmit}

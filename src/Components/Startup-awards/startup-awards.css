@@ -53,6 +53,7 @@
 
 .edit-icon-1 {
   background-color: white;
+  cursor: pointer;
   padding: 8px 10px 10px 11px;
   color: #fff;
   border-radius: 50%;
@@ -60,6 +61,7 @@
 
 .delete-icon-1 {
   background-color: white;
+  cursor: pointer;
   padding: 8px 14px 11px 14px;
   border-radius: 50%;
 }

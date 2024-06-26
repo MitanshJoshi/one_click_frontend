@@ -134,6 +134,7 @@ const { state } = useLocation();
         autoClose: 1000,
       });
       setTimeout(() => {
+        localStorage.setItem("myData", "award");
         Navigate(-1);
       }, 2000);
     } catch (error) {

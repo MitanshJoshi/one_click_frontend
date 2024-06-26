@@ -16,15 +16,39 @@ const Startup_awards = () => {
   const [file, setimage] = useState();
   const [achievementPlace, setachievementPlace] = useState();
   const [achievementYear, setachievementYear] = useState();
-  
+  const [visibleAwardCount, setVisibleAwardCount] = useState(6);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [visibleCertificateCount, setVisibleCertificateCount] = useState(6); // Initial number of certificates to display
+  const [isExpandedd, setIsExpandedd] = useState(false);
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [awarddelete, setawarddelete] = useState(false);
   const handleCancelDelete = () => {
     setShowConfirmation(false);
   };
+  const toggleCertificates = () => {
+    setIsExpandedd((prev) => !prev);
+    if (isExpandedd) {
+      setVisibleCertificateCount(6); // Show 6 certificates when collapsing
+    } else {
+      setVisibleCertificateCount(certi.length); // Show all certificates when expanding
+    }
+  };
+
+  const toggleAwards = () => {
+    setIsExpanded((prev) => !prev);
+    if (isExpanded) {
+      setVisibleAwardCount(6); // Show 6 awards when collapsing
+    } else {
+      setVisibleAwardCount(data.length); // Show all awards when expanding
+    }
+  };
   const handleawarddelete = (id) => {
     setawarddelete(id);
     setShowConfirmation(true);
+  };
+  const loadMoreAwards = () => {
+    setVisibleAwardCount((prevCount) => prevCount + 6); // Increase by 6 awards when "See More" is clicked
   };
   const [showConfirmatio, setshowConfirmatio] = useState(false);
   const [cirtificatedelete, setcirtificatedelete] = useState(false);
@@ -50,9 +74,8 @@ const Startup_awards = () => {
   };
 
   const handleBack = () => {
-    setShowAwardList(false);
-    setAwardAdd(false);
-    setCertiList(true); // Hide the other section
+    localStorage.setItem("myData", "award");
+    Navigate(0); // Hide the other section
   };
 
   const handleAddAward = () => {
@@ -154,8 +177,8 @@ const Startup_awards = () => {
         autoClose: 1000,
       });
       setTimeout(() => {
+        localStorage.setItem("myData", "award");
         Navigate(0);
-        // localStorage.setItem('myData', "product")
       }, 1000);
     } catch (error) {
       if (error) {
@@ -299,7 +322,6 @@ const Startup_awards = () => {
         headers: {
           //   "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
-
         },
         body: formData,
       });
@@ -311,8 +333,8 @@ const Startup_awards = () => {
         autoClose: 1000,
       });
       setTimeout(() => {
+        localStorage.setItem("myData", "award");
         Navigate(0);
-        // localStorage.setItem('myData', "product")
       }, 1000);
     } catch (error) {
       if (error) {
@@ -336,13 +358,13 @@ const Startup_awards = () => {
           },
         }
       );
-      
+
       setShowConfirmation(false);
       toast.success(" Award Delete successful!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
-      
+
       if (!response.ok) {
         throw new Error("Request failed");
       }
@@ -406,9 +428,7 @@ const Startup_awards = () => {
         {showAwardList ? (
           <div>
             <div className="d-flex justify-content-between">
-              <h2 className="mb-5">
-                Achievement List
-              </h2>
+              <h2 className="mb-5">Achievement List</h2>
               <button className="back-buttone-style" onClick={handleBack}>
                 BACK
               </button>
@@ -884,54 +904,46 @@ const Startup_awards = () => {
                 <div className="d-flex justify-content-center">
                   <div className="startup-award-list w-100">
                     {data &&
-                      data.map((e) => {
-                        return (
-                          <>
-                            <div className="mb-3">
-                              <div className="overflow-content-hide">
-                                <div className="awards-relative">
-                                  <img
-                                    src="/awards.png"
-                                    alt=""
-                                    className="w-100"
-                                  />
+                      data.slice(0, visibleAwardCount).map((e) => (
+                        <div key={e._id} className="mb-3">
+                          <div className="overflow-content-hide">
+                            <div className="awards-relative">
+                              <img src="/awards.png" alt="" className="w-100" />
 
-                                  <div className="award-absolute">
-                                    <div className="edit-delete-hover-icon ">
-                                      <div className="edit-icon-1 me-3 ">
-                                        <img
-                                          src="/edit.png"
-                                          alt=""
-                                          onClick={() => handleawardedit(e._id)}
-                                          style={{ cursor: "pointer" }}
-                                          // className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
-                                        />
-                                      </div>
-                                      <div className="delete-icon-1">
-                                        <img
-                                          src="/delete.png"
-                                          alt=""
-                                          onClick={() =>
-                                            handleawarddelete(e._id)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
+                              <div className="award-absolute">
+                                <div className="edit-delete-hover-icon">
+                                  <div className="edit-icon-1 me-3">
+                                    <img
+                                      src="/edit.png"
+                                      alt=""
+                                      onClick={() => handleawardedit(e._id)}
+                                      style={{ cursor: "pointer" }}
+                                    />
+                                  </div>
+                                  <div className="delete-icon-1">
+                                    <img
+                                      src="/delete.png"
+                                      alt=""
+                                      onClick={() => handleawarddelete(e._id)}
+                                    />
                                   </div>
                                 </div>
-                                <h6 className="mt-2 ms-1">
-                                  {e.achievementName}
-                                </h6>
                               </div>
                             </div>
-                          </>
-                        );
-                      })}
+                            <h6 className="mt-2 ms-1">{e.achievementName}</h6>
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </div>
-                <div className="startup-awards-buttons text-center mt-3">
-                  <button>See More</button>
-                </div>
+                {/* Toggle button for See More / See Less */}
+                {data.length > 6 && (
+                  <div className="startup-awards-buttons text-center mt-3">
+                    <button className="btn btn-primary" onClick={toggleAwards}>
+                      {isExpanded ? "See Less" : "See More"}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
             <div className="mt-5 pt-4">
@@ -954,52 +966,49 @@ const Startup_awards = () => {
                 <div className="d-flex justify-content-center">
                   <div className="startup-award-list w-100">
                     {certi &&
-                      certi.map((e) => {
-                        return (
-                          <>
-                            <div className="mb-3">
-                              <div className="overflow-content-hide">
-                                <div className="awards-relative">
-                                  <img
-                                    src="/awards.png"
-                                    alt=""
-                                    className="w-100"
-                                  />
-                                  <div className="award-absolute">
-                                    <div className="edit-delete-hover-icon ">
-                                      <div className="edit-icon-1 me-3 ">
-                                        <img
-                                          src="/edit.png"
-                                          alt=""
-                                          onClick={() => cirtificateedit(e._id)}
-                                          style={{ cursor: "pointer" }}
-                                        />
-                                      </div>
-                                      <div className="delete-icon-1">
-                                        <img
-                                          src="/delete.svg"
-                                          alt=""
-                                          onClick={() =>
-                                            cirtificatedelet(e._id)
-                                          }
-                                        />
-                                      </div>
-                                    </div>
+                      certi.slice(0, visibleCertificateCount).map((e) => (
+                        <div key={e._id} className="mb-3">
+                          <div className="overflow-content-hide">
+                            <div className="awards-relative">
+                              <img src="/awards.png" alt="" className="w-100" />
+
+                              <div className="award-absolute">
+                                <div className="edit-delete-hover-icon">
+                                  <div className="edit-icon-1 me-3">
+                                    <img
+                                      src="/edit.png"
+                                      alt=""
+                                      onClick={() => cirtificateedit(e._id)}
+                                      style={{ cursor: "pointer" }}
+                                    />
+                                  </div>
+                                  <div className="delete-icon-1">
+                                    <img
+                                      src="/delete.svg"
+                                      alt=""
+                                      onClick={() => cirtificatedelet(e._id)}
+                                    />
                                   </div>
                                 </div>
-                                <h6 className="mt-2 ms-1">
-                                  {e.certificateName}
-                                </h6>
                               </div>
                             </div>
-                          </>
-                        );
-                      })}
+                            <h6 className="mt-2 ms-1">{e.certificateName}</h6>
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </div>
-                <div className="startup-awards-buttons text-center mt-3">
-                  <button>See More</button>
-                </div>
+                {/* Toggle button for See More / See Less */}
+                {certi.length > 6 && (
+                  <div className="startup-awards-buttons text-center mt-3">
+                    <button
+                      className="btn btn-primary"
+                      onClick={toggleCertificates}
+                    >
+                      {isExpandedd ? "See Less" : "See More"}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -1013,8 +1022,12 @@ const Startup_awards = () => {
               Are you sure you want to delete this Award?
             </h1>
             <div className="buttons-container">
-              <button className="btng" onClick={handleConfirmDelete}>Yes</button>
-              <button className="btnr" onClick={handleCancelDelete}>No</button>
+              <button className="btng" onClick={handleConfirmDelete}>
+                Yes
+              </button>
+              <button className="btnr" onClick={handleCancelDelete}>
+                No
+              </button>
             </div>
           </div>
         </div>
@@ -1027,8 +1040,12 @@ const Startup_awards = () => {
               Are you sure you want to delete this Certificate?
             </h3>
             <div className="buttons-container">
-              <button className="btng" onClick={handleConfirmDelet}>Yes</button>
-              <button className="btnr" onClick={handleCancelDelet}>No</button>
+              <button className="btng" onClick={handleConfirmDelet}>
+                Yes
+              </button>
+              <button className="btnr" onClick={handleCancelDelet}>
+                No
+              </button>
             </div>
           </div>
         </div>

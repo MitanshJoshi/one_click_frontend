@@ -253,7 +253,7 @@ const MyFullInfo = () => {
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}
             >
-              <h5 className="mb-0 tab-bold-css">Basic Information</h5>
+              <h5 className="mb-0 tab-bold-css text-center">Basic Information</h5>
               {activeTab === 0 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
@@ -264,7 +264,7 @@ const MyFullInfo = () => {
               className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
               onClick={() => handleTabClick(1)}
             >
-              <h5 className="mb-0 tab-bold-css">Education Background</h5>
+              <h5 className="mb-0 tab-bold-css text-center">Education Background</h5>
               {activeTab === 1 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
@@ -276,7 +276,7 @@ const MyFullInfo = () => {
               className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
               onClick={() => handleTabClick(2)}
             >
-              <h5 className="mb-0 tab-bold-css">Start-ups</h5>
+              <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
               {activeTab === 2 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
@@ -287,7 +287,7 @@ const MyFullInfo = () => {
               className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
               onClick={() => handleTabClick(3)}
             >
-              <h5 className="mb-0 tab-bold-css">My inquiry</h5>
+              <h5 className="mb-0 tab-bold-css text-center">My inquiry</h5>
               {activeTab === 3 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />

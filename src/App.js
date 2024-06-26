@@ -18,6 +18,7 @@ import DisplayProfile from "./Components/DisplayProfile/DisplayProfile"
 import AddPartner from "./Components/Startup_team/addPartner";
 import StartUps from "./Container/HomePage/StartUps";
 import Footer from "./Components/Footer/Footer";
+import PartnerEdit from "./Components/Startup_team/partnerEdit";
 import Inquiry from "./Container/HomePage/Inquiry";
 import Selling_inquiry from "./Container/HomePage/Selling-inquiry";
 import Buying_Inquiry from "./Container/HomePage/Buying-Inquiry";
@@ -37,7 +38,11 @@ import Myinquirychat from "./Components/Myinquirychat/Myinquirychat";
 import Forgot from "./Forgot Password/Forgot";
 import ContactUs from "./Components/Contact US/ContactUs";
 import Inquiryform from "./Components/Inquiry-form/Inquiryform";
+import EditGrant from "./Components/Startup_grant/EditGrant";
 import AddInvestments from "./Components/Startup_investments/addinvestment";
+import ProductEdit from "./Components/StartUp-ProductEdit/Productedit";
+import EditInvestment from "./Components/Startup_investments/EditInvestment";
+// import EditGrant from "./Components/Startup_grant/EditGrant";
 // import Startup_product from "./Components/Startup-products/Startup-produc";
 
 const App = () => {
@@ -52,6 +57,8 @@ const App = () => {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/home" element={<HomePage2 />} />
           <Route path="/my-profile" element={<Myprofile />} />
+          <Route path="/editgrant/:grantId" element={<EditGrant />} />
+          <Route path="/editinvestment/:_id" element={<EditInvestment />} />
           <Route path="/my-fullinfo" element={<MyFullInfo />} />
           <Route path="/start-up-full-detail/:_id" element={<StartUps />} />
           <Route path="/home-page" element={<HomePage2 />} />
@@ -64,7 +71,8 @@ const App = () => {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/addstartup/:id" element={<AddStartUp />} />
           <Route path="/startupprod" element={<Startup_product />} />
-
+          <Route path="/productEdit" element={<ProductEdit />} />
+          <Route path="/partnerEdit" element={<PartnerEdit />} />
           <Route path="/addproduct" element={<Addprduct/>} />
           <Route path="/addpartner" element={<AddPartner/>} />
           <Route path="/addgrant" element={<AddGrant/>} />

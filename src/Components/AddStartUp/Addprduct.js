@@ -23,7 +23,7 @@ const AddStartUp = () => {
   const [subcategoryId, setsubcategoryId] = useState("");
   const [image, setimage] = useState("");
   const [data, setdata] = useState();
-  const [subcategory, setsubcategory] = useState();
+  const [subcategory, setsubcategory] = useState([]);
   const [inqubation, setinqubation] = useState();
   const [selectedState, setSelectedState] = useState(null);
   // const [logo, setlogo] = useState(null);
@@ -90,9 +90,11 @@ const AddStartUp = () => {
     setcategoryId(e.target.value);
     const selectedOption = e.target.value; // Get the value of the selected option
     const selectedData = data.find((item) => item._id === selectedOption); // Find the selected item in the data array
+    console.log('selected data',selectedData);
+    
     if (selectedData) {
       setcategoryIdSub(selectedData._id); // Set the _id of the selected item to the state variable
-      console.log(selectedData._id);
+      console.log("id isssssss:",selectedData._id);
     }
   };
 
@@ -393,6 +395,13 @@ const AddStartUp = () => {
       }
     }
   };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return () => {
+      navigate("/my-profile");
+    };
+  }, [navigate]);
   useEffect(() => {
     center();
   }, []);
@@ -401,6 +410,7 @@ const AddStartUp = () => {
       <div>
         <div className="container mt-5 mb-5">
           <ToastContainer />
+          <div className="mx-[100px]">
           <div className="add-start-up mb-3">+ Add Start-up</div>
           <div className="lorem-ipsum-dolor-container mb-5">
             <p className="lorem-ipsum-dolor mb-0">
@@ -411,7 +421,8 @@ const AddStartUp = () => {
               incididunt ut labore et dolore magna aliqua.
             </p>
           </div>
-          <form>
+          </div>
+          <form className="mx-[100px]">
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group mb-4">

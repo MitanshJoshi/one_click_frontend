@@ -20,7 +20,7 @@ export default function AddProduct() {
   const [subcategoryId, setsubcategoryId] = useState([]);
   const [productstatus, setproductstatus] = useState("");
   const [data, setData] = useState([]);
-  const [sub, setsub] = useState([]);
+  const [subcategory, setsubcategory] = useState([]);
   const [files, setFiles] = useState([]);
   const [wishList, setWishList] = useState(false);
   
@@ -42,21 +42,23 @@ export default function AddProduct() {
     setFiles(uploadedPhotos);
 };
 
-  const handleCategory = (e) => {
-    setcategoryId(e.target.value);
-    const selectedOption = e.target.value;
-    const selectedData = data.find((item) => item._id === selectedOption);
-    if (selectedData) {
-      setcategoryIdSub(selectedData._id);
-    }
-  };
+const handleCategory = (e) => {
+  setcategoryId(e.target.value);
+  const selectedOption = e.target.value; // Get the value of the selected option
+  const selectedData = data.find((item) => item._id === selectedOption); // Find the selected item in the data array
+  console.log('selected data',selectedData);
+  
+  if (selectedData) {
+    setcategoryIdSub(selectedData._id); // Set the _id of the selected item to the state variable
+    console.log("id isssssss:",selectedData._id);
+  }
+};
 
   const displayWishList = () => {
     setWishList(true); // Set addStartup to false when back button is clicked
 };
 
   const [categoryIdforSub, setcategoryIdSub] = useState("");
-
   const subCategoryFetch = async () => {
     try {
       const respo = await fetch(
@@ -70,14 +72,18 @@ export default function AddProduct() {
         }
       );
 
+      // Check if the response status is okay
       if (!respo.ok) {
         throw new Error("Failed to fetch data");
       }
 
+      // Parse the response as JSON
       const responseData = await respo.json();
 
+      // Check if responseData.data exists before calling categoryIdforSub
       if (responseData && responseData.data) {
-        setsub(responseData.data);
+        setsubcategory(responseData.data);
+        console.log(responseData.data);
       } else {
         console.error("No data found in response");
       }
@@ -88,9 +94,13 @@ export default function AddProduct() {
 
   useEffect(() => {
     if (categoryIdforSub) {
+      console.log(categoryIdforSub);
       subCategoryFetch();
     }
   }, [categoryIdforSub]);
+
+
+  
 
   const handlesubcategory = (e) => {
     setsubcategoryId(e.target.value);
@@ -302,7 +312,7 @@ export default function AddProduct() {
                 </div>
                 <div className="mb-1">
                   <p className="mb-3">Select Category</p>
-                  <select className="form-control" onChange={handleCategory}style={{width:'559px', height:'46px'}}>
+                  <select className="form-control" onChange={handleCategory} style={{width:'559px', height:'46px'}}>
                     <option value="Select">Select</option>
                     {data &&
                       data.map((e) => (
@@ -316,8 +326,8 @@ export default function AddProduct() {
                   <p className="mb-3">Select Sub Category</p>
                   <select className="form-control" onChange={handlesubcategory} style={{width:'559px', height:'46px'}}>
                     <option value="Select" >Select</option>
-                    {sub &&
-                      sub.map((e) => (
+                    {subcategory &&
+                      subcategory.map((e) => (
                         <option key={e._id} value={e._id} >
                           {e.name}
                         </option>

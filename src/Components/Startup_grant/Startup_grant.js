@@ -18,7 +18,7 @@ const Startup_grant = () => {
   const [editingGrant, setEditingGrant] = useState(null);
 
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     fetchGrants();
   }, []);
@@ -121,9 +121,10 @@ const Startup_grant = () => {
     setShowConfirmation(false);
   };
 
-  const handleEdit = (grant) => {
-    setEditingGrant(grant);
-  };
+const handleEdit = (grant) => {
+  // const navigate = useNavigate();
+  navigate(`/editgrant/${grant._id}`); // Example assuming grantId is passed
+};
 
   const handleListView = () => {
     setListView(true);
@@ -351,7 +352,20 @@ const Startup_grant = () => {
       )}
 
       {/* Modal for Delete Confirmation */}
-      <Modal show={showConfirmation} onHide={handleCancelDelete}>
+      {showConfirmation && (
+        <div className="confirmation-modal">
+          <div className="confirmation-content">
+            <h1 className="confirmation-message">
+              Are you sure you want to delete this Grant?
+            </h1>
+            <div className="buttons-container">
+              <button className="btng" onClick={handleDeleteGrant}>Yes</button>
+              <button className="btnr" onClick={handleCancelDelete}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* <Modal show={showConfirmation} onHide={handleCancelDelete}>
         <Modal.Header className="">
           <Modal.Title>Confirm Deletion</Modal.Title>
         </Modal.Header>
@@ -364,7 +378,7 @@ const Startup_grant = () => {
             Delete
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

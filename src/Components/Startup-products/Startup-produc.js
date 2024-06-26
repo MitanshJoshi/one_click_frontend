@@ -27,6 +27,80 @@ import { BASE_URL } from "../../BASE_URL";
 const Startup_product = () => {
   const [showConfirmation, setshowConfirmation] = useState(false);
   const [product, setproduct] = useState(false);
+  const [data1, setdata1] = useState();
+  const [categoryId, setcategoryId] = useState("");
+  const [subcategoryId, setsubcategoryId] = useState([]);
+  const [subcategory, setsubcategory] = useState();
+  
+  const [categoryIdforSub, setcategoryIdSub] = useState("");
+  const [activeView, setActiveView] = useState('list'); // Initial state set to 'list' view
+
+    const handleListview1 = () => {
+        setActiveView('list');
+    };
+
+    const handleGridview1 = () => {
+        setActiveView('grid');
+    };
+
+    const listStyle = {
+        background: 'linear-gradient(to bottom, #9ad1a0, #00818a)',
+    };
+
+    const gridStyle = {
+        background: 'linear-gradient(to bottom, #9ad1a0, #00818a)',
+    };
+
+    const inactiveStyle = {
+        background: 'linear-gradient(to bottom, #c8dbca, #a4c7c9)',
+    };
+
+
+  const handlesubcategory = (e) => {
+    setsubcategoryId(e.target.value);
+  };
+  const subCategoryFetch = async () => {
+    try {
+      const respo = await fetch(
+        `${BASE_URL}/api/subcategory/displayAllByCategoryId?category_id=${categoryIdforSub}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      // Check if the response status is okay
+      if (!respo.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      // Parse the response as JSON
+      const responseData = await respo.json();
+      console.log('resp data',responseData);
+      
+
+      // Check if responseData.data exists before calling categoryIdforSub
+      if (responseData && responseData.data) {
+        setsubcategory(responseData.data);
+        console.log("subcategoties"+subcategory);
+      } else {
+        console.error("No data found in response");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (categoryIdforSub) {
+      console.log(categoryIdforSub);
+      subCategoryFetch();
+    }
+  }, [categoryIdforSub]);
+
 
   const handleCancelDelete = () => {
     setshowConfirmation(false);
@@ -38,6 +112,15 @@ const Startup_product = () => {
   const navigate = useNavigate();
   const handleaddproduct = (_id) => {
     navigate("/addproduct", { state: { _id } });
+  };
+
+  const handleCategory = (e) => {
+    setcategoryId(e.target.value);
+    const selectedOption = e.target.value;
+    const selectedData = data.find((item) => item._id === selectedOption);
+    if (selectedData) {
+      setcategoryIdSub(selectedData._id);
+    }
   };
   // const array = [
   //   { hyyy: "dnfkdf" },
@@ -55,10 +138,12 @@ const Startup_product = () => {
   const [listView, setListView] = useState(true);
 
   const handleListview = () => {
+    setActiveView('list');
     setListView(true);
   };
 
   const handleGridview = () => {
+    setActiveView('grid');
     setListView(false);
   };
 
@@ -69,6 +154,33 @@ const Startup_product = () => {
   const handleedit = (id) => {
     navigate("/productedit", { state: { _id, id } });
   };
+  const handleid = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/category/displayAll`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+      const responseData = await res.json();
+      setdata1(responseData.data);
+      console.log(responseData.data);
+    } catch (error) {
+      if (error) {
+        toast.error("Something went wrong!", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: 1000,
+        });
+      }
+    }
+  };
+  useEffect(() => {
+    handleid();
+  }, []);
 
   const [data, setdata] = useState([]);
   console.log(data);
@@ -159,11 +271,15 @@ const Startup_product = () => {
                       fontWeight: "600",
                       fontFamily: "poppins",
                     }}
+                    onChange={handleCategory}
                   >
-                    <option value="">select category</option>
-                    <option value="">select</option>
-                    <option value="">select</option>
-                    <option value="">select</option>
+                   <option value="">Select Category</option>
+                    {data1 &&
+                      data1.map((e) => (
+                        <option key={e._id} value={e._id}>
+                          {e.name}
+                        </option>
+                      ))}
                     <option value="">select</option>
                   </select>
                 </div>
@@ -172,7 +288,7 @@ const Startup_product = () => {
                 <div className="w-100">
                   <select
                     name=""
-                    id=""
+                    id="startupSubCategory"
                     className="form-control"
                     style={{
                       color: "#000",
@@ -180,12 +296,16 @@ const Startup_product = () => {
                       fontWeight: "600",
                       fontFamily: "poppins",
                     }}
+                    onChange={handlesubcategory}
+
                   >
-                    <option value="">select sub-category</option>
-                    <option value="">select</option>
-                    <option value="">select</option>
-                    <option value="">select</option>
-                    <option value="">select</option>
+                    <option value="Select">Select Sub-category</option>
+                    {subcategory &&
+                      subcategory.map((e) => (
+                        <option key={e._id} value={e._id}>
+                          {e.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -194,6 +314,7 @@ const Startup_product = () => {
                   <input
                     type="text"
                     className="form-control"
+                    
                     placeholder="Search"
                     style={{
                       color: "#000",
@@ -223,12 +344,14 @@ const Startup_product = () => {
                   <FontAwesomeIcon
                     icon={faList}
                     className="startup-add-product-icons"
-                    onClick={handleGridview}
+                    onClick={handleListview}
+                    style={activeView === 'list' ? listStyle : inactiveStyle}
                   />
                   <FontAwesomeIcon
                     icon={faTableCells}
                     className="startup-add-product-icons startup-add-product-icons-2"
-                    onClick={handleListview}
+                    onClick={handleGridview}
+                    style={activeView === 'grid' ? gridStyle : inactiveStyle}
                   />
                 </div>
               </div>
