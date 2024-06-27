@@ -675,10 +675,11 @@ const RegistrationPage = () => {
                   </div>
                   <div className=" form-check">
                     <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="terms"
-                    />
+                          className="form-check-input"
+                          type="checkbox"
+                          style={{width:"16px"}}
+                          id="terms"
+                        />
                     <label className="form-check-label" htmlFor="terms">
                       I agree to the terms and conditions
                     </label>
