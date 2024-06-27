@@ -282,76 +282,69 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     </div>
                   )}
                   {activeTab === "grants" && (
-                    <div className="ml-[20px]">
-                      <div className="review-list-title">
+                    <div>
+                      <div className="review-list-title ml-[23px]">
                         <h3>Grants</h3>
                       </div>
                       <div className="mb-3">
                         <div className="row">
-                          {grants.map((grant) => (
-                            <div className="col-4" key={grant._id}>
-                              <div className="card mb-3">
-                                <div className="card-body">
-                                  <h5 className="card-title">
-                                    {grant.grant_name}
-                                  </h5>
-                                  <p className="card-text">
-                                    <strong>Grant Amount:</strong>{" "}
-                                    {grant.grant_amount}
-                                  </p>
-                                  <p className="card-text">
-                                    <strong>Date Available:</strong>{" "}
-                                    {new Date(
-                                      grant.date_when_available
-                                    ).toLocaleDateString()}
-                                  </p>
-                                  <p className="card-text">
-                                    <strong>Grant From:</strong>{" "}
-                                    {grant.grant_from}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
+                          {activeTab === "grants" && (
+                            // <div className="mt-5">
+                              <table className="table table-striped ml-[28px]">
+                                <thead>
+                                  <tr>
+                                    <th>Grant Name</th>
+                                    <th>Grant Amount</th>
+                                    <th>Date Available</th>
+                                    <th>Grant From</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {grants.map((grant) => (
+                                    <tr key={grant._id}>
+                                      <td>{grant.grant_name}</td>
+                                      <td>{grant.grant_amount}</td>
+                                      <td>
+                                        {new Date(
+                                          grant.date_when_available
+                                        ).toLocaleDateString()}
+                                      </td>
+                                      <td>{grant.grant_from}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            // </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   )}
                   {activeTab === "investment" && (
-                    <div className="ml-[20px]">
+                     <div className="ml-[23px]">
                       <div className="review-list-title">
                         <h3>Investments</h3>
                       </div>
-                      <div className="mb-3">
-                        <div className="row">
-                          {investments.map((investment) => (
-                            <div className="col-4" key={investment._id}>
-                              <div className="card mb-3">
-                                <div className="card-body">
-                                  <h5 className="card-title">
-                                    {investment.investor_name}
-                                  </h5>
-                                  <p className="card-text">
-                                    <strong>Investment Amount:</strong>{" "}
-                                    {investment.investment_amount}
-                                  </p>
-                                  <p className="card-text">
-                                    <strong>Investment Date:</strong>{" "}
-                                    {new Date(
-                                      investment.date_when_available
-                                    ).toLocaleDateString()}
-                                  </p>
-                                  <p className="card-text">
-                                    <strong>Investment Type:</strong>{" "}
-                                    {investment.investment_type}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                     <table className="table table-striped ml-[-7px]">
+                       <thead>
+                         <tr>
+                           <th>Investor Name</th>
+                           <th>Investment Amount</th>
+                           <th>Investment Date</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         {investments.map((investment) => (
+                           <tr key={investment._id}>
+                             <td>{investment.investor_name}</td>
+                             <td>{investment.investment_amount}</td>
+                             <td>{new Date(investment.date_when_available).toLocaleDateString()}</td>
+                             <td>{investment.investment_type}</td>
+                           </tr>
+                         ))}
+                       </tbody>
+                     </table>
+                   </div>
                   )}
                   {activeTab === "team" && (
                     <div className="ml-[20px]">
