@@ -140,7 +140,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     onClick={() => setActiveTab("product")}
                     className={`tab py-2 px-4 ${
                       activeTab === "product"
-                        ? "border-b-2 border-blue-500 text-blue-500"
+                        ? "border-b-2 border-[#9ad1a0]"
                         : "text-gray-500"
                     }`}
                   >
@@ -150,7 +150,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     onClick={() => setActiveTab("awards")}
                     className={`tab py-2 px-4 ${
                       activeTab === "awards"
-                        ? "border-b-2 border-blue-500 text-blue-500"
+                        ? "border-b-2 border-[#9ad1a0]"
                         : "text-gray-500"
                     }`}
                   >
@@ -160,7 +160,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     onClick={() => setActiveTab("grants")}
                     className={`tab py-2 px-4 ${
                       activeTab === "grants"
-                        ? "border-b-2 border-blue-500 text-blue-500"
+                        ? "border-b-2 border-[#9ad1a0] "
                         : "text-gray-500"
                     }`}
                   >
@@ -170,7 +170,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     onClick={() => setActiveTab("investment")}
                     className={`tab py-2 px-4 ${
                       activeTab === "investment"
-                        ? "border-b-2 border-blue-500 text-blue-500"
+                        ? "border-b-2 border-[#9ad1a0]"
                         : "text-gray-500"
                     }`}
                   >
@@ -180,7 +180,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     onClick={() => setActiveTab("team")}
                     className={`tab py-2 px-4 ${
                       activeTab === "team"
-                        ? "border-b-2 border-blue-500 text-blue-500"
+                        ? "border-b-2 border-[#9ad1a0] "
                         : "text-gray-500"
                     }`}
                   >
@@ -190,17 +190,14 @@ const Supplier_full_detail = ({ onShoesChange }) => {
 
                 <div className="tab-content">
                   {activeTab === "product" && (
-                    <div>
-                         <div className="review-list-title">
+                    <div className="ml-[20px]">
+                      <div className="review-list-title">
                         <h3>Products</h3>
                       </div>
                       <div>
-                        
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                           {more.map((e) => (
-                            <div
-                              key={e._id}
-                            >
+                            <div key={e._id}>
                               <div className="shoes-detail-box">
                                 <div className="shoes-detail-head">
                                   <p className="mb-0">RFQ</p>
@@ -249,11 +246,11 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     </div>
                   )}
                   {activeTab === "awards" && (
-                    <div>
+                    <div className="ml-[20px]">
                       <div className="review-list-title">
                         <h3>Awards</h3>
                       </div>
-                      <div className="mb-3">
+                      <div className="mb-3 ml-[-12px]">
                         <div className="row">
                           {awards.map((e) => (
                             <div className="col-3" key={e._id}>
@@ -266,11 +263,15 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                                   />
                                 </div>
                                 <div className="flex justify-between">
-                                    <h4 className="text-[12px]  font-bold">Award Name</h4>
-                                    <h4 className="text-[12px] font-bold">Comp Name</h4>
+                                  <h4 className="text-[12px] font-bold">
+                                    Award Name
+                                  </h4>
+                                  <h4 className="text-[12px] font-bold">
+                                    Comp Name
+                                  </h4>
                                 </div>
                                 <div className="flex justify-between text-[12px]">
-                                  <h6 >{e.achievementName}</h6>  
+                                  <h6>{e.achievementName}</h6>
                                   <h6>{e.competitionName}</h6>
                                 </div>
                               </div>
@@ -281,99 +282,125 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     </div>
                   )}
                   {activeTab === "grants" && (
-                    <div>
+                    <div className="ml-[20px]">
                       <div className="review-list-title">
                         <h3>Grants</h3>
                       </div>
                       <div className="mb-3">
                         <div className="row">
-                          {activeTab === "grants" && (
-                            // <div className="mt-5">
-                              <table className="table table-striped">
-                                <thead>
-                                  <tr>
-                                    <th>Grant Name</th>
-                                    <th>Grant Amount</th>
-                                    <th>Date Available</th>
-                                    <th>Grant From</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {grants.map((grant) => (
-                                    <tr key={grant._id}>
-                                      <td>{grant.grant_name}</td>
-                                      <td>{grant.grant_amount}</td>
-                                      <td>
-                                        {new Date(
-                                          grant.date_when_available
-                                        ).toLocaleDateString()}
-                                      </td>
-                                      <td>{grant.grant_from}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            // </div>
-                          )}
+                          {grants.map((grant) => (
+                            <div className="col-4" key={grant._id}>
+                              <div className="card mb-3">
+                                <div className="card-body">
+                                  <h5 className="card-title">
+                                    {grant.grant_name}
+                                  </h5>
+                                  <p className="card-text">
+                                    <strong>Grant Amount:</strong>{" "}
+                                    {grant.grant_amount}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>Date Available:</strong>{" "}
+                                    {new Date(
+                                      grant.date_when_available
+                                    ).toLocaleDateString()}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>Grant From:</strong>{" "}
+                                    {grant.grant_from}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
                   )}
                   {activeTab === "investment" && (
-                     <div className="">
+                    <div className="ml-[20px]">
                       <div className="review-list-title">
                         <h3>Investments</h3>
                       </div>
-                     <table className="table table-striped ml-[-12px]">
-                       <thead>
-                         <tr>
-                           <th>Investor Name</th>
-                           <th>Investment Amount</th>
-                           <th>Investment Date</th>
-                         </tr>
-                       </thead>
-                       <tbody>
-                         {investments.map((investment) => (
-                           <tr key={investment._id}>
-                             <td>{investment.investor_name}</td>
-                             <td>{investment.investment_amount}</td>
-                             <td>{new Date(investment.date_when_available).toLocaleDateString()}</td>
-                             <td>{investment.investment_type}</td>
-                           </tr>
-                         ))}
-                       </tbody>
-                     </table>
-                   </div>
+                      <div className="mb-3">
+                        <div className="row">
+                          {investments.map((investment) => (
+                            <div className="col-4" key={investment._id}>
+                              <div className="card mb-3">
+                                <div className="card-body">
+                                  <h5 className="card-title">
+                                    {investment.investor_name}
+                                  </h5>
+                                  <p className="card-text">
+                                    <strong>Investment Amount:</strong>{" "}
+                                    {investment.investment_amount}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>Investment Date:</strong>{" "}
+                                    {new Date(
+                                      investment.date_when_available
+                                    ).toLocaleDateString()}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>Investment Type:</strong>{" "}
+                                    {investment.investment_type}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   )}
                   {activeTab === "team" && (
-                      <div className="">
-                        <div className="review-list-title">
-                        <h3>Partners</h3>
+                    <div className="ml-[20px]">
+                      <div className="review-list-title">
+                        <h3>Team</h3>
                       </div>
-                      <table className="table table-striped ml-[-12px]">
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th>DOB</th>
-                            <th>Country</th>
-                            <th>State</th>
-                            <th>City</th>
-                          </tr>
-                        </thead>
-                        <tbody>
+                      <div className="mb-3">
+                        <div className="row">
                           {teamMembers.map((member) => (
-                            <tr key={member.id}>
-                              <td>{member.partner_name}</td>
-                              <td>{member.position}</td>
-                              <td>{new Date(member.DOB).toLocaleDateString()}</td>
-                              <td>{member.country}</td>
-                              <td>{member.state}</td>
-                              <td>{member.city}</td>
-                            </tr>
+                            <div className="col-4 mb-4" key={member.id}>
+                              <div className="card">
+                                <div className="card-body">
+                                  <div className="flex  items-center">
+                                    <img
+                                      className="me-3"
+                                      src="/webearl.png"
+                                      alt=""
+                                      style={{
+                                        width: "50px",
+                                        height: "50px",
+                                        borderRadius: "50%",
+                                      }}
+                                    />
+                                    <h5 className="mb-0">
+                                      {member.partner_name}
+                                    </h5>
+                                  </div>
+                                  <p className="card-text">
+                                    <strong>Role:</strong> {member.position}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>DOB:</strong>{" "}
+                                    {new Date(member.DOB).toLocaleDateString()}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>Country:</strong> {member.country}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>State:</strong> {member.state}
+                                  </p>
+                                  <p className="card-text">
+                                    <strong>City:</strong> {member.city}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
                           ))}
-                        </tbody>
-                      </table>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

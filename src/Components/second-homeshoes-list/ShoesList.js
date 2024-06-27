@@ -186,7 +186,7 @@ const ShoesList = ({ handleDetail }) => {
                             <div
                               className="startup-product-list-display"
                               onClick={() => handleproductid(e._id)}
-                              style={{ cursor: "pointer", width:"180px", height:"300px" }}
+                              style={{ cursor: "pointer", width:"180px", height:"270px" }}
                             >
                               <div className="pt-3">
                                 <img
