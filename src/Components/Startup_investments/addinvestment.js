@@ -96,6 +96,11 @@ export default function AddInvestment() {
       });
     }
   };
+
+  const handleback = () => {
+    localStorage.setItem("myData", "investment");
+    navigate(-1);
+  };
   
   return (
     <>
@@ -157,13 +162,20 @@ export default function AddInvestment() {
           </div>
         </div>
         <div className="row mr-[105px]">
-        <div className="d-flex justify-end mt-5 mb-5">
+        <div className="d-flex justify-end mt-5 mb-5 gap-3">
                   <button
                     onClick={handleSubmit}
                     className="add-award-submit-button"
                     style={{ height: "50px", width: "267px" }}
                   >
                     SUBMIT
+                  </button>
+                  <button
+                    onClick={handleback}
+                    className="add-award-submit-button"
+                    style={{ height: "50px", width: "267px" }}
+                  >
+                    BACK
                   </button>
                 </div>
         </div>

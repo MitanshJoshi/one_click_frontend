@@ -24,19 +24,16 @@ const MyFullInfo = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedStartupId, setSelectedStartupId] = useState(null);
   const [img, setimg] = useState("");
-  
+
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/api/startup/displaybasic`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/startup/displaybasic`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Request failed");
@@ -97,14 +94,11 @@ const MyFullInfo = () => {
         });
 
         // Clear input fields after successful submission
-      } 
+      }
 
       if (!response.ok) {
         throw new Error("Request failed");
-      }
-      else
-      {
-        
+      } else {
       }
 
       fetchData();
@@ -138,8 +132,8 @@ const MyFullInfo = () => {
       const Data = await response.json();
 
       setname(Data.data[0].name || "");
-      console.log('data is:',Data);
-      
+      console.log("data is:", Data);
+
       setimg(Data.data[0].profilePicture || "");
       // console.log(Data.data)
     } catch (error) {
@@ -149,7 +143,6 @@ const MyFullInfo = () => {
 
   useEffect(() => {
     // setCountryData(Countries);
-
 
     display();
   }, []);
@@ -180,9 +173,8 @@ const MyFullInfo = () => {
       });
 
       if (!response.ok) {
-      
       }
-      display()
+      display();
       // console.log(response);
 
       // Handle success
@@ -191,7 +183,6 @@ const MyFullInfo = () => {
       // Handle error
     }
   };
-  
 
   return (
     <>
@@ -225,8 +216,7 @@ const MyFullInfo = () => {
                     htmlFor="file-upload"
                     className="edit-icon mb-5 my-profile-image-change"
                   >
-                    <img src="/edit.png" alt="" 
-                    />
+                    <img src="/edit.png" alt="" />
                   </label>
                   <input
                     id="file-upload"
@@ -249,22 +239,26 @@ const MyFullInfo = () => {
 
         <div className="custom-tabs-container mt-5">
           <div className="custom-tabs flex justify-center">
-          <div
+            <div
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}
             >
-              <h5 className="mb-0 tab-bold-css text-center">Basic Information</h5>
+              <h5 className="mb-0 tab-bold-css text-center">
+                Basic Information
+              </h5>
               {activeTab === 0 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
               )}
             </div>
-          <div
+            <div
               className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
               onClick={() => handleTabClick(1)}
             >
-              <h5 className="mb-0 tab-bold-css text-center">Education Background</h5>
+              <h5 className="mb-0 tab-bold-css text-center">
+                Education Background
+              </h5>
               {activeTab === 1 && (
                 <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
@@ -296,14 +290,14 @@ const MyFullInfo = () => {
             </div>
           </div>
           <div className="custom-tab-panel ">
-          {activeTab === 0 && (
+            {activeTab === 0 && (
               <div>
                 <DisplayProfile img={img} />
               </div>
             )}
-          {activeTab === 1 && (
+            {activeTab === 1 && (
               <div>
-                <EducationBack/>
+                <EducationBack />
               </div>
             )}
             {activeTab === 2 && (
@@ -316,7 +310,7 @@ const MyFullInfo = () => {
                   <>
                     {startups && startups.length > 0 ? (
                       <div>
-                        <div className="row mt-5">
+                        <div className="row mt-5 mx-[100px]">
                           {startups &&
                             startups.map((e) => (
                               <div className="col-12 col-md-6 mb-4" key={e._id}>
@@ -381,7 +375,7 @@ const MyFullInfo = () => {
                                     </div>
                                   </div>
                                   <div className="d-flex justify-content-between mt-3">
-                                    <div onClick={() => handleNavigate(e._id)}>
+                                    <div>
                                       <FontAwesomeIcon icon={faLocationDot} />
                                       <span style={{ marginLeft: "10px" }}>
                                         {e.address}
@@ -397,7 +391,12 @@ const MyFullInfo = () => {
                                       </p>
                                     </div>
                                   </div>
-                                  <div className="d-flex justify-content-end mt-2">
+                                  <div className="flex justify-between items-center mt-2">
+                                    <div className="add-start-up-button mt-sm-5 mt-0 flex justify-center items-center">
+                                      <button onClick={()=>handleNavigate(e._id)} className="">VIEW</button>
+                                    </div>
+                                    <div>
+                                    
                                     <button className="edit-icon me-3">
                                       <img
                                         src="./edit.png"
@@ -412,6 +411,7 @@ const MyFullInfo = () => {
                                         onClick={() => handleDelete(e._id)}
                                       />
                                     </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -419,8 +419,15 @@ const MyFullInfo = () => {
                         </div>
                       </div>
                     ) : (
-                      <div className="m-auto" style={{display:"flex", justifyContent:"center", paddingTop:"50px"}}>
-                      <h3>ADD NEW STARTUP</h3>
+                      <div
+                        className="m-auto"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          paddingTop: "50px",
+                        }}
+                      >
+                        <h3>ADD NEW STARTUP</h3>
                       </div>
                     )}
                   </>
@@ -442,8 +449,12 @@ const MyFullInfo = () => {
                 Are you sure you want to delete this startup?
               </h3>
               <div className="buttons-container">
-                <button className="btng"  onClick={handleConfirmDelete}>Yes</button>
-                <button className="btnr" onClick={handleCancelDelete}>No</button>
+                <button className="btng" onClick={handleConfirmDelete}>
+                  Yes
+                </button>
+                <button className="btnr" onClick={handleCancelDelete}>
+                  No
+                </button>
               </div>
             </div>
           </div>

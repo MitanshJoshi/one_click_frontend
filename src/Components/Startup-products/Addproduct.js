@@ -133,6 +133,11 @@ const handleCategory = (e) => {
       }
     }
   };
+
+  const handleback = () => {
+    localStorage.setItem("myData", "product");
+    navigate(-1);
+  };
   
 
   useEffect(() => {
@@ -294,6 +299,13 @@ const handleCategory = (e) => {
                     style={{ height: "50px", width: "267px" }}
                   >
                     SUBMIT
+                  </button>
+                  <button
+                    onClick={handleback}
+                    className="add-award-submit-button "
+                    style={{ height: "50px", width: "267px" }}
+                  >
+                    BACK
                   </button>
                 </div>
               </div>

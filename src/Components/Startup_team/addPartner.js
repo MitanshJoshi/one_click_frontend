@@ -148,6 +148,11 @@ export default function AddPartner() {
     }
   };
 
+  const handleback = () => {
+    localStorage.setItem("myData", "partner");
+    navigate(-1);
+  };
+
   return (
     <>
       <SecondNavbar />
@@ -260,13 +265,20 @@ export default function AddPartner() {
                     style={{ width: "559px", height: "46px"}}
                   />
                   </div>
-                  <div className="d-flex justify-content-between mt-5 mb-5">
+                  <div className="d-flex justify-content-between mt-5 mb-5 gap-3">
                   <button
                     onClick={handleSubmit}
                     className="add-award-submit-button"
                     style={{ height: "50px", width: "267px" }}
                   >
                     SUBMIT
+                  </button>
+                  <button
+                    onClick={handleback}
+                    className="add-award-submit-button"
+                    style={{ height: "50px", width: "267px" }}
+                  >
+                    BACK
                   </button>
                 </div>
               </div>

@@ -75,7 +75,7 @@ const Startup_awards = () => {
 
   const handleBack = () => {
     localStorage.setItem("myData", "award");
-    Navigate(0); // Hide the other section
+    Navigate(0);
   };
 
   const handleAddAward = () => {
