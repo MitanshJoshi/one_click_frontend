@@ -135,7 +135,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                 </div>
               </div>
               <div className="col-8">
-                <div className="tabs flex space-x-4 mb-4">
+                <div className="tabs flex space-x-4 mb-4 justify-between">
                   <button
                     onClick={() => setActiveTab("product")}
                     className={`tab py-2 px-4 ${
