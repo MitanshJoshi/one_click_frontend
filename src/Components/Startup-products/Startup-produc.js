@@ -252,6 +252,10 @@ const Startup_product = () => {
     }
   };
 
+  const handleViewReviews = (productId) => {
+    navigate(`/product-reviews/${productId}`);
+  };
+
   return (
     <>
       <section className="mt-5">
@@ -478,6 +482,9 @@ const Startup_product = () => {
                                   >
                                     <FontAwesomeIcon icon={faTrashAlt} />
                                   </a>
+                                  <div className="startup-product-add-button mr-[-190px] ml-[20px]">
+                                  <button className="p-[2px]" onClick={() => handleViewReviews(e._id)}>View Reviews</button>
+                                  </div>
                                   </div>
                                 </div>
                               </div>

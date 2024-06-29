@@ -3,6 +3,8 @@ import SecondNavbar from "../Navbar/Navbar";
 import { Container } from "react-bootstrap";
 import "./useiquirychat.css";
 import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faHeart, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../../context/SocketContext";
 import { useSharedState } from "../../context/SharedStateContext";
@@ -299,27 +301,27 @@ export default function Userinquirychat() {
                     style={{ marginLeft: "20px" }}
                   >
                     <h4 className="h4">Profile</h4>
-                    <p className="lead ">webearl</p>
+                    <p className="lead ">{item.item.startupDetails.startupName}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* detail  */}
-            <div>
+            <div className="mt-[20px]">
               <div
-                className="startup-profile "
+                className="startup-profile"
               >
                 <div>
                   <div className="startup-profile-heading">
-                    <div className="d-flex justify-content-between mb-md-5 mb-2">
+                    <div className="d-flex justify-content-between mb-md-5 mb-2 w-[100%]">
                       <div className="d-flex align-items-sm-center align-items-start">
                         <div>
                           <img src="/webearl.png" alt="" />
                         </div>
                         <div className="ms-sm-4 ms-2">
-                          <h4 className="mb-1">Webearl Technology Pvt Ltd</h4>
-                          <p className="mb-0">Cradle, EDII</p>
+                          <h4 className="mb-1">{item.item.startupDetails.startupName}</h4>
+                          <p className="mb-0">{item.item.startupDetails.address}</p>
                         </div>
                       </div>
                       <div className="ms-lg-0 ms-1">
@@ -332,81 +334,74 @@ export default function Userinquirychat() {
                         </div>
                       </div>
                     </div>
-                    <div className=" d-flex align-item-center gap-5 w-100 d-flex  ">
-                      <p className=" ms-md-3 ms-sm-2 ">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupDetails.city}
-                      </p>
+                    <div className=" d-flex align-item-center gap-2 w-100 d-flex">
+                      <div>
                       <p className=" ms-md-3 ms-sm-2">
                         <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
+                        <FontAwesomeIcon
+                                      icon={faLocationDot}
+                                      className=""
+                                      style={{
+                                        fontSize: "20px",
+                                        color: "#74CC7E",
+                                      }}
+                                    />
+                                    </span>
+                      </p>
+                      </div>
+                      <p className=" ms-md-3 ms-sm-2">
+                        {item.item.startupDetails.country}
+                      </p>
+                      <p className=" ms-md-3 ms-sm-2">
                         {item.item.startupDetails.state}
                       </p>
                       <p className=" ms-md-3 ms-sm-2">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
-                        {item.item.startupDetails.country}
+                      {item.item.startupDetails.city}
                       </p>
-                    </div>
-                    <div className="icone d-flex align-item center justify-content-start gap-5 mt-3">
                       <p className=" ms-md-3 ms-sm-2">
-                        <span>
-                          <img
-                            src="/map-pin.png"
-                            alt=""
-                            style={{ width: "30px", height: "30px" }}
-                          />
-                        </span>
+
                         {item.item.startupDetails.inqubationCenterCity}
                       </p>
-                      <p className=" ms-md-3 ms-sm-2">
-                        {/* <FontAwesomeIcon icon={faMapMarkerAlt} /> */}
-                        Centre for Advancing & Launching Enterprises (CrAdLE)
-                      </p>
                     </div>
-                    <div className="mt-5 d-flex align-item-center">
-                      <div>
+                    <div className="mt-5 d-flex align-item-center ">
+                      <div className="block text-gray-700 font-bold mb-2">
                         <h3>Inquiry Information :</h3>
                       </div>
-                      <div className="mt-2 ms-5">
-                        <h5>Title={item.item.title}</h5>
-                        <h5>Description={item.item.description}</h5>
-                        <h5>
-                          Best-Time To Connect={" "}
-                          {item.item.best_time_to_connect}
+                      <div className=" ms-5 w-[800px] flex justify-between">
+                        <div>
+                        <h5 className="block text-gray-700 font-bold mb-2">Title</h5>
+                          <h5 className="mt-2">{item.item.title}</h5>
+                        </div>
+                        <div>
+                        <h5 className="block text-gray-700 font-bold mb-2">Description</h5>
+                         <h5 className="mt-2 text-center"> {item.item.description}</h5>
+                         </div>
+                         <div>
+
+                        <h5 className="block text-gray-700 font-bold mb-2">
+                          Best-Time To Connect{" "}</h5>
+                         <h5 className="mt-2 text-center"> {item.item.best_time_to_connect}
                         </h5>
+                         </div>
                       </div>
                     </div>
                     <div className="mt-5 d-flex align-item-center">
-                      <div>
+                      <div className="block text-gray-700 font-bold mb-2">
                         <h3>Product Information :</h3>
                       </div>
-                      <div className="mt-2 ms-5 d-flex align-item-center">
+                      <div className="mt-2 ms-5 d-flex align-item-center justify-between w-[437px]">
                         <div>
+                          <h5 className="block text-gray-700 font-bold mb-2">Product image</h5>
                           <img
                             src="/shoe-list.png"
                             alt=""
+                            className="mt-2"
                             style={{ width: "70px", height: "30px" }}
                           />
                         </div>
                         <div>
-                          <h5>{item.item.productDetails.productName}</h5>
+                          <h5 className="block text-gray-700 font-bold mb-2">Product Name</h5>
+                          <h5 className="mt-2 text-center">{item.item.productDetails.productName}</h5>
                         </div>
                       </div>
                     </div>

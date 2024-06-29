@@ -12,6 +12,7 @@ import HomePage2 from "./Container/HomePage/HomePage2";
 import ShoesDetails from "./Container/HomePage/ShoesDetails";
 import addinvestment from "./Components/Startup_investments/addinvestment";
 import SupplierDetail from "./Container/HomePage/SupplierDetail";
+import ProductReviews from "./Components/Startup-products/ProductReviews";
 import AddGrant from "./Components/Startup_grant/addgrant";
 import Myprofile from "./Container/HomePage/Myprofile";
 import DisplayProfile from "./Components/DisplayProfile/DisplayProfile"
@@ -25,6 +26,7 @@ import Buying_Inquiry from "./Container/HomePage/Buying-Inquiry";
 import ChangePassword from "./Container/HomePage/ChangePassword";
 import Addprduct from "./Components/Startup-products/Addproduct";
 import MyFullInfo from "./Components/MyProfile/MyFullInfo";
+import Startup_review from "./Components/startup-review/Startup-review";
 import EducationBack from "./EducationBackground/educationBack";
 import Edit from "./Components/EditStartUp/Edit";
 // import Startup_product from "./Components/Startup-products/Startup-produc";
@@ -69,8 +71,10 @@ const App = () => {
           <Route path="/buying-inquiry" element={<Buying_Inquiry />} />
           <Route path="/display-profile" element={<DisplayProfile />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/addstartup/:id" element={<AddStartUp />} />
           <Route path="/startupprod" element={<Startup_product />} />
+          <Route path="/addstartup/:id" element={<AddStartUp />} />
+          <Route path="/startup-review/:_id" element={<Startup_review/>} />
+          <Route path="/product-reviews/:_id" element={<ProductReviews/>} />
           <Route path="/productEdit" element={<ProductEdit />} />
           <Route path="/partnerEdit" element={<PartnerEdit />} />
           <Route path="/addproduct" element={<Addprduct/>} />

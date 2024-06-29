@@ -1,0 +1,49 @@
+.hotel-riviews{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .hotel-review-box {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .personal-review {
+    border: 1px solid #b8b8b8;
+    border-radius: 15px;
+    padding: 20px 25px;
+  }
+  
+  .personal-review p{
+    font-size: 14px;
+  }
+  
+  .hotel-review-header p{
+    font-size: 12px;
+  }
+  
+  .hotel-review-header h5{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .hotel-review-specific{
+    position: relative;
+  }
+  
+  .hotel-review-edit{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+  }
+  
+  .insert-hotel-review button{
+    background-color: rgb(9, 100, 109);
+    color: white;
+    cursor: pointer;
+    border-radius: 7px;
+    border: none;
+    padding: 5px 20px;
+  }
