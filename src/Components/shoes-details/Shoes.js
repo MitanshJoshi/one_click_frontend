@@ -533,24 +533,35 @@ const Shoes = () => {
           {reviews && reviews?.map((review, index) => (
                     <div className="hotel-review-specific">
                       <div className="personal-review">
-                        <div className="d-flex justify-content-between">
+                      <div className="d-flex justify-content-between h-[60px] mb-[10px]">
                           <div className="d-flex hotel-review-header">
                             <div>
                               <img src="" alt="" />
-                            </div>
+                            </div >
+                            <div className="flex justify-center items-center gap-2">
+                            <img
+                              className="rounded-full w-[40px] h-[40px]"
+                              src={review.profilePicture}
+                              alt=""
+                            ></img>
                             <div>
                               <h5 className="mb-1">{review.name}</h5>
-                              <p className="mb-0">{review.createdAt?.slice(0, 10)}</p>
+                              <p className="mb-0">
+                                {new Date(review.createdAt).toLocaleDateString(
+                                  "en-GB"
+                                )}
+                              </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex mt-[10px]">
                     {[...Array(review.stars)].map((star, i) => (
                       <FontAwesomeIcon icon={faStar} className="text-[#FFD700]" key={i} />
                     ))}
                   </div>
                         </div>
-                        <hr />
-                        <div>
+                        <hr/>
+                        <div className="w-[90%] text-justify mt-[10px]">
                           <p>{review.detail}</p>
                         </div>
                       </div>

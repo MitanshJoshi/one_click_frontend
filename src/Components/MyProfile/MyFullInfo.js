@@ -6,6 +6,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import DisplayProfile from "../DisplayProfile/DisplayProfile";
 import SecondNavbar from "../Navbar/Navbar";
 import AddStartUp from "../AddStartUp/Addprduct";
+import Startup_review from "../startup-review/Startup-review";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -288,6 +289,19 @@ const MyFullInfo = () => {
                 </div>
               )}
             </div>
+            <div
+              className={`custom-tab ${activeTab === 4 ? "active" : ""}`}
+              onClick={() => handleTabClick(4)}
+            >
+              <h5 className="mb-0 tab-bold-css text-center">
+                My Reviews
+              </h5>
+              {activeTab === 4 && (
+                <div className="active-icon">
+                  <img src="./tab-photo.png" alt="" className="" />
+                </div>
+              )}
+            </div>
           </div>
           <div className="custom-tab-panel ">
             {activeTab === 0 && (
@@ -437,6 +451,11 @@ const MyFullInfo = () => {
             {activeTab === 3 && (
               <div>
                 <Userinquiry />
+              </div>
+            )}
+            {activeTab === 4 && (
+              <div>
+                <Startup_review />
               </div>
             )}
           </div>
