@@ -13,6 +13,7 @@ const Startup_review = () => {
   const [reviews, setReviews] = useState([]);
   const [editReviewId, setEditReviewId] = useState(null);
   const [editReviewDetail, setEditReviewDetail] = useState("");
+  const [editReviewStars, setEditReviewStars] = useState(0);
   const [deleteReviewId, setDeleteReviewId] = useState(null);
 
   const fetchReviews = async () => {
@@ -40,20 +41,32 @@ const Startup_review = () => {
   };
 
   const handleEdit = async (reviewId) => {
+    console.log("handleEdit invoked for reviewId:", reviewId);
+    console.log("Edit review detail:", editReviewDetail);
+    console.log("Edit review stars:", editReviewStars);
+
     try {
       const response = await fetch(
         `${BASE_URL}/api/review/edit?review_id=${reviewId}`,
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
           },
-          body: JSON.stringify({ detail: editReviewDetail }),
+          body: JSON.stringify({
+            detail: editReviewDetail,
+            stars: editReviewStars
+          }),
         }
       );
 
+      console.log("Response status:", response.status);
+      console.log("Response:", response);
+
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error data:", errorData);
         throw new Error("Edit request failed");
       }
 
@@ -64,6 +77,7 @@ const Startup_review = () => {
       setEditReviewId(null);
       fetchReviews();
     } catch (error) {
+      console.error("Error:", error);
       toast.error("Failed to edit review!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -138,104 +152,10 @@ const Startup_review = () => {
               <button>Low to High</button>
             </div>
           </div>
-          {/* {reviews.map((review) => (
-            <div className="mb-4" key={review._id}> 
-              <div className="startup-user-review-detail mx-[200px]">
-                <div className="flex justify-between mb-4">
-                  <div className="startup-user-review-detail-name flex items-center">
-                    <div>
-                      <img src="/review.png" alt="" />
-                    </div>
-                    <div className="ml-3">
-                      <h6 className="mb-0">Product Name: {review.productId?.productName}</h6>
-                      <p className="mb-0">{review.userId.name}</p>
-                    </div>
-                  </div>
-                  <div className="text-end startup-user-review-detail-time">
-                    <span>{review.stars}</span>
-                    <FontAwesomeIcon icon={faStar} className="ml-2 text-gold" />
-                    <p>{new Date(review.createdAt).toLocaleString()}</p>
-                  </div>
-                </div>
-                <div className="startup-user-review-description flex justify-between items-center">
-                  <p className="mb-0">{review.detail}</p>
-                  <div className="flex justify-end items-end mr-[-10px]">
-                    <button
-                      className="btnn"
-                      onClick={() => {
-                        setEditReviewId(review._id);
-                        setEditReviewDetail(review.detail);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btnn1"
-                      onClick={() => setDeleteReviewId(review._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {editReviewId === review._id && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                  <div className="bg-white rounded-lg shadow-lg p-6 w-96">
-                    <h4 className="text-lg font-semibold mb-4">Edit Review</h4>
-                    <textarea
-                      className="w-full h-32 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-                      value={editReviewDetail}
-                      onChange={(e) => setEditReviewDetail(e.target.value)}
-                    />
-                    <div className="flex justify-end">
-                      <button
-                        className="btnn"
-                        onClick={() => handleEdit(review._id)}
-                      >
-                        Submit
-                      </button>
-                      <button
-                        className="btnn1"
-                        onClick={() => setEditReviewId(null)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {deleteReviewId === review._id && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                  <div className="bg-white rounded-lg shadow-lg p-6 w-96">
-                    <h4 className="text-xl font-bold text-gray-800 mb-4">
-                      Confirm Delete
-                    </h4>
-                    <p className="text-gray-600 mb-4">
-                      Are you sure you want to delete this review?
-                    </p>
-                    <div className="flex justify-end space-x-2">
-                      <button
-                        className="btnn1"
-                        onClick={() => handleDelete(review._id)}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        className="btnn"
-                        onClick={() => setDeleteReviewId(null)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))} */}
           <div className=" grid grid-cols-2 gap-4 mx-[100px]">
             {reviews &&
-              reviews?.map((review, index) => (
-                <div className="hotel-review-specific ">
+              reviews.map((review, index) => (
+                <div className="hotel-review-specific" key={review._id}>
                   <div className="personal-review">
                     <div className="d-flex justify-content-between h-[60px] mb-[10px]">
                       <div className="d-flex hotel-review-header">
@@ -245,9 +165,14 @@ const Startup_review = () => {
                               className="rounded-full w-[40px] h-[40px]"
                               src={review.userId.profilePicture}
                               alt=""
-                            ></img>
+                            />
                             <div>
-                            <h6 className="mb-0"><span className="font-medium ">Product Name:</span> {review.productId?.productName}</h6>
+                              <h6 className="mb-0">
+                                <span className="font-medium">
+                                  Product Name:
+                                </span>{" "}
+                                {review.productId?.productName}
+                              </h6>
                               <h5 className="mb-1">{review.userId.name}</h5>
                               <p className="mb-0">
                                 {new Date(review.createdAt).toLocaleDateString(
@@ -277,12 +202,18 @@ const Startup_review = () => {
                         <button
                           className="mr-[10px] mb-[2px]"
                           onClick={() => {
+                            console.log(
+                              "Edit button clicked for reviewId:",
+                              review._id
+                            );
                             setEditReviewId(review._id);
                             setEditReviewDetail(review.detail);
+                            setEditReviewStars(review.stars); // Make sure to add this line if it was missing
                           }}
                         >
                           <FaEdit />
                         </button>
+
                         <button
                           className="mb-[2px]"
                           onClick={() => setDeleteReviewId(review._id)}
@@ -303,6 +234,23 @@ const Startup_review = () => {
                           value={editReviewDetail}
                           onChange={(e) => setEditReviewDetail(e.target.value)}
                         />
+                        <div className="mb-4">
+                          <label className="block mb-2">Stars</label>
+                          <div className="flex space-x-1">
+                            {[...Array(5)].map((_, index) => (
+                              <FontAwesomeIcon
+                                icon={faStar}
+                                className={`cursor-pointer ${
+                                  index < editReviewStars
+                                    ? "text-[#FFD700]"
+                                    : "text-gray-300"
+                                }`}
+                                key={index}
+                                onClick={() => setEditReviewStars(index + 1)}
+                              />
+                            ))}
+                          </div>
+                        </div>
                         <div className="flex justify-end">
                           <button
                             className="btnn"
@@ -330,19 +278,18 @@ const Startup_review = () => {
                           Are you sure you want to delete this review?
                         </p>
                         <div className="flex justify-end space-x-2">
-                        <button
+                          <button
                             className="btnn"
-                            onClick={() => setDeleteReviewId(null)}
+                            onClick={() => handleDelete(review._id)}
                           >
-                            No
+                            Delete
                           </button>
                           <button
                             className="btnn1"
-                            onClick={() => handleDelete(review._id)}
+                            onClick={() => setDeleteReviewId(null)}
                           >
-                            Yes
+                            Cancel
                           </button>
-                          
                         </div>
                       </div>
                     </div>

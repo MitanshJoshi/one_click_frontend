@@ -156,7 +156,7 @@ export default function AddPartner() {
   return (
     <>
       <SecondNavbar />
-      <StartUpProfile />
+      {/* <StartUpProfile /> */}
       <div>
         <ToastContainer />
         <div className="d-flex text-[30px] justify-content-between ml-[200px] pt-[30px]">

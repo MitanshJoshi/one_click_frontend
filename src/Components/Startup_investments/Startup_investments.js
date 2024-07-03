@@ -18,6 +18,7 @@ const Startup_investments = () => {
   const [listView, setListView] = useState(true);
   const [investments, setInvestments] = useState([]);
   const [editingInvestment, setEditingInvestment] = useState(null);
+  const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
 
   const navigate = useNavigate();
 
@@ -26,12 +27,13 @@ const Startup_investments = () => {
     }, []);
 
   const fetchInvestments = async () => {
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
     try {
       const response = await fetch(`${BASE_URL}/api/Investment/getInvestment/${_id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: token,
         },
       });
       console.log('id is:',_id);
@@ -154,9 +156,9 @@ const Startup_investments = () => {
                 <img src="" alt="" />
               </div>
               <div className="d-flex">
-                <div className="startup-product-add-button">
+                {!investorToken?<div className="startup-product-add-button">
                   <button onClick={handleAddInvestment}>+ Add Investment</button>
-                </div>
+                </div>:<></>}
               </div>
             </div>
 
@@ -185,11 +187,11 @@ const Startup_investments = () => {
                           <p>Other Details</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                    {investorToken?  <div className="pe-5">
                         <div>
                           <p>Actions</p>
                         </div>
-                      </div>
+                      </div>:<></>}
                     </div>
                     {investments.map((investment) => (
                       <div
@@ -216,7 +218,7 @@ const Startup_investments = () => {
                             {investment.other_details}
                           </h5>
                         </div>
-                        <div className="w-[95px]">
+                        {!investorToken?<div className="w-[95px]">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -230,7 +232,7 @@ const Startup_investments = () => {
                               setShowConfirmation(true);
                             }}
                           />
-                        </div>
+                        </div>:<></>}
                       </div>
                     ))}
                   </div>

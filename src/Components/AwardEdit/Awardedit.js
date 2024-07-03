@@ -19,6 +19,7 @@ const Awardedit = () => {
   const [wishList, setWishList] = useState(false);
   const [achievementYear, setachievementYear] = useState(); 
   const [matchedStartup, setmatchedStartup] = useState("");
+  const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"))
   console.log(matchedStartup); 
   // const [data, setdata] = useState(); 
   // console.log(name)
@@ -151,7 +152,9 @@ const { state } = useLocation();
 // //   const [certi, setCeti] = useState([]);
   const fetchData = async () => {
     // console.log(localStorage.getItem("tokenData"));
-
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
+    console.log('token',token);
+    
     try {
       const response = await fetch(
         `${BASE_URL}/api/startup/displaydetail?startupId=${startupId}`,
@@ -159,7 +162,7 @@ const { state } = useLocation();
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
+            Authorization: token,
           },
         }
       );

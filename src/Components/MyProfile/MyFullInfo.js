@@ -15,6 +15,9 @@ import { useParams } from "react-router-dom";
 import Userinquiry from "../User-inquiry/Userinquiry";
 import EducationBack from "../../EducationBackground/educationBack";
 import { BASE_URL } from "../../BASE_URL";
+import DisplayInvestor from "../DisplayProfile/DisplayInvestor";
+import InvestorPortfolio from "../../InvestorPortfolio/InvestorPortfolio";
+import StartupCards from "../../StartupsDisplay/StartupDisp";
 
 const MyFullInfo = () => {
   const navigate = useNavigate();
@@ -24,6 +27,9 @@ const MyFullInfo = () => {
   // console.log(startups)
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedStartupId, setSelectedStartupId] = useState(null);
+  const [investorToken, setinvestorToken] = useState(
+    localStorage.getItem("investorToken")
+  );
   const [img, setimg] = useState("");
 
   const fetchData = async () => {
@@ -141,11 +147,32 @@ const MyFullInfo = () => {
       // console.error("Error fetching data from the backend", error);
     }
   };
+  const display1 = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/Investor/getInvestorById`, {
+        method: "GET",
+        headers: {
+          // "Content-Type": "application/json",
+          Authorization: localStorage.getItem("investorToken"),
+        },
+      });
+      const Data = await response.json();
+      console.log("data", Data);
+
+      setname(Data.investor.InvestorName || "");
+      console.log("data is:", Data);
+
+      setimg(Data.investor.InvestorPhoto || "");
+      // console.log(Data.data)
+    } catch (error) {
+      // console.error("Error fetching data from the backend", error);
+    }
+  };
 
   useEffect(() => {
-    // setCountryData(Countries);
-
-    display();
+    {
+      !investorToken ? display() : display1();
+    }
   }, []);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -237,9 +264,8 @@ const MyFullInfo = () => {
             </div>
           </section>
         </div>
-
         <div className="custom-tabs-container mt-5">
-          <div className="custom-tabs flex justify-center">
+          <div className="custom-tabs flex justify-center ">
             <div
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}
@@ -248,65 +274,104 @@ const MyFullInfo = () => {
                 Basic Information
               </h5>
               {activeTab === 0 && (
-                <div className="active-icon">
+                <div
+                  className={`active-icon ${
+                    investorToken ? "ml-[90px]" : "ml-[0px]"
+                  }`}
+                >
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
               )}
             </div>
-            <div
-              className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
-              onClick={() => handleTabClick(1)}
-            >
-              <h5 className="mb-0 tab-bold-css text-center">
-                Education Background
-              </h5>
-              {activeTab === 1 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
-            </div>
+            {investorToken ? (
+              <></>
+            ) : (
+              <div
+                className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
+                onClick={() => handleTabClick(1)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">
+                  Education Background
+                </h5>
+                {activeTab === 1 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            )}
 
-            <div
-              className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
-              onClick={() => handleTabClick(2)}
-            >
-              <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
-              {activeTab === 2 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
-            </div>
-            <div
-              className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
-              onClick={() => handleTabClick(3)}
-            >
-              <h5 className="mb-0 tab-bold-css text-center">My inquiry</h5>
-              {activeTab === 3 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
-            </div>
-            <div
-              className={`custom-tab ${activeTab === 4 ? "active" : ""}`}
-              onClick={() => handleTabClick(4)}
-            >
-              <h5 className="mb-0 tab-bold-css text-center">
-                My Reviews
-              </h5>
-              {activeTab === 4 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
-            </div>
+{investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 5 ? "active" : ""}`}
+                onClick={() => handleTabClick(5)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">
+                  Investor Portfolio
+                </h5>
+                {activeTab === 5 && (
+                  <div className="active-icon ml-[90px]">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+
+            
+              <div
+                className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
+                onClick={() => handleTabClick(2)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
+                {activeTab === 2 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            
+            {!investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
+                onClick={() => handleTabClick(3)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">My inquiry</h5>
+                {activeTab === 3 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+            {!investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 4 ? "active" : ""}`}
+                onClick={() => handleTabClick(4)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">My Reviews</h5>
+                {activeTab === 4 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+           
           </div>
           <div className="custom-tab-panel ">
             {activeTab === 0 && (
               <div>
-                <DisplayProfile img={img} />
+                {!investorToken ? (
+                  <DisplayProfile img={img} />
+                ) : (
+                  <DisplayInvestor />
+                )}
               </div>
             )}
             {activeTab === 1 && (
@@ -322,7 +387,7 @@ const MyFullInfo = () => {
                   </>
                 ) : (
                   <>
-                    {startups && startups.length > 0 ? (
+                    {startups && startups.length > 0 && !investorToken ? (
                       <div>
                         <div className="row mt-5 mx-[100px]">
                           {startups &&
@@ -370,28 +435,53 @@ const MyFullInfo = () => {
                                         icon={faStar}
                                         style={{ color: "gold" }}
                                       />
-                                      <FontAwesomeIcon icon={faStar} />
-                                      <FontAwesomeIcon icon={faStar} />
+                                      <FontAwesomeIcon
+                                        icon={faStar}
+                                        style={{ color: "gray" }}
+                                      />
+                                      <FontAwesomeIcon
+                                        icon={faStar}
+                                        style={{ color: "gray" }}
+                                      />
                                     </div>
                                   </div>
+                                  <hr />
                                   <div className="d-flex mt-3">
                                     <div>
-                                      <FontAwesomeIcon icon={faLocationDot} />
-                                      <span style={{ marginLeft: "10px" }}>
+                                      <FontAwesomeIcon
+                                        icon={faLocationDot}
+                                        style={{ color: "#74CC7E" }}
+                                      />
+                                      <span
+                                        className="font-[500] text-[15px]"
+                                        style={{ marginLeft: "10px" }}
+                                      >
                                         {e.city},
                                       </span>
-                                      <span style={{ marginLeft: "10px" }}>
+                                      <span
+                                        className="font-[500] text-[15px]"
+                                        style={{ marginLeft: "10px" }}
+                                      >
                                         {e.state},
                                       </span>
-                                      <span style={{ marginLeft: "10px" }}>
+                                      <span
+                                        className="font-[500] text-[15px]"
+                                        style={{ marginLeft: "10px" }}
+                                      >
                                         {e.country}
                                       </span>
                                     </div>
                                   </div>
                                   <div className="d-flex justify-content-between mt-3">
-                                    <div>
-                                      <FontAwesomeIcon icon={faLocationDot} />
-                                      <span style={{ marginLeft: "10px" }}>
+                                    <div className="w-[400px]">
+                                      <FontAwesomeIcon
+                                        icon={faLocationDot}
+                                        style={{ color: "#74CC7E" }}
+                                      />
+                                      <span
+                                        className="font-[500] text-[15px]"
+                                        style={{ marginLeft: "10px" }}
+                                      >
                                         {e.address}
                                       </span>
                                     </div>
@@ -407,24 +497,28 @@ const MyFullInfo = () => {
                                   </div>
                                   <div className="flex justify-between items-center mt-2">
                                     <div className="add-start-up-button mt-sm-5 mt-0 flex justify-center items-center">
-                                      <button onClick={()=>handleNavigate(e._id)} className="">VIEW</button>
+                                      <button
+                                        onClick={() => handleNavigate(e._id)}
+                                        className=""
+                                      >
+                                        VIEW
+                                      </button>
                                     </div>
                                     <div>
-                                    
-                                    <button className="edit-icon me-3">
-                                      <img
-                                        src="./edit.png"
-                                        alt=""
-                                        onClick={() => handleEdit(e._id)}
-                                      />
-                                    </button>
-                                    <button className="delete-icon">
-                                      <img
-                                        src="./delete.svg"
-                                        alt=""
-                                        onClick={() => handleDelete(e._id)}
-                                      />
-                                    </button>
+                                      <button className="edit-icon me-3">
+                                        <img
+                                          src="./edit.png"
+                                          alt=""
+                                          onClick={() => handleEdit(e._id)}
+                                        />
+                                      </button>
+                                      <button className="delete-icon">
+                                        <img
+                                          src="./delete.svg"
+                                          alt=""
+                                          onClick={() => handleDelete(e._id)}
+                                        />
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -432,7 +526,7 @@ const MyFullInfo = () => {
                             ))}
                         </div>
                       </div>
-                    ) : (
+                    ) : investorToken?<StartupCards/> : (
                       <div
                         className="m-auto"
                         style={{
@@ -456,6 +550,11 @@ const MyFullInfo = () => {
             {activeTab === 4 && (
               <div>
                 <Startup_review />
+              </div>
+            )}
+            {activeTab === 5 && (
+              <div>
+                <InvestorPortfolio />
               </div>
             )}
           </div>

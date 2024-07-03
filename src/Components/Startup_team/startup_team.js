@@ -16,7 +16,7 @@ const Startup_team = () => {
   const [editingPartner, setEditingPartner] = useState(null);
   const [partnerDetails, setPartnerDetails] = useState(null);
   const [activeView, setActiveView] = useState('list'); 
-
+ const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"))
   const navigate = useNavigate();
   const { _id } = useParams();
 
@@ -38,12 +38,13 @@ const inactiveStyle = {
   }, []);
 
   const fetchData = async () => {
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
     try {
       const response = await fetch(`${BASE_URL}/api/Partner/getPartner/${_id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: token,
         },
       });
 
@@ -161,9 +162,9 @@ const inactiveStyle = {
                 <h6>All Partners</h6>
               </div>
               <div className="d-flex">
-                <div className="startup-product-add-button">
+               {!investorToken? <div className="startup-product-add-button">
                   <button onClick={handleAddPartner}>+ Add Partner</button>
-                </div>
+                </div>:<></>}
                 <div className="ms-4">
                   <FontAwesomeIcon
                     icon={faList}
@@ -203,9 +204,9 @@ const inactiveStyle = {
                     <div className="pe-5">
                       <p>Date of Birth</p>
                     </div>
-                    <div className="pe-5">
+                    {!investorToken?<div className="pe-5">
                       <p>Actions</p>
-                    </div>
+                    </div>:<></>}
                   </div>
                   {partners.map((partner) => (
                     <div key={partner._id} className="product-list-view product-list-view-content d-flex align-item-center">
@@ -251,7 +252,7 @@ const inactiveStyle = {
                           </h5>
                         </div>
                       </div>
-                      <div className="w-[95px]">
+                      {!investorToken?<div className="w-[95px]">
                         <div className="d-flex align-items-center h-100">
                           <FontAwesomeIcon
                             icon={faEdit}
@@ -267,7 +268,7 @@ const inactiveStyle = {
                             }}
                           />
                         </div>
-                      </div>
+                      </div>:<></>}
                     </div>
                   ))}
                 </div>

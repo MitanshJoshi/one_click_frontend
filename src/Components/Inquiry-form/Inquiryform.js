@@ -11,6 +11,7 @@ const Inquiryform = () => {
   const location = useLocation();
   const productId = location.state && location.state.productId;
   const startupId = location.state && location.state.startupId;
+  const investorToken=localStorage.getItem("investorToken");
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -22,18 +23,21 @@ const Inquiryform = () => {
       return;
     }
 
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
+    const endpoint = investorToken ? "/api/investorInquiry/addInquiry" : "/api/inquiry/insert";
+
     try {
-      const response = await fetch(`${BASE_URL}/api/inquiry/insert`, {
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: token,
         },
         body: JSON.stringify({
           title,
           description,
           best_time_to_connect,
-          productId,
+          productId: investorToken ? "" : "productId",
           startupId,
         }),
       });

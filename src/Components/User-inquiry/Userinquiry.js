@@ -66,17 +66,17 @@ const Userinquiry = () => {
 
       {inquiry.map((item) => (
         <div key={item._id} className="product-list-view" style={{ height: "auto", marginBottom: "20px", marginTop: "10px" }}>
-          <div className="product-info">
+          <div className="product-info flex justify-center items-center">
             <img src="/shoe.png" alt="Product" style={{ width: "25%", maxWidth: "150px" }} />
           </div>
           <div className="product-info">
-            <p>{item?.productDetails?.productName}</p>
+            <h5>{item?.productDetails?.productName}</h5>
           </div>
           <div className="product-info">
-            <p>{item?.startupDetails?.startupName}</p>
+            <h5>{item?.startupDetails?.startupName}</h5>
           </div>
           <div className="product-info">
-            <p>{item.createdAt.slice(0, 10)}</p>
+            <h5>{item.createdAt.slice(0, 10)}</h5>
           </div>
           <div className="product-info">
             <button className="btn btn-success" onClick={() => handlenavigate(item)}>View</button>

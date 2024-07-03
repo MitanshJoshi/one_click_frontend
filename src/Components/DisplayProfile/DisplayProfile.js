@@ -12,6 +12,7 @@ const DisplayProfile = ({ img }) => {
   // Initial states
   const [countryData, setCountryData] = useState([]);
   const [selectedState, setSelectedState] = useState({});
+  
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [name, setUsername] = useState("");
@@ -755,136 +756,6 @@ const DisplayProfile = ({ img }) => {
             </div>
           </div>
 
-          {/* <div>
-            <div className="display-profile-education">
-              <h4>Education Background</h4>
-
-              <div className="mb-4 mt-4">
-                <label className="mb-2" htmlFor="">
-                  Last Education
-                </label>
-                <select
-                  className="form-control py-2 "
-                  id="city"
-                  style={{ color: "#000", fontWeight: "600" }}
-                  value={highestEducation}
-                  onChange={(e) => setHighestEducation(e.target.value)}
-                >
-                  <option value="high-school">High School</option>
-                  <option value="associate">Associate Degree</option>
-                  <option value="bachelor">Bachelor's Degree</option>
-                  <option value="master">Master's Degree</option>
-                  <option value="doctorate">Doctorate</option>
-                  <option value="other">Other</option>
-                </select>
-                <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="position-absolute right-[885px] bottom-[-622px] translate-middle-y pe-3 iconn"
-                        />
-              </div>
-              <div className="mb-4">
-                <label className="mb-2" htmlFor="">
-                  Passing Year
-                </label>
-                <input
-                  className="form-control py-2 "
-                  id="city"
-                  style={{ color: "#000", fontWeight: "600" }}
-                  type="number"
-                  value={passingYear}
-                  onChange={(e) => setPassingYear(e.target.value)}
-                >
-                </input>
-              </div>
-              <div className="mb-4">
-                <label className="mb-2" htmlFor="">
-                  School / Collage Name
-                </label>
-                <input
-                  className="form-control py-2 "
-                  id="city"
-                  style={{ color: "#000", fontWeight: "600" }}
-                  type="text"
-                  value={collegeName}
-                  onChange={(e) => setCollegeName(e.target.value)}
-                >
-                </input>
-              </div>
-              </div>
-            <div className="d-flex justify-content-end mb-sm-5 mb-3">
-              <div className="profile-edit-buttons">
-                <button className="ms-3" type="submit" onClick={handleEducationSubmit}>Save</button>
-              </div>
-            </div>
-          </div> */}
-          {/* <div>
-            <div className="display-profile-education">
-              <div className="">
-                <h4>Career Experience</h4>
-              </div>
-              <div className="mb-4 mt-4">
-                <label className="mb-2" htmlFor="">
-                  Company Name
-                </label>
-                <select
-                  className="form-control py-2 "
-                  id="city"
-                  style={{ color: "#000", fontWeight: "600" }}
-                >
-                  <option value="Select">Ahmedabad</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="mb-2" htmlFor="">
-                  Designation
-                </label>
-                <select
-                  className="form-control py-2 "
-                  id="city"
-                  style={{ color: "#000", fontWeight: "600" }}
-                >
-                  <option value="Select">Ahmedabad</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="mb-2" htmlFor="">
-                  Joining Date
-                </label>
-
-                <div
-                  className="d-flex align-items-center"
-                  style={{ gap: "20px" }}
-                >
-                  <input
-                    type="date"
-                    name=""
-                    id=""
-                    className="form-control py-2 "
-                  />
-                  <span>to</span>
-                  <input
-                    type="date"
-                    name=""
-                    id=""
-                    className="form-control py-2 "
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="d-flex justify-content-end mb-sm-5 mb-3">
-              <div className="profile-edit-buttons">
-                <button className="ms-3">Save</button>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

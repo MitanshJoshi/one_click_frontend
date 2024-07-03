@@ -16,7 +16,7 @@ const Startup_grant = () => {
   const [listView, setListView] = useState(true);
   const [grants, setGrants] = useState([]);
   const [editingGrant, setEditingGrant] = useState(null);
-
+  const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -24,12 +24,13 @@ const Startup_grant = () => {
   }, []);
 
   const fetchGrants = async () => {
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
     try {
       const response = await fetch(`${BASE_URL}/api/Grant/getGrant/${_id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: token,
         },
       });
 
@@ -137,7 +138,7 @@ const handleEdit = (grant) => {
   return (
     <>
       <section className="mt-5">
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <div className="startup-products">
           <div>
             <div
@@ -149,9 +150,9 @@ const handleEdit = (grant) => {
                 <img src="" alt="" />
               </div>
               <div className="d-flex">
-                <div className="startup-product-add-button">
+               {!investorToken? <div className="startup-product-add-button">
                   <button onClick={handleAddGrant}>+ Add Grant</button>
-                </div>
+                </div>:<></>}
               </div>
             </div>
 
@@ -180,11 +181,11 @@ const handleEdit = (grant) => {
                           <p>Grant From</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      {!investorToken?<div className="pe-5">
                         <div>
                           <p>Actions</p>
                         </div>
-                      </div>
+                      </div>:<></>}
                     </div>
                     {grants.map((grant) => (
                       <div
@@ -211,7 +212,7 @@ const handleEdit = (grant) => {
                             {grant.grant_from}
                           </h5>
                         </div>
-                        <div className="w-[95px]">
+                       {!investorToken? <div className="w-[95px]">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -225,7 +226,7 @@ const handleEdit = (grant) => {
                               setShowConfirmation(true);
                             }}
                           />
-                        </div>
+                        </div>:<></>}
                       </div>
                     ))}
                   </div>

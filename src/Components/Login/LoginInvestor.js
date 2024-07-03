@@ -1,30 +1,26 @@
 import React, { useState } from "react";
-import "./LoginPage.css";
+import "./LoginPage.css"; // Assuming styles are defined here
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
-import { BASE_URL } from "../../BASE_URL";
 
-const LoginPage = () => {
-  const { setAuthUser }=useAuthContext();
+const LoginInvestor = () => {
   const [email, setEmail] = useState("");
-  // console.log(email.trim());
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/registration");
   };
-  
+
   const handleForgotPassword = () => {
     // Handle forgot password logic here
-    navigate("/forgot-password")
+    navigate("/investorforgot");
   };
+
   const validateEmail = (email) => {
     // Regular expression for email validation
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,104 +28,79 @@ const LoginPage = () => {
   };
 
   const handleLogin = async () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      toast.error('Email is required', {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }  if (!validateEmail(email)) {
-      toast.error('Please enter a valid email address', {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    } 
-  
-  if(!password){
-    toast.error("Password is required", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 1000,
-  });return}
-
-  if(password.length < 6){
-    toast.error("Password must  be at least 6 characters long.", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: 1000,
-  });return}
-  
-   
-
-    if (!emailRegex.test(email)) {
-      toast.error("Invalid Email Address!", {
+      toast.error("Email is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
       return;
     }
-   
-
-    try {
-      const response = await fetch(`https://oneclick-sfu6.onrender.com/api/user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+  
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
       });
-
+      return;
+    }
+  
+    if (!password) {
+      toast.error("Password is required", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+  
+    try {
+      const response = await fetch(
+        "https://oneclick-sfu6.onrender.com/api/Investor/loginInvestor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            InvestorEmail: email,
+            Password: password,
+          }),
+        }
+      );
+      const responseData = await response.json();
+      console.log("Login response:", responseData);
+  
       if (!response.ok) {
         throw new Error("Login failed");
-      }
+      } // Check the response in console
+  
+      // Store token in localStorage
+      localStorage.setItem("investorToken", responseData.InvestorToken);
+      localStorage.setItem("userid", responseData.Investor._id);
+  
       toast.success("Login Successful!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
+  
       setTimeout(() => {
         navigate("/");
-    }, 2000);
-      const responseData = await response.json();
-      localStorage.setItem("token", responseData.data.token);
-      localStorage.setItem("userid", responseData.data.id);
-      setAuthUser(responseData.data.id); 
-      console.log(responseData);
+      }, 2000);
     } catch (error) {
-      if (error) {
-        toast.error("Invalid email or password!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 1000,
-        });
-      }
+      console.error("Login error:", error);
+      toast.error("Invalid email or password!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
     }
-  };
- 
-  const handleKeyDown = (e) => {
-    // Allow: backspace, delete, tab, escape, enter
-    if (
-      [46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
-      // Allow: Ctrl+A/Ctrl+C/Ctrl+V
-      (e.keyCode === 65 && e.ctrlKey === true) ||
-      (e.keyCode === 67 && e.ctrlKey === true) ||
-      (e.keyCode === 86 && e.ctrlKey === true) ||
-      // Allow: home, end, left, right
-      (e.keyCode >= 35 && e.keyCode <= 39)
-    ) {
-      // Let it happen, don't do anything
-      return;
-    }
-    // Ensure that it is a number and stop the keypress
-    if (
-      (e.shiftKey || e.keyCode < 48 || e.keyCode > 57) &&
-      (e.keyCode < 96 || e.keyCode > 105)
-    ) {
-      e.preventDefault();
-    }
-  };
-
-  const handleinvlogin=()=>{
-    navigate("/logininvestor")
-  }
+  };  
 
   return (
     <div className="container form-start">
@@ -137,17 +108,19 @@ const LoginPage = () => {
 
       <div className="login">
         <div className="login-wrapper">
-          <div className="row w-75 h-100 gx-0 ">
-            <div className="col-6 h-100 login11" 
-            >
+          <div className="row w-75 h-100 gx-0">
+            {/* Left Side */}
+            <div className="col-6 h-100 login11">
               <div className="login-form h-100">
                 <div className="login-header">
                   <div className="logo">
+                    {/* Assuming logo */}
                     <img
                       src="./NavLogo.png"
                       alt="login logo"
                       className="LoginLogo"
                     />
+                    {/* SVG path */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="66"
@@ -161,45 +134,39 @@ const LoginPage = () => {
                       />
                     </svg>
                   </div>
+                  {/* Sign up button */}
                   <div>
                     <div className=" SignUP-Btn" onClick={handleNavigate}>
                       Sign up
                     </div>
                   </div>
                 </div>
-
+                {/* Form section */}
                 <div className="mb-3">
                   <div className="text-center FormHead pt-5">
-                    <h1 className="">Hey, John</h1>
+                    <h1 className="">Hey, Investor</h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor
+                      Welcome back! Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
                     </p>
                   </div>
                 </div>
                 <div>
                   <form className="row g-3">
-                    <div className="col-12 ">
+                    {/* Email input */}
+                    <div className="col-12">
                       <input
                         type="email"
                         className="form-control"
                         id="inputEmail"
                         placeholder="Email"
-                        value={email.trim()}
-                        onChange={(e) => setEmail(e.target.value.trim())}
-                        onInput={(e) => {
-                          let value = e.target.value.replace(/[^0-9 a-z @_. ]/g, ''); // Remove non-numeric characters
-                          // Check if the first digit is zero
-                          if (value.length > 0 && value[0] === ' ') {
-                            // If the first digit is zero, remove it
-                            value = value.slice(1);
-                          }
-                          // Set the updated value
-                          e.target.value = value;
-                        }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                       />
                     </div>
+                    {/* Password input */}
                     <div className="col-12">
                       <div className="input-group">
                         <input
@@ -207,10 +174,11 @@ const LoginPage = () => {
                           className="form-control"
                           id="inputPassword"
                           placeholder="Password"
-                          value={password.trim()}
-                          onChange={(e) => setPassword(e.target.value.trim())}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                           required
                         />
+                        {/* Toggle password visibility */}
                         <button
                           className="btn btn-outline-secondary"
                           type="button"
@@ -222,7 +190,7 @@ const LoginPage = () => {
                         </button>
                       </div>
                     </div>
-
+                    {/* Remember me and Forgot password */}
                     <div className="col-12 d-flex justify-content-between align-items-center">
                       <div className="form-check">
                         <input
@@ -241,6 +209,7 @@ const LoginPage = () => {
                         Forgot Password?
                       </div>
                     </div>
+                    {/* Login button */}
                     <div className="col-12 d-flex justify-content-center align-items-center">
                       <button
                         type="button"
@@ -250,23 +219,24 @@ const LoginPage = () => {
                         Login
                       </button>
                     </div>
-                    <div>
-                      <button onClick={handleinvlogin} className="text-[13px]">Login as Investor</button>
-                    </div>
                   </form>
                 </div>
               </div>
             </div>
+            {/* Right Side */}
             <div className="col-6">
               <div className="login-image-section h-100">
+                {/* Placeholder for background image */}
                 <img
                   src="./login-background.jpg"
                   className="login-background-image"
+                  alt="Background"
                 />
                 <div className="image-content">
+                  {/* Placeholder content */}
                   <div className="login-image-content">
                     <div>
-                      <img src="./login-side.png" />
+                      <img src="./login-side.png" alt="Side Image" />
                     </div>
                     <div>
                       <h4>
@@ -274,13 +244,43 @@ const LoginPage = () => {
                         cities"
                       </h4>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0px' }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="91" height="15" viewBox="0 0 91 25" fill="none">
-                        <circle opacity="0.5" cx="9.87597" cy="12.0496" r="9.87597" fill="#59E659" />
-                        <circle cx="45.5002" cy="12.4023" r="12.345" fill="#59E659" />
-                        <circle opacity="0.5" cx="81.124" cy="12.0496" r="9.87597" fill="#59E659" />
-                    </svg>
-                </div>
+                    {/* Example SVG */}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        margin: "10px 0px",
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="91"
+                        height="15"
+                        viewBox="0 0 91 25"
+                        fill="none"
+                      >
+                        <circle
+                          opacity="0.5"
+                          cx="9.87597"
+                          cy="12.0496"
+                          r="9.87597"
+                          fill="#59E659"
+                        />
+                        <circle
+                          cx="45.5002"
+                          cy="12.4023"
+                          r="12.345"
+                          fill="#59E659"
+                        />
+                        <circle
+                          opacity="0.5"
+                          cx="81.124"
+                          cy="12.0496"
+                          r="9.87597"
+                          fill="#59E659"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -292,4 +292,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginInvestor;

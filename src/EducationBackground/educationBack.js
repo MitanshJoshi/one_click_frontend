@@ -108,18 +108,22 @@ const EducationBack = () => {
 
   return (
     <div className="max-w-2xl mx-[100px] p-3 mt-5">
-        <h1 className="text-lg text-[20px] font-bold mb-4">Education Background</h1>
+        {/* <h1 className="text-lg text-[20px] font-bold mb-4">Education Background</h1> */}
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="highestEducation">
+        <div className="mb-4 flex w-[100%]">
+          <div className="col-lg-2 col-3 mr-[50px] w-[200px]">
+          <label className="LabelDesign2"
+                        style={{ color: "#000", fontWeight: "600" }} htmlFor="highestEducation">
             
             Highest Education
           </label>
-          <div className="relative">
+          </div>
+          <div className="relative col-lg-9 col-8">
             <select
-              className="form-select block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="w-full h-[43px] form-select block  py-2 px-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               id="highestEducation"
               value={educationData.highest_Education}
+              style={{ color: "#000", fontWeight: "600" }}
               onChange={(e) =>
                 setEducationData({
                   ...educationData,
@@ -136,12 +140,16 @@ const EducationBack = () => {
             </select>
           </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="passingYear">
+        <div className="mb-4 flex w-[100%]">
+          <div className="col-lg-2 col-3 mr-[143px]">
+          <label className=" LabelDesign2 w-[200px]"
+                        style={{ color: "#000", fontWeight: "600" }} htmlFor="passingYear">
             Passing Year
           </label>
+          </div>
+          <div className="relative col-lg-9 col-8">
           <input
-            className="form-input block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="form-input h-[43px] block w-full py-2 px-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             id="passingYear"
             type="number"
             value={educationData.passing_year}
@@ -160,13 +168,18 @@ const EducationBack = () => {
               }
             }}
           />
+          </div>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="collegeName">
+        <div className="mb-4 flex w-[100%]">
+          <div className="col-lg-2 col-3 mr-[143px]">
+          <label className="LabelDesign2 w-[200px] "
+                        style={{ color: "#000", fontWeight: "600" }} htmlFor="collegeName">
             School / College / University Name
           </label>
+          </div>
+          <div className="col-lg-9 col-8">
           <input
-            className="form-input block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="form-input h-[43px] block w-full py-2 px-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             id="collegeName"
             type="text"
             value={educationData.college_university_name}
@@ -177,6 +190,7 @@ const EducationBack = () => {
               })
             }
           />
+          </div>
         </div>
          <div className="profile-edit-buttons flex justify-end" style={{marginRight:"0px"}}>
           <button className="ms-3" type="submit" onClick={handleEducationSubmit}>

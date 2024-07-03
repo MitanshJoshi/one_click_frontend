@@ -50,19 +50,23 @@ const SidebarFreeAdd = () => {
         <ToastContainer />
         <div className="row ">
           <div className="col-md-12 sidebarscroll">
+            
             <div className="sidebar px-4 ">
-            {searchTerm === '' && <FaSearch className="search-icon" />}
-              <input
-                type="search"
-                id="site-search"
-                name="q"
-                className="searchType px-3"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-
-              <div className="scrollable-content" style={{ maxHeight: "1294px", overflowY: "auto" }}>
+            <div className="relative mb-3 w-full max-w-md mx-auto">
+      {searchTerm === '' && (
+        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" style={{top:"70%",left:"4.5%"}} />
+      )}
+      <input
+        type="search"
+        id="site-search"
+        name="q"
+        className="w-full mt-[30px] pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+    </div>
+              <div className="custom-scrollbar" style={{ maxHeight: "1294px", overflowY: "auto" }}>
                 {filteredNames.map((e, index) => (
                   <div className="Elements mb-4 mt-3" key={index}>
                     <img
@@ -70,7 +74,7 @@ const SidebarFreeAdd = () => {
                       alt="agriculture"
                       className="image"
                     />
-                    <p style={{ marginLeft: "20px" }}>{e.name}</p>
+                    <p className="ml-[20px] font-bold">{e.name}</p>
                   </div>
                 ))}
               </div>

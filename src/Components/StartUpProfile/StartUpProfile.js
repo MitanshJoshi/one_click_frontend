@@ -12,9 +12,11 @@ const StartUpProfile = ({ onBackButtonClick }) => {
     const navigate = useNavigate();
     const { _id } = useParams();
     const [startupData, setStartupData] = useState(null);
+    const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
 
     useEffect(() => {
         const fetchStartupData = async () => {
+            const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
             try {
                 const response = await fetch(
                     `${BASE_URL}/api/startup/displaydetail?startupId=${_id}`,
@@ -22,7 +24,7 @@ const StartUpProfile = ({ onBackButtonClick }) => {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            Authorization: localStorage.getItem("token"),
+                            Authorization: token,
                         },
                     }
                 );

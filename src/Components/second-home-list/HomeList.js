@@ -53,7 +53,7 @@ const HomeList = ({ handlesubcategory }) => {
             <div className="second-home-sidebar px-4">
               <div className="d-flex justify-content-between align-items-center pt-4 mb-4 second-home-categories">
                 <div>
-                  <h5 className="mb-0">Related categories</h5>
+                  <h5 className="mb-0 font-bold text-[17px]">Related categories</h5>
                 </div>
                 <div>
                   <select name="" id="">
@@ -63,33 +63,31 @@ const HomeList = ({ handlesubcategory }) => {
                 </div>
               </div>
 
-              <div className="mb-5 second-home-searchType">
-              {searchTerm === '' && <FaSearch className="search-ic" />}
-                <input
-                  type="search"
-                  id="site-search"
-                  name="q"
-                  className="px-3"
-                  placeholder="search"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
+<div className="relative mb-5 w-full max-w-md mx-auto">
+      {searchTerm === '' && (
+        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" style={{top:"50%",left:"4.5%"}} />
+      )}
+      <input
+        type="search"
+        id="site-search"
+        name="q"
+        className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+    </div>
 
-              <div className="home-list-scroll">
+              <div className="custom-scrollbar" style={{ maxHeight: "1294px", overflowY: "auto" }}>
                 {filteredNames.map((e, index) => (
-                  <div className="Elements mb-4 mt-3" key={index} >
+                  <div className="Elements mb-4 mt-3" key={index}>
                     <img
                       src="./Side1.png"
                       alt="agriculture"
                       className="image"
                     />
-                    <p
-                      style={{ marginLeft: "20px", cursor:"pointer" }}
-                      onClick={() => handlesubcategory(e._id)}
-                    >
-                      {e.name}
-                    </p>
+                    <p className="ml-[20px] font-bold text-[30px] cursor-pointer" onClick={() => handlesubcategory(e._id)}>{e.name}</p>
+                    
                   </div>
                 ))}
               </div>

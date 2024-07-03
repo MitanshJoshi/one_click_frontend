@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import SecondNavbar from "../Navbar/Navbar";
 import { BASE_URL } from "../../BASE_URL";
 
-const ChangePasswordPage = () => {
+const InvestorChange = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -50,10 +50,10 @@ const ChangePasswordPage = () => {
       });
       return;
     }
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("investorToken");
 
     try {
-      const response = await fetch(`${BASE_URL}/api/user/change-password`, {
+      const response = await fetch(`${BASE_URL}/api/Investor/changePassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,11 +61,11 @@ const ChangePasswordPage = () => {
           Authorization: token,
         },
         body: JSON.stringify({
-          oldpassword: oldPassword,
-          newpassword: newPassword,
+            currentPassword: oldPassword,
+            newPassword: newPassword,
         }),
       });
-
+      
       if (!response.ok) {
         throw new Error("changepassword is failed");
       }
@@ -80,12 +80,6 @@ const ChangePasswordPage = () => {
       localStorage.setItem("token", responseData.data.token);
       console.log(responseData);
     } catch (error) {
-      if (error) {
-        toast.error("Old Password went wrong!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-          autoClose: 1000,
-        });
-      }
     }
   };
   const handlenavigate=()=>{
@@ -226,11 +220,6 @@ const ChangePasswordPage = () => {
                             Change Password
                           </button>
                         </div>
-                        <div>
-                          <button className="text-[13px] text-[#47d758] underline" onClick={handlenavigate}>
-                            Change Password For Investor
-                          </button>
-                        </div>
                       </form>
                     </div>
                   </div>
@@ -274,4 +263,4 @@ const ChangePasswordPage = () => {
   );
 };
 
-export default ChangePasswordPage;
+export default InvestorChange;

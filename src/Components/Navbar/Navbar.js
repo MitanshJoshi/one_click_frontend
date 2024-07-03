@@ -18,9 +18,14 @@ function SecondNavbar() {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    const storedToken1 = localStorage.getItem("investorToken");
     if (storedToken) {
       setToken(storedToken);
     }
+    else if(storedToken1)
+      {
+        setToken(storedToken1);
+      }
   }, []);
 
   useEffect(() => {
@@ -40,6 +45,27 @@ function SecondNavbar() {
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData1 = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/Investor/getInvestorById`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("investorToken"),
+          },
+        });
+        const data = await response.json();
+        console.log('investordata',data);
+        
+        setName(data.investor.InvestorName || "");
+      } catch (error) {
+        console.error("Error fetching data from the backend", error);
+      }
+    };
+    fetchData1();
   }, []);
   
 
@@ -62,6 +88,8 @@ function SecondNavbar() {
 
   const handleConfirmLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("investorToken");
+    localStorage.removeItem("userid");
     setToken(null);
     setShowLogoutConfirmation(false);
     navigate("/login");

@@ -23,6 +23,7 @@ const Startup_awards = () => {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [awarddelete, setawarddelete] = useState(false);
+  const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
   const handleCancelDelete = () => {
     setShowConfirmation(false);
   };
@@ -195,6 +196,9 @@ const Startup_awards = () => {
   const [certi, setCeti] = useState([]);
   const fetchData = async () => {
     // console.log(localStorage.getItem("tokenData"));
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
+    console.log('token',token);
+    
 
     try {
       const response = await fetch(
@@ -203,7 +207,7 @@ const Startup_awards = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
+            Authorization: token,
           },
         }
       );
@@ -894,7 +898,7 @@ const Startup_awards = () => {
                   <h6 className="mb-0">Awards</h6>
                 </div>
                 <div className="startup-awards-buttons">
-                  <button onClick={handleAddAward}>+ Add Awards</button>
+                 {!investorToken? <button onClick={handleAddAward}>+ Add Awards</button>:<></>}
                   <button className="ms-4 eebtn" onClick={handleSeeListClick}>
                     Achievement List
                   </button>
@@ -910,7 +914,7 @@ const Startup_awards = () => {
                             <div className="awards-relative">
                               <img src="/awards.png" alt="" className="w-100" />
 
-                              <div className="award-absolute">
+                              {!investorToken?<div className="award-absolute">
                                 <div className="edit-delete-hover-icon">
                                   <div className="edit-icon-1 me-3">
                                     <img
@@ -928,7 +932,7 @@ const Startup_awards = () => {
                                     />
                                   </div>
                                 </div>
-                              </div>
+                              </div>:<></>}
                             </div>
                             <h6 className="mt-2 ms-1">{e.achievementName}</h6>
                           </div>
@@ -952,9 +956,9 @@ const Startup_awards = () => {
                   <h6 className="mb-0">Certificate</h6>
                 </div>
                 <div className="startup-awards-buttons">
-                  <button onClick={() => handleCertificate("certi")}>
+                  {!investorToken?<button onClick={() => handleCertificate("certi")}>
                     + Add Certificate
-                  </button>
+                  </button>:<></>}
                   <button className="ms-4 eebtn" onClick={handleCertiList}>
                     Certificate List
                   </button>
@@ -972,7 +976,7 @@ const Startup_awards = () => {
                             <div className="awards-relative">
                               <img src="/awards.png" alt="" className="w-100" />
 
-                              <div className="award-absolute">
+                             {!investorToken? <div className="award-absolute">
                                 <div className="edit-delete-hover-icon">
                                   <div className="edit-icon-1 me-3">
                                     <img
@@ -990,7 +994,7 @@ const Startup_awards = () => {
                                     />
                                   </div>
                                 </div>
-                              </div>
+                              </div>:<></>}
                             </div>
                             <h6 className="mt-2 ms-1">{e.certificateName}</h6>
                           </div>

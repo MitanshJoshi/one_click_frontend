@@ -34,6 +34,7 @@ const Startup_product = () => {
   
   const [categoryIdforSub, setcategoryIdSub] = useState("");
   const [activeView, setActiveView] = useState('list'); // Initial state set to 'list' view
+  const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
 
     const handleListview1 = () => {
         setActiveView('list');
@@ -60,6 +61,8 @@ const Startup_product = () => {
     setsubcategoryId(e.target.value);
   };
   const subCategoryFetch = async () => {
+
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
     try {
       const respo = await fetch(
         `${BASE_URL}/api/subcategory/displayAllByCategoryId?category_id=${categoryIdforSub}`,
@@ -67,7 +70,7 @@ const Startup_product = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
+            Authorization: token,
           },
         }
       );
@@ -155,12 +158,13 @@ const Startup_product = () => {
     navigate("/productedit", { state: { _id, id } });
   };
   const handleid = async () => {
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
     try {
       const res = await fetch(`${BASE_URL}/api/category/displayAll`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: token,
         },
       });
       if (!res.ok) {
@@ -186,6 +190,7 @@ const Startup_product = () => {
   console.log(data);
   const fetchData = async () => {
     // console.log(localStorage.getItem("tokenData"));
+    const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
 
     try {
       const response = await fetch(
@@ -194,7 +199,7 @@ const Startup_product = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
+            Authorization: token,
           },
         }
       );
@@ -339,11 +344,11 @@ const Startup_product = () => {
                 <img src="" alt="" />
               </div>
               <div className="d-flex">
-                <div className="startup-product-add-button">
+               {!investorToken? <div className="startup-product-add-button">
                   <button onClick={() => handleaddproduct(_id)}>
                     + Add Product
                   </button>
-                </div>
+                </div>:<></>}
                 <div className="ms-4">
                   <FontAwesomeIcon
                     icon={faList}
@@ -396,11 +401,11 @@ const Startup_product = () => {
                           <p>Product Price</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                     {!investorToken? <div className="pe-5">
                         <div>
                           <p>Product Edit</p>
                         </div>
-                      </div>
+                      </div>:<></>}
                     </div>
                     {data &&
                       data.map((e) => {
@@ -467,7 +472,7 @@ const Startup_product = () => {
                                     {e.productprice}
                           
                                   </h5>
-                                  <div className="flex items-center mr-[61px]">
+                                  {!investorToken?<div className="flex items-center mr-[61px]">
                                   <Nav.Link
                                     className="ms-5"
                                     href=""
@@ -485,7 +490,7 @@ const Startup_product = () => {
                                   <div className="startup-product-add-button mr-[-190px] ml-[20px]">
                                   <button className="p-[2px]" onClick={() => handleViewReviews(e._id)}>View Reviews</button>
                                   </div>
-                                  </div>
+                                  </div>:<></>}
                                 </div>
                               </div>
                             </div>

@@ -1,5 +1,6 @@
 .custom-tabs {
   display: flex;
+  font-size: large;
 }
 
 .custom-tab {
@@ -8,7 +9,7 @@
   cursor: pointer;
   background-color: transparent;
   user-select: none;
-  width:350px;
+  width:500px;
 }
 
 .custom-tab.active {

@@ -1,21 +1,29 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export const useAuthContext = () => {
-	return useContext(AuthContext);
+    return useContext(AuthContext);
 };
 
 export const AuthContextProvider = ({ children }) => {
-	const [authUser, setAuthUser] = useState(() => {
+    const [authUser, setAuthUser] = useState(() => {
         try {
-            return {id: localStorage.getItem("userid")}
+            const userId = localStorage.getItem("userid");
+            const token = localStorage.getItem("token");
+            const investorToken = localStorage.getItem("investorToken");
+            const tokenType = token ? 'token' : investorToken ? 'investorToken' : null;
+            
+            return { id: userId, tokenType: tokenType };
         } catch (error) {
             console.error("Error parsing JSON from localStorage:", error);
-            return null;
+            return { id: null, tokenType: null };
         }
     });
-    // console.log(authUser)
 
-	return <AuthContext.Provider value={{ authUser:authUser, setAuthUser }}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={{ authUser, setAuthUser }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
