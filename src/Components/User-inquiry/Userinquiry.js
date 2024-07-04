@@ -26,7 +26,7 @@ const Userinquiry = () => {
       }
       const responseData = await response.json();
       setInquiry(responseData.data);
-      console.log(responseData.data);
+      console.log("respppp",responseData.data);
     } catch (error) {
       toast.error("Something went wrong!", {
         position: toast.POSITION.BOTTOM_RIGHT,

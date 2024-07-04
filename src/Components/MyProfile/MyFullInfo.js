@@ -18,6 +18,8 @@ import { BASE_URL } from "../../BASE_URL";
 import DisplayInvestor from "../DisplayProfile/DisplayInvestor";
 import InvestorPortfolio from "../../InvestorPortfolio/InvestorPortfolio";
 import StartupCards from "../../StartupsDisplay/StartupDisp";
+import InvestorCards from "../../InvestorDisplay/InvestorDisplay";
+import InvestorInquiry from "../../InvestorInquiry/InquiryDisplay";
 
 const MyFullInfo = () => {
   const navigate = useNavigate();
@@ -31,6 +33,19 @@ const MyFullInfo = () => {
     localStorage.getItem("investorToken")
   );
   const [img, setimg] = useState("");
+
+  useEffect(() => {
+    const myData = localStorage.getItem('myData');
+    console.log("myData from localStorage:", myData);
+    if(myData=="inquiry"){
+        setActiveTab(7);
+        localStorage.removeItem('myData');
+    }
+    if(myData=="Startup"){
+        setActiveTab(2);
+        localStorage.removeItem('myData');
+    }
+}, []);
 
   const fetchData = async () => {
     try {
@@ -275,9 +290,7 @@ const MyFullInfo = () => {
               </h5>
               {activeTab === 0 && (
                 <div
-                  className={`active-icon ${
-                    investorToken ? "ml-[90px]" : "ml-[0px]"
-                  }`}
+                  className="active-icon"
                 >
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
@@ -310,7 +323,7 @@ const MyFullInfo = () => {
                   Investor Portfolio
                 </h5>
                 {activeTab === 5 && (
-                  <div className="active-icon ml-[90px]">
+                  <div className="active-icon">
                     <img src="./tab-photo.png" alt="" className="" />
                   </div>
                 )}
@@ -362,6 +375,37 @@ const MyFullInfo = () => {
             ) : (
               <></>
             )}
+            {!investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 6 ? "active" : ""}`}
+                onClick={() => handleTabClick(6)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">All Investors</h5>
+                {activeTab === 6 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+            {investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 7 ? "active" : ""}`}
+                onClick={() => handleTabClick(7)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">My Inquiry</h5>
+                {activeTab === 7 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
+            
            
           </div>
           <div className="custom-tab-panel ">
@@ -555,6 +599,16 @@ const MyFullInfo = () => {
             {activeTab === 5 && (
               <div>
                 <InvestorPortfolio />
+              </div>
+            )}
+            {activeTab === 6 && (
+              <div>
+                <InvestorCards />
+              </div>
+            )}
+            {activeTab === 7 && (
+              <div>
+                <InvestorInquiry />
               </div>
             )}
           </div>

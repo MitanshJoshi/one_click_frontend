@@ -36,6 +36,9 @@ const StartupCards = () => {
     navigate(`/start-up-full-detail/${id}`);
   };
   const handleInquiry = (startupId) => {
+    console.log('startupId',startupId);
+    localStorage.setItem("myData","Startup");
+    
     navigate("/inquiryform", { state: { startUpId: startupId } });
   };
   

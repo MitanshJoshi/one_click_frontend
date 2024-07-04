@@ -7,6 +7,8 @@ import RegistrationPage from "./Components/Registration/Registration";
 import Startup_product from "./Components/Startup-products/Startup-produc";
 import InvestorRegistrationPage from "./Components/Registration/InvestorRegistration";
 import "./App.css";
+import EditInquiry from "./InvestorInquiry/EditInvestorInquiry";
+import StartupInquiry from "./InvestorDisplay/StartupInquiry";
 import DisplayProfileWithStartupList from "./Components/DisplayProfileWithStartupList/DisplayProfileWithStartupList";
 import AddStartUp from "./Components/AddStartUp/Addprduct";
 import HomePage2 from "./Container/HomePage/HomePage2";
@@ -67,6 +69,7 @@ const App = () => {
           <Route path="/investorchange" element={<InvestorChange />} />
           <Route path="/Contect-Us" element={<ContactUs />} />
           <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/startupinquiry" element={<StartupInquiry />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route
             path="/investorregistration"
@@ -75,6 +78,7 @@ const App = () => {
           <Route path="/home" element={<HomePage2 />} />
           <Route path="/my-profile" element={<Myprofile />} />
           <Route path="/editgrant/:grantId" element={<EditGrant />} />
+          <Route path="/editinquiry/:inquiryId" element={<EditInquiry />} />
           <Route path="/editinvestment/:_id" element={<EditInvestment />} />
           <Route path="/my-fullinfo" element={<MyFullInfo />} />
           <Route path="/start-up-full-detail/:_id" element={<StartUps />} />

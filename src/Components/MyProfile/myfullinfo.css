@@ -35,6 +35,10 @@
   /* transition: 5s; */
 }
 
+.backk{
+  background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
+}
+
 .add-start-up-button button {
   background: linear-gradient(180deg, #74cc7e 0%, #00818a 100%);
   color: #000;

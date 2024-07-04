@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import SecondNavbar from "../Navbar/Navbar";
-import { BASE_URL } from "../../BASE_URL";
+import SecondNavbar from "../Components/Navbar/Navbar";
+import { BASE_URL } from "../BASE_URL";
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Inquiryform = () => {
+const StartupInquiry = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [best_time_to_connect, setConnect] = useState("");
   const location = useLocation();
-  const productId = location.state && location.state.productId;
-  const startupId = location.state && location.state.startupId;
-  const startupId1 = location.state && location.state.startUpId;
+  const investorId = location.state && location.state.investorId;
+  console.log('investorId',investorId);
   
-  console.log('startupid is',startupId1);
   
   const investorToken = localStorage.getItem("investorToken");
   const navigate = useNavigate();
@@ -28,7 +26,7 @@ const Inquiryform = () => {
     }
     
     try {
-      const response = await fetch(`${BASE_URL}/api/inquiry/insert`, {
+      const response = await fetch(`${BASE_URL}/api/investorInquiry/addInquiry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,8 +36,7 @@ const Inquiryform = () => {
           title,
           description,
           best_time_to_connect,
-          productId,
-          startupId,
+          investorId,
         }),
       });
 
@@ -63,55 +60,6 @@ const Inquiryform = () => {
       });
     }
   };
-  const handleSubmit1 = async () => {
-    if (!title || !description || !best_time_to_connect) {
-      toast.error("All fields are required", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    
-    try {
-      const response = await fetch(`${BASE_URL}/api/investorInquiry/addInquiry`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("investorToken"),
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          best_time_to_connect,
-          startupId:startupId1,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Inquiry failed");
-      }
-
-      toast.success("Inquiry Successful!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-
-      setTimeout(() => {
-        navigate(-1); // Go back
-      }, 2000);
-    } catch (error) {
-      console.error("Error submitting inquiry:", error);
-      toast.error("Inquiry failed!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-    }
-  };
-
-  const handleConditionalSubmit=()=>{
-    investorToken?handleSubmit1():handleSubmit();
-  }
-
   return (
     <>
       <SecondNavbar />
@@ -164,7 +112,7 @@ const Inquiryform = () => {
               <div className="flex items-center justify-center mt-6 add-start-up-button">
                 <button
                   className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  onClick={handleConditionalSubmit}
+                  onClick={handleSubmit}
                 >
                   Submit
                 </button>
@@ -177,4 +125,4 @@ const Inquiryform = () => {
   );
 };
 
-export default Inquiryform;
+export default StartupInquiry;

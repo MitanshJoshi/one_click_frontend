@@ -106,10 +106,10 @@
 }
 
 .product-list-view img {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   border-radius: 50%;
   padding: 15px 0px;
-  height: 50px;
+  /* height: 50px; */
 }
 
 .product-list-view-content {

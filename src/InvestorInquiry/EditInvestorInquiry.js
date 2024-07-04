@@ -1,116 +1,116 @@
-import React, { useState } from "react";
-import SecondNavbar from "../Navbar/Navbar";
-import { BASE_URL } from "../../BASE_URL";
+import React, { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { BASE_URL } from "../BASE_URL";
+import SecondNavbar from "../Components/Navbar/Navbar";
+import StartUpProfile from "../Components/StartUpProfile/StartUpProfile";
+import "react-toastify/dist/ReactToastify.css";
 
-const Inquiryform = () => {
+const EditInquiry = () => {
+  const { state } = useLocation();
+  const { inquiryId } = useParams();
+  const _id = state && state._id;
+  const data = state && state.data;
+  console.log('data',data);
+  
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [best_time_to_connect, setConnect] = useState("");
-  const location = useLocation();
-  const productId = location.state && location.state.productId;
-  const startupId = location.state && location.state.startupId;
-  const startupId1 = location.state && location.state.startUpId;
   
-  console.log('startupid is',startupId1);
-  
-  const investorToken = localStorage.getItem("investorToken");
+
+  const [grantName, setGrantName] = useState("");
+  const [grantAmount, setGrantAmount] = useState("");
+  const [dateWhenAvailable, setDateWhenAvailable] = useState("");
+  const [grantFrom, setGrantFrom] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
-    if (!title || !description || !best_time_to_connect) {
-      toast.error("All fields are required", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    
+  useEffect(() => {
+    fetchGrantDetails();
+  }, []);
+
+  const fetchGrantDetails = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/api/inquiry/insert`, {
-        method: "POST",
+      const response = await fetch(`${BASE_URL}/api/investorInquiry/getInquiryById/${inquiryId}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("investorToken")?localStorage.getItem("investorToken"):localStorage.getItem("token"),
         },
-        body: JSON.stringify({
-          title,
-          description,
-          best_time_to_connect,
-          productId,
-          startupId,
-        }),
       });
 
       if (!response.ok) {
-        throw new Error("Inquiry failed");
+        throw new Error("Request failed");
       }
 
-      toast.success("Inquiry Successful!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
+      const data = await response.json();
+      console.log('data',data);
+      
+      const inquiry=data.inquiry;
 
-      setTimeout(() => {
-        navigate(-1);
-      }, 2000);
+      setTitle(inquiry.title);
+      setDescription(inquiry.description);
+      setConnect(inquiry.best_time_to_connect);
+
     } catch (error) {
-      console.error("Error submitting inquiry:", error);
-      toast.error("Inquiry failed!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-    }
-  };
-  const handleSubmit1 = async () => {
-    if (!title || !description || !best_time_to_connect) {
-      toast.error("All fields are required", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-      return;
-    }
-    
-    try {
-      const response = await fetch(`${BASE_URL}/api/investorInquiry/addInquiry`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("investorToken"),
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          best_time_to_connect,
-          startupId:startupId1,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Inquiry failed");
-      }
-
-      toast.success("Inquiry Successful!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000,
-      });
-
-      setTimeout(() => {
-        navigate(-1); // Go back
-      }, 2000);
-    } catch (error) {
-      console.error("Error submitting inquiry:", error);
-      toast.error("Inquiry failed!", {
+      console.error("Error fetching grant details:", error);
+      toast.error("Something went wrong!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
       });
     }
   };
 
-  const handleConditionalSubmit=()=>{
-    investorToken?handleSubmit1():handleSubmit();
+  const handleBack= () =>{
+    localStorage.setItem("myData","inquiry")
+    navigate(-1);
   }
+
+  const handleEditInquiry = async (e) => {
+    e.preventDefault();
+    if (!title || !description || !best_time_to_connect) {
+      toast.error("All fields are required!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL}/api/investorInquiry/updateInquiry/${inquiryId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("investorToken")?localStorage.getItem("investorToken"):localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          title: title,
+          description: description,
+          best_time_to_connect: best_time_to_connect,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      toast.success("Inquiry updated successfully!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+
+      setTimeout(() => {
+        navigate(-1, { state: { abc: "editinquiry" } });
+        localStorage.setItem("myData", "inquiry");
+      }, 1000);
+    } catch (error) {
+      console.error("Error updating Inquiry:", error);
+      toast.error("Something went wrong!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+    }
+  };
 
   return (
     <>
@@ -130,6 +130,7 @@ const Inquiryform = () => {
                 <input
                   id="title"
                   type="text"
+                  value={title}
                   className="w-full py-2 px-3 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -140,6 +141,7 @@ const Inquiryform = () => {
                 </label>
                 <textarea
                   id="description"
+                  value={description}
                   className="w-full py-2 px-3 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
                   rows="6"
                   onChange={(e) => setDescription(e.target.value)}
@@ -151,6 +153,7 @@ const Inquiryform = () => {
                 </label>
                 <select
                   id="best_time_to_connect"
+                  value={best_time_to_connect}
                   className="w-full py-2 px-3 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
                   onChange={(e) => setConnect(e.target.value)}
                 >
@@ -161,14 +164,21 @@ const Inquiryform = () => {
                   <option value="9 to 12">9 to 12</option>
                 </select>
               </div>
-              <div className="flex items-center justify-center mt-6 add-start-up-button">
+              {data=="edit"?<div className="flex items-center justify-center mt-6 add-start-up-button">
                 <button
                   className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  onClick={handleConditionalSubmit}
+                  onClick={handleEditInquiry}
                 >
                   Submit
                 </button>
-              </div>
+              </div>:<div className="flex items-center justify-center mt-6 add-start-up-button">
+                <button
+                  className=" text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  onClick={handleBack}
+                >
+                  Back
+                </button>
+              </div>}
             </div>
           </div>
         </div>
@@ -177,4 +187,4 @@ const Inquiryform = () => {
   );
 };
 
-export default Inquiryform;
+export default EditInquiry;

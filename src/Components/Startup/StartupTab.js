@@ -11,6 +11,7 @@ import Startup_investments from '../Startup_investments/Startup_investments';
 import Wishlist from '../Wishlist/Wishlist';
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from 'react-router-dom';
+import StartupInquiryDisplay from '../../InvestorDisplay/StartupInquiryDisplay';
 
 const StartupTab = () => {
     const { state } = useLocation();
@@ -132,6 +133,28 @@ const StartupTab = () => {
                                     </div>
                                 )}
                             </div>
+                            <div
+                                className={`custom-tab ${activeTab === 5 ? 'active' : ''}`}
+                                onClick={() => handleTabClick(5)}
+                            >
+                                <h5 className='mb-0 tab-bold-css'>Investor Inquiry</h5>
+                                {activeTab === 5 && (
+                                    <div className="active-icon-1">
+                                        <img src="/tab-photo.png" alt="" className='' />
+                                    </div>
+                                )}
+                            </div>
+                            <div
+                                className={`custom-tab ${activeTab === 6 ? 'active' : ''}`}
+                                onClick={() => handleTabClick(6)}
+                            >
+                                <h5 className='mb-0 tab-bold-css'>Startup Inquiry</h5>
+                                {activeTab === 6 && (
+                                    <div className="active-icon-1">
+                                        <img src="/tab-photo.png" alt="" className='' />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         {/* <div className="custom-tab-panel ">
                             {activeTab === 0 && <Startup_review />}
@@ -150,6 +173,12 @@ const StartupTab = () => {
                         </div>
                         <div className="custom-tab-panel ">
                             {activeTab === 4 && <Startup_investments />}
+                        </div>
+                        <div className="custom-tab-panel ">
+                            {activeTab === 5 && <StartupInquiryDisplay />}
+                        </div>
+                        <div className="custom-tab-panel ">
+                            {activeTab === 6 && <StartupInquiryDisplay />}
                         </div>
                     </div>
                 )}
