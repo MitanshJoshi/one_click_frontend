@@ -371,37 +371,37 @@ const Startup_product = () => {
                 <div className="mt-5">
                   <div>
                     <div className="product-list-view d-flex align-item-center justify-content-betweenx">
-                    <div className="pe-5">
+                    <div className="product-info">
                         <div>
                           <p>Product Name</p>
                         </div>
                       </div>
-                      <div className="pe-5 ">
+                      <div className="product-info ">
                         <div>
                           <p>Product Description</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Category</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Sub Category</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Status</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Product Price</p>
                         </div>
                       </div>
-                     {!investorToken? <div className="pe-5">
+                     {!investorToken? <div className="product-info">
                         <div>
                           <p>Product Edit</p>
                         </div>
@@ -412,7 +412,7 @@ const Startup_product = () => {
                         return (
                           <>
                             <div className="product-list-view product-list-view-content d-flex align-item-center justify-content-between">
-                            <div className="">
+                            <div className="product-info">
                                 <div className="d-flex align-items-center h-100">
                                   <h5
                                     className="ms-3  "
@@ -422,7 +422,7 @@ const Startup_product = () => {
                                   </h5>
                                 </div>
                               </div>
-                              <div className="">
+                              <div className="product-info">
                                 <div className="d-flex align-items-center ">
                                   <img className="me-3" src="" alt="" />
                                   <h5
@@ -433,7 +433,7 @@ const Startup_product = () => {
                                   </h5>
                                 </div>
                               </div>
-                              <div className="">
+                              <div className="product-info">
                                 <div className="d-flex align-items-center h-100">
                                   <h5
                                     className="mb-0 ms-2"
@@ -443,7 +443,7 @@ const Startup_product = () => {
                                   </h5>
                                 </div>
                               </div>
-                              <div className="">
+                              <div className="product-info">
                                 <div className="d-flex align-items-center h-100">
                                   <h5
                                     className="mb-0"
@@ -453,7 +453,7 @@ const Startup_product = () => {
                                   </h5>
                                 </div>
                               </div>
-                              <div className="">
+                              <div className="product-info">
                                 <div className="d-flex align-items-center h-100">
                                   <h5
                                     className="mb-0 ms-2"

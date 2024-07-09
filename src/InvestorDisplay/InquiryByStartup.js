@@ -7,12 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../context/SocketContext";
 import { faList, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { useScrollTrigger } from "@mui/material";
 
-const StartupInquiryDisplay = () => {
+const InquiryByStartup = () => {
   const [inquiry, setInquiry] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState(null);
-  const { initializeSocket }=useSocketContext();
+
+  const { initializeSocket } = useSocketContext();
   const id=useParams();
   console.log('id iss',id);
   
@@ -52,7 +54,7 @@ const StartupInquiryDisplay = () => {
         {
           method: "DELETE",
           headers: {
-            Authorization: localStorage.getItem("investorToken"),
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
@@ -86,9 +88,10 @@ const StartupInquiryDisplay = () => {
 
   const navigate = useNavigate();
 
-  const handleEdit = (item) => {
+  const handleEdit = (inquiry) => {
+    // const navigate = useNavigate();
     initializeSocket(inquiry.userId, inquiry.startupId); 
-    navigate("/chatwithinvestor", { state: { item: item, data: "startup" } });
+    navigate("/chatwithinvestor", { state: { item: inquiry, data: "startup" } }); 
   };
 
   return (
@@ -113,9 +116,12 @@ const StartupInquiryDisplay = () => {
           <div className="product-info">
             <p>View Details</p>
           </div>
+          <div className="product-info">
+            <p>Actions</p>
+          </div>
         </div>
 
-        {inquiry.filter((item)=>item.InquiryBy==="investor").map((item) => (
+        {inquiry.filter((item)=>item.InquiryBy==="startup").map((item) => (
           <div
             key={item._id}
             className="product-list-view"
@@ -142,9 +148,23 @@ const StartupInquiryDisplay = () => {
               <h5>{item.createdAt.slice(0, 10)}</h5>
             </div>
             <div className="product-info startup-product-add-button">
-              <button onClick={() => handleEdit(item)}>View</button>
+              <button onClick={() => handleEdit(item, "view")}>View</button>
             </div>
-           
+            <div className="product-info">
+              <FontAwesomeIcon
+                icon={faEdit}
+                className="me-3 cursor-pointer"
+                onClick={() => handleEdit(item)}
+              />
+              <FontAwesomeIcon
+                icon={faTrashAlt}
+                className="cursor-pointer"
+                onClick={() => {
+                  setSelectedInquiry(item._id);
+                  setShowConfirmation(true);
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -171,4 +191,4 @@ const StartupInquiryDisplay = () => {
   );
 };
 
-export default StartupInquiryDisplay;
+export default InquiryByStartup;

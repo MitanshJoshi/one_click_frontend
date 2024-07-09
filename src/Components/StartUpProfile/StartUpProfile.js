@@ -51,7 +51,7 @@ const StartUpProfile = ({ onBackButtonClick }) => {
             }
         };
 
-        fetchStartupData();
+        _id?fetchStartupData():<></>;
     }, [_id]);
 
     const handleWishlist = () => {

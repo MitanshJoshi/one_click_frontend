@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./myinquiry.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import SecondNavbar from "../Navbar/Navbar";
+import { useSocketContext } from "../../context/SocketContext";
 import { BASE_URL } from "../../BASE_URL";
 import { toast, ToastContainer } from "react-toastify";
+
+
 const Myinquiry = () => {
   const startUpId= useParams()
+  const { initializeSocket } = useSocketContext();
 
   const navigate = useNavigate();
-  const handleNavigate = (item) => {
-    navigate("/myinquirychar", { state: { item } });
+  const handleNavigate = (item,data) => {
+    console.log('item from myinquiry',item);
+    console.log(item.userData._id);
+
+    initializeSocket(item.userId, item.startupId); 
+    navigate("/Userinquirychat", { state: { item:item,data:"myinquiry" } });
   };
+  
   const [inquiry, setinquiry] = useState([]);
 
   const handlesubmit = async () => {

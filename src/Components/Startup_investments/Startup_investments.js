@@ -167,27 +167,27 @@ const Startup_investments = () => {
                 <div className="mt-5">
                   <div>
                     <div className="product-list-view d-flex align-item-center justify-content-between">
-                      <div className="pe-5 ">
+                      <div className="product-info">
                         <div>
                           <p>Investor Name</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Investment Amount</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Date Available</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Other Details</p>
                         </div>
                       </div>
-                    {investorToken?  <div className="pe-5">
+                    {!investorToken?  <div className="product-info">
                         <div>
                           <p>Actions</p>
                         </div>
@@ -198,27 +198,27 @@ const Startup_investments = () => {
                         key={investment._id}
                         className="product-list-view product-list-view-content d-flex align-item-center"
                       >
-                        <div className="">
-                          <h5 className="mb-0" style={{ width: "150px" }}>
+                        <div className="product-info">
+                          <h5 className="mb-0" >
                             {investment.investor_name}
                           </h5>
                         </div>
-                        <div className="text-start">
-                          <h5 className="" style={{ width: "150px" }}>
+                        <div className="product-info">
+                          <h5 className="">
                             {investment.investment_amount}
                           </h5>
                         </div>
-                        <div className="text-start">
-                          <h5 className="mb-0" style={{ width: "100px" }}>
+                        <div className="product-info">
+                          <h5 className="mb-0" >
                             {new Date(investment.date_when_available).toLocaleDateString()}
                           </h5>
                         </div>
-                        <div className="">
-                          <h5 className="mb-0" style={{ width: "100px" }}>
+                        <div className="product-info">
+                          <h5 className="mb-0" >
                             {investment.other_details}
                           </h5>
                         </div>
-                        {!investorToken?<div className="w-[95px]">
+                        {!investorToken?<div className="product-info">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"

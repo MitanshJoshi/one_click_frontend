@@ -161,27 +161,27 @@ const handleEdit = (grant) => {
                 <div className="mt-5">
                   <div>
                     <div className="product-list-view d-flex align-item-center justify-content-between">
-                      <div className="pe-5 ">
+                      <div className="product-info ">
                         <div>
                           <p>Grant Name</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Grant Amount</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Date Available</p>
                         </div>
                       </div>
-                      <div className="pe-5">
+                      <div className="product-info">
                         <div>
                           <p>Grant From</p>
                         </div>
                       </div>
-                      {!investorToken?<div className="pe-5">
+                      {!investorToken?<div className="product-info">
                         <div>
                           <p>Actions</p>
                         </div>
@@ -192,27 +192,27 @@ const handleEdit = (grant) => {
                         key={grant._id}
                         className="product-list-view product-list-view-content d-flex align-item-center"
                       >
-                        <div className="">
-                          <h5 className="mb-0 me-5" style={{ width: "" }}>
+                        <div className="product-info">
+                          <h5 className="" style={{ width: "" }}>
                             {grant.grant_name}
                           </h5>
                         </div>
-                        <div className="ml-[39px]">
-                          <h5 className="ms-3" style={{ width: "80px" }}>
+                        <div className="product-info">
+                          <h5 className="">
                             {grant.grant_amount}
                           </h5>
                         </div>
-                        <div className="ml-[67px]">
-                          <h5 className="mb-0 ms-2" style={{ width: "180px" }}>
+                        <div className="product-info">
+                          <h5 className="mb-0 ">
                             {new Date(grant.date_when_available).toLocaleDateString()}
                           </h5>
                         </div>
-                        <div className="">
-                          <h5 className="mb-0" style={{ width: "100px" }}>
+                        <div className="product-info">
+                          <h5 className="mb-0" >
                             {grant.grant_from}
                           </h5>
                         </div>
-                       {!investorToken? <div className="w-[95px]">
+                       {!investorToken? <div className="product-info">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -249,7 +249,7 @@ const handleEdit = (grant) => {
                         <p className="mb-1">
                           <strong>Grant From:</strong> {grant.grant_from}
                         </p>
-                        <div className="d-flex justify-content-between mt-3">
+                        {!investorToken?<div className="d-flex justify-content-between mt-3">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -263,7 +263,7 @@ const handleEdit = (grant) => {
                               setShowConfirmation(true);
                             }}
                           />
-                        </div>
+                        </div>:<></>}
                       </div>
                     </div>
                   </div>

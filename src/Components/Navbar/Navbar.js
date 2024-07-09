@@ -15,7 +15,7 @@ function SecondNavbar() {
   const [name, setName] = useState("");
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedToken1 = localStorage.getItem("investorToken");
@@ -44,7 +44,7 @@ function SecondNavbar() {
         console.error("Error fetching data from the backend", error);
       }
     };
-    fetchData();
+    localStorage.getItem("token")?fetchData():<></>;
   }, []);
 
   useEffect(() => {

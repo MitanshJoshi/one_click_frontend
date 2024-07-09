@@ -74,12 +74,15 @@ const InvestorChange = () => {
         autoClose: 1000,
       });
       setTimeout(() => {
-        navigate("/login");
+        navigate("/logininvestor");
       }, 1000);
       const responseData = await response.json();
       localStorage.setItem("token", responseData.data.token);
       console.log(responseData);
     } catch (error) {
+       {
+       
+      };
     }
   };
   const handlenavigate=()=>{

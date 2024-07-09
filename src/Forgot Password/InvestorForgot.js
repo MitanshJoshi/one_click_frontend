@@ -573,15 +573,6 @@ const InvestorForgot = () => {
                                onChange={(e) => setPassword(e.target.value.trim())}
                             required
                           />
-                          <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                               onClick={() => setShowPassword(!showPassword)}
-                          >
-                            <FontAwesomeIcon
-                             icon={showPassword ? faEye : faEyeSlash}
-                            />
-                          </button>
                         </div>
                       </div>
                       <div className="col-12">

@@ -29,6 +29,7 @@ import Buying_Inquiry from "./Container/HomePage/Buying-Inquiry";
 import DisplayInvestor from "./Components/DisplayProfile/DisplayInvestor";
 import ChangePassword from "./Container/HomePage/ChangePassword";
 import Addprduct from "./Components/Startup-products/Addproduct";
+import ChatWithInvestor from "./InvestorInquiryChat.js/ChatWithInvestor";
 import MyFullInfo from "./Components/MyProfile/MyFullInfo";
 import LoginInvestor from "./Components/Login/LoginInvestor";
 import Startup_review from "./Components/startup-review/Startup-review";
@@ -40,6 +41,7 @@ import Productedit from "./Components/StartUp-ProductEdit/Productedit";
 import Awardedit from "./Components/AwardEdit/Awardedit";
 import Certificateedit from "./Components/CertificateEdit/Certificateedit";
 import Myinquiry from "./Components/My-inquiry/Myinquiry";
+import AddPortfolio from "./InvestorPortfolio/AddPortfolio";
 import Userinquirychat from "./Components/userinquirychat/Useriquirychat";
 import myinquirychat from "./Components/Myinquirychat/Myinquirychat";
 import Myinquirychat from "./Components/Myinquirychat/Myinquirychat";
@@ -52,11 +54,13 @@ import AddInvestments from "./Components/Startup_investments/addinvestment";
 import ProductEdit from "./Components/StartUp-ProductEdit/Productedit";
 import EditInvestment from "./Components/Startup_investments/EditInvestment";
 import { AuthContext } from "./context/AuthContext";
+import OutgoingFromStartupChat from "./InvestorDisplay/OutgoingFromStartupChat";
 // import EditGrant from "./Components/Startup_grant/EditGrant";
 // import Startup_product from "./Components/Startup-products/Startup-produc";
 
 const App = () => {
   const { authUser } = useContext(AuthContext);
+  const investorToken=localStorage.getItem("investorToken");
   console.log("TEST: ", authUser.tokenType);
   return (
     <>
@@ -66,9 +70,9 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/logininvestor" element={<LoginInvestor />} />
           <Route path="/investorforgot" element={<InvestorForgot />} />
-          <Route path="/investorchange" element={<InvestorChange />} />
+          {investorToken?<Route path="/changepassword" element={<InvestorChange />} />:<Route path="/changepassword" element={<ChangePassword />} />}
+          <Route path="/addportfilio" element={<AddPortfolio />} />
           <Route path="/Contect-Us" element={<ContactUs />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/startupinquiry" element={<StartupInquiry />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route
@@ -83,6 +87,7 @@ const App = () => {
           <Route path="/my-fullinfo" element={<MyFullInfo />} />
           <Route path="/start-up-full-detail/:_id" element={<StartUps />} />
           <Route path="/home-page" element={<HomePage2 />} />
+          <Route path="/chatwithinvestor" element={<ChatWithInvestor />} />
           <Route path="/shoes-details/:_id" element={<ShoesDetails />} />
           <Route path="/supplier-detail" element={<SupplierDetail />} />
           <Route path="/inquiry/:_id" element={<Myinquiry />} />
@@ -108,6 +113,7 @@ const App = () => {
           <Route path="/Userinquirychat" element={<Userinquirychat />} />
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/inquiryform" element={<Inquiryform />} />
+          <Route path="/outgoingfromstartup" element={<OutgoingFromStartupChat />} />
           {/* <Route path="/productstartub" element={<Startup_product/>} /> */}
         </Routes>
       </Router>

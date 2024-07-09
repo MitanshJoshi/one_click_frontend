@@ -289,7 +289,7 @@ const inactiveStyle = {
                           />
                           <h5 className="mb-0">{partner.partner_name}</h5>
                           </div>
-                          <div className="d-flex">
+                          {!investorToken?<div className="d-flex">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -303,7 +303,7 @@ const inactiveStyle = {
                               setShowConfirmation(true);
                             }}
                           />
-                        </div>
+                        </div>:<></>}
                         </div>
                         <p>Position: {partner.position}</p>
                         <p>City: {partner.city}</p>

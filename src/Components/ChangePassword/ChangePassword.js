@@ -74,7 +74,7 @@ const ChangePasswordPage = () => {
         autoClose: 1000,
       });
       setTimeout(() => {
-        navigate("/login");
+      navigate("/login")
       }, 1000);
       const responseData = await response.json();
       localStorage.setItem("token", responseData.data.token);
@@ -226,11 +226,11 @@ const ChangePasswordPage = () => {
                             Change Password
                           </button>
                         </div>
-                        <div>
+                        {/* <div>
                           <button className="text-[13px] text-[#47d758] underline" onClick={handlenavigate}>
                             Change Password For Investor
                           </button>
-                        </div>
+                        </div> */}
                       </form>
                     </div>
                   </div>

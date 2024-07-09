@@ -12,11 +12,13 @@ import Wishlist from '../Wishlist/Wishlist';
 import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from 'react-router-dom';
 import StartupInquiryDisplay from '../../InvestorDisplay/StartupInquiryDisplay';
+import InquiryByStartup from '../../InvestorDisplay/InquiryByStartup';
 
 const StartupTab = () => {
     const { state } = useLocation();
     const [activeTab, setActiveTab] = useState(0);
     const [wishList, setWishList] = useState(false);
+    const token=localStorage.getItem("token");
 
     useEffect(() => {
         const myData = localStorage.getItem('myData');
@@ -133,7 +135,7 @@ const StartupTab = () => {
                                     </div>
                                 )}
                             </div>
-                            <div
+                            {token?<div
                                 className={`custom-tab ${activeTab === 5 ? 'active' : ''}`}
                                 onClick={() => handleTabClick(5)}
                             >
@@ -143,8 +145,8 @@ const StartupTab = () => {
                                         <img src="/tab-photo.png" alt="" className='' />
                                     </div>
                                 )}
-                            </div>
-                            <div
+                            </div>:<></>}
+                            {token?<div
                                 className={`custom-tab ${activeTab === 6 ? 'active' : ''}`}
                                 onClick={() => handleTabClick(6)}
                             >
@@ -154,7 +156,7 @@ const StartupTab = () => {
                                         <img src="/tab-photo.png" alt="" className='' />
                                     </div>
                                 )}
-                            </div>
+                            </div>:<></>}
                         </div>
                         {/* <div className="custom-tab-panel ">
                             {activeTab === 0 && <Startup_review />}
@@ -178,7 +180,7 @@ const StartupTab = () => {
                             {activeTab === 5 && <StartupInquiryDisplay />}
                         </div>
                         <div className="custom-tab-panel ">
-                            {activeTab === 6 && <StartupInquiryDisplay />}
+                            {activeTab === 6 && <InquiryByStartup />}
                         </div>
                     </div>
                 )}

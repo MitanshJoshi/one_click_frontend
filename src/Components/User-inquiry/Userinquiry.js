@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./userinquiry.css";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../BASE_URL";
+import { useSocketContext } from "../../context/SocketContext";
 import { toast, ToastContainer } from "react-toastify";
 
 const Userinquiry = () => {
   
   const [inquiry, setInquiry] = useState([]);
+  const { initializeSocket } = useSocketContext();
 
   const inquirydata = async () => {
     try {
@@ -40,8 +42,10 @@ const Userinquiry = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handlenavigate = (item) => {
-    navigate("/Userinquirychat", { state: { item, _id: item._id } });
+  const handlenavigate = (item,data) => {
+    initializeSocket(item.userId, item.startupId);
+    navigate("/Userinquirychat", { state: { item:item, data:"userinquiry"} });
+    console.log('item from userinquiry',item);
   };
 
   return (

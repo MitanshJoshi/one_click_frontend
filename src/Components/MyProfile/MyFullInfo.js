@@ -20,6 +20,7 @@ import InvestorPortfolio from "../../InvestorPortfolio/InvestorPortfolio";
 import StartupCards from "../../StartupsDisplay/StartupDisp";
 import InvestorCards from "../../InvestorDisplay/InvestorDisplay";
 import InvestorInquiry from "../../InvestorInquiry/InquiryDisplay";
+import InquiryDoneOnInvestor from "../../InvestorInquiry/InquiryDoneOnInvestor";
 
 const MyFullInfo = () => {
   const navigate = useNavigate();
@@ -35,17 +36,17 @@ const MyFullInfo = () => {
   const [img, setimg] = useState("");
 
   useEffect(() => {
-    const myData = localStorage.getItem('myData');
+    const myData = localStorage.getItem("myData");
     console.log("myData from localStorage:", myData);
-    if(myData=="inquiry"){
-        setActiveTab(7);
-        localStorage.removeItem('myData');
+    if (myData == "inquiry") {
+      setActiveTab(7);
+      localStorage.removeItem("myData");
     }
-    if(myData=="Startup"){
-        setActiveTab(2);
-        localStorage.removeItem('myData');
+    if (myData == "Startup") {
+      setActiveTab(2);
+      localStorage.removeItem("myData");
     }
-}, []);
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -73,7 +74,7 @@ const MyFullInfo = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    localStorage.getItem("token")?fetchData():<></>;
   }, []);
 
   const handleAdd = () => {
@@ -289,9 +290,7 @@ const MyFullInfo = () => {
                 Basic Information
               </h5>
               {activeTab === 0 && (
-                <div
-                  className="active-icon"
-                >
+                <div className="active-icon">
                   <img src="./tab-photo.png" alt="" className="" />
                 </div>
               )}
@@ -314,7 +313,7 @@ const MyFullInfo = () => {
               </div>
             )}
 
-{investorToken ? (
+            {investorToken ? (
               <div
                 className={`custom-tab ${activeTab === 5 ? "active" : ""}`}
                 onClick={() => handleTabClick(5)}
@@ -332,19 +331,18 @@ const MyFullInfo = () => {
               <></>
             )}
 
-            
-              <div
-                className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
-                onClick={() => handleTabClick(2)}
-              >
-                <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
-                {activeTab === 2 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
-              </div>
-            
+            <div
+              className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
+              onClick={() => handleTabClick(2)}
+            >
+              <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
+              {activeTab === 2 && (
+                <div className="active-icon">
+                  <img src="./tab-photo.png" alt="" className="" />
+                </div>
+              )}
+            </div>
+
             {!investorToken ? (
               <div
                 className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
@@ -405,8 +403,21 @@ const MyFullInfo = () => {
             ) : (
               <></>
             )}
-            
-           
+            {investorToken ? (
+              <div
+                className={`custom-tab ${activeTab === 8 ? "active" : ""}`}
+                onClick={() => handleTabClick(8)}
+              >
+                <h5 className="mb-0 tab-bold-css text-center">Inquiries on me</h5>
+                {activeTab === 8 && (
+                  <div className="active-icon">
+                    <img src="./tab-photo.png" alt="" className="" />
+                  </div>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="custom-tab-panel ">
             {activeTab === 0 && (
@@ -570,7 +581,9 @@ const MyFullInfo = () => {
                             ))}
                         </div>
                       </div>
-                    ) : investorToken?<StartupCards/> : (
+                    ) : investorToken ? (
+                      <StartupCards />
+                    ) : (
                       <div
                         className="m-auto"
                         style={{
@@ -609,6 +622,11 @@ const MyFullInfo = () => {
             {activeTab === 7 && (
               <div>
                 <InvestorInquiry />
+              </div>
+            )}
+            {activeTab === 8 && (
+              <div>
+                <InquiryDoneOnInvestor />
               </div>
             )}
           </div>
