@@ -13,12 +13,11 @@ export const SocketContextProvider = ({ children }) => {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const { authUser } = useAuthContext();
 
-    const initializeSocket = (userId, startupId) => {
-        if (userId && startupId) {
+    const initializeSocket = (id) => {
+        if (id) {
             const newSocket = io("https://oneclick-sfu6.onrender.com", {
                 query: {
-                    userId: userId,
-                    startupId: startupId,
+                    id:id,
                 },
                 transports: ["websocket"],
                 timeout: 20000,

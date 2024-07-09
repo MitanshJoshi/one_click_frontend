@@ -87,7 +87,7 @@ const StartupInquiryDisplay = () => {
   const navigate = useNavigate();
 
   const handleEdit = (item) => {
-    initializeSocket(inquiry.userId, inquiry.startupId); 
+    initializeSocket(item.startupId); 
     navigate("/chatwithinvestor", { state: { item: item, data: "startup" } });
   };
 

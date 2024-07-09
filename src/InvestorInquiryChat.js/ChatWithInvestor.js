@@ -22,9 +22,7 @@ export default function ChatWithInvestor() {
   const item = state.state.item;
   console.log('changed itemm:',item);
   
-  
   const [inquiryId, setid] = useState(item._id);
-
 
   const [userId, setuserId] = useState(myData==="investor"?item.investorId:item.startupId);
   console.log("User Id:::",userId)

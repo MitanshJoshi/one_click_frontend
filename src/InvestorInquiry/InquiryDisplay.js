@@ -87,7 +87,7 @@ const InvestorInquiry = () => {
     navigate(`/editinquiry/${inquiry._id}`,{state:{data:data}}); // Example assuming grantId is passed
   };
   const handleView = (inquiry) => {
-    initializeSocket(inquiry.userId, inquiry.startupId); 
+    initializeSocket(inquiry.investorId); 
     navigate("/chatwithinvestor", { state: { item: inquiry, data: "investor" } });
   };
   return (

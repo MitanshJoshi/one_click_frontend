@@ -43,7 +43,7 @@ const Userinquiry = () => {
 
   const navigate = useNavigate();
   const handlenavigate = (item,data) => {
-    initializeSocket(item.userId, item.startupId);
+    initializeSocket(item.userId);
     navigate("/Userinquirychat", { state: { item:item, data:"userinquiry"} });
     console.log('item from userinquiry',item);
   };

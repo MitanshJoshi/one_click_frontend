@@ -14,9 +14,9 @@ const Myinquiry = () => {
   const navigate = useNavigate();
   const handleNavigate = (item,data) => {
     console.log('item from myinquiry',item);
-    console.log(item.userData._id);
+    console.log("startupid is:",item.startupData._id);
 
-    initializeSocket(item.userId, item.startupId); 
+    initializeSocket(item.startupData._id); 
     navigate("/Userinquirychat", { state: { item:item,data:"myinquiry" } });
   };
   
