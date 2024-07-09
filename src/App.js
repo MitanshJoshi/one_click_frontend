@@ -66,8 +66,8 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/logininvestor" element={<LoginInvestor />} />
           <Route path="/investorforgot" element={<InvestorForgot />} />
           {investorToken?<Route path="/changepassword" element={<InvestorChange />} />:<Route path="/changepassword" element={<ChangePassword />} />}
