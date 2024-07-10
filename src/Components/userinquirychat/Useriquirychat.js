@@ -143,6 +143,8 @@ export default function Userinquirychat() {
   // setuserId(localStorage.getItem("userid"))
   const screen = "";
 
+  
+
   const fetchChatData = async () => {
     try {
       const response = await fetch(
@@ -418,7 +420,7 @@ export default function Userinquirychat() {
                 </div>
               </div>
             </div>
-            
+
             {messageComponent && (
               <div
                 style={{
@@ -463,21 +465,19 @@ export default function Userinquirychat() {
                                 overflowY: "auto", 
                               }}
                             >
-                              {chat &&
+                             {chat &&
                                 chat.map((e, index) => (
                                   <div
                                     key={index} // Add a unique key to each chat message
-                                    className={`${
-                                      uid === e.senderId
-                                        ? "text-end"
-                                        : "text-start"
+                                    className=
+                                    {`flex ${
+                                      e.senderId === userId
+                                        ? "justify-start"
+                                        : "justify-end"
                                     } p-3`}
                                   >
-                                    <span
-                                      style={{
-                                        height: "20px",
-                                        color: "black",
-                                      }}
+                                    <div
+                                      className="flex items-center bg-white p-3 rounded-lg shadow-md "
                                     >
                                       <img
                                         src="BioDisplayUser.png"
@@ -488,12 +488,20 @@ export default function Userinquirychat() {
                                           marginRight: "10px",
                                         }}
                                       />
-                                      {e.message}
-                                    </span>
+                                      <span
+                                      className=" "
+                                        style={{
+                                          height: "20px",
+                                          color: "black",
+                                        }}
+                                      >
+                                        {e.message}
+                                      </span>
+                                    </div>
                                   </div>
                                 ))}
                             </div>
-                            <div className="mt-5 From-Control ">
+                            <div className="mt-5 From-Control flex gap-2">
                               <input
                                 value={message}
                                 type="text "
@@ -516,6 +524,7 @@ export default function Userinquirychat() {
                               >
                                 <img
                                   src="send.png"
+                                  className="flex justify-center items-center"
                                   alt=""
                                   onClick={handlechat}
                                 />

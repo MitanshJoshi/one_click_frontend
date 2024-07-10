@@ -114,7 +114,6 @@ const App = () => {
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/inquiryform" element={<Inquiryform />} />
           <Route path="/outgoingfromstartup" element={<OutgoingFromStartupChat />} />
-          {/* <Route path="/productstartub" element={<Startup_product/>} /> */}
         </Routes>
       </Router>
       <Footer />

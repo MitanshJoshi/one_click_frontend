@@ -1,0 +1,6 @@
+{
+    "python.createEnvironment.contentButton": "hide",
+    "git.showActionButton": {
+        "commit": false
+    }
+}
