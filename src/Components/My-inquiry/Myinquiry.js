@@ -23,7 +23,6 @@ const Myinquiry = () => {
   const [inquiry, setinquiry] = useState([]);
 
   const handlesubmit = async () => {
-
       const response = await fetch(`${BASE_URL}/api/inquiry/sellingInquiry`, {
         method: "POST",
         headers: {

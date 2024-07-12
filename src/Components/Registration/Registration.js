@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./registration.css";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -26,13 +26,76 @@ const RegistrationPage = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [contact, setContact] = useState("");
-  const [dob,setDob]=useState("")
-  const [file,setFile]=useState(null)
+  const [dob, setDob] = useState("");
+  const [file, setFile] = useState(null);
   // const [file, setimage] = useState("");
 
   // console.log(file);
 
   const [selectedState, setSelectedState] = useState(null);
+
+  const fetchDetailsFromPincode = async (pincode) => {
+    try {
+      const res = await fetch(
+        `https://api.postalpincode.in/pincode/${pincode}`,
+        {
+          mode: "no-cors",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Check if the response is ok before trying to parse JSON
+      // if (!res.ok) {
+      //   throw new Error(`HTTP error! Status: ${res.status}`);
+      // }
+
+      const response = await res.json();
+      console.log("response is", response);
+
+      // console.log(response[0]?.PostOffice[0]);
+      // const data = response[0]?.PostOffice[0];
+
+      // if (data) {
+      //   console.log(data); // Log the fetched data for verification
+
+      //   // Extract country, state, and city from the API response
+      //   const countryName = data.Country;
+      //   const stateName = data.State;
+      //   const cityName = data.District;
+
+      //   // Find the corresponding country object
+      //   const selectedCountry = Countries.find((country) => country.name === countryName);
+      //   const countryStates = selectedCountry?.states || [];
+
+      //   // Find the corresponding state object
+      //   const selectedState = countryStates.find((state) => state.name === stateName);
+      //   const stateCities = selectedState?.cities || [];
+
+      //   // Update form data and states
+      //   setState(stateName);
+      //   setCity(cityName);
+
+      //   // setFormData((prevData) => ({
+      //   //   ...prevData,
+      //   //   country: countryName,
+      //   //   state: stateName,
+      //   //   city: cityName,
+      //   //   pincode: pincode,
+      //   // }));
+      // } else {
+      //   console.error("No PostOffice data found for the provided pincode.");
+      // }
+    } catch (error) {
+      console.error("Error fetching pincode details:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDetailsFromPincode("380004");
+  }, []);
 
   const handleName = (e) => {
     setUserName(e.target.value);
@@ -76,16 +139,17 @@ const RegistrationPage = () => {
 
   const handlePincode = (e) => {
     setPincode(e.target.value);
+    fetchDetailsFromPincode(e.target.value);
   };
 
   const handleContact = (e) => {
     setContact(e.target.value);
   };
 
-  const handleFileChange=(e)=>{
-    const file=e.target.files[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
     setFile(file);
-  }
+  };
   const handleDob = (e) => {
     setDob(e.target.value);
   };
@@ -110,7 +174,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!email) {
       toast.error("Email is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -123,7 +187,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!password) {
       toast.error("Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -131,7 +195,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!confirmPassword) {
       toast.error("Confirm Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -139,7 +203,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (password !== confirmPassword) {
       toast.error("Password and Confirm Password do not match.", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -147,7 +211,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!selectedState) {
       toast.error("State must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -155,7 +219,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!city) {
       toast.error("City must be required!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -163,7 +227,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!address) {
       toast.error("Address must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -171,7 +235,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!pincode) {
       toast.error("Pincode must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -179,7 +243,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (pincode.length < 6) {
       toast.error("Please enter a valid 6-digit Pincode!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -187,7 +251,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!contact) {
       toast.error("Contact number must be required!", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -195,7 +259,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (contact.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -203,7 +267,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!dob) {
       toast.error("Date of Birth is required", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -211,7 +275,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     if (!file) {
       toast.error("Please select an image file", {
         position: toast.POSITION.BOTTOM_RIGHT,
@@ -219,7 +283,7 @@ const RegistrationPage = () => {
       });
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("name", userName);
     formData.append("email", email);
@@ -232,17 +296,17 @@ const RegistrationPage = () => {
     formData.append("status", "active");
     formData.append("DOB", new Date(dob).toISOString());
     formData.append("image", file);
-  
+
     try {
       const response = await fetch(`${BASE_URL}/api/user/register`, {
         method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error("Registration failed");
       }
-  
+
       toast.success(
         "Registration successful!  Now, login with your registered email and password",
         {
@@ -250,7 +314,7 @@ const RegistrationPage = () => {
           autoClose: 1000,
         }
       );
-  
+
       setTimeout(() => {
         navigate("/login");
       }, 1500);
@@ -262,7 +326,6 @@ const RegistrationPage = () => {
       });
     }
   };
-  
 
   const handleKeyDown = (e) => {
     // Allow: backspace, delete, tab, escape, enter
@@ -287,9 +350,9 @@ const RegistrationPage = () => {
     }
   };
 
-  const invreg=()=>{
-    navigate("/investorregistration")
-  }
+  const invreg = () => {
+    navigate("/investorregistration");
+  };
 
   return (
     <div className="container form-start">
@@ -498,40 +561,40 @@ const RegistrationPage = () => {
                       />
                     </div>
                     <div className="mb-3">
-                    <label htmlFor="dob" className="form-label">
-                      Date of Birth
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="dob"
-                      placeholder="Enter your date of birth"
-                      value={dob}
-                      onChange={handleDob}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="file" className="form-label">
-                      Upload Image
-                    </label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="file"
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className=" form-check">
-                    <input
-                          className="form-check-input"
-                          type="checkbox"
-                          style={{width:"16px"}}
-                          id="terms"
-                        />
-                    <label className="form-check-label" htmlFor="terms">
-                      I agree to the terms and conditions
-                    </label>
-                  </div>
+                      <label htmlFor="dob" className="form-label">
+                        Date of Birth
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="dob"
+                        placeholder="Enter your date of birth"
+                        value={dob}
+                        onChange={handleDob}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="file" className="form-label">
+                        Upload Image
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        id="file"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    <div className=" form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        style={{ width: "16px" }}
+                        id="terms"
+                      />
+                      <label className="form-check-label" htmlFor="terms">
+                        I agree to the terms and conditions
+                      </label>
+                    </div>
                     {/* <div className="col-12 ">
                       <input
                         type="file"
@@ -575,13 +638,42 @@ const RegistrationPage = () => {
                         cities"
                       </h4>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', margin: '10px 0px' }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="91" height="15" viewBox="0 0 91 25" fill="none">
-                        <circle opacity="0.5" cx="9.87597" cy="12.0496" r="9.87597" fill="#59E659" />
-                        <circle cx="45.5002" cy="12.4023" r="12.345" fill="#59E659" />
-                        <circle opacity="0.5" cx="81.124" cy="12.0496" r="9.87597" fill="#59E659" />
-                    </svg>
-                </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        margin: "10px 0px",
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="91"
+                        height="15"
+                        viewBox="0 0 91 25"
+                        fill="none"
+                      >
+                        <circle
+                          opacity="0.5"
+                          cx="9.87597"
+                          cy="12.0496"
+                          r="9.87597"
+                          fill="#59E659"
+                        />
+                        <circle
+                          cx="45.5002"
+                          cy="12.4023"
+                          r="12.345"
+                          fill="#59E659"
+                        />
+                        <circle
+                          opacity="0.5"
+                          cx="81.124"
+                          cy="12.0496"
+                          r="9.87597"
+                          fill="#59E659"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>

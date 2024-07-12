@@ -13,6 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useLocation } from 'react-router-dom';
 import StartupInquiryDisplay from '../../InvestorDisplay/StartupInquiryDisplay';
 import InquiryByStartup from '../../InvestorDisplay/InquiryByStartup';
+import Startup_investors from '../Startup_investments/Startup_investors';
 
 const StartupTab = () => {
     const { state } = useLocation();
@@ -157,6 +158,17 @@ const StartupTab = () => {
                                     </div>
                                 )}
                             </div>:<></>}
+                            {token?<div
+                                className={`custom-tab ${activeTab === 7 ? 'active' : ''}`}
+                                onClick={() => handleTabClick(7)}
+                            >
+                                <h5 className='mb-0 tab-bold-css'>My Investors</h5>
+                                {activeTab === 7 && (
+                                    <div className="active-icon-1">
+                                        <img src="/tab-photo.png" alt="" className='' />
+                                    </div>
+                                )}
+                            </div>:<></>}
                         </div>
                         {/* <div className="custom-tab-panel ">
                             {activeTab === 0 && <Startup_review />}
@@ -181,6 +193,9 @@ const StartupTab = () => {
                         </div>
                         <div className="custom-tab-panel ">
                             {activeTab === 6 && <InquiryByStartup />}
+                        </div>
+                        <div className="custom-tab-panel ">
+                            {activeTab === 7 && <Startup_investors />}
                         </div>
                     </div>
                 )}

@@ -68,25 +68,32 @@ const Shoes = () => {
           Authorization: localStorage.getItem("token")
         }
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to fetch reviews");
       }
-
+  
       const responseData = await response.json();
-      console.log('resppp',responseData);
-      
-      setReviews(responseData.reviews);
-      console.log('reviews',reviews);
-      
+      console.log('resppp', responseData);
+  
+      if (responseData.reviews) {
+        setReviews(responseData.reviews);
+        console.log('reviews', reviews);
+      } else {
+        setReviews([]);
+        console.log('No reviews found for this product');
+      }
+  
     } catch (error) {
-      console.error("Error fetching reviews:", error.message);
-      toast.error("Failed to fetch reviews!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 1000
-      });
+      // console.error("Error fetching reviews:", error.message);
+      // toast.error("Failed to fetch reviews!", {
+      //   position: toast.POSITION.BOTTOM_RIGHT,
+      //   autoClose: 1000
+      // });
     }
   };
+
+  
   function reverseDate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -272,7 +279,7 @@ const Shoes = () => {
 
   return (
     <>
-      <div className="container">
+     <div className={`container ${showAddReviewModal ? "opacity-50"  : ""}`}>
         <ToastContainer />
         <div className="row mt-5 pt-4">
           {/* Left Section */}
@@ -491,7 +498,7 @@ const Shoes = () => {
         <div className="mt-10">
   <div className="review-list-title mb-4 pt-30 pl-0 mx-[70px]">
     <h3>Reviews</h3>
-    <button className="cursor-pointer bg-green-600 text-white font-bold py-2 px-4 rounded"  onClick={() => setShowAddReviewModal(true)}>
+    <button className="cursor-pointer backk text-white font-bold py-2 px-4 rounded"  onClick={() => setShowAddReviewModal(true)}>
       Add Review
     </button>
   </div>
@@ -529,7 +536,7 @@ const Shoes = () => {
       </div>
     ))}
   </div> */}
-  <div className=' grid grid-cols-2 gap-4'>
+  <div className=' grid grid-cols-2 gap-4 mx-[200px]'>
           {reviews && reviews?.map((review, index) => (
                     <div className="hotel-review-specific">
                       <div className="personal-review">
@@ -622,7 +629,7 @@ const Shoes = () => {
                         <option value={5}>5 Stars</option>
                       </select>
                     </div>
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btnn2">
                       Submit
                     </button>
                   </form>

@@ -15,6 +15,7 @@ const Startup_review = () => {
   const [editReviewDetail, setEditReviewDetail] = useState("");
   const [editReviewStars, setEditReviewStars] = useState(0);
   const [deleteReviewId, setDeleteReviewId] = useState(null);
+  const [sortType, setSortType] = useState("all");
 
   const fetchReviews = async () => {
     try {
@@ -56,7 +57,7 @@ const Startup_review = () => {
           },
           body: JSON.stringify({
             detail: editReviewDetail,
-            stars: editReviewStars
+            stars: editReviewStars,
           }),
         }
       );
@@ -120,6 +121,23 @@ const Startup_review = () => {
     fetchReviews();
   }, []);
 
+  const averageRating = reviews.length
+    ? (
+        reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length
+      ).toFixed(1)
+    : 0;
+
+  const sortReviews = (type) => {
+    let sortedReviews = [...reviews];
+    if (type === "highToLow") {
+      sortedReviews.sort((a, b) => b.stars - a.stars);
+    } else if (type === "lowToHigh") {
+      sortedReviews.sort((a, b) => a.stars - b.stars);
+    } // Add more sorting types if needed
+    setReviews(sortedReviews);
+    setSortType(type);
+  };
+
   return (
     <>
       <ToastContainer />
@@ -131,30 +149,45 @@ const Startup_review = () => {
               <p>100% Authenticated & Trusted ratings from OneClick users</p>
             </div>
             <div>
-              <button>4.6</button>
+              <button>{averageRating}</button>
             </div>
           </div>
           <div className="startup-recent-review flex items-center mt-3">
             <h6 className="mb-0">Recent Rating</h6>
             <div className="flex flex-wrap gap-3 ml-5">
-              <button>4.5</button>
-              <button>4.0</button>
-              <button>4.5</button>
-              <button>5.0</button>
+              {reviews.slice(0, 4).map((review, index) => (
+                <button key={index}>{review.stars}</button>
+              ))}
             </div>
           </div>
           <div className="startup-user-review mb-4 flex items-center flex-wrap">
             <h6 className="mb-0">User Review</h6>
             <div className="flex flex-wrap gap-3 ml-4">
-              <button className="startup-user-review-button">All Review</button>
-              <button>Popular</button>
-              <button>High to Low</button>
-              <button>Low to High</button>
+              <button
+                className={`startup-user-review-button ${
+                  sortType === "all" ? "active" : ""
+                }`}
+                onClick={() => sortReviews("all")}
+              >
+                All Review
+              </button>
+              <button
+                className={sortType === "highToLow" ? "active" : ""}
+                onClick={() => sortReviews("highToLow")}
+              >
+                High to Low
+              </button>
+              <button
+                className={sortType === "lowToHigh" ? "active" : ""}
+                onClick={() => sortReviews("lowToHigh")}
+              >
+                Low to High
+              </button>
             </div>
           </div>
-          <div className=" grid grid-cols-2 gap-4 mx-[100px]">
+          <div className="grid grid-cols-2 gap-4 mx-[100px]">
             {reviews &&
-              reviews.map((review, index) => (
+              reviews.map((review) => (
                 <div className="hotel-review-specific" key={review._id}>
                   <div className="personal-review">
                     <div className="d-flex justify-content-between h-[60px] mb-[10px]">
@@ -208,7 +241,7 @@ const Startup_review = () => {
                             );
                             setEditReviewId(review._id);
                             setEditReviewDetail(review.detail);
-                            setEditReviewStars(review.stars); // Make sure to add this line if it was missing
+                            setEditReviewStars(review.stars);
                           }}
                         >
                           <FaEdit />
@@ -251,15 +284,15 @@ const Startup_review = () => {
                             ))}
                           </div>
                         </div>
-                        <div className="flex justify-end">
+                        <div className="flex justify-end space-x-2">
                           <button
-                            className="btnn"
+                            className="btnn2"
                             onClick={() => handleEdit(review._id)}
                           >
                             Submit
                           </button>
                           <button
-                            className="btnn1"
+                            className="btnn"
                             onClick={() => setEditReviewId(null)}
                           >
                             Cancel
@@ -279,13 +312,13 @@ const Startup_review = () => {
                         </p>
                         <div className="flex justify-end space-x-2">
                           <button
-                            className="btnn"
+                            className="btnn1"
                             onClick={() => handleDelete(review._id)}
                           >
                             Delete
                           </button>
                           <button
-                            className="btnn1"
+                            className="btnn"
                             onClick={() => setDeleteReviewId(null)}
                           >
                             Cancel

@@ -19,6 +19,7 @@ const DisplayProfile = ({ img }) => {
   const [contact, setContactNo] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [doc, setdoc] = useState(false)
   const [pincode, setPincode] = useState("");
   const [countryCode, setCountryCode] = useState("91+");
   const [citiesArray, setCitiesArray] = useState([]);
@@ -38,27 +39,30 @@ const DisplayProfile = ({ img }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchDocumentTypes = async () => {
-      const token = localStorage.getItem("token"); // Get token from localStorage
-      try {
-        const response = await axios.get(
-          "https://oneclick-sfu6.onrender.com/api/Document/getDocument",
-          {
-            headers: {
-              authorization: token,
-            },
-          }
-        );
-        if (response.data.document && response.data.document.length > 0) {
-          const document = response.data.document[0];
-          setDocumentType(document.document_type);
-          setDocumentUrl(document.document_photo);
+  const fetchDocumentTypes = async () => {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+    try {
+      const response = await axios.get(
+        "https://oneclick-sfu6.onrender.com/api/Document/getDocument",
+        {
+          headers: {
+            authorization: token,
+          },
         }
-      } catch (error) {
-        console.error("Error fetching document types:", error);
+      );
+      if (response.data.document && response.data.document.length > 0) {
+        const document = response.data.document[0];
+        setdoc(true);
+        setDocumentType(document.document_type);
+        setDocumentUrl(document.document_photo);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching document types:", error);
+    }
+  };
+
+  useEffect(() => {
+
 
     fetchDocumentTypes();
 
@@ -203,6 +207,7 @@ const DisplayProfile = ({ img }) => {
       const responseData = await response.json();
       console.log("resp:", responseData);
       setDocumentUrl(responseData.document_photo);
+      setdoc(true);
       console.log("documenturl", documentUrl);
 
       if (response.ok) {
@@ -210,6 +215,7 @@ const DisplayProfile = ({ img }) => {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,
         });
+        fetchDocumentTypes();
         // Optionally update state or perform any additional actions
       } else {
         toast.error("Failed to update document", {
@@ -433,6 +439,8 @@ const DisplayProfile = ({ img }) => {
   };
   const handleViewDocument = () => {
     // Open documentUrl in a new tab
+    console.log('document urel',documentUrl);
+    
     window.open(documentUrl, "_blank");
   };
 
@@ -737,7 +745,7 @@ const DisplayProfile = ({ img }) => {
             </div>
           </div>
           <div className="d-flex justify-content-end mb-sm-5 mb-3">
-            {documentUrl && (
+            {(documentUrl || doc)  && (
               <div>
                 <div className="profile-edit-buttons">
                   <button

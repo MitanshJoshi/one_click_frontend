@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../BASE_URL";
 
-const Startup_investments = () => {
+const Startup_investors = () => {
     const { _id } = useParams();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedInvestment, setSelectedInvestment] = useState(null);
@@ -196,13 +196,8 @@ const Startup_investments = () => {
               style={{ marginTop: "40px" }}
             >
               <div className="startup-products-header">
-                <h6>All Investments</h6>
+                <h6>All Investors</h6>
                 <img src="" alt="" />
-              </div>
-              <div className="d-flex">
-                {!investorToken?<div className="startup-product-add-button">
-                  <button onClick={handleAddInvestment}>+ Add Investment</button>
-                </div>:<></>}
               </div>
             </div>
 
@@ -223,63 +218,25 @@ const Startup_investments = () => {
                       </div>
                       <div className="product-info">
                         <div>
-                          <p>Date Available</p>
+                          <p>Investment Date</p>
                         </div>
                       </div>
                       <div className="product-info">
                         <div>
-                          <p>Other Details</p>
+                          <p>Firm Name</p>
                         </div>
                       </div>
-                    {!investorToken?  <div className="product-info">
+                      <div className="product-info">
                         <div>
-                          <p>Actions</p>
+                          <p>Brand Name</p>
                         </div>
-                      </div>:<></>}
-                    </div>
-                    {investments.map((investment) => (
-                      <div
-                        key={investment._id}
-                        className="product-list-view product-list-view-content d-flex align-item-center"
-                      >
-                        <div className="product-info">
-                          <h5 className="mb-0" >
-                            {investment.investor_name}
-                          </h5>
-                        </div>
-                        <div className="product-info">
-                          <h5 className="">
-                            {investment.investment_amount}
-                          </h5>
-                        </div>
-                        <div className="product-info">
-                          <h5 className="mb-0" >
-                            {new Date(investment.date_when_available).toLocaleDateString()}
-                          </h5>
-                        </div>
-                        <div className="product-info">
-                          <h5 className="mb-0" >
-                            {investment.other_details}
-                          </h5>
-                        </div>
-                        {!investorToken?<div className="product-info">
-                          <FontAwesomeIcon
-                            icon={faEdit}
-                            className="me-3 cursor-pointer"
-                            onClick={() => handleEdit(investment)}
-                          />
-                          <FontAwesomeIcon
-                            icon={faTrashAlt}
-                            className="cursor-pointer"
-                            onClick={() => {
-                              setmyData("investment");
-                              setSelectedInvestment(investment._id);
-                              setShowConfirmation(true);
-                            }}
-                          />
-                        </div>:<></>}
                       </div>
-                    ))}
+                      <div className="product-info">
+                        <div>
+                          <p>Trade Name</p>
+                        </div>
+                      </div>
+                    </div>
                     {portfolios.map((investment) => (
                       <div
                         key={investment._id}
@@ -305,22 +262,16 @@ const Startup_investments = () => {
                             {investment.investor.FirmName}
                           </h5>
                         </div>
-                        {!investorToken?<div className="product-info">
-                          <FontAwesomeIcon
-                            icon={faEdit}
-                            className="me-3 cursor-pointer"
-                            onClick={() => handleEdit(investment)}
-                          />
-                          <FontAwesomeIcon
-                            icon={faTrashAlt}
-                            className="cursor-pointer"
-                            onClick={() => {
-                              setmyData("portfolio");
-                              setSelectedInvestment(investment._id);
-                              setShowConfirmation(true);
-                            }}
-                          />
-                        </div>:<></>}
+                        <div className="product-info">
+                          <h5 className="mb-0" >
+                            {investment.startupBrandName}
+                          </h5>
+                        </div>
+                        <div className="product-info">
+                          <h5 className="mb-0" >
+                            {investment.startupTradeName}
+                          </h5>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -367,119 +318,8 @@ const Startup_investments = () => {
           </div>
         </div>
       </section>
-
-      {/* Modal for Edit Investment */}
-      {editingInvestment && (
-        <Modal show={true} onHide={() => setEditingInvestment(null)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Investment</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form onSubmit={handleEditInvestment}>
-              <div className="form-group mb-3">
-                <label>Investor Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="investor_name"
-                  value={editingInvestment.investor_name}
-                  onChange={(e) =>
-                    setEditingInvestment({
-                      ...editingInvestment,
-                      investor_name: e.target.value,
-                    })
-                  }
-                  required
-                />
-              </div>
-              <div className="form-group mb-3">
-                <label>Investment Amount</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  name="investment_amount"
-                  value={editingInvestment.investment_amount}
-                  onChange={(e) =>
-                    setEditingInvestment({
-                      ...editingInvestment,
-                      investment_amount: e.target.value,
-                    })
-                  }
-                  required
-                />
-              </div>
-              <div className="form-group mb-3">
-                <label>Date When Available</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  name="date_when_available"
-                  value={new Date(editingInvestment.date_when_available)
-                    .toISOString()
-                    .substring(0, 10)}
-                  onChange={(e) =>
-                    setEditingInvestment({
-                      ...editingInvestment,
-                      date_when_available: new Date(e.target.value).toISOString(),
-                    })
-                  }
-                  required
-                />
-              </div>
-              <div className="form-group mb-3">
-                <label>Other Details</label>
-                <textarea
-                  className="form-control"
-                  name="other_details"
-                  value={editingInvestment.other_details}
-                  onChange={(e) =>
-                    setEditingInvestment({
-                      ...editingInvestment,
-                      other_details: e.target.value,
-                    })
-                  }
-                ></textarea>
-              </div>
-              <div className="startup-product-add-button">
-              <button type="submit" className="btn btn-primary">
-                Save Changes
-              </button>
-              </div>
-            </form>
-          </Modal.Body>
-        </Modal>
-      )}
-
-      {/* Confirmation Modal for Deletion */}
-      {showConfirmation && (
-        <div className="confirmation-modal">
-          <div className="confirmation-content">
-            <h1 className="confirmation-message">
-              Are you sure you want to delete this Investment?
-            </h1>
-            <div className="buttons-container">
-              <button className="btng" onClick={myData==="portfolio"?handleDeletePortfolio:handleDeleteInvestment}>Yes</button>
-              <button className="btnr" onClick={handleCancelDelete}>No</button>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* <Modal show={showConfirmation} onHide={handleCancelDelete}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this investment?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancelDelete}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDeleteInvestment}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </>
   );
 };
 
-export default Startup_investments;
+export default Startup_investors;

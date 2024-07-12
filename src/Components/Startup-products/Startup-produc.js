@@ -352,13 +352,13 @@ const Startup_product = () => {
                 <div className="ms-4">
                   <FontAwesomeIcon
                     icon={faList}
-                    className="startup-add-product-icons"
+                    className="startup-add-product-icons cursor-pointer"
                     onClick={handleListview}
                     style={activeView === 'list' ? listStyle : inactiveStyle}
                   />
                   <FontAwesomeIcon
                     icon={faTableCells}
-                    className="startup-add-product-icons startup-add-product-icons-2"
+                    className="startup-add-product-icons startup-add-product-icons-2 cursor-pointer"
                     onClick={handleGridview}
                     style={activeView === 'grid' ? gridStyle : inactiveStyle}
                   />

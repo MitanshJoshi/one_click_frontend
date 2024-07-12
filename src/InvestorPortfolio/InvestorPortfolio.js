@@ -278,6 +278,7 @@ const InvestorPortfolio = () => {
               </div>
             )}
           </div>
+          
         </div>
       </section>
 
@@ -564,22 +565,36 @@ const InvestorPortfolio = () => {
         </form>
       </Modal.Body>
     </Modal>
+    
 
       {/* Modal for Delete Confirmation */}
-      <Modal show={showConfirmation} onHide={handleCancelDelete}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Portfolio</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this portfolio?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancelDelete}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleDeletePortfolio}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      {showConfirmation && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+      <h4 className="text-xl font-bold text-gray-800 mb-4">
+        Delete Portfolio
+      </h4>
+      <p className="text-gray-600 mb-4">
+        Are you sure you want to delete this portfolio?
+      </p>
+      <div className="flex justify-end space-x-2">
+        <button
+          className="btnn1"
+          onClick={handleDeletePortfolio}
+        >
+          Delete
+        </button>
+        <button
+          className="btnn"
+          onClick={handleCancelDelete}
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       <ToastContainer />
     </>
