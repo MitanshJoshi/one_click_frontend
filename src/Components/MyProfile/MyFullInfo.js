@@ -443,144 +443,64 @@ const MyFullInfo = () => {
                 ) : (
                   <>
                     {startups && startups.length > 0 && !investorToken ? (
-                      <div>
-                        <div className="row mt-5 mx-[100px]">
-                          {startups &&
-                            startups.map((e) => (
-                              <div className="col-12 col-md-6 mb-4" key={e._id}>
-                                <div className="shadow-startup shadow">
-                                  <div className="d-flex justify-content-between mb-4">
-                                    <div className="d-flex align-items-center">
-                                      <img
-                                        src={e.startupLogoURL}
-                                        alt=""
-                                        style={{
-                                          width: "50px",
-                                          height: "50px",
-                                          borderRadius: "50%",
-                                        }}
-                                      />{" "}
-                                      {/* Corrected */}
-                                      <div style={{ marginLeft: "10px" }}>
-                                        <p className="mb-0 fw-bold">
-                                          {e.startupName}
-                                        </p>
-                                        <p
-                                          className="mb-0"
-                                          style={{
-                                            color: "#000000",
-                                            opacity: "0.5",
-                                          }}
-                                        >
-                                          {e.categoryName},{e.subcategoryName}
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <div>
-                                      <span>3 </span>
-                                      <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "gold" }}
-                                      />
-                                      <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "gold" }}
-                                      />
-                                      <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "gold" }}
-                                      />
-                                      <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "gray" }}
-                                      />
-                                      <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{ color: "gray" }}
-                                      />
-                                    </div>
-                                  </div>
-                                  <hr />
-                                  <div className="d-flex mt-3">
-                                    <div>
-                                      <FontAwesomeIcon
-                                        icon={faLocationDot}
-                                        style={{ color: "#74CC7E" }}
-                                      />
-                                      <span
-                                        className="font-[500] text-[15px]"
-                                        style={{ marginLeft: "10px" }}
-                                      >
-                                        {e.city},
-                                      </span>
-                                      <span
-                                        className="font-[500] text-[15px]"
-                                        style={{ marginLeft: "10px" }}
-                                      >
-                                        {e.state},
-                                      </span>
-                                      <span
-                                        className="font-[500] text-[15px]"
-                                        style={{ marginLeft: "10px" }}
-                                      >
-                                        {e.country}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="d-flex justify-content-between mt-3">
-                                    <div className="w-[400px]">
-                                      <FontAwesomeIcon
-                                        icon={faLocationDot}
-                                        style={{ color: "#74CC7E" }}
-                                      />
-                                      <span
-                                        className="font-[500] text-[15px]"
-                                        style={{ marginLeft: "10px" }}
-                                      >
-                                        {e.address}
-                                      </span>
-                                    </div>
-                                    <div>
-                                      <p
-                                        className="text-end"
-                                        style={{ fontWeight: "600" }}
-                                      >
-                                        {e.inqubationcenterName} <br />{" "}
-                                        {e.inqubationCenterCity}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div className="flex justify-between items-center mt-2">
-                                    <div className="add-start-up-button mt-sm-5 mt-0 flex justify-center items-center">
-                                      <button
-                                        onClick={() => handleNavigate(e._id)}
-                                        className=""
-                                      >
-                                        VIEW
-                                      </button>
-                                    </div>
-                                    <div>
-                                      <button className="edit-icon me-3">
-                                        <img
-                                          src="./edit.png"
-                                          alt=""
-                                          onClick={() => handleEdit(e._id)}
-                                        />
-                                      </button>
-                                      <button className="delete-icon">
-                                        <img
-                                          src="./delete.svg"
-                                          alt=""
-                                          onClick={() => handleDelete(e._id)}
-                                        />
-                                      </button>
-                                    </div>
+                      <div className="container mx-auto mt-5 lg:w-[90%] w-[120%]">
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        {startups.map((e) => (
+                          <div className="col-12 mb-4 " key={e._id}>
+                            <div className="shadow-startup shadow p-4">
+                              <div className="flex justify-between mb-4">
+                                <div className="flex items-center">
+                                  <img
+                                    src={e.startupLogoURL}
+                                    alt=""
+                                    className="w-12 h-12 rounded-full"
+                                  />
+                                  <div className="ml-4">
+                                    <p className="font-bold">{e.startupName}</p>
+                                    <p className="text-sm text-gray-500">{e.categoryName}, {e.subcategoryName}</p>
                                   </div>
                                 </div>
+                                <div className="flex items-center">
+                                  <span className="text-yellow-500">
+                                    <FontAwesomeIcon icon={faStar} />
+                                    <FontAwesomeIcon icon={faStar} />
+                                    <FontAwesomeIcon icon={faStar} />
+                                  </span>
+                                  <span className="text-gray-300 ml-1">
+                                    <FontAwesomeIcon icon={faStar} />
+                                    <FontAwesomeIcon icon={faStar} />
+                                  </span>
+                                </div>
                               </div>
-                            ))}
-                        </div>
+                              <hr className="my-2" />
+                              <div className="flex items-center mb-2">
+                                <FontAwesomeIcon icon={faLocationDot} className="text-green-500" />
+                                <span className="ml-2">{e.city}, {e.state}, {e.country}</span>
+                              </div>
+                              <div className="flex items-center mb-2">
+                                <FontAwesomeIcon icon={faLocationDot} className="text-green-500" />
+                                <span className="ml-2 min-h-20 flex items-center">{e.address}</span>
+                              </div>
+                              <div className="flex justify-between items-center mt-4">
+                                <button onClick={() => handleNavigate(e._id)} className="backk text-white px-4 py-2 rounded">
+                                  VIEW
+                                </button>
+                                {!investorToken && (
+                                  <div className="flex">
+                                    <button className="edit-icon" onClick={() => handleEdit(e._id)}>
+                                      <img src="./edit.png" alt="Edit" />
+                                    </button>
+                                    <button className="delete-icon ml-3" onClick={() => handleDelete(e._id)}>
+                                      <img src="./delete.svg" alt="Delete" />
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
+                    </div>
                     ) : investorToken ? (
                       <StartupCards />
                     ) : (

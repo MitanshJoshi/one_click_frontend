@@ -472,8 +472,8 @@ export default function Userinquirychat() {
                                     className=
                                     {`flex ${
                                       e.senderId === userId
-                                        ? "justify-start"
-                                        : "justify-end"
+                                      ?"justify-end"
+                                        :"justify-start"
                                     } p-3`}
                                   >
                                     <div

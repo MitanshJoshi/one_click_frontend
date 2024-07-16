@@ -209,7 +209,7 @@ const InvestorPortfolio = () => {
                           <h5 className="">{portfolio.startupBrandName}</h5>
                         </div>
                         <div className="product-info">
-                          <h5 className="">{portfolio.startupName}</h5>
+                          <h5 className="">{portfolio.startupName?portfolio.startupName:portfolio.startupBrandName}</h5>
                         </div>
                         <div className="product-info">
                           <h5 className="mb-0 ">{portfolio.InvestedAmount}</h5>

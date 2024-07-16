@@ -21,6 +21,7 @@ export default function AddPortfolio() {
   const [statesArray, setStatesArray] = useState([]);
   const [citiesArray, setCitiesArray] = useState([]);
   const [investedAmount, setInvestedAmount] = useState("");
+  const [manualEntry, setManualEntry] = useState(false); 
   const [investmentDate, setInvestmentDate] = useState("");
   const [country, setCountry] = useState("");
   const [statee, setStatee] = useState("");
@@ -238,6 +239,7 @@ export default function AddPortfolio() {
   };
 
   const handleStartup = (e) => {
+
     setStartupId(e.target.value);
   };
 
@@ -258,7 +260,9 @@ export default function AddPortfolio() {
     formData.append("InvestedAmount", investedAmount);
     formData.append("InvestmentDate", investmentDate);
     formData.append("InvestorId", localStorage.getItem("userid"));
-    formData.append("startupId", startupId);
+    if (!manualEntry && startupId) {
+      formData.append("startupId", startupId);
+    }
     files.forEach((file) => {
       formData.append("file", file);
     });
@@ -336,22 +340,65 @@ export default function AddPortfolio() {
                     style={{ width: "559px", height: "46px" }}
                   ></input>
                 </div>
-                <div className="mb-1">
-                  <p className="mb-1">Select Startup</p>
-                  <select
-                    className="form-control mb-3"
-                    onChange={handleStartup}
-                    value={startupId}
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select a Startup</option>
-                    {startups.map((startup) => (
-                      <option key={startup._id} value={startup._id}>
-                        {startup.startupName}
-                      </option>
-                    ))}
-                  </select>
+                <div className="">
+                {!manualEntry ? (
+                  <div className="">
+                     <p className="mb-1">Startup Name</p>
+                    <select
+                      name="startupId"
+                      id="startupId"
+                      value={startupId}
+                      onChange={handleStartup}
+                      className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
+                    >
+                      <option value="">Select Startup</option>
+                      {startups.map((startup) => (
+                        <option key={startup._id} value={startup._id}>
+                          {startup.startupName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <div className="">
+                     <p className="mb-1">Startup Name</p>
+                    <input
+                      type="text"
+                      name="startupName"
+                      id="startupName"
+                      value={startupId}
+                      onChange={handleStartup}
+                     className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
+                      required
+                    />
+                  </div>
+                )}
+                <div className="mt-2">
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="entryMode"
+                      value="dropdown"
+                      checked={!manualEntry}
+                      onChange={() => setManualEntry(false)}
+                      className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    />
+                    <span className="">Select from Dropdown</span>
+                  </label>
+                  <label className="inline-flex items-center ml-6">
+                    <input
+                      type="radio"
+                      name="entryMode"
+                      value="manual"
+                      checked={manualEntry}
+                      onChange={() => setManualEntry(true)}
+                      className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                    />
+                    <span className="">Enter Manually</span>
+                  </label>
                 </div>
+              </div>
+
                 <div className="mb-1">
                   <p className="mb-1">Invested Amount</p>
                   <input

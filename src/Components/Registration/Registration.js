@@ -36,63 +36,28 @@ const RegistrationPage = () => {
 
   const fetchDetailsFromPincode = async (pincode) => {
     try {
-      const res = await fetch(
-        `https://api.postalpincode.in/pincode/${pincode}`,
-        {
-          mode: "no-cors",
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // Check if the response is ok before trying to parse JSON
-      // if (!res.ok) {
-      //   throw new Error(`HTTP error! Status: ${res.status}`);
-      // }
-
+      const res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`, {
+        mode: "cors", // Use "cors" mode
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
       const response = await res.json();
-      console.log("response is", response);
-
-      // console.log(response[0]?.PostOffice[0]);
-      // const data = response[0]?.PostOffice[0];
-
-      // if (data) {
-      //   console.log(data); // Log the fetched data for verification
-
-      //   // Extract country, state, and city from the API response
-      //   const countryName = data.Country;
-      //   const stateName = data.State;
-      //   const cityName = data.District;
-
-      //   // Find the corresponding country object
-      //   const selectedCountry = Countries.find((country) => country.name === countryName);
-      //   const countryStates = selectedCountry?.states || [];
-
-      //   // Find the corresponding state object
-      //   const selectedState = countryStates.find((state) => state.name === stateName);
-      //   const stateCities = selectedState?.cities || [];
-
-      //   // Update form data and states
-      //   setState(stateName);
-      //   setCity(cityName);
-
-      //   // setFormData((prevData) => ({
-      //   //   ...prevData,
-      //   //   country: countryName,
-      //   //   state: stateName,
-      //   //   city: cityName,
-      //   //   pincode: pincode,
-      //   // }));
-      // } else {
-      //   console.error("No PostOffice data found for the provided pincode.");
-      // }
+      console.log(response);
+      
+      const data = response[0]?.PostOffice[0];
+      console.log(data);
+      
     } catch (error) {
       console.error("Error fetching pincode details:", error);
     }
   };
-
   useEffect(() => {
     fetchDetailsFromPincode("380004");
   }, []);
