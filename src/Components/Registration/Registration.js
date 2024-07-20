@@ -154,7 +154,15 @@ const RegistrationPage = () => {
       return;
     }
 
-    if (!password || password.length<6) {
+    if(password.length<6)
+    {
+      toast.error("Password must be atleast 6 digit long", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 1000,
+      });
+      return;
+    }
+    if (!password) {
       toast.error("Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -162,7 +170,7 @@ const RegistrationPage = () => {
       return;
     }
 
-    if (!confirmPassword || confirmPassword.length<6) {
+    if (!confirmPassword) {
       toast.error("Confirm Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
