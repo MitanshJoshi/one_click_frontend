@@ -309,13 +309,13 @@ export default function AddPortfolio() {
       <StartUpProfile onBackButtonClick={() => navigate(-1)} />
       <div>
         <ToastContainer />
-        <div className="d-flex text-[30px] justify-content-between ml-[200px] pt-[30px]">
+        <div className="d-flex text-[30px] justify-content-between  lg:ml-[200px] pt-[30px]">
           <h1 className="mb-5" style={{ fontWeight: "600" }}>
             Add Portfolio
           </h1>
         </div>
         <div className="flex justify-center items-center">
-          <div className="row gap-0">
+          <div className="row gap-0 flex-col lg:flex-row">
             <div className="col-6 d-flex align-item-center justify-content-center">
               <div
                 className="add-award-form"

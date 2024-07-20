@@ -136,79 +136,88 @@ const EditInvestment = () => {
       });
     }
   };
+  const handleback = () => {
+    localStorage.setItem("myData", "investment");
+    navigate(-1);
+};
 
   return (
     <>
-      <SecondNavbar />
-      <StartUpProfile />
-      <div className="container p-11">
-        <ToastContainer />
-        <div className="d-flex justify-content-between mb-4 ml-[120px] pt-[30px] text-[30px]">
-          <h2 style={{ fontWeight: "600" }}>Edit Investment</h2>
-        </div>
-        <div className="row flex justify-center items-center">
-          <div className="col-lg-5 mb-4 mt-[-23px]">
-            <div className="form-group">
-              <label htmlFor="investorName">Investor Name</label>
-              <input
-                type="text"
-                className="mb-3 form-control"
-                id="investorName"
-                style={{ width: "559px", height: "46px" }}
-                value={investorName}
-                onChange={handleInvestorName}
-              />
+            <SecondNavbar />
+            <StartUpProfile />
+            <div className="container p-11">
+                <ToastContainer />
+                <div className="d-flex justify-content-between mb-4 lg:ml-[120px] pt-[30px] text-[30px]">
+                    <h2 style={{ fontWeight: "600" }}>Add Investment</h2>
+                </div>
+                <div className="row flex justify-center items-center">
+                    <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+                        <div className="form-group">
+                            <label htmlFor="investorName">Investor Name</label>
+                            <input
+                                type="text"
+                                className="mb-3 form-control"
+                                id="investorName"
+                                style={{ width: "100%", height: "46px" }}
+                                value={investorName}
+                                onChange={handleInvestorName}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="investmentAmount">Investment Amount</label>
+                            <input
+                                type="text"
+                                className="mb-3 form-control"
+                                id="investmentAmount"
+                                value={investmentAmount}
+                                style={{ width: "100%", height: "46px" }}
+                                onChange={handleInvestmentAmount}
+                            />
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+                        <div className="form-group">
+                            <label htmlFor="dateAvailable">Date Available</label>
+                            <input
+                                type="date"
+                                className="form-control mb-3"
+                                style={{ width: "100%", height: "46px" }}
+                                required
+                                id="dateAvailable"
+                                value={dateAvailable}
+                                onChange={handleDateAvailable}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="otherDetails">Other Details</label>
+                            <textarea
+                                className="form-control"
+                                id="otherDetails"
+                                rows="3"
+                                value={otherDetails}
+                                onChange={handleOtherDetails}
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-end mt-5 mb-5 gap-3">
+                    <button
+                        onClick={handleSubmit}
+                        className="add-award-submit-button"
+                        style={{ height: "50px", width: "267px" }}
+                    >
+                        SUBMIT
+                    </button>
+                    <button
+                        onClick={handleback}
+                        className="add-award-submit-button"
+                        style={{ height: "50px", width: "267px" }}
+                    >
+                        BACK
+                    </button>
+                </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="investmentAmount">Investment Amount</label>
-              <input
-                type="text"
-                className="mb-3 form-control"
-                id="investmentAmount"
-                value={investmentAmount}
-                style={{ width: "559px", height: "46px" }}
-                onChange={handleInvestmentAmount}
-              />
-            </div>
-          </div>
-          <div className="col-lg-5 mb-4">
-            <div className="form-group">
-              <label htmlFor="dateAvailable">Date Available</label>
-              <input
-                type="date"
-                className="form-control mb-3"
-                style={{ width: "559px", height: "46px" }}
-                required
-                id="dateAvailable"
-                value={dateAvailable}
-                onChange={handleDateAvailable}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="otherDetails">Other Details</label>
-              <textarea
-                className="form-control"
-                id="otherDetails"
-                rows="3"
-                value={otherDetails}
-                onChange={handleOtherDetails}
-              ></textarea>
-            </div>
-          </div>
-        </div>
-        <div className="row mr-[105px]">
-          <div className="d-flex justify-end mt-5 mb-5">
-            <button
-              onClick={handleSubmit}
-              className="add-award-submit-button"
-              style={{ height: "50px", width: "267px" }}
-            >
-              SUBMIT
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
+        </>
   );
 };
 

@@ -138,7 +138,7 @@ const LoginPage = () => {
       <div className="login">
         <div className="login-wrapper">
           <div className="row w-75 h-100 gx-0 ">
-            <div className="col-6 h-100 login11" 
+            <div className="col-6 h-100 login11 lg:w-[50%] w-[100%]" 
             >
               <div className="login-form h-100">
                 <div className="login-header">

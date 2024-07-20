@@ -118,7 +118,7 @@ const Inquiryform = () => {
       <section className="bg-gray-100 min-h-screen py-8">
         <ToastContainer />
         <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden w-[40%]">
+          <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden lg:w-[40%]">
             <h3 className="text-2xl font-semibold text-center text-white py-4 backk">
               Inquiry Form
             </h3>

@@ -43,6 +43,14 @@ const InquiryByStartup = () => {
   const { initializeSocket } = useSocketContext();
   const id=useParams();
   console.log('id iss',id);
+
+
+
+
+  const handleE = (inquiry,data) => {
+    // const navigate = useNavigate();
+    navigate(`/editinquiry/${inquiry._id}`,{state:{data:data}}); 
+  };
   
 
 
@@ -215,7 +223,7 @@ const InquiryByStartup = () => {
               <FontAwesomeIcon
                 icon={faEdit}
                 className="me-3 cursor-pointer"
-                onClick={() => handleEdit(item)}
+                onClick={() => handleE(item)}
               />
               <FontAwesomeIcon
                 icon={faTrashAlt}
