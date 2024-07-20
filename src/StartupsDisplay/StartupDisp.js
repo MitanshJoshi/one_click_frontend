@@ -55,7 +55,7 @@ const StartupCards = () => {
 
   return (
     <div>
-      <div className="row mt-5 mx-[100px]">
+      <div className="row mt-5 lg:mx-[100px]">
         {startups &&
           startups.map((e) => (
             <div className="col-12 col-md-6 mb-4" key={e._id}>
@@ -84,7 +84,7 @@ const StartupCards = () => {
                       </p>
                     </div>
                   </div>
-                  <div>
+                  <div className='min-w-[105px]'>
                     <span>3 </span>
                     <FontAwesomeIcon icon={faStar} style={{ color: 'gold' }} />
                     <FontAwesomeIcon icon={faStar} style={{ color: 'gold' }} />
@@ -137,8 +137,8 @@ const StartupCards = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-2">
-                  <div className="add-start-up-button mt-sm-5 mt-0 flex justify-center items-center">
-                    <button onClick={() => handleNavigate(e._id)}>VIEW</button>
+                  <div className="text-white mt-sm-5 mt-0 flex justify-center items-center">
+                    <button className='backk py-2 px-3 rounded-lg' onClick={() => handleNavigate(e._id)}>VIEW</button>
                   </div>
                  {!investorToken? <div>
                     <button className="edit-icon me-3">
@@ -155,8 +155,8 @@ const StartupCards = () => {
                         onClick={() => handleDelete(e._id)}
                       />
                     </button>
-                  </div>: <div className="add-start-up-button mt-sm-5 mt-0 flex justify-center items-center">
-                    <button onClick={() => handleInquiry(e._id)}>Inquiry Now</button>
+                  </div>: <div className="text-white mt-sm-5 mt-0 flex justify-center items-center">
+                    <button className='backk py-2 px-3 rounded-lg' onClick={() => handleInquiry(e._id)}>Inquiry Now</button>
                   </div>}
                 </div>
               </div>

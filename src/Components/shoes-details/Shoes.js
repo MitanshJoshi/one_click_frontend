@@ -283,7 +283,7 @@ const Shoes = () => {
         <ToastContainer />
         <div className="row mt-5 pt-4">
           {/* Left Section */}
-          <div className="col-4">
+          <div className="col-4 block lg:w-[33%] w-[100%]">
             {/* Product Images and Supplier Details */}
             <div>
               {/* Product Image */}
@@ -352,13 +352,13 @@ const Shoes = () => {
           </div>
 
           {/* Right Section */}
-          <div className="col-8">
+          <div className="col-8 lg:w-[67%] w-[100%] lg:mt-0 mt-3">
             {/* Product Details and Related Products */}
             <div>
               <div className="details-product-title mb-4">
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
-                    <h3>{shoes.productName}</h3>
+                    <h3><strong>{shoes.productName}</strong></h3>
                     <FontAwesomeIcon icon={faHeart} />
                     <span className="ms-1">Add to my wishlist</span>
                   </div>
@@ -368,36 +368,6 @@ const Shoes = () => {
                 </div>
               </div>
               <div>
-                <div className="row detail-shoe-uses">
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <h6 className="mb-0">Occasion</h6>
-                      <p className="mb-0">Sports</p>
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <h6 className="mb-0" style={{ width: "60px" }}>
-                        Color
-                      </h6>
-                      <p className="mb-0">Red</p>
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <h6 className="mb-0">Size</h6>
-                      <p className="mb-0">12</p>
-                    </div>
-                  </div>
-                  <div className="col-6">
-                    <div className="d-flex align-items-center">
-                      <h6 className="mb-0" style={{ width: "60px" }}>
-                        Type
-                      </h6>
-                      <p className="mb-0">Running Shoes, Womens Shoes</p>
-                    </div>
-                  </div>
-                </div>
                 <div className="d-flex justify-content-between mt-5 mb-5">
                   <div className="detail-product-price">
                     <p className="mb-0">$ {shoes.productprice}</p>
@@ -413,31 +383,6 @@ const Shoes = () => {
                 </div>
                 <div className="mt-5">
                   {/* Product Specifications */}
-                  <div className="detail-specification">
-                    <div className="detail-specification-title mb-4">
-                      <h6>Specification</h6>
-                    </div>
-                    <div className="detail-specifications">
-                      <div className="mb-3 d-flex justify-content-between">
-                        <h6>Product Model</h6>
-                        <p className="text-end">Escaper Mesh</p>
-                      </div>
-                      <div className="mb-3 d-flex justify-content-between">
-                        <h6>Manufacture details</h6>
-                        <p className="text-end">
-                          48/B, Batahouse, malaseri Bhat-gandhinagar
-                        </p>
-                      </div>
-                      <div className="mb-3 d-flex justify-content-between">
-                        <h6>Product weight</h6>
-                        <p className="text-end">0.7190kg, 719gm</p>
-                      </div>
-                      <div className="mb-3 d-flex justify-content-between">
-                        <h6>Net Quantity</h6>
-                        <p className="text-end">1N</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div className="mt-5">
                   {/* Related Products */}
@@ -447,7 +392,7 @@ const Shoes = () => {
                     </div>
                     <div className="row">
                       {otherProducts.map((product) => (
-                        <div className="col-md-4" key={product._id}>
+                        <div className="col-md-4 border-gray-200 border-[1px] rounded-lg ml-1 mt-1 lg:w-[32.5%]" key={product._id}>
                           <div className="detail-related-product-card mb-4">
                             <img
                               src="/shoes.png"
@@ -496,47 +441,13 @@ const Shoes = () => {
 
         {/* Reviews Section */}    
         <div className="mt-10">
-  <div className="review-list-title mb-4 pt-30 pl-0 mx-[70px]">
+  <div className="review-list-title mb-4 pt-30 pl-0 lg:mx-[70px]">
     <h3>Reviews</h3>
     <button className="cursor-pointer backk text-white font-bold py-2 px-4 rounded"  onClick={() => setShowAddReviewModal(true)}>
       Add Review
     </button>
   </div>
-  {/* <div>      
-    {reviews.map((review, index) => (
-      <div className="mb-4 mx-[300px]" key={index}>
-        <div className="startup-user-review-detail">
-          <div className="flex justify-between mb-4">
-            <div className="startup-user-review-detail-name flex items-center">
-              <div>
-                <img src="/review.png" alt="" />
-              </div>
-              <div className="ml-3">
-                <h6 className="mb-0">{review.name}</h6>
-                <p className="mb-0">{review.reviews}</p>
-              </div>
-            </div>
-            <div className="text-end startup-user-review-detail-time">
-              <span>{review.stars}</span><FontAwesomeIcon icon={faStar} className="ml-2 text-gold" />
-              <p>{new Date(review.createdAt).toLocaleString()}</p>
-            </div>
-          </div>
-          <div className="startup-user-review-description flex justify-between items-center">
-            <p className="mb-0">{review.detail}</p>
-            <div className="flex">
-              <button className="round-icon-border" onClick={() => editReview(review._id)}>
-                Edit
-              </button>
-              <button className="round-icon-border ml-3" onClick={() => deleteReview(review._id)}>
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div> */}
-  <div className=' grid grid-cols-2 gap-4 mx-[200px]'>
+  <div className=' grid lg:grid-cols-2 gap-4 lg:mx-[200px]'>
           {reviews && reviews?.map((review, index) => (
                     <div className="hotel-review-specific">
                       <div className="personal-review">

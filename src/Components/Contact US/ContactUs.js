@@ -10,12 +10,12 @@ const ContactUs = () => {
     <>
     <SecondNavbar />
     <ToastContainer />
-    <div className="container form-start">
+    <div className="container flex items-center justify-center">
       <div className="login">
         <div className="login-wrapper">
           <div className="row w-75 h-100 gx-0 ">
             <div className="col-6 h-100 login">
-              <div className="login-form h-100">
+              <div className="login-form lg:w-[100%] w-[450px] mx-auto h-100">
                 <div className="login-header"></div>
                 <div className="mb-3">
                   <div className="text-center FormHead pt-5">
@@ -112,8 +112,8 @@ const ContactUs = () => {
                 </div>
               </div>
             </div>
-            <div className="col-6 h-[492px]">
-              <div className="login-image-section h-100">
+            <div className="col-6 lg:h-[492px]">
+              <div className="login-image-section h-100 ">
                 <img src="./map.png" className="login-background-image" />
                 <div className="image-content" style={{ position: "relative" }}>
                   <div

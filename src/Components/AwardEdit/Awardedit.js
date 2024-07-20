@@ -199,13 +199,13 @@ const { state } = useLocation();
       <StartUpProfile onBackButtonClick={displayWishList} />
       <ToastContainer />
             <div>
-              <div className="d-flex justify-content-between ml-[200px] pt-[30px] text-[30px]">
+              <div className="d-flex justify-content-between lg:ml-[200px] pt-[30px] text-[30px]">
                 <h2 className="mb-5" style={{ fontWeight: "600" }}>
                   Edit Awards
                 </h2>
               </div>
-              <div className=" mx-[170px]">
-                <div className="row">
+              <div className=" lg:mx-[170px]">
+                <div className="row flex-col lg:flex-row">
                   <div className="col-6">
                     <div className="add-award-form">
                       <div className="mb-4">
@@ -227,6 +227,7 @@ const { state } = useLocation();
                           rows="5"
                           value={description}
                           onChange={handlecompetition}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         ></textarea>
                       </div>
                       <div className="mb-4">
@@ -247,16 +248,17 @@ const { state } = useLocation();
                           id=""
                           value={competitionName}
                           onChange={handlename}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
                         <p className="mb-3">Upload Image</p>
-                        <input type="file" name="" id="" onChange={handleimg} />
+                        <input type="file" name="" id="" onChange={handleimg} className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"/>
                       </div>
-                      <div className="d-flex justify-content-between mt-5 mb-5">
+                      <div className="lg:block hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]">
 
                         <button
-                          className="add-award-submit-button"
+                          className="add-award-submit-button lg:mr-2 mr-1"
                           onClick={handlesubmit}
                         >
                           SUBMIT
@@ -265,7 +267,7 @@ const { state } = useLocation();
                     </div>
                   </div>
                   <div className="col-6">
-                    <div className="add-award-form ms-3">
+                    <div className="add-award-form lg:ms-3">
                       <div className="mb-4">
                         <p className="mb-3">Achievement Title</p>
                         <input
@@ -284,6 +286,7 @@ const { state } = useLocation();
                           id=""
                           value={achievementName}
                           onChange={handleachievement}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -304,6 +307,7 @@ const { state } = useLocation();
                           id=""
                           value={achievementPlace}
                           onChange={handleplace}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -316,7 +320,17 @@ const { state } = useLocation();
                           id=""
                           value={achievementYear}
                           onChange={handleyear}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
+                      </div>
+                      <div className="block lg:hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]">
+
+                        <button
+                          className="add-award-submit-button lg:mr-2 mr-1"
+                          onClick={handlesubmit}
+                        >
+                          SUBMIT
+                        </button>
                       </div>
                     </div>
                   </div>

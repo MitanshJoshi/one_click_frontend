@@ -8,7 +8,6 @@
   justify-content: space-between;
   margin-top: 40px;
   align-items: center;
-  margin-right: 42px;
 }
 
 .startup-awards-header h6 {
@@ -149,7 +148,7 @@
 }
 
 .add-award-form input , .add-award-form textarea {
-  width: 100%;
+  /* width: 100%; */
   padding: 5px 0px 5px 20px;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.25);

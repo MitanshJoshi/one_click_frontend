@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { faList, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faList, faTrashAlt, faEdit, faTableCells } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../BASE_URL";
 
 const Startup_grant = () => {
@@ -15,13 +15,35 @@ const Startup_grant = () => {
   const [selectedGrant, setSelectedGrant] = useState(null);
   const [listView, setListView] = useState(true);
   const [grants, setGrants] = useState([]);
+  const [activeView, setActiveView] = useState('list'); 
   const [editingGrant, setEditingGrant] = useState(null);
   const [investorToken, setinvestorToken] = useState(localStorage.getItem("investorToken"));
   const navigate = useNavigate();
   
   useEffect(() => {
     fetchGrants();
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListView(false);
+        setActiveView("grid")
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the initial state
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+  const listStyle = {
+    background: 'linear-gradient(to bottom, #9ad1a0, #00818a)',
+};
+
+const gridStyle = {
+    background: 'linear-gradient(to bottom, #9ad1a0, #00818a)',
+};
+
+const inactiveStyle = {
+    background: 'linear-gradient(to bottom, #c8dbca, #a4c7c9)',
+};
 
   const fetchGrants = async () => {
     const token=investorToken?localStorage.getItem("investorToken"):localStorage.getItem("token");
@@ -129,10 +151,12 @@ const handleEdit = (grant) => {
 
   const handleListView = () => {
     setListView(true);
+    setActiveView("list")
   };
 
   const handleGridView = () => {
     setListView(false);
+    setActiveView("grid");
   };
 
   return (
@@ -153,6 +177,20 @@ const handleEdit = (grant) => {
                {!investorToken? <div className="startup-product-add-button">
                   <button onClick={handleAddGrant}>+ Add Grant</button>
                 </div>:<></>}
+                <div className="ms-4 lg:block hidden">
+                  <FontAwesomeIcon
+                    icon={faList}
+                    className="startup-add-product-icons cursor-pointer"
+                    onClick={handleListView}
+                    style={activeView === 'list' ? listStyle : inactiveStyle}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTableCells}
+                    className="startup-add-product-icons startup-add-product-icons-2 cursor-pointer"
+                    onClick={handleGridView}
+                    style={activeView === 'grid' ? gridStyle : inactiveStyle}
+                  />
+                </div>
               </div>
             </div>
 
@@ -213,6 +251,7 @@ const handleEdit = (grant) => {
                           </h5>
                         </div>
                        {!investorToken? <div className="product-info">
+                        <div className="d-flex justify-center items-center h-100">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -226,6 +265,7 @@ const handleEdit = (grant) => {
                               setShowConfirmation(true);
                             }}
                           />
+                        </div>
                         </div>:<></>}
                       </div>
                     ))}
@@ -238,18 +278,9 @@ const handleEdit = (grant) => {
                   <div key={grant._id} className="col-md-4 mb-4">
                     <div className="card">
                       <div className="card-body">
+                        <div className="flex justify-between items-center">
                         <h5 className="mb-1">{grant.grant_name}</h5>
-                        <p className="mb-1">
-                          <strong>Grant Amount:</strong> {grant.grant_amount}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Date Available:</strong>{" "}
-                          {new Date(grant.date_when_available).toLocaleDateString()}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Grant From:</strong> {grant.grant_from}
-                        </p>
-                        {!investorToken?<div className="d-flex justify-content-between mt-3">
+                        {!investorToken?<div className="d-flex mt-3 items-center justify-center">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -264,6 +295,18 @@ const handleEdit = (grant) => {
                             }}
                           />
                         </div>:<></>}
+                        </div>
+                        <p className="mb-1">
+                          <strong>Grant Amount:</strong> {grant.grant_amount}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Date Available:</strong>{" "}
+                          {new Date(grant.date_when_available).toLocaleDateString()}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Grant From:</strong> {grant.grant_from}
+                        </p>
+                        
                       </div>
                     </div>
                   </div>

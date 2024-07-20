@@ -1,6 +1,15 @@
 .custom-tabs {
-  display: flex;
-  font-size: large;
+  /* display: flex; */
+  /* font-size: large;  */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }
 
 .custom-tab {
@@ -91,12 +100,11 @@
 }
 
 @media (max-width: 770px) {
-  .profile-image img {
-    height: 130px;
-  }
-
   .profile-image {
     margin-top: -29px;
+  }
+  .custom-tab{
+    width: auto;
   }
 
   .profileDiv h4 {
@@ -117,9 +125,7 @@
   .editim{
     border-radius: -100px;
   }
-  .profile-image img {
-    height: 100px;
-  }
+  
 
   .profile-image {
     margin-top: 0px;

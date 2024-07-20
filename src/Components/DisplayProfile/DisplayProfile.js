@@ -445,7 +445,7 @@ const DisplayProfile = ({ img }) => {
   };
 
   return (
-    <div className="mx-[100px] ">
+    <div className="lg:mx-[100px] ">
       <div className="Newsallstyle">
         <div className="container">
           <div className="row">
@@ -524,17 +524,17 @@ const DisplayProfile = ({ img }) => {
                     </div>
                     <div className="col-lg-3 col-4">
                       <label
-                        className="LabelDesign2 ml-[-10px]"
+                        className="LabelDesign2 lg:ml-[-10px]"
                         htmlFor="email"
                         style={{ color: "#000", fontWeight: "600" }}
                       >
                         Email ID
                       </label>
                     </div>
-                    <div className="col-lg-3 col-4 ml-[-220px]">
+                    <div className="col-lg-3 lg:col-4 col-9 lg:ml-[-220px]">
                       <input
                         type="email"
-                        className="form-control py-2 w-[136%]"
+                        className="form-control py-2 lg:w-[136%]"
                         id="email"
                         value={email}
                         style={{

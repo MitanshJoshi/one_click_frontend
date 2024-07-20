@@ -8,6 +8,7 @@ import {
   faList,
   faTrashAlt,
   faEdit,
+  faTableCells,
 } from "@fortawesome/free-solid-svg-icons";
 import { BASE_URL } from "../../BASE_URL";
 
@@ -15,8 +16,10 @@ const Startup_investors = () => {
     const { _id } = useParams();
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedInvestment, setSelectedInvestment] = useState(null);
-  const [listView, setListView] = useState(true);
+  // const [listView, setListView] = useState(true);
   const [myData, setmyData] = useState();
+  const [listView, setListView] = useState(true);
+  const [activeView, setActiveView] = useState("list");
   const [portfolios, setportfolios] = useState([])
   const [investments, setInvestments] = useState([]);
   const [editingInvestment, setEditingInvestment] = useState(null);
@@ -26,6 +29,16 @@ const Startup_investors = () => {
 
   useEffect(() => {
         fetchInvestments();
+        const handleResize = () => {
+          if (window.innerWidth < 1024) {
+            setListView(false);
+            setActiveView("grid")
+          }
+        };
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Set the initial state
+    
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
   const fetchInvestments = async () => {
@@ -177,13 +190,29 @@ const Startup_investors = () => {
     navigate(`/editinvestment/${investment._id}`);
   };
 
+  const listStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const gridStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const inactiveStyle = {
+    background: "linear-gradient(to bottom, #c8dbca, #a4c7c9)",
+  };
+
+
   const handleListView = () => {
     setListView(true);
+    setActiveView("list");
   };
 
   const handleGridView = () => {
     setListView(false);
+    setActiveView("grid");
   };
+
 
   return (
     <>
@@ -195,17 +224,36 @@ const Startup_investors = () => {
               className="d-flex justify-content-between "
               style={{ marginTop: "40px" }}
             >
-              <div className="startup-products-header">
-                <h6>All Investors</h6>
-                <img src="" alt="" />
-              </div>
             </div>
+            <div className="flex justify-between items-center lg:mt-10 lg:mb-[100px]">
+            <div className="startup-products-header lg:text-[22px] text-[18px]">
+              <h6 >All Investors</h6>
+              <img src="" alt="" />
+            </div>
+            <div className="flex">
+              
+               <div className="ms-4 lg:block hidden">
+                  <FontAwesomeIcon
+                    icon={faList}
+                    className="startup-add-product-icons cursor-pointer"
+                    onClick={handleListView}
+                    style={activeView === 'list' ? listStyle : inactiveStyle}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTableCells}
+                    className="startup-add-product-icons startup-add-product-icons-2 cursor-pointer"
+                    onClick={handleGridView}
+                    style={activeView === 'grid' ? gridStyle : inactiveStyle}
+                  />
+                </div>
+            </div>
+          </div>
 
             {listView ? (
               <>
                 <div className="mt-5">
                   <div>
-                    <div className="product-list-view d-flex align-item-center justify-content-between">
+                    <div className="product-list-view d-flex align-item-center justify-between">
                       <div className="product-info">
                         <div>
                           <p>Investor Name</p>
@@ -279,36 +327,27 @@ const Startup_investors = () => {
               </>
             ) : (
               <div className="row mt-5">
-                {investments.map((investment) => (
+                {portfolios.map((investment) => (
                   <div key={investment._id} className="col-md-4 mb-4">
                     <div className="card">
                       <div className="card-body">
-                        <h5 className="mb-1">{investment.investor_name}</h5>
+                        <h5 className="mb-3">{investment.investor.InvestorName}</h5>
                         <p className="mb-1">
-                          <strong>Investment Amount:</strong> {investment.investment_amount}
+                          <strong>Investment Amount:</strong>  {investment.InvestedAmount}
                         </p>
                         <p className="mb-1">
                           <strong>Date Available:</strong>{" "}
-                          {new Date(investment.date_when_available).toLocaleDateString()}
+                          {new Date(investment.InvestmentDate).toLocaleDateString()}
                         </p>
                         <p className="mb-1">
-                          <strong>Other Details:</strong> {investment.other_details}
+                          <strong>Other Details:</strong> {investment.investor.FirmName}
                         </p>
-                        <div className="d-flex justify-content-between mt-3">
-                          <FontAwesomeIcon
-                            icon={faEdit}
-                            className="me-3 cursor-pointer"
-                            onClick={() => handleEdit(investment)}
-                          />
-                          <FontAwesomeIcon
-                            icon={faTrashAlt}
-                            className="cursor-pointer"
-                            onClick={() => {
-                              setSelectedInvestment(investment._id);
-                              setShowConfirmation(true);
-                            }}
-                          />
-                        </div>
+                        <p className="mb-1">
+                          <strong>Other Details:</strong>   {investment.startupBrandName}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Other Details:</strong>    {investment.startupTradeName}
+                        </p>
                       </div>
                     </div>
                   </div>

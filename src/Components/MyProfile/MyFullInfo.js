@@ -27,8 +27,10 @@ const MyFullInfo = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [addStartup, setAddStartup] = useState(false);
   const [startups, setStartups] = useState([]);
+  const [sshowbtn, setsshowbtn] = useState(false)
   // console.log(startups)
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedStartupId, setSelectedStartupId] = useState(null);
   const [investorToken, setinvestorToken] = useState(
     localStorage.getItem("investorToken")
@@ -83,6 +85,14 @@ const MyFullInfo = () => {
 
   const handleTabClick = (index) => {
     setActiveTab(index);
+    if(index==2)
+    {
+      setsshowbtn(true);
+    }
+    else{
+      setsshowbtn(false);
+    }
+    setIsDropdownOpen(false);
   };
 
   const handleNavigate = (id) => {
@@ -250,17 +260,18 @@ const MyFullInfo = () => {
                     src={img}
                     alt="User Display"
                     value={img}
-                    style={{
-                      height: "150px",
-                      width: "150px",
-                      borderRadius: "50%",
-                    }}
+                    // style={{
+                    //   height: "150px",
+                    //   width: "150px",
+                    //   borderRadius: "50%",
+                    // }}
+                    className="lg:h-[150px] lg:w-[150px] lg:rounded-[50%] h-[70px] w-[70px] rounded-full"
                   />
                   <label
                     htmlFor="file-upload"
-                    className="edit-icon mb-5 my-profile-image-change"
+                    className="hidden lg:block edit-icon mb-5 my-profile-image-change"
                   >
-                    <img src="/edit.png" alt="" />
+                    <img className="hidden lg:block" src="/edit.png" alt="" />
                   </label>
                   <input
                     id="file-upload"
@@ -269,156 +280,220 @@ const MyFullInfo = () => {
                     onChange={handleFileChange}
                   />
                 </div>
-                <div className="profileDiv " style={{ marginLeft: "20px" }}>
-                  <h4 className="h4 mb-1">Profile</h4>
-                  <p className="lead mb-4 ">{name}</p>
+                <div className="profileDiv flex flex-col items-center justify-center ml-[10px]" >
+                  <h4 className="h4 ">Profile</h4>
+                  <p className="lead  mb-2">{name}</p>
                 </div>
               </div>
-              <div className="add-start-up-button mt-sm-5 mt-0">
-                <button onClick={handleAdd}>+ Add New Start-up</button>
-              </div>
+              {sshowbtn?<div className="add-start-up-button mt-sm-5 mt-0 ">
+                <button className="px-4 py-2" onClick={handleAdd}>+ Add New Start-up</button>
+              </div>:<></>}
             </div>
           </section>
         </div>
         <div className="custom-tabs-container mt-5">
-          <div className="custom-tabs flex justify-center ">
+        <div className="container mx-auto lg:px-4">
+      {/* Dropdown for small screens */}
+      {/* <div className="block md:hidden">
+        <div className="flex justify-end ">
+        <button
+          className="tab-bold-css text-center px-4 py-2 rounded backk"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        >
+          {isDropdownOpen ? "Close Menu" : "Open Menu"}
+        </button>
+        </div>
+        {isDropdownOpen && (
+          <div className="mt-2 space-y-2">
             <div
               className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
               onClick={() => handleTabClick(0)}
             >
-              <h5 className="mb-0 tab-bold-css text-center">
-                Basic Information
-              </h5>
-              {activeTab === 0 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
+              <h5 className="mb-0 tab-bold-css text-center">Basic Information</h5>
             </div>
-            {investorToken ? (
-              <></>
-            ) : (
+            {!investorToken && (
               <div
                 className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
                 onClick={() => handleTabClick(1)}
               >
-                <h5 className="mb-0 tab-bold-css text-center">
-                  Education Background
-                </h5>
-                {activeTab === 1 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
+                <h5 className="mb-0 tab-bold-css text-center">Education Background</h5>
               </div>
             )}
-
-            {investorToken ? (
+            {investorToken && (
               <div
                 className={`custom-tab ${activeTab === 5 ? "active" : ""}`}
                 onClick={() => handleTabClick(5)}
               >
-                <h5 className="mb-0 tab-bold-css text-center">
-                  Investor Portfolio
-                </h5>
-                {activeTab === 5 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
+                <h5 className="mb-0 tab-bold-css text-center">Investor Portfolio</h5>
               </div>
-            ) : (
-              <></>
             )}
-
             <div
               className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
               onClick={() => handleTabClick(2)}
             >
               <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
-              {activeTab === 2 && (
-                <div className="active-icon">
-                  <img src="./tab-photo.png" alt="" className="" />
-                </div>
-              )}
             </div>
-
-            {!investorToken ? (
+            {!investorToken && (
               <div
                 className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
                 onClick={() => handleTabClick(3)}
               >
                 <h5 className="mb-0 tab-bold-css text-center">My inquiry</h5>
-                {activeTab === 3 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
               </div>
-            ) : (
-              <></>
             )}
-            {!investorToken ? (
+            {!investorToken && (
               <div
                 className={`custom-tab ${activeTab === 4 ? "active" : ""}`}
                 onClick={() => handleTabClick(4)}
               >
                 <h5 className="mb-0 tab-bold-css text-center">My Reviews</h5>
-                {activeTab === 4 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
               </div>
-            ) : (
-              <></>
             )}
-            {!investorToken ? (
+            {!investorToken && (
               <div
                 className={`custom-tab ${activeTab === 6 ? "active" : ""}`}
                 onClick={() => handleTabClick(6)}
               >
                 <h5 className="mb-0 tab-bold-css text-center">All Investors</h5>
-                {activeTab === 6 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
               </div>
-            ) : (
-              <></>
             )}
-            {investorToken ? (
+            {investorToken && (
               <div
                 className={`custom-tab ${activeTab === 7 ? "active" : ""}`}
                 onClick={() => handleTabClick(7)}
               >
                 <h5 className="mb-0 tab-bold-css text-center">My Inquiry</h5>
-                {activeTab === 7 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
               </div>
-            ) : (
-              <></>
             )}
-            {investorToken ? (
+            {investorToken && (
               <div
                 className={`custom-tab ${activeTab === 8 ? "active" : ""}`}
                 onClick={() => handleTabClick(8)}
               >
                 <h5 className="mb-0 tab-bold-css text-center">Inquiries on me</h5>
-                {activeTab === 8 && (
-                  <div className="active-icon">
-                    <img src="./tab-photo.png" alt="" className="" />
-                  </div>
-                )}
               </div>
-            ) : (
-              <></>
             )}
           </div>
+        )}
+      </div> */}
+
+      {/* Tabs for larger screens */}
+      <div className="flex custom-tabs lg:justify-center lg:space-x-4  overflow-x-scroll hide-scrollbar">
+        <div
+          className={`custom-tab ${activeTab === 0 ? "active" : ""}`}
+          onClick={() => handleTabClick(0)}
+        >
+          <h5 className="mb-0 tab-bold-css text-center">Basic Information</h5>
+          {activeTab === 0 && (
+            <div className="active-icon">
+              <img src="./tab-photo.png" alt="" className="" />
+            </div>
+          )}
+        </div>
+        {!investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 1 ? "active" : ""}`}
+            onClick={() => handleTabClick(1)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">Education Background</h5>
+            {activeTab === 1 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        {investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 5 ? "active" : ""}`}
+            onClick={() => handleTabClick(5)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">Investor Portfolio</h5>
+            {activeTab === 5 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        <div
+          className={`custom-tab ${activeTab === 2 ? "active" : ""}`}
+          onClick={() => handleTabClick(2)}
+        >
+          <h5 className="mb-0 tab-bold-css text-center">Start-ups</h5>
+          {activeTab === 2 && (
+            <div className="active-icon">
+              <img src="./tab-photo.png" alt="" className="" />
+            </div>
+          )}
+        </div>
+        {!investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 3 ? "active" : ""}`}
+            onClick={() => handleTabClick(3)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">My inquiry</h5>
+            {activeTab === 3 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        {!investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 4 ? "active" : ""}`}
+            onClick={() => handleTabClick(4)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">My Reviews</h5>
+            {activeTab === 4 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        {!investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 6 ? "active" : ""}`}
+            onClick={() => handleTabClick(6)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">All Investors</h5>
+            {activeTab === 6 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        {investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 7 ? "active" : ""}`}
+            onClick={() => handleTabClick(7)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">My Inquiry</h5>
+            {activeTab === 7 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+        {investorToken && (
+          <div
+            className={`custom-tab ${activeTab === 8 ? "active" : ""}`}
+            onClick={() => handleTabClick(8)}
+          >
+            <h5 className="mb-0 tab-bold-css text-center">Inquiries on me</h5>
+            {activeTab === 8 && (
+              <div className="active-icon">
+                <img src="./tab-photo.png" alt="" className="" />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      </div>
           <div className="custom-tab-panel ">
             {activeTab === 0 && (
               <div>
@@ -443,7 +518,7 @@ const MyFullInfo = () => {
                 ) : (
                   <>
                     {startups && startups.length > 0 && !investorToken ? (
-                      <div className="container mx-auto mt-5 lg:w-[90%] w-[120%]">
+                      <div className="container lg:mx-auto mt-5 lg:w-[90%] w-[100%]">
                       <div className="grid gap-4 sm:grid-cols-2">
                         {startups.map((e) => (
                           <div className="col-12 mb-4 " key={e._id}>
@@ -460,13 +535,13 @@ const MyFullInfo = () => {
                                     <p className="text-sm text-gray-500">{e.categoryName}, {e.subcategoryName}</p>
                                   </div>
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center min-w-[95px] justify-end">
                                   <span className="text-yellow-500">
                                     <FontAwesomeIcon icon={faStar} />
                                     <FontAwesomeIcon icon={faStar} />
                                     <FontAwesomeIcon icon={faStar} />
                                   </span>
-                                  <span className="text-gray-300 ml-1">
+                                  <span className="text-gray-300">
                                     <FontAwesomeIcon icon={faStar} />
                                     <FontAwesomeIcon icon={faStar} />
                                   </span>

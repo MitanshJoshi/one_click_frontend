@@ -212,7 +212,7 @@ const DisplayInvestor = ({ img }) => {
   };
   return (
     <>
-    <div className="mx-[100px] ">
+    <div className="lg:mx-[100px] ">
       <div className="Newsallstyle">
         <div className="container">
           <div className="row">

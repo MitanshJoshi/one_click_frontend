@@ -91,7 +91,7 @@ const InvestorChange = () => {
   return (
     <>
       <SecondNavbar />
-      <div  className="profile col-12 md-col-6 sm-col-6" style={{width:"1175px"}}>
+      <div  className="profile col-12 md-col-6 sm-col-6" >
             <div>
               <img
                 className="background-image img-fluid "
@@ -106,16 +106,17 @@ const InvestorChange = () => {
                   <img
                     src="BioDisplayUser.png"
                     alt="User Display"
-                    style={{
-                      height: "150px",
-                      width: "150px",
-                      borderRadius: "50%",
-                    }}
+                    // style={{
+                    //   height: "150px",
+                    //   width: "150px",
+                    //   borderRadius: "50%",
+                    // }}
+                    className="lg:h-[150px] lg:w-[150px] lg:border-[50%] h-[80px] w-[80px] border-[50%]"
                   />
                 </div>
                 <div
-                  className="profileDiv mt-5"
-                  style={{ marginLeft: "20px" }}
+                  className="profileDiv mt-5 ml-[20px]"
+                  
                 >
                   <h4 className="h4 ">Profile</h4>
                   <p className="lead ">webearl</p>
@@ -124,11 +125,11 @@ const InvestorChange = () => {
             </div>
             
           </div>
-      <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Container className="d-flex justify-content-center align-items-center lg:vh-100 lg:mt-9 mt-5">
 
         <ToastContainer />
         
-        <div className="container form-start" style={{width:"986px"}}>
+        <div className=" w-[973px]" >
           <div className="login">
             <div className="login-wrapper">
               <div className="row w-75 h-100 gx-0 ">

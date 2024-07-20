@@ -35,6 +35,17 @@ const inactiveStyle = {
 
   useEffect(() => {
     fetchData();
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListView(false);
+    setActiveView("grid")
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the initial state
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchData = async () => {
@@ -165,7 +176,7 @@ const inactiveStyle = {
                {!investorToken? <div className="startup-product-add-button">
                   <button onClick={handleAddPartner}>+ Add Partner</button>
                 </div>:<></>}
-                <div className="ms-4">
+                <div className="ms-4 lg:block hidden">
                   <FontAwesomeIcon
                     icon={faList}
                     className="startup-add-product-icons cursor-pointer"
@@ -276,7 +287,7 @@ const inactiveStyle = {
             ) : (
               <div className="row mt-5">
                 {partners.map((partner) => (
-                  <div key={partner._id} className="col-md-4 mb-4">
+                  <div key={partner._id} className="col-md-4 mb-4 ">
                     <div className="card">
                       <div className="card-body">
                         <div className="d-flex align-items-center mb-3 justify-between">

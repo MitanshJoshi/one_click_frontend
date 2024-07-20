@@ -9,7 +9,7 @@ const Footer = () => {
       <footer className="text-center text-lg-start text-muted p-4 footers">
         <div className="container">
           <div className="row pt-5">
-            <div className="col-lg-3 col-md-6 col-12 mb-md-3 mb-5 logoDiv">
+            <div className="col-lg-3 col-md-6 col-12 mb-md-3 mb-5 logoDiv justify-center">
               <div className="LogoDesign">
                 <img
                   src="/NavLogo.png"

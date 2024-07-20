@@ -185,7 +185,7 @@ const Startup_review = () => {
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mx-[100px]">
+          <div className="grid lg:grid-cols-2 gap-4 lg:mx-[100px]">
             {reviews &&
               reviews.map((review) => (
                 <div className="hotel-review-specific" key={review._id}>

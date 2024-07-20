@@ -35,7 +35,7 @@ const InvestorCards = () => {
 
   return (
     <div>
-      <div className="row mt-5 mx-[100px]">
+      <div className="row mt-5 lg:mx-[100px] ">
         {investors &&
           investors.map((e) => (
             <div className="col-12 col-md-6 mb-4" key={e._id}>
@@ -45,13 +45,9 @@ const InvestorCards = () => {
                     <img
                       src={e.InvestorPhoto}
                       alt=""
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '50%',
-                      }}
+                      className='w-[50px] h-[50px] rounded-[50px] mr-2'
                     />
-                    <div style={{ marginLeft: '10px' }}>
+                    <div >
                       <p className="mb-0 fw-bold">{e.InvestorName}</p>
                       <p
                         className="mb-0"
@@ -92,20 +88,20 @@ const InvestorCards = () => {
                   <div>
                     <FontAwesomeIcon icon={faLocationDot} style={{ color: '#74CC7E' }} />
                     <span
-                      className="font-[500] text-[15px]"
-                      style={{ marginLeft: '10px' }}
+                      className="font-[500] text-[15px] ml-[10px]"
+                      
                     >
                       {e.InvestorCity},
                     </span>
                     <span
-                      className="font-[500] text-[15px]"
-                      style={{ marginLeft: '10px' }}
+                      className="font-[500] text-[15px] ml-[10px]"
+                      
                     >
                       {e.InvestorState},
                     </span>
                     <span
-                      className="font-[500] text-[15px]"
-                      style={{ marginLeft: '10px' }}
+                      className="font-[500] text-[15px] ml-[10px]"
+                      
                     >
                       {e.InvestorCountry}
                     </span>
@@ -115,8 +111,8 @@ const InvestorCards = () => {
                   <div className="w-[400px]">
                     <FontAwesomeIcon icon={faPhone} style={{ color: '#74CC7E' }} />
                     <span
-                      className="font-[500] text-[15px]"
-                      style={{ marginLeft: '10px' }}
+                      className="font-[500] text-[15px] ml-[10px]"
+                      
                     >
                       {e.InvestorContactNum}
                     </span>
@@ -126,8 +122,8 @@ const InvestorCards = () => {
                 <div className="w-[400px] mt-3">
                 <FontAwesomeIcon icon={faShare} style={{ color: '#74CC7E' }} />
                     <span
-                      className="font-[500] text-[15px]"
-                      style={{ marginLeft: '10px' }}
+                      className="font-[500] text-[15px] ml-[10px]"
+                      
                     >
                       {e.InvestorEmail}
                     </span>

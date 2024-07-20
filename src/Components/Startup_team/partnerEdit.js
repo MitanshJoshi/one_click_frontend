@@ -188,132 +188,126 @@ export default function PartnerEdit() {
     }
   };
 
+  const handleBack=()=>{
+    navigate(-1, { state: { abc: "editpartner" } });
+    localStorage.setItem("myData", "partner");
+  }
+
   return (
     <>
-      <SecondNavbar />
-      <StartUpProfile/>
-      <div>
-        <ToastContainer />
-        <div className="d-flex justify-content-between ml-[200px] pt-[30px] text-[30px]">
-          <h2 className="mb-5 ps-5" style={{ fontWeight: "600" }}>
-            Edit Partner
-          </h2>
-        </div>
-        <div className="flex justify-center items-center">
-          <div className="row gap-0">
-          <div className="col-6">
-              <div className="add-award-form mt-1">
-                <div className="mb-1">
-                  <p className="mb-3">Enter Partner Position</p>
-                  <input
-                    type="text"
-                    onChange={handlePosition}
-                    value={position}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Enter Country</p>
-                  <select
-                    value={country}
-                    onChange={handleCountryChange}
-                    className="mb-3 form-control py-2 w-[100%]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="" className="opacity-30">
-                      Select Country
-                    </option>
-                    {Countries.map((country) => (
-                      <option key={country.name} value={country.name}>
-                        {country.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Enter State</p>
-                  <select
-                    type="text"
-                    // onChange={handleStateName}
-                    onChange={handleStateChange}
-                    value={stateName}
-                        className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select State</option>
-                    {statesArray.map((state) => (
-                      <option key={state.id} value={state.name}>
-                        {state.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Enter City</p>
-                  <select
-                    value={city}
-                    onChange={handleCity}
-                    className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select City</option>
-                    {citiesArray.map((city) => (
-                      <option key={city.id} value={city.name}>
-                        {city.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              
-                <div className="mb-1">
-                  <p className="mb-3">Enter Date of Birth</p>
-                  <input
-                    type="date"
-                    onChange={handleDob}
-                    value={dob}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-              </div>
+    <SecondNavbar />
+    <div className="px-4 lg:px-16">
+      <ToastContainer />
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="font-semibold text-2xl lg:mt-5 lg:ml-[240px]">Edit Partner</h2>
+      </div>
+      <div className="flex flex-col lg:flex-row justify-center">
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center lg:mr-[-100px]">
+          <div className="add-award-form w-full max-w-md">
+            <div className="mb-4">
+              <p className="mb-3">Enter Position</p>
+              <input
+                type="text"
+                onChange={handlePosition}
+                value={position}
+                className="w-full mb-3 h-12"
+              />
             </div>
-            <div className="col-6 d-flex align-item-center justify-content-center">
-              <div className="add-award-form" style={{ width: "556px", height: "181px" }}>
-                
-                <div className="mb-1">
-                  <p className="mb-[5px] mt-[12px]">Enter Partner Name</p>
-                  <input
-                    type="text"
-                    onChange={handleName}
-                    value={partnerName}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <p className="mb-[13px] mt-[6px]">Enter partner image</p>
-                <div className="mb-4">
-                  <input
-                    type="file"
-                    onChange={handleImg}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="d-flex justify-content-between mt-5 mb-5">
-                  <button
-                    onClick={handleEditPartner}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    SUBMIT
-                  </button>
-                </div>
-              </div>
+            <div className="mb-4">
+              <p className="mb-3">Select Country</p>
+              <select
+                value={country}
+                onChange={handleCountryChange}
+                className="form-control w-full mb-3 h-12"
+              >
+                <option value="" className="opacity-30">
+                  Select Country
+                </option>
+                {Countries.map((country) => (
+                  <option key={country.name} value={country.name}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <p className="mb-3">Select State</p>
+              <select
+                value={stateName}
+                onChange={handleStateChange}
+                className="form-control w-full mb-3 h-12"
+              >
+                <option value="">Select State</option>
+                {statesArray.map((state) => (
+                  <option key={state.id} value={state.name}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <p className="mb-3">Select City</p>
+              <select
+                value={city}
+                onChange={handleCity}
+                className="form-control w-full mb-3 h-12"
+              >
+                <option value="">Select City</option>
+                {citiesArray.map((city) => (
+                  <option key={city.id} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <p className="mb-3">Enter Date of Birth</p>
+              <input
+                type="date"
+                onChange={handleDob}
+                value={dob}
+                className="w-full mb-3 h-12"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="w-full lg:w-1/2 flex flex-col items-center lg:ml-[-100px]">
+          <div className="add-award-form w-full max-w-md">
+            <div className="mb-4">
+              <p className="mb-3">Enter Partner Name</p>
+              <input
+                type="text"
+                onChange={handleName}
+                value={partnerName}
+                className="w-full mb-3 h-12"
+              />
+            </div>
+            <div className="mb-4">
+              <p className="mb-3">Enter Partner Photo</p>
+              <input
+                type="file"
+                onChange={handleImg}
+                className="w-full mb-3 h-12"
+              />
+            </div>
+            <div className="flex justify-between mt-5 mb-5 gap-3">
+              <button
+                onClick={handleEditPartner}
+                className="add-award-submit-button h-12 w-1/2"
+              >
+                SUBMIT
+              </button>
+              <button
+                onClick={handleBack}
+                className="add-award-submit-button h-12 w-1/2"
+              >
+                BACK
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 }

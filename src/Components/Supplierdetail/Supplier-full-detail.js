@@ -57,11 +57,11 @@ const Supplier_full_detail = ({ onShoesChange }) => {
       <section className="mt-5">
         <div className="container">
           <div>
-            <div className="row">
+            <div className="flex lg:flex-row flex-col">
               <div className="col-4">
                 <div>
-                  <div>
-                    <div className="supplier-full-detail">
+                  <div className="">
+                    <div className="supplier-full-detail lg:w-[100%] w-[300%]">
                       <div>
                         <div className="about-supplier-title-photo">
                           <img
@@ -134,8 +134,8 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-8">
-                <div className="tabs flex space-x-4 mb-4 justify-between">
+              <div className="col-8 lg:w-[67%] w-[100%]">
+                <div className="tabs flex space-x-4 mb-4 justify-between overflow-x-scroll hide-scrollbar">
                   <button
                     onClick={() => setActiveTab("product")}
                     className={`tab py-2 px-4 ${
@@ -190,7 +190,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
 
                 <div className="tab-content">
                   {activeTab === "product" && (
-                    <div className="ml-[20px]">
+                    <div className="lg:ml-[20px]">
                       <div className="review-list-title">
                         <h3>Products</h3>
                       </div>
@@ -246,7 +246,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     </div>
                   )}
                   {activeTab === "awards" && (
-                    <div className="ml-[20px]">
+                    <div className="lg:ml-[20px] ">
                       <div className="review-list-title">
                         <h3>Awards</h3>
                       </div>
@@ -283,14 +283,14 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                   )}
                   {activeTab === "grants" && (
                     <div>
-                      <div className="review-list-title ml-[23px]">
+                      <div className="review-list-title lg:ml-[23px]">
                         <h3>Grants</h3>
                       </div>
                       <div className="mb-3">
                         <div className="row">
                           {activeTab === "grants" && (
                             // <div className="mt-5">
-                              <table className="table table-striped ml-[28px]">
+                              <table className="table table-striped lg:ml-[28px]">
                                 <thead>
                                   <tr>
                                     <th>Grant Name</th>
@@ -321,7 +321,7 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                     </div>
                   )}
                   {activeTab === "investment" && (
-                     <div className="ml-[23px]">
+                     <div className="lg:ml-[23px]">
                       <div className="review-list-title">
                         <h3>Investments</h3>
                       </div>
@@ -347,14 +347,14 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                    </div>
                   )}
                   {activeTab === "team" && (
-                    <div className="ml-[20px]">
+                    <div className="lg:ml-[20px]">
                       <div className="review-list-title">
                         <h3>Team</h3>
                       </div>
                       <div className="mb-3">
-                        <div className="row">
+                        <div className="flex lg:flex-row flex-col">
                           {teamMembers.map((member) => (
-                            <div className="col-4 mb-4" key={member.id}>
+                            <div className="col-4 mb-4 lg:w-[32%] lg:mr-2 w-[100%]" key={member.id}>
                               <div className="card">
                                 <div className="card-body">
                                   <div className="flex  items-center">
@@ -396,14 +396,6 @@ const Supplier_full_detail = ({ onShoesChange }) => {
                       </div>
                     </div>
                   )}
-                </div>
-              </div>
-              <div className="col-12 mt-5 ">
-                <div className="review-list-title p-[10px] text-[30px] ml-[40px]">
-                  <h1>Reviews</h1>
-                </div>
-                <div className="mt-[20px]">
-                  <ReviewList />
                 </div>
               </div>
             </div>

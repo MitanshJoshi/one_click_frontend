@@ -36,5 +36,6 @@
     display: flex;
     justify-content: space-between;
     overflow-x: scroll;
+    height: 100px;
   }
 }

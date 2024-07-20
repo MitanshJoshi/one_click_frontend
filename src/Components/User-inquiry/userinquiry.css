@@ -34,8 +34,8 @@
 
   @media (max-width:600px) {
     .profile{
-      width: 500px;
-      height: 570px;
+      /* width: 500px; */
+      /* height: 570px; */
       margin-top: 36px;
     }
     .startup-profile{

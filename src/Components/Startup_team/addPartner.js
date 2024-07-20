@@ -52,20 +52,16 @@ export default function AddPartner() {
 
   const handleStateChange = (e) => {
     const selectedState = e.target.value;
-    console.log("selected state is", selectedState);
-    
     setStateName(selectedState);
     setCity(""); // Reset city selection
   
     const selectedCountry = Countries.find(
-      (country) => country.name == country // Replace with the correct variable or state
+      (country) => country.name === country
     );    
 
-    const selectedCities = statesArray.find((e) => e.name === selectedState)
-    console.log(selectedCities);
-    setCitiesArray(selectedCities.cities)
-    
-    console.log("selected country is", selectedCountry);
+    const selectedCities = statesArray.find((e) => e.name === selectedState);
+    setCitiesArray(selectedCities.cities);
+
     if (selectedCountry) {
       const selectedStateObj = selectedCountry.states.find(
         (state) => state.name === selectedState
@@ -75,12 +71,10 @@ export default function AddPartner() {
       } else {
         setCitiesArray([]); // Reset cities array if no cities found
       }
-    } else { // Reset cities array if selectedCountry not found
+    } else {
+      setCitiesArray([]); // Reset cities array if selectedCountry not found
     }
   };
-  
-
-  
 
   const handleCity = (e) => {
     setCity(e.target.value.trim());
@@ -129,7 +123,6 @@ export default function AddPartner() {
         throw new Error("Partner Add failed");
       }
 
-      console.log(response);
       toast.success("Partner added successfully!", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -156,131 +149,113 @@ export default function AddPartner() {
   return (
     <>
       <SecondNavbar />
-      {/* <StartUpProfile /> */}
-      <div>
+      <div className="px-4 lg:px-16">
         <ToastContainer />
-        <div className="d-flex text-[30px] justify-content-between ml-[200px] pt-[30px]">
-          <h2 className="mb-5" style={{ fontWeight: "600" }}>
-            Add Partner
-          </h2>
+        <div className="flex justify-between items-center mb-5">
+          <h2 className="font-semibold text-2xl">Add Partner</h2>
         </div>
-        <div className="flex justify-center items-center">
-          <div className="row gap-0">
-            <div className="col-6">
-              <div className="add-award-form mt-1">
-                <div className="mb-1">
-                  <p className="mb-3">Enter Position</p>
-                  <input
-                    type="text"
-                    onChange={handlePosition}
-                    value={position}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Select Country</p>
-                  <select
-                    value={country}
-                    onChange={handleCountryChange}
-                    className="mb-3 form-control py-2 w-[100%]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="" className="opacity-30">
-                      Select Country
+        <div className="flex flex-col lg:flex-row justify-center">
+          <div className="w-full lg:w-1/2 flex flex-col items-center justify-center lg:mr-[-100px]">
+            <div className="add-award-form w-full max-w-md">
+              <div className="mb-4">
+                <p className="mb-3">Enter Position</p>
+                <input
+                  type="text"
+                  onChange={handlePosition}
+                  value={position}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Select Country</p>
+                <select
+                  value={country}
+                  onChange={handleCountryChange}
+                  className="form-control w-full mb-3 h-12"
+                >
+                  <option value="" className="opacity-30">
+                    Select Country
+                  </option>
+                  {Countries.map((country) => (
+                    <option key={country.name} value={country.name}>
+                      {country.name}
                     </option>
-                    {Countries.map((country) => (
-                      <option key={country.name} value={country.name}>
-                        {country.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="mb-1">
-                  <p className="mb-3">Select State</p>
-                  <select
-                    value={stateName}
-                    onChange={handleStateChange}
-                    className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select State</option>
-                    {statesArray.map((state) => (
-                      <option key={state.id} value={state.name}>
-                        {state.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Select City</p>
-                  <select
-                    value={city}
-                    onChange={handleCity}
-                    className="mb-3 form-control py-2 w-[100%] border-[#00000040]"
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select City</option>
-                    {citiesArray.map((city) => (
-                      <option key={city.id} value={city.name}>
-                        {city.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Enter Date of Birth</p>
-                  <input
-                    type="date"
-                    onChange={handleDob}
-                    value={dob}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Select State</p>
+                <select
+                  value={stateName}
+                  onChange={handleStateChange}
+                  className="form-control w-full mb-3 h-12"
+                >
+                  <option value="">Select State</option>
+                  {statesArray.map((state) => (
+                    <option key={state.id} value={state.name}>
+                      {state.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Select City</p>
+                <select
+                  value={city}
+                  onChange={handleCity}
+                  className="form-control w-full mb-3 h-12"
+                >
+                  <option value="">Select City</option>
+                  {citiesArray.map((city) => (
+                    <option key={city.id} value={city.name}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Enter Date of Birth</p>
+                <input
+                  type="date"
+                  onChange={handleDob}
+                  value={dob}
+                  className="w-full mb-3 h-12"
+                />
               </div>
             </div>
-            <div className="col-6 d-flex align-item-center justify-content-center">
-              <div
-                className="add-award-form"
-                style={{ width: "556px", height: "auto" }}
-              >
-                <div className="mb-4">
-                  <p className="mb-3">Enter Partner Name</p>
-                  <input
-                    type="text"
-                    onChange={handlePartnerName}
-                    value={partnerName}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-4">
-                  <p className="">Enter Partner Photo</p>
-                  <input
-                    type="file"
-                    onChange={handleFilePhoto}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px"}}
-                  />
-                  </div>
-                  <div className="d-flex justify-content-between mt-5 mb-5 gap-3">
-                  <button
-                    onClick={handleSubmit}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    SUBMIT
-                  </button>
-                  <button
-                    onClick={handleback}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    BACK
-                  </button>
-                </div>
+          </div>
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:ml-[-100px]">
+            <div className="add-award-form w-full max-w-md">
+              <div className="mb-4">
+                <p className="mb-3">Enter Partner Name</p>
+                <input
+                  type="text"
+                  onChange={handlePartnerName}
+                  value={partnerName}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Enter Partner Photo</p>
+                <input
+                  type="file"
+                  onChange={handleFilePhoto}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="flex justify-between mt-5 mb-5 gap-3">
+                <button
+                  onClick={handleSubmit}
+                  className="add-award-submit-button h-12 w-1/2"
+                >
+                  SUBMIT
+                </button>
+                <button
+                  onClick={handleback}
+                  className="add-award-submit-button h-12 w-1/2"
+                >
+                  BACK
+                </button>
               </div>
             </div>
           </div>

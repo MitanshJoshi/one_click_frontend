@@ -13,7 +13,6 @@ export default function ProductEdit() {
   const [productName, setShoesname] = useState("");
   const [productprice, setProductPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  // console.log(categoryId)
   const [subcategoryId, setSubcategoryId] = useState("");
   const [productstatus, setProductStatus] = useState("");
   const [data, setData] = useState([]);
@@ -74,7 +73,6 @@ export default function ProductEdit() {
       const response = await fetch(`${BASE_URL}/api/subcategory/displayAllByCategoryId?category_id=${categoryId}`, {
         method: "GET",
         headers: {
-          // "Content-Type": "application/json",
           Authorization: localStorage.getItem("token"),
         },
       });
@@ -124,8 +122,6 @@ export default function ProductEdit() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    // Form validation code here
-
     const formData = new FormData();
     formData.append("productName", productName);
     formData.append("description", description);
@@ -162,6 +158,7 @@ export default function ProductEdit() {
       });
     }
   };
+
   const handleid = async () => {
     try {
       const res = await fetch( `${BASE_URL}/api/category/displayAll`, {
@@ -176,7 +173,6 @@ export default function ProductEdit() {
       }
       const responseData = await res.json();
       setData(responseData.data);
-      // console.log(responseData.data);
     } catch (error) {
       if (error) {
         toast.error("Something went wrong!", {
@@ -186,118 +182,116 @@ export default function ProductEdit() {
       }
     }
   };
+
   useEffect(() => {
     handleid();
   }, []);
 
-
   return (
     <>
       <SecondNavbar />
-      <div>
+      <div className="px-4 lg:px-16">
         <ToastContainer />
-        <div className="d-flex justify-content-between">
-          <h2 className="mb-5 ps-5" style={{ fontWeight: "600" }}>
-            Edit Product
-          </h2>
+        <div className="flex justify-between items-center mb-5">
+          <h2 className="font-semibold text-2xl">Edit Product</h2>
         </div>
-        <div>
-          <div className="row gap-0">
-            <div className="col-6 d-flex align-item-center justify-content-center">
-              <div className="add-award-form" style={{ width: "556px", height: "181px" }}>
-                <p className="">Enter product image</p>
-                <div className="mb-4">
-                  <input
-                    type="file"
-                    onChange={handleImg}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-4">
-                  <p className="mb-3">Enter product Description</p>
-                  <textarea
-                    onChange={handleDescription}
-                    value={description}
-                    cols="30"
-                    rows="5"
-                    style={{ width: "559px", height: "147px" }}
-                  ></textarea>
-                </div>
-                <div className="d-flex justify-content-between mt-5 mb-5 ">
-                  <button
-                    onClick={handleSubmit}
-                    className="add-award-submit-button "
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    SUBMIT
-                  </button>
-                </div>
+        <div className="flex flex-col lg:flex-row">
+          <div className="w-full lg:w-1/2 flex lg:flex-row flex-col  justify-center">
+            <div className="add-award-form w-full max-w-md">
+              <p>Enter product image</p>
+              <div className="mb-4">
+                <input
+                  type="file"
+                  onChange={handleImg}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Enter product Description</p>
+                <textarea
+                  onChange={handleDescription}
+                  value={description}
+                  cols="30"
+                  rows="5"
+                  className="w-full h-36"
+                ></textarea>
+              </div>
+              <div className="lg:block hidden flex justify-between mt-5 mb-5 w-full">
+                <button
+                  onClick={handleSubmit}
+                  className="add-award-submit-button h-12 w-1/2 mr-2"
+                >
+                  SUBMIT
+                </button>
               </div>
             </div>
-            <div className="col-6">
-              <div className="add-award-form mt-1">
-                <div className="mb-1">
-                  <p className="mb-3">Enter Your Product Name</p>
-                  <input
-                    type="text"
-                    onChange={handleName}
-                    value={productName}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Select Category</p>
-                  <select
-                    className="form-control"
-                    value={categoryId}
-                    onChange={handleCategory}
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select</option>
-                    {data.map((category) => (
-                      <option key={category._id} value={category._id}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Select Sub Category</p>
-                  <select
-                    className="form-control"
-                    onChange={handleSubcategory}
-                    value={subcategoryId}
-                    style={{ width: "559px", height: "46px" }}
-                  >
-                    <option value="">Select</option>
-                    {sub.map((subcategory) => (
-                      <option key={subcategory._id} value={subcategory._id}>
-                        {subcategory.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Product Status</p>
-                  <input
-                    type="text"
-                    onChange={handleProductStatus}
-                    value={productstatus}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Price</p>
-                  <input
-                    type="text"
-                    onChange={handlePrice}
-                    value={productprice}
-                    style={{ width: "559px", height: "46px" }}
-                  />
-                </div>
+          </div>
+          <div className="w-full lg:w-1/2">
+            <div className="add-award-form  w-full max-w-md">
+              <div className="mb-4">
+                <p className="mb-3">Enter Your Product Name</p>
+                <input
+                  type="text"
+                  onChange={handleName}
+                  value={productName}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Select Category</p>
+                <select
+                  className="form-control w-full mb-3 h-12"
+                  value={categoryId}
+                  onChange={handleCategory}
+                >
+                  <option value="">Select</option>
+                  {data.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Select Sub Category</p>
+                <select
+                  className="form-control w-full mb-3 h-12"
+                  onChange={handleSubcategory}
+                  value={subcategoryId}
+                >
+                  <option value="">Select</option>
+                  {sub.map((subcategory) => (
+                    <option key={subcategory._id} value={subcategory._id}>
+                      {subcategory.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Product Status</p>
+                <input
+                  type="text"
+                  onChange={handleProductStatus}
+                  value={productstatus}
+                  className="w-full mb-3 h-12"
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Price</p>
+                <input
+                  type="text"
+                  onChange={handlePrice}
+                  value={productprice}
+                  className="w-full h-12"
+                />
+              </div>
+              <div className="block lg:hidden flex justify-between mt-5 mb-5 w-full">
+                <button
+                  onClick={handleSubmit}
+                  className="add-award-submit-button h-12 w-1/2 mr-2"
+                >
+                  SUBMIT
+                </button>
               </div>
             </div>
           </div>

@@ -510,12 +510,12 @@ const Startup_awards = () => {
           <>
             <div>
               <div className="d-flex justify-content-between">
-                <h2 className="mb-5" style={{ fontWeight: "600" }}>
+                <h2 className="mb-5 font-[600]">
                   Add Awards
                 </h2>
               </div>
               <div>
-                <div className="row">
+                <div className="flex flex-col lg:flex-row">
                   <div className="col-6">
                     <div className="add-award-form">
                       <div className="mb-4">
@@ -540,6 +540,7 @@ const Startup_awards = () => {
                           rows="5"
                           value={description}
                           onChange={handlecompetition}
+                          className="w-[190%] mx-[5%] lg:w-[100%] lg:mx-[0px]"
                         ></textarea>
                       </div>
                       <div className="mb-4">
@@ -563,15 +564,17 @@ const Startup_awards = () => {
                           id=""
                           value={competitionName}
                           onChange={handlename}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
                         <p className="mb-3">Upload Image</p>
-                        <input type="file" name="" id="" onChange={handleimg} />
+                        <input type="file" name="" id="" onChange={handleimg} className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]" />
+                        
                       </div>
-                      <div className="d-flex justify-content-between mt-5 mb-5">
+                      <div className="lg:block hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%] ">
                         <button
-                          className="add-award-submit-button"
+                          className="add-award-submit-button lg:mr-2 mr-1"
                           onClick={handleBack}
                         >
                           BACK
@@ -586,7 +589,7 @@ const Startup_awards = () => {
                     </div>
                   </div>
                   <div className="col-6">
-                    <div className="add-award-form ms-3">
+                    <div className="add-award-form lg:ms-3">
                       <div className="mb-4">
                         <p className="mb-3">Achievement Title</p>
                         <input
@@ -608,6 +611,7 @@ const Startup_awards = () => {
                           id=""
                           value={achievementName}
                           onChange={handleachievement}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -631,6 +635,7 @@ const Startup_awards = () => {
                           id=""
                           value={achievementPlace}
                           onChange={handleplace}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -648,7 +653,22 @@ const Startup_awards = () => {
                           id=""
                           value={achievementYear}
                           onChange={handleyear}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
+                      </div>
+                      <div className="block lg:hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%] ">
+                        <button
+                          className="add-award-submit-button lg:mr-2 mr-1"
+                          onClick={handleBack}
+                        >
+                          BACK
+                        </button>
+                        <button
+                          className="add-award-submit-button"
+                          onClick={handlesubmit}
+                        >
+                          SUBMIT
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -659,14 +679,14 @@ const Startup_awards = () => {
         ) : addCerti ? (
           // add  certification
           <>
-            <div>
+            <div className="">
               <div className="d-flex justify-content-between">
                 <h2 className="mb-5" style={{ fontWeight: "600" }}>
                   Add certificate
                 </h2>
               </div>
               <div>
-                <div className="row">
+                <div className="row flex-col lg:flex-row">
                   <div className="col-6">
                     <div className="add-award-form">
                       <div className="mb-4">
@@ -691,6 +711,7 @@ const Startup_awards = () => {
                           rows="5"
                           value={decscprt}
                           onChange={handlecirtificatediscription}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         ></textarea>
                       </div>
                       <div className="mb-4">
@@ -714,6 +735,7 @@ const Startup_awards = () => {
                           id=""
                           value={cname}
                           onChange={handlecompetitionName}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -723,11 +745,12 @@ const Startup_awards = () => {
                           name=""
                           id=""
                           onChange={handlcirtificateimg}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
-                      <div className="d-flex justify-content-between mt-5 mb-5">
+                      <div className="lg:block hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]">
                         <button
-                          className="add-award-submit-button"
+                          className="add-award-submit-button lg:mr-2 mr-1"
                           onClick={handleBack}
                         >
                           BACK
@@ -742,7 +765,7 @@ const Startup_awards = () => {
                     </div>
                   </div>
                   <div className="col-6">
-                    <div className="add-award-form ms-3">
+                    <div className="add-award-form lg:ms-3">
                       <div className="mb-4">
                         <p className="mb-3">Certificate Title</p>
                         <input
@@ -764,6 +787,7 @@ const Startup_awards = () => {
                           id=""
                           value={certificateName}
                           onChange={handlecertificateName}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -787,6 +811,7 @@ const Startup_awards = () => {
                           id=""
                           value={certificatePlace}
                           onChange={handlecertificatePlace}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
                       </div>
                       <div className="mb-4">
@@ -804,7 +829,22 @@ const Startup_awards = () => {
                           id=""
                           value={certificateYear}
                           onChange={handlecertificateYear}
+                          className="w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]"
                         />
+                      </div>
+                      <div className="block lg:hidden w-[190%] mx-[5%] lg:mx-[0px] lg:w-[100%]">
+                        <button
+                          className="add-award-submit-button lg:mr-2 mr-1"
+                          onClick={handleBack}
+                        >
+                          BACK
+                        </button>
+                        <button
+                          className="add-award-submit-button"
+                          onClick={handlecirtificatesubmit}
+                        >
+                          SUBMIT
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -893,13 +933,13 @@ const Startup_awards = () => {
         ) : (
           <div className="startup-awards-container">
             <div>
-              <div className="startup-awards-header">
+              <div className="startup-awards-header lg:mr-[42px] text-end">
                 <div>
                   <h6 className="mb-0">Awards</h6>
                 </div>
-                <div className="startup-awards-buttons">
-                 {!investorToken? <button onClick={handleAddAward}>+ Add Awards</button>:<></>}
-                  <button className="ms-4 eebtn" onClick={handleSeeListClick}>
+                <div className="">
+                 {!investorToken? <button className="backk text-white px-4 py-2 rounded-lg" onClick={handleAddAward}>+ Add Awards</button>:<></>}
+                  <button className="lg:ms-4 lg:mt-0 mt-1 backk text-white px-4 py-2 rounded-lg" onClick={handleSeeListClick}>
                     Achievement List
                   </button>
                 </div>
@@ -951,15 +991,15 @@ const Startup_awards = () => {
               </div>
             </div>
             <div className="mt-5 pt-4">
-              <div className="startup-awards-header">
+              <div className="startup-awards-header lg:mr-[42px] text-end">
                 <div>
                   <h6 className="mb-0">Certificate</h6>
                 </div>
-                <div className="startup-awards-buttons">
-                  {!investorToken?<button onClick={() => handleCertificate("certi")}>
+                <div className="">
+                  {!investorToken?<button className="backk text-white px-4 py-2 rounded-lg" onClick={() => handleCertificate("certi")}>
                     + Add Certificate
                   </button>:<></>}
-                  <button className="ms-4 eebtn" onClick={handleCertiList}>
+                  <button className="lg:ms-4 lg:mt-0 mt-1 backk text-white px-4 py-2 rounded-lg" onClick={handleCertiList}>
                     Certificate List
                   </button>
                 </div>

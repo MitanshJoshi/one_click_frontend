@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: white;
 }
 
@@ -236,11 +236,6 @@
 @media (max-width: 770px) {
   .login-image-section {
     display: none;
-  }
-
-  .login-form {
-    width: 200%;
-    margin: auto;
   }
 
   .login {

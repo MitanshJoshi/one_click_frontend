@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { faList, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faList, faTrashAlt, faEdit ,faTableCells} from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -11,8 +11,11 @@ import { BASE_URL } from "../BASE_URL";
 const InvestorPortfolio = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState(null);
-  const [logoFile, setLogoFile] = useState(null); // State for logo file
+  const [myData, setmyData] = useState();
   const [listView, setListView] = useState(true);
+  const [activeView, setActiveView] = useState("list");
+  const [logoFile, setLogoFile] = useState(null); // State for logo file
+  // const [listView, setListView] = useState(true);
   const [startups, setStartups] = useState([]);
   const [portfolios, setPortfolios] = useState([]);
   const [editingPortfolio, setEditingPortfolio] = useState(null);
@@ -33,6 +36,16 @@ const InvestorPortfolio = () => {
   useEffect(() => {
     fetchPortfolios();
     fetchStartupNames();
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListView(false);
+        setActiveView("grid")
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the initial state
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const fetchStartupNames = async () => {
@@ -132,12 +145,27 @@ const InvestorPortfolio = () => {
     setEditingPortfolio(portfolio);
   };
 
+  const listStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const gridStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const inactiveStyle = {
+    background: "linear-gradient(to bottom, #c8dbca, #a4c7c9)",
+  };
+
+
   const handleListView = () => {
     setListView(true);
+    setActiveView("list");
   };
 
   const handleGridView = () => {
     setListView(false);
+    setActiveView("grid");
   };
 
   return (
@@ -149,12 +177,26 @@ const InvestorPortfolio = () => {
               className="d-flex justify-content-between "
               style={{ marginTop: "40px" }}
             >
-              <div className="startup-products-header ml-[140px]">
+              <div className="startup-products-header lg:text-[22px] text-[18px] lg:ml-[140px]">
                 <h6>All Portfolios</h6>
               </div>
               <div className="d-flex">
                 <div className="startup-product-add-button">
                   <button onClick={handleAddPortfolio}>+ Add Portfolio</button>
+                </div>
+                <div className="ms-4 lg:block hidden">
+                  <FontAwesomeIcon
+                    icon={faList}
+                    className="startup-add-product-icons cursor-pointer"
+                    onClick={handleListView}
+                    style={activeView === 'list' ? listStyle : inactiveStyle}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTableCells}
+                    className="startup-add-product-icons startup-add-product-icons-2 cursor-pointer"
+                    onClick={handleGridView}
+                    style={activeView === 'grid' ? gridStyle : inactiveStyle}
+                  />
                 </div>
               </div>
             </div>
@@ -245,18 +287,9 @@ const InvestorPortfolio = () => {
                   <div key={portfolio._id} className="col-md-4 mb-4">
                     <div className="card">
                       <div className="card-body">
+                        <div className="flex items-center justify-between">
                         <h5 className="mb-1">{portfolio.startupTradeName}</h5>
-                        <p className="mb-1">
-                          <strong>Brand Name:</strong> {portfolio.startupBrandName}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Invested Amount:</strong> {portfolio.InvestedAmount}
-                        </p>
-                        <p className="mb-1">
-                          <strong>Investment Date:</strong>{" "}
-                          {new Date(portfolio.InvestmentDate).toLocaleDateString()}
-                        </p>
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="d-flex  items-center">
                           <FontAwesomeIcon
                             icon={faEdit}
                             className="me-3 cursor-pointer"
@@ -271,6 +304,17 @@ const InvestorPortfolio = () => {
                             }}
                           />
                         </div>
+                        </div>
+                        <p className="mb-1">
+                          <strong>Brand Name:</strong> {portfolio.startupBrandName}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Invested Amount:</strong> {portfolio.InvestedAmount}
+                        </p>
+                        <p className="mb-1">
+                          <strong>Investment Date:</strong>{" "}
+                          {new Date(portfolio.InvestmentDate).toLocaleDateString()}
+                        </p>
                       </div>
                     </div>
                   </div>

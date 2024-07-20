@@ -184,6 +184,16 @@ const Startup_product = () => {
   };
   useEffect(() => {
     handleid();
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListView(false);
+        setActiveView("grid")
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the initial state
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const [data, setdata] = useState([]);
@@ -349,7 +359,7 @@ const Startup_product = () => {
                     + Add Product
                   </button>
                 </div>:<></>}
-                <div className="ms-4">
+                <div className="ms-4 lg:block hidden">
                   <FontAwesomeIcon
                     icon={faList}
                     className="startup-add-product-icons cursor-pointer"
@@ -502,50 +512,47 @@ const Startup_product = () => {
               </>
             ) : (
               <>
-                <div>
-                  <div className="row gx-5 mt-3 gy-4">
-                    {data &&
-                      data.map((e) => {
-                        return (
-                          <>
-                            <div className="col-4">
-                              <div className="startup-product-list-display">
-                                <div className="pt-3">
-                                  <img
-                                    src="/shoes.png"
-                                    alt=""
-                                    className="img-fluid"
-                                  />
-                                </div>
-                                <div className="startup-product-list-display-detail">
-                                  <h6 className="mb-2">
-                                    {e.productName}
-                                  </h6>
-                                  <span>{e.description}</span>
-                                  <div className="d-flex justify-content-between">
-                                    <p className="mb-0">Price</p>{" "}
-                                    <p className="mb-0">{e.productprice}</p>
-                                  </div>
-                                </div>
-                                <hr />
-                                <div className="d-flex justify-content-between startup-product-categories pb-3">
-                                  <div>
-                                    <p className="mb-1">Category</p>
-                                    <h6>{e.categoryName}</h6>
-                                  </div>
-                                  <div>
-                                    <p className="mb-1">Sub-Category</p>
-                                    <h6>{e.subcategoryName}</h6>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })}
+  <div>
+    <div className="flex flex-wrap gap-5 mt-3">
+      {data &&
+        data.map((e) => {
+          return (
+            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+              <div className="startup-product-list-display p-4 border border-gray-200 rounded-lg shadow">
+                <div className="pt-3">
+                  <img
+                    src="/shoes.png"
+                    alt=""
+                    className="img-fluid w-full h-auto"
+                  />
+                </div>
+                <div className="startup-product-list-display-detail mt-4">
+                  <h6 className="mb-2">{e.productName}</h6>
+                  <span>{e.description}</span>
+                  <div className="flex justify-between mt-2">
+                    <p className="mb-0">Price</p>
+                    <p className="mb-0">{e.productprice}</p>
                   </div>
                 </div>
-              </>
+                <hr className="my-4" />
+                <div className="flex justify-between opacity-50 font-[600] pb-3">
+                  <div>
+                    <p className="mb-1 ">Category</p>
+                    <h6 className="font-[600]">{e.categoryName}</h6>
+                  </div>
+                  <div>
+                    <p className="mb-1">Sub-Category</p>
+                    <h6 className="font-[600]">{e.subcategoryName}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  </div>
+</>
+
             )}
           </div>
         </div>

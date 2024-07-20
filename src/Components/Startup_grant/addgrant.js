@@ -77,79 +77,77 @@ const AddGrant = () => {
       <StartUpProfile />
       <div className="container mt-4">
         <ToastContainer />
-        <div className="d-flex justify-content-between ml-[200px] pt-[30px] text-[30px]">
+        <div className="d-flex justify-content-between lg:ml-[200px] pt-[30px] text-[30px]">
           <h2 className="mb-5" style={{ fontWeight: "600" }}>
             Add Grant
           </h2>
         </div>
-        <div className="flex justify-center items-center">
-          <div className="row gap-0">
-            <div className="col-6 d-flex  justify-content-center">
-              <div className="add-award-form mt-1" style={{ width: "556px", height: "181px" }}>
-                <div className="mb-1">
-                  <p className="mb-3">Enter Grant Name</p>
-                  <input
-                    type="text"
-                    onChange={(e) => setGrantName(e.target.value.trim())}
-                    value={grantName}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <p className="mb-3">Enter Grant Amount</p>
-                  <input
-                    type="number"
-                    onChange={(e) => setGrantAmount(e.target.value.trim())}
-                    value={grantAmount}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                    required
-                  />
-                </div>
+        <div className="flex flex-wrap justify-center items-center">
+          <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+            <div className="add-award-form lg:mt-[-110px]" style={{ width: "100%" }}>
+              <div className="mb-1">
+                <p className="mb-3">Enter Grant Name</p>
+                <input
+                  type="text"
+                  onChange={(e) => setGrantName(e.target.value.trim())}
+                  value={grantName}
+                  className="mb-3 form-control"
+                  style={{ width: "100%", height: "46px" }}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <p className="mb-3">Enter Grant Amount</p>
+                <input
+                  type="number"
+                  onChange={(e) => setGrantAmount(e.target.value.trim())}
+                  value={grantAmount}
+                  className="mb-3 form-control"
+                  style={{ width: "100%", height: "46px" }}
+                  required
+                />
               </div>
             </div>
-            <div className="col-6">
-              <div className="add-award-form mt-1">
-                <div className="mb-1">
-                  <p className="mb-3">Enter Date When Available</p>
-                  <input
-                    type="date"
-                    onChange={(e) => setDateWhenAvailable(e.target.value)}
-                    value={dateWhenAvailable}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                    required
-                  />
-                </div>
-                <div className="mb-1">
-                  <p className="mb-3">Enter Grant From</p>
-                  <input
-                    type="text"
-                    onChange={(e) => setGrantFrom(e.target.value.trim())}
-                    value={grantFrom}
-                    className="mb-3"
-                    style={{ width: "559px", height: "46px" }}
-                    required
-                  />
-                </div> 
-                <div className="d-flex justify-end mt-5 mb-5 gap-3">
-                  <button
-                    onClick={handleAddGrant}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    SUBMIT
-                  </button>
-                  <button
-                    onClick={handleback}
-                    className="add-award-submit-button"
-                    style={{ height: "50px", width: "267px" }}
-                  >
-                    BACK
-                  </button>
-                </div>
+          </div>
+          <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+            <div className="add-award-form lg:mt-1 mt-[-40px]">
+              <div className="mb-1">
+                <p className="mb-3">Enter Date When Available</p>
+                <input
+                  type="date"
+                  onChange={(e) => setDateWhenAvailable(e.target.value)}
+                  value={dateWhenAvailable}
+                  className="mb-3 form-control"
+                  style={{ width: "100%", height: "46px" }}
+                  required
+                />
+              </div>
+              <div className="mb-1">
+                <p className="mb-3">Enter Grant From</p>
+                <input
+                  type="text"
+                  onChange={(e) => setGrantFrom(e.target.value.trim())}
+                  value={grantFrom}
+                  className="mb-3 form-control"
+                  style={{ width: "100%", height: "46px" }}
+                  required
+                />
+              </div> 
+              <div className="d-flex justify-between mt-5 mb-5 gap-3">
+                <button
+                  onClick={handleAddGrant}
+                  className="add-award-submit-button"
+                  style={{ height: "50px", width: "100%" }}
+                >
+                  SUBMIT
+                </button>
+                <button
+                  onClick={handleback}
+                  className="add-award-submit-button"
+                  style={{ height: "50px", width: "100%" }}
+                >
+                  BACK
+                </button>
               </div>
             </div>
           </div>

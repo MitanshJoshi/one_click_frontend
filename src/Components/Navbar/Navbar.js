@@ -109,7 +109,7 @@ function SecondNavbar() {
 
   return (
     <>
-      <Navbar expand="md" className="mb-3 shadow">
+      <Navbar expand="md" className="shadow w-[100%]">
         <Container>
           <Navbar.Brand>
             <div className="LogoDesign" onClick={handleNavigate}>
@@ -144,7 +144,7 @@ function SecondNavbar() {
                 Contact Us
               </Nav.Link>
               {token ? (
-                <Dropdown>
+                <Dropdown className="mr-14" >
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
                     {name}
                   </Dropdown.Toggle>

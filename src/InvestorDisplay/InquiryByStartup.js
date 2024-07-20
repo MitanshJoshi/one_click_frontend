@@ -6,13 +6,39 @@ import { BASE_URL } from "../BASE_URL";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast, ToastContainer } from "react-toastify";
 import { useSocketContext } from "../context/SocketContext";
-import { faList, faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faList, faTrashAlt, faEdit,faTableCells } from "@fortawesome/free-solid-svg-icons";
 import { useScrollTrigger } from "@mui/material";
 
 const InquiryByStartup = () => {
   const [inquiry, setInquiry] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState(null);
+  const [listView, setListView] = useState(true);
+  const [activeView, setActiveView] = useState("list");
+
+
+  const listStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const gridStyle = {
+    background: "linear-gradient(to bottom, #9ad1a0, #00818a)",
+  };
+
+  const inactiveStyle = {
+    background: "linear-gradient(to bottom, #c8dbca, #a4c7c9)",
+  };
+
+
+  const handleListView = () => {
+    setListView(true);
+    setActiveView("list");
+  };
+
+  const handleGridView = () => {
+    setListView(false);
+    setActiveView("grid");
+  };
 
   const { initializeSocket } = useSocketContext();
   const id=useParams();
@@ -84,6 +110,16 @@ const InquiryByStartup = () => {
 
   useEffect(() => {
     inquirydata();
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setListView(false);
+        setActiveView("grid")
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Set the initial state
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const navigate = useNavigate();
@@ -97,7 +133,32 @@ const InquiryByStartup = () => {
   return (
     <div className="container" style={{ marginTop: "50px" }}>
       <div className="">
-        <div className="product-list-view">
+      <div className="flex justify-between items-center mt-10 lg:mb-[100px]">
+            <div className="startup-products-header lg:text-[22px] text-[18px]">
+              <h6 >All Inquiries</h6>
+              <img src="" alt="" />
+            </div>
+            <div className="flex">
+              
+               <div className="ms-4 lg:block hidden">
+                  <FontAwesomeIcon
+                    icon={faList}
+                    className="startup-add-product-icons cursor-pointer"
+                    onClick={handleListView}
+                    style={activeView === 'list' ? listStyle : inactiveStyle}
+                  />
+                  <FontAwesomeIcon
+                    icon={faTableCells}
+                    className="startup-add-product-icons startup-add-product-icons-2 cursor-pointer"
+                    onClick={handleGridView}
+                    style={activeView === 'grid' ? gridStyle : inactiveStyle}
+                  />
+                </div>
+            </div>
+          </div>
+        {listView ?(
+          <>
+          <div className="product-list-view">
           <div className="product-info">
             <p>Investor Photo</p>
           </div>
@@ -167,6 +228,35 @@ const InquiryByStartup = () => {
             </div>
           </div>
         ))}
+        </>):<div className="row mt-5">
+                {inquiry.filter((item)=>item.InquiryBy==="startup").map((partner) => (
+                  <div key={partner._id} className="col-md-4 mb-4 ">
+                    <div className="card">
+                      <div className="card-body">
+                        <div className="d-flex align-items-center mb-3 justify-between">
+                          <div className="flex justify-center items-center">
+                          <img
+                            className="me-3"
+                            src={partner.investorPhoto}
+                            alt=""
+                            style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                          />
+                          <h5 className="mb-0"><strong>{partner.investorName}</strong></h5>
+                          </div>
+                         
+                        </div>
+                        <p><strong>Title:</strong> {partner.title}</p>
+                        <p><strong>Best Time To Connect:</strong> {partner.best_time_to_connect}</p>
+                        <p><strong>Inquiry Date:</strong> {partner.createdAt.slice(0, 10)}</p>
+                        <div className="product-info w-full mt-3 text-white text-end">
+                  <button className="backk px-4 py-2 rounded-lg" onClick={() => handleEdit(partner)}>View</button>
+                </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>}
       </div>
 
       <ToastContainer />
