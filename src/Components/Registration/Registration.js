@@ -20,6 +20,7 @@ const RegistrationPage = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checked, setchecked] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
@@ -153,7 +154,7 @@ const RegistrationPage = () => {
       return;
     }
 
-    if (!password) {
+    if (!password || password.length<6) {
       toast.error("Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -161,7 +162,7 @@ const RegistrationPage = () => {
       return;
     }
 
-    if (!confirmPassword) {
+    if (!confirmPassword || confirmPassword.length<6) {
       toast.error("Confirm Password must be required", {
         position: toast.POSITION.BOTTOM_RIGHT,
         autoClose: 1000,
@@ -553,6 +554,7 @@ const RegistrationPage = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
+                        checked=""
                         style={{ width: "16px" }}
                         id="terms"
                       />
