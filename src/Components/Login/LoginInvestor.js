@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginInvestor = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("mitansh@gmail.com");
+  const [password, setPassword] = useState("mj141203");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -218,6 +218,9 @@ const LoginInvestor = () => {
                       >
                         Login
                       </button>
+                    </div>
+                    <div>
+                      <Link to={"/login"}  className="text-[13px]">Login as User</Link>
                     </div>
                   </form>
                 </div>

@@ -10,9 +10,9 @@ import { BASE_URL } from "../../BASE_URL";
 
 const LoginPage = () => {
   const { setAuthUser }=useAuthContext();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("mitansh.joshi141203@gmail.com");
   // console.log(email.trim());
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("newpassword1");
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();

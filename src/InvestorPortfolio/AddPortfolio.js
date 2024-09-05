@@ -109,7 +109,7 @@ export default function AddPortfolio() {
     console.log("selected state is", selectedState);
     
     setStatee(selectedState);
-    setCity(""); // Reset city selection
+    setCity(""); // Reset city
   
     const selectedCountry = Countries.find(
       (country) => country.name == country // Replace with the correct variable or state
