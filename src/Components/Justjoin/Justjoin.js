@@ -13,7 +13,7 @@ const Justjoin = () => {
             </svg>
           </div>
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
               <g filter="url(#filter0_d_1_572)">
                 <path d="M9.52388 14.6412L5.41797 10.5352L9.52388 6.42932" stroke="black" stroke-width="1.64237" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M15.2719 14.6412L11.166 10.5352L15.2719 6.42932" stroke="black" stroke-width="1.64237" stroke-linecap="round" stroke-linejoin="round" />
@@ -30,9 +30,9 @@ const Justjoin = () => {
                   <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_572" result="shape" />
                 </filter>
               </defs>
-            </svg>
+            </svg> */}
             
-            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
+            {/* <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
               <g filter="url(#filter0_d_1_572)">
                 <path d="M11.2915 14.6412L15.3975 10.5352L11.2915 6.42932" stroke="black" stroke-width="1.64237" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M5.5435 14.6412L9.64941 10.5352L5.5435 6.42932" stroke="black" stroke-width="1.64237" stroke-linecap="round" stroke-linejoin="round" />
@@ -49,7 +49,7 @@ const Justjoin = () => {
                   <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_572" result="shape" />
                 </filter>
               </defs>
-            </svg>
+            </svg> */}
 
           </div>
         </div>

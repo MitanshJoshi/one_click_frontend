@@ -44,38 +44,38 @@ const SpaBeauty = () => {
                     <div className='SpaExperts pt-2 px-4 pb-4'>
                         <div className='BeautySpa d-flex justify-content-between'>
                             <div>
-                                <h4 className='mb-0'>Beauty & Spa</h4>
+                                <h4 className='mb-0'>Startups</h4>
                                 <p className='mb-4'>500 Experts</p>
                             </div>
                             <div className='see'>
                                 See all
                             </div>
                         </div>
-                        <Slider {...settings}>
+                        <Slider  {...settings}>
 
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg2.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
 
                         </Slider>
@@ -94,29 +94,29 @@ const SpaBeauty = () => {
                         </div>
                         <Slider {...settings}>
 
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg2.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
 
                         </Slider>
@@ -134,29 +134,29 @@ const SpaBeauty = () => {
                         </div>
                         <Slider {...settings}>
 
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg2.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
 
                         </Slider>
@@ -174,29 +174,29 @@ const SpaBeauty = () => {
                         </div>
                         <Slider {...settings}>
 
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg2.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
-                            <div>
-                                <img src="./spaImg1.png" alt="spa" />
-                                <h4>Beauty Parlour</h4>
+                            <div className='p-2'>
+                                <img src="./startup.jpeg" classname="m-2" alt="spa" />
+                                <h4>Startup</h4>
                             </div>
 
                         </Slider>
